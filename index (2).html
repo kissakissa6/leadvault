@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LeadVault — AI-Curated B2B Leads for European Companies</title>
+<meta name="description" content="Custom-researched prospect lists with AI-powered scoring, relevance ranking, and written fit explanations. 48-hour delivery.">
+<link rel="canonical" href="https://leadvault.eu/">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+:root{--bg:#FAFAFA;--surface:#FFF;--alt:#F5F5F5;--border:#E5E5E5;--bdr2:#D0D0D0;--t:#1A1A1A;--t2:#4A4A4A;--t3:#6B6B6B;--tm:#999;--g:#1B5E20;--f:'Inter',-apple-system,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:var(--f);background:var(--bg);color:var(--t);-webkit-font-smoothing:antialiased;line-height:1.6}
+.c{max-width:800px;margin:0 auto;padding:0 32px}section{padding:80px 0}
+nav{padding:24px 0;border-bottom:1px solid var(--border);background:var(--bg);position:sticky;top:0;z-index:100}
+.ni{max-width:800px;margin:0 auto;padding:0 32px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:900;font-size:1.4rem;letter-spacing:-.03em;color:var(--t);text-decoration:none}
+.nc{font-size:.85rem;color:var(--t3)}.nc a{color:var(--t2);text-decoration:none;border-bottom:1px solid var(--border)}
+.hero{padding:100px 0 80px;border-bottom:1px solid var(--border)}.hero h1{font-size:clamp(2.2rem,5vw,3.2rem);font-weight:900;letter-spacing:-.04em;line-height:1.17;margin-bottom:16px;max-width:560px}
+.hero p{font-size:1.02rem;color:var(--t2);max-width:540px;line-height:1.6;margin-bottom:8px}
+.hero .sub{font-size:.88rem;color:var(--tm);margin-top:16px}
+.sl{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--tm);margin-bottom:16px}
+h2{font-size:1.6rem;font-weight:800;letter-spacing:-.03em;margin-bottom:12px}
+.sd{font-size:.95rem;color:var(--t2);max-width:540px;margin-bottom:32px;line-height:1.6}
+.sc{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.sh{background:var(--t);color:#FFF;padding:14px 24px;font-weight:600;font-size:.8rem;text-transform:uppercase;letter-spacing:.08em}
+.sr{display:flex;border-bottom:1px solid var(--border);font-size:.92rem}.sr:last-child{border-bottom:none}
+.sl2{width:140px;padding:12px 24px;font-weight:600;color:var(--t3);background:var(--alt);border-right:1px solid var(--border);font-size:.85rem}
+.sv{padding:12px 24px;flex:1;display:flex;align-items:center;gap:8px}
+.vf{color:var(--g);font-weight:600;font-size:.85rem}
+.cks{margin-top:28px;display:flex;flex-direction:column;gap:8px}
+.ck{display:flex;align-items:flex-start;gap:10px;font-size:.92rem;color:var(--t2);line-height:1.5}
+.ck .ic{color:var(--g);font-weight:700;flex-shrink:0}
+section.pricing{background:var(--alt);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.pg{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pc{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:32px 24px}
+.pc.ft{border-color:var(--t);box-shadow:0 0 0 1px var(--t)}
+.pc.ft .badge{display:inline-block;background:var(--t);color:#FFF;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:4px 10px;border-radius:99px;margin-bottom:12px}
+.pt{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--t3);margin-bottom:8px}
+.pa{font-size:2.8rem;font-weight:900;letter-spacing:-.03em;margin-bottom:4px}
+.pa span{font-size:.85rem;font-weight:500;color:var(--t3)}
+.pd{font-size:.88rem;color:var(--t3);line-height:1.5}
+.steps{display:flex;flex-direction:column;gap:32px}
+.step{display:flex;gap:20px;align-items:flex-start}
+.sn{font-size:2.5rem;font-weight:900;color:var(--border);line-height:1;min-width:48px}
+.st h3{font-size:1.05rem;font-weight:700;margin-bottom:4px}
+.st p{font-size:.9rem;color:var(--t3);line-height:1.5}
+.cta{text-align:center;padding:60px 0;background:var(--t);color:#FFF}
+.cta h2{color:#FFF;margin-bottom:8px}
+.cta p{color:#999;font-size:.95rem;margin-bottom:20px}
+.btn{display:inline-block;background:#FFF;color:var(--t);font-weight:700;font-size:.9rem;padding:14px 28px;border-radius:8px;text-decoration:none;transition:opacity .2s}
+.btn:hover{opacity:.9}
+.comp{padding:40px 0;border-top:1px solid var(--border)}
+.ci{font-size:.82rem;color:var(--t3);margin-bottom:6px}
+footer{border-top:1px solid var(--border);padding:32px 0;text-align:center}
+footer p{font-size:.78rem;color:var(--tm);line-height:1.6}
+footer a{color:var(--t3);text-decoration:none}
+@media(max-width:640px){.c{padding:0 20px}.ni{padding:0 20px}section{padding:60px 0}.hero{padding:60px 0 40px}.pg{grid-template-columns:1fr}.sl2{width:120px}}
+</style>
+</head>
+<body>
+<nav><div class="ni"><a href="/" class="logo">LEADVAULT</a><div class="nc"><a href="mailto:akseli@leadvault.eu">akseli@leadvault.eu</a></div></div></nav>
+
+<div class="hero"><div class="c"><h1>AI-curated leads<br>built to your brief</h1><p>Tell us who you want to reach. Our AI agent researches, verifies, scores, and ranks every contact — with a written explanation of why they’re a fit.</p><p>Delivered in 48 hours. No subscriptions. No self-serve portal. Just precision-targeted leads, built to order.</p><p class="sub">Serving European B2B companies · Powered by AI research agents</p></div></div>
+
+<section><div class="c"><div class="sl">What makes this different</div><h2>Every lead is researched, not just scraped</h2><div class="sd">This isn’t a database export. Each contact is individually evaluated by our AI agent against your specific brief, scored for relevance, and delivered with a written explanation of why they made the list.</div>
+<div class="sc"><div class="sh">Sample contact from a real delivery</div><div class="sr"><div class="sl2">Full Name</div><div class="sv">Lars Hansen</div></div><div class="sr"><div class="sl2">Job Title</div><div class="sv">CEO</div></div><div class="sr"><div class="sl2">Company</div><div class="sv">NordicHire ApS</div></div><div class="sr"><div class="sl2">Industry</div><div class="sv">Recruitment</div></div><div class="sr"><div class="sl2">Size</div><div class="sv">11–50 employees</div></div><div class="sr"><div class="sl2">Country</div><div class="sv">Denmark</div></div><div class="sr"><div class="sl2">Email</div><div class="sv">lars@nordichire.dk <span class="vf">✓ verified</span></div></div><div class="sr"><div class="sl2">Score</div><div class="sv">92/100 — Tier A</div></div><div class="sr"><div class="sl2">Why this lead</div><div class="sv">CEO at a Nordic recruitment firm with direct purchasing authority; strong ICP alignment and company size matches target segment.</div></div></div>
+<div class="cks"><div class="ck"><span class="ic">✓</span> AI-scored relevance — every contact ranked against your brief</div><div class="ck"><span class="ic">✓</span> Written fit explanations — you know exactly why each lead was selected</div><div class="ck"><span class="ic">✓</span> Tiered by priority — A/B/C ranking so you know who to call first</div><div class="ck"><span class="ic">✓</span> Verified business emails only — no personal addresses, no stale data</div><div class="ck"><span class="ic">✓</span> Max 3 contacts per company — no single employer dominates the list</div></div></div></section>
+
+<section class="pricing"><div class="c"><div class="sl">Pricing</div><h2>Quality over volume</h2><div class="sd">You don’t need 500 leads. You need 25 that actually respond. Every contact is AI-curated to your specific criteria — not pulled from a generic database.</div>
+<div class="pg"><div class="pc"><div class="pt">Starter</div><div class="pa">€249</div><div class="pd">25 curated leads, one-time, 48h delivery</div></div><div class="pc ft"><div class="badge">Best value</div><div class="pt">Growth</div><div class="pa">€449</div><div class="pd">50 curated leads — best per-lead value</div></div><div class="pc"><div class="pt">Monthly</div><div class="pa">€799 <span>/mo</span></div><div class="pd">100 leads/month in weekly batches of 25</div></div><div class="pc"><div class="pt">Agency</div><div class="pa">€499 <span>/mo per client</span></div><div class="pd">White-label leads under your brand</div></div></div></div></section>
+
+<section><div class="c"><div class="sl">How to start</div><h2>Three steps. First one is free.</h2><div class="steps"><div class="step"><div class="sn">01</div><div class="st"><h3>Send your target criteria</h3><p>Email akseli@leadvault.eu with your ideal customer profile: job titles, industries, countries, company size.</p></div></div><div class="step"><div class="sn">02</div><div class="st"><h3>Get a free sample</h3><p>25 AI-curated leads matching your criteria within 48 hours. Scored, ranked, with fit explanations. No cost, no commitment.</p></div></div><div class="step"><div class="sn">03</div><div class="st"><h3>Review and order</h3><p>Check the quality. If the leads match, place your first order. If not, no obligation.</p></div></div></div></div></section>
+
+<div class="cta"><div class="c"><h2>Ready to skip the prospecting grind?</h2><p>Send us your ICP and get 25 free AI-curated leads within 48 hours.</p><a href="mailto:akseli@leadvault.eu?subject=Free%20sample%20request&body=Hi%20Akseli%2C%0A%0ATarget%20criteria%3A%0AJob%20titles%3A%20%0AIndustries%3A%20%0ACountries%3A%20%0ACompany%20size%3A%20" class="btn">Request free sample →</a></div></div>
+
+<div class="comp"><div class="c"><div class="sl">Compliance</div><div class="ci">— GDPR compliant — Legitimate Interest basis (Article 6(1)(f)), full LIA on file</div><div class="ci">— Business emails only — personal addresses filtered at source</div><div class="ci">— Opt-out honoured within 30 days — permanent suppression list</div></div></div>
+
+<footer><div class="c"><p>LeadVault · Synlig Media · CVR DK 44784416 · akseli@leadvault.eu · Copenhagen, Denmark<br><a href="mailto:akseli@leadvault.eu">Contact</a> · <a href="/privacy.html">Privacy Policy</a></p></div></footer>
+</body>
+</html>
