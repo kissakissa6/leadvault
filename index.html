@@ -1,81 +1,2118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LeadVault — AI-Curated B2B Leads for European Companies</title>
-<meta name="description" content="Custom-researched prospect lists with AI-powered scoring, relevance ranking, and written fit explanations. 48-hour delivery.">
-<link rel="canonical" href="https://leadvault.eu/">
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-:root{--bg:#FAFAFA;--surface:#FFF;--alt:#F5F5F5;--border:#E5E5E5;--bdr2:#D0D0D0;--t:#1A1A1A;--t2:#4A4A4A;--t3:#6B6B6B;--tm:#999;--g:#1B5E20;--f:'Inter',-apple-system,sans-serif}
-*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
-body{font-family:var(--f);background:var(--bg);color:var(--t);-webkit-font-smoothing:antialiased;line-height:1.6}
-.c{max-width:800px;margin:0 auto;padding:0 32px}section{padding:80px 0}
-nav{padding:24px 0;border-bottom:1px solid var(--border);background:var(--bg);position:sticky;top:0;z-index:100}
-.ni{max-width:800px;margin:0 auto;padding:0 32px;display:flex;justify-content:space-between;align-items:center}
-.logo{font-weight:900;font-size:1.4rem;letter-spacing:-.03em;color:var(--t);text-decoration:none}
-.nc{font-size:.85rem;color:var(--t3)}.nc a{color:var(--t2);text-decoration:none;border-bottom:1px solid var(--border)}
-.hero{padding:100px 0 80px;border-bottom:1px solid var(--border)}.hero h1{font-size:clamp(2.2rem,5vw,3.2rem);font-weight:900;letter-spacing:-.04em;line-height:1.17;margin-bottom:16px;max-width:560px}
-.hero p{font-size:1.02rem;color:var(--t2);max-width:540px;line-height:1.6;margin-bottom:8px}
-.hero .sub{font-size:.88rem;color:var(--tm);margin-top:16px}
-.sl{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--tm);margin-bottom:16px}
-h2{font-size:1.6rem;font-weight:800;letter-spacing:-.03em;margin-bottom:12px}
-.sd{font-size:.95rem;color:var(--t2);max-width:540px;margin-bottom:32px;line-height:1.6}
-.sc{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden}
-.sh{background:var(--t);color:#FFF;padding:14px 24px;font-weight:600;font-size:.8rem;text-transform:uppercase;letter-spacing:.08em}
-.sr{display:flex;border-bottom:1px solid var(--border);font-size:.92rem}.sr:last-child{border-bottom:none}
-.sl2{width:140px;padding:12px 24px;font-weight:600;color:var(--t3);background:var(--alt);border-right:1px solid var(--border);font-size:.85rem}
-.sv{padding:12px 24px;flex:1;display:flex;align-items:center;gap:8px}
-.vf{color:var(--g);font-weight:600;font-size:.85rem}
-.cks{margin-top:28px;display:flex;flex-direction:column;gap:8px}
-.ck{display:flex;align-items:flex-start;gap:10px;font-size:.92rem;color:var(--t2);line-height:1.5}
-.ck .ic{color:var(--g);font-weight:700;flex-shrink:0}
-section.pricing{background:var(--alt);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.pg{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.pc{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:32px 24px}
-.pc.ft{border-color:var(--t);box-shadow:0 0 0 1px var(--t)}
-.pc.ft .badge{display:inline-block;background:var(--t);color:#FFF;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:4px 10px;border-radius:99px;margin-bottom:12px}
-.pt{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--t3);margin-bottom:8px}
-.pa{font-size:2.8rem;font-weight:900;letter-spacing:-.03em;margin-bottom:4px}
-.pa span{font-size:.85rem;font-weight:500;color:var(--t3)}
-.pd{font-size:.88rem;color:var(--t3);line-height:1.5}
-.steps{display:flex;flex-direction:column;gap:32px}
-.step{display:flex;gap:20px;align-items:flex-start}
-.sn{font-size:2.5rem;font-weight:900;color:var(--border);line-height:1;min-width:48px}
-.st h3{font-size:1.05rem;font-weight:700;margin-bottom:4px}
-.st p{font-size:.9rem;color:var(--t3);line-height:1.5}
-.cta{text-align:center;padding:60px 0;background:var(--t);color:#FFF}
-.cta h2{color:#FFF;margin-bottom:8px}
-.cta p{color:#999;font-size:.95rem;margin-bottom:20px}
-.btn{display:inline-block;background:#FFF;color:var(--t);font-weight:700;font-size:.9rem;padding:14px 28px;border-radius:8px;text-decoration:none;transition:opacity .2s}
-.btn:hover{opacity:.9}
-.comp{padding:40px 0;border-top:1px solid var(--border)}
-.ci{font-size:.82rem;color:var(--t3);margin-bottom:6px}
-footer{border-top:1px solid var(--border);padding:32px 0;text-align:center}
-footer p{font-size:.78rem;color:var(--tm);line-height:1.6}
-footer a{color:var(--t3);text-decoration:none}
-@media(max-width:640px){.c{padding:0 20px}.ni{padding:0 20px}section{padding:60px 0}.hero{padding:60px 0 40px}.pg{grid-template-columns:1fr}.sl2{width:120px}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeadVault — Sales Intelligence for European B2B</title>
+    <meta name="description" content="AI-curated sales intelligence reports with verified contacts, real financial data from Nordic tax records, and growth signals. Find buyers who are ready to spend.">
+    <meta name="keywords" content="B2B leads, sales intelligence, European leads, verified contacts, growth signals, Nordic tax records">
+    <link rel="canonical" href="https://leadvault.eu/">
+    <meta property="og:title" content="LeadVault — Sales Intelligence for European B2B">
+    <meta property="og:description" content="Find buyers who are ready to spend. AI-curated reports with real financial data, growth signals, and verified contacts.">
+    <meta property="og:type" content="website">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* ================================================================
+           LEADVAULT — DESIGN TOKENS
+           ================================================================ */
+        :root {
+            --bg: #FAFBF8;
+            --bg-alt: #F2F4EE;
+            --surface: #FFFFFF;
+            --surface-elevated: #FFFFFF;
+            --border: #E2E5DC;
+            --border-strong: #C8CEC0;
+            --text: #111912;
+            --text-sec: #4A5244;
+            --text-muted: #7D8577;
+            --brand: #1B5E20;
+            --brand-light: #E8F5E9;
+            --brand-dark: #0D3311;
+            --brand-mid: #2E7D32;
+            --accent: #1B5E20;
+            --accent-hover: #145018;
+            --amber: #F57F17;
+            --amber-bg: #FFF8E1;
+            --blue: #1565C0;
+            --blue-bg: #E3F2FD;
+            --red-bg: #FFEBEE;
+            --radius: 6px;
+            --radius-md: 10px;
+            --radius-lg: 14px;
+            --font: 'DM Sans', -apple-system, sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+            --shadow-sm: 0 1px 2px rgba(17,25,18,0.04);
+            --shadow: 0 2px 8px rgba(17,25,18,0.06);
+            --shadow-md: 0 4px 20px rgba(17,25,18,0.08);
+            --shadow-lg: 0 12px 40px rgba(17,25,18,0.12);
+            --max-w: 1120px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ================================================================
+           UTILITY
+           ================================================================ */
+        .container { max-width: var(--max-w); margin: 0 auto; padding: 0 32px; }
+        section { padding: 100px 0; }
+
+        /* Reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ================================================================
+           NAV
+           ================================================================ */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(250,251,248,0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            transition: box-shadow 0.3s;
+        }
+
+        nav.scrolled { box-shadow: var(--shadow); }
+
+        .nav-inner {
+            max-width: var(--max-w);
+            margin: 0 auto;
+            padding: 0 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+        }
+
+        .nav-logo {
+            font-family: var(--mono);
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-logo span { color: var(--brand); }
+
+        .nav-links {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-sec);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 7px 14px;
+            border-radius: var(--radius);
+            transition: all 0.15s;
+        }
+
+        .nav-links a:hover { color: var(--text); background: var(--bg-alt); }
+
+        .nav-cta {
+            background: var(--brand) !important;
+            color: #fff !important;
+            font-weight: 600 !important;
+            padding: 8px 18px !important;
+        }
+
+        .nav-cta:hover { background: var(--accent-hover) !important; }
+
+        /* ================================================================
+           HERO
+           ================================================================ */
+        .hero {
+            padding: 140px 0 80px;
+            position: relative;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+        }
+
+        .hero-content { max-width: 520px; }
+
+        .hero-eyebrow {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--brand);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hero-eyebrow::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--brand);
+            border-radius: 50%;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+            font-weight: 700;
+            line-height: 1.12;
+            letter-spacing: -0.035em;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        .hero h1 em {
+            font-style: normal;
+            color: var(--brand);
+        }
+
+        .hero-desc {
+            font-size: 1.05rem;
+            color: var(--text-sec);
+            line-height: 1.65;
+            margin-bottom: 32px;
+            max-width: 460px;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--brand);
+            color: #fff;
+            padding: 14px 28px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hero-cta:hover { background: var(--accent-hover); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+
+        .hero-stats {
+            display: flex;
+            gap: 32px;
+            margin-top: 36px;
+            padding-top: 28px;
+            border-top: 1px solid var(--border);
+        }
+
+        .hero-stat-num {
+            font-family: var(--mono);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text);
+            letter-spacing: -0.02em;
+        }
+
+        .hero-stat-label {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* === REPORT MOCKUP === */
+        .hero-visual {
+            position: relative;
+        }
+
+        .report-mockup {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+
+        .report-header {
+            background: var(--brand-dark);
+            padding: 20px 24px;
+            color: #fff;
+        }
+
+        .report-header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .report-logo {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            opacity: 0.7;
+        }
+
+        .report-badge {
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            background: rgba(255,255,255,0.15);
+            padding: 3px 10px;
+            border-radius: 99px;
+            letter-spacing: 0.05em;
+        }
+
+        .report-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .report-subtitle {
+            font-size: 0.78rem;
+            opacity: 0.65;
+        }
+
+        .report-body { padding: 20px 24px; }
+
+        .report-summary {
+            background: var(--brand-light);
+            border: 1px solid #C8E6C9;
+            border-radius: var(--radius);
+            padding: 14px 16px;
+            margin-bottom: 18px;
+            font-size: 0.82rem;
+            color: var(--brand-dark);
+            line-height: 1.6;
+        }
+
+        .report-summary strong {
+            color: var(--brand);
+        }
+
+        /* Lead rows in mockup */
+        .report-lead {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 12px;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.8rem;
+        }
+
+        .report-lead:last-child { border-bottom: none; }
+
+        .lead-score {
+            font-family: var(--mono);
+            font-weight: 600;
+            font-size: 0.72rem;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius);
+            background: var(--brand-light);
+            color: var(--brand);
+        }
+
+        .lead-info { min-width: 0; }
+
+        .lead-name {
+            font-weight: 600;
+            color: var(--text);
+            font-size: 0.82rem;
+        }
+
+        .lead-detail {
+            color: var(--text-muted);
+            font-size: 0.74rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .lead-badges {
+            display: flex;
+            gap: 4px;
+            flex-shrink: 0;
+        }
+
+        .lead-badge {
+            font-family: var(--mono);
+            font-size: 0.6rem;
+            font-weight: 600;
+            padding: 2px 7px;
+            border-radius: 4px;
+            letter-spacing: 0.03em;
+        }
+
+        .badge-growing { background: #E8F5E9; color: #1B5E20; }
+        .badge-profitable { background: #E3F2FD; color: #1565C0; }
+        .badge-hiring { background: #FFF8E1; color: #F57F17; }
+        .badge-funded { background: #F3E5F5; color: #6A1B9A; }
+
+        /* Float cards on mockup */
+        .hero-float {
+            position: absolute;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 12px 16px;
+            box-shadow: var(--shadow-md);
+            font-size: 0.78rem;
+            z-index: 2;
+            animation: float 5s ease-in-out infinite;
+        }
+
+        .hero-float.top-right {
+            top: -10px;
+            right: -20px;
+            animation-delay: 0s;
+        }
+
+        .hero-float.bottom-left {
+            bottom: 20px;
+            left: -24px;
+            animation-delay: 2.5s;
+        }
+
+        .float-label {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 4px;
+        }
+
+        .float-value {
+            font-family: var(--mono);
+            font-weight: 600;
+            color: var(--brand);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        /* ================================================================
+           HOW IT WORKS
+           ================================================================ */
+        .how-section { background: var(--bg-alt); }
+
+        .section-eyebrow {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--brand);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+            margin-bottom: 16px;
+        }
+
+        .section-desc {
+            color: var(--text-sec);
+            font-size: 1rem;
+            max-width: 540px;
+            line-height: 1.6;
+        }
+
+        .section-header { margin-bottom: 56px; }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .step-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 28px 24px;
+            position: relative;
+            transition: all 0.25s;
+        }
+
+        .step-card:hover {
+            border-color: var(--brand);
+            box-shadow: var(--shadow);
+            transform: translateY(-2px);
+        }
+
+        .step-num {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--brand);
+            background: var(--brand-light);
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius);
+            margin-bottom: 16px;
+        }
+
+        .step-card h3 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+        }
+
+        .step-card p {
+            font-size: 0.84rem;
+            color: var(--text-sec);
+            line-height: 1.55;
+        }
+
+        /* ================================================================
+           DIFFERENTIATORS
+           ================================================================ */
+        .diff-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .diff-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 32px 28px;
+            transition: all 0.25s;
+        }
+
+        .diff-card:hover {
+            border-color: var(--brand);
+            box-shadow: var(--shadow);
+        }
+
+        .diff-icon {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+        }
+
+        .diff-card h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+        }
+
+        .diff-card p {
+            font-size: 0.88rem;
+            color: var(--text-sec);
+            line-height: 1.6;
+        }
+
+        .diff-tag {
+            display: inline-block;
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--brand);
+            background: var(--brand-light);
+            padding: 3px 10px;
+            border-radius: 4px;
+            margin-top: 12px;
+            letter-spacing: 0.03em;
+        }
+
+        /* ================================================================
+           REPORT PREVIEW
+           ================================================================ */
+        .preview-section { background: var(--bg-alt); }
+
+        .preview-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .preview-bar {
+            background: var(--brand-dark);
+            color: #fff;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.82rem;
+        }
+
+        .preview-bar-logo {
+            font-family: var(--mono);
+            font-weight: 600;
+            font-size: 0.72rem;
+            letter-spacing: 0.05em;
+            opacity: 0.7;
+        }
+
+        .preview-content { padding: 28px; }
+
+        .preview-exec {
+            background: var(--brand-light);
+            border-left: 3px solid var(--brand);
+            padding: 16px 20px;
+            margin-bottom: 24px;
+            font-size: 0.88rem;
+            line-height: 1.6;
+            color: var(--brand-dark);
+            border-radius: 0 var(--radius) var(--radius) 0;
+        }
+
+        .preview-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+        }
+
+        .preview-table th {
+            text-align: left;
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            padding: 10px 12px;
+            border-bottom: 2px solid var(--border-strong);
+        }
+
+        .preview-table td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        .preview-table .td-name {
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .preview-table .td-company {
+            color: var(--text-sec);
+            font-size: 0.76rem;
+        }
+
+        .preview-table .td-revenue {
+            font-family: var(--mono);
+            font-size: 0.76rem;
+            color: var(--text-sec);
+        }
+
+        .preview-table .td-why {
+            font-size: 0.76rem;
+            color: var(--text-sec);
+            line-height: 1.45;
+            max-width: 260px;
+        }
+
+        .preview-note {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* ================================================================
+           PRICING
+           ================================================================ */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .pricing-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 32px 24px;
+            text-align: center;
+            position: relative;
+            transition: all 0.25s;
+        }
+
+        .pricing-card:hover {
+            border-color: var(--brand);
+            box-shadow: var(--shadow);
+        }
+
+        .pricing-card.featured {
+            border-color: var(--brand);
+            box-shadow: 0 0 0 1px var(--brand);
+        }
+
+        .pricing-card.featured::before {
+            content: 'Best value';
+            position: absolute;
+            top: -11px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--brand);
+            color: #fff;
+            padding: 3px 14px;
+            border-radius: 99px;
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+        }
+
+        .pricing-tier {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+        }
+
+        .pricing-price {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 4px;
+        }
+
+        .pricing-price span {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .pricing-desc {
+            font-size: 0.84rem;
+            color: var(--text-sec);
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        .pricing-features {
+            list-style: none;
+            text-align: left;
+            font-size: 0.82rem;
+        }
+
+        .pricing-features li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-sec);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pricing-features li:last-child { border-bottom: none; }
+
+        .pricing-features li::before {
+            content: '✓';
+            color: var(--brand);
+            font-weight: 700;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        .pricing-cta {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            border-radius: var(--radius);
+            font-family: var(--font);
+            font-size: 0.88rem;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            margin-top: 24px;
+            transition: all 0.15s;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+        }
+
+        .pricing-cta:hover { border-color: var(--brand); color: var(--brand); }
+
+        .pricing-card.featured .pricing-cta {
+            background: var(--brand);
+            color: #fff;
+            border-color: var(--brand);
+        }
+
+        .pricing-card.featured .pricing-cta:hover { background: var(--accent-hover); }
+
+        .pricing-note {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        /* ================================================================
+           INTAKE FORM (5-step wizard)
+           ================================================================ */
+        .form-section { background: var(--bg-alt); }
+
+        .wizard-container {
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .wizard-progress {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 8px;
+        }
+
+        .wizard-seg {
+            flex: 1;
+            height: 3px;
+            background: var(--border);
+            border-radius: 2px;
+            transition: background 0.3s;
+        }
+
+        .wizard-seg.done { background: var(--brand); }
+        .wizard-seg.active { background: var(--brand); }
+
+        .wizard-step-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.76rem;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        .wizard-step-label .cur { color: var(--text); font-weight: 600; }
+
+        .wizard-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 36px 32px;
+            box-shadow: var(--shadow);
+        }
+
+        .wiz-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            letter-spacing: -0.01em;
+        }
+
+        .wiz-desc {
+            color: var(--text-sec);
+            font-size: 0.86rem;
+            margin-bottom: 24px;
+            line-height: 1.55;
+        }
+
+        .wiz-field { margin-bottom: 18px; }
+        .wiz-field:last-of-type { margin-bottom: 0; }
+
+        .wiz-label {
+            display: block;
+            font-size: 0.84rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .wiz-hint {
+            display: block;
+            font-size: 0.74rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .wiz-input,
+        .wiz-textarea,
+        .wiz-select {
+            width: 100%;
+            padding: 11px 13px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            font-family: var(--font);
+            font-size: 0.88rem;
+            color: var(--text);
+            background: var(--surface);
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .wiz-input:focus, .wiz-textarea:focus, .wiz-select:focus {
+            border-color: var(--brand);
+            box-shadow: 0 0 0 3px rgba(27,94,32,0.08);
+        }
+
+        .wiz-input::placeholder, .wiz-textarea::placeholder { color: var(--text-muted); }
+        .wiz-textarea { min-height: 80px; resize: vertical; }
+        .wiz-input.invalid { border-color: #C43333; }
+
+        .wiz-field-error {
+            font-size: 0.72rem;
+            color: #C43333;
+            margin-top: 3px;
+            display: none;
+        }
+        .wiz-field-error.visible { display: block; }
+
+        .wiz-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        /* Chips in form */
+        .wiz-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+
+        .wiz-chip {
+            display: inline-block;
+            padding: 6px 13px;
+            border: 1px solid var(--border);
+            border-radius: 99px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.12s;
+            user-select: none;
+            color: var(--text-sec);
+        }
+
+        .wiz-chip:hover { border-color: var(--text-muted); }
+        .wiz-chip.sel { background: var(--brand); color: #fff; border-color: var(--brand); }
+
+        /* Lead count selector */
+        .wiz-count-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .wiz-count-opt { position: relative; }
+        .wiz-count-opt input { position: absolute; opacity: 0; pointer-events: none; }
+
+        .wiz-count-card {
+            display: block;
+            text-align: center;
+            padding: 16px 8px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.12s;
+        }
+
+        .wiz-count-card:hover { border-color: var(--text-muted); }
+
+        .wiz-count-opt input:checked + .wiz-count-card {
+            border-color: var(--brand);
+            background: var(--brand-light);
+            box-shadow: 0 0 0 1px var(--brand);
+        }
+
+        .wiz-count-num {
+            font-family: var(--mono);
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .wiz-count-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* Checkbox */
+        .wiz-check {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.86rem;
+            color: var(--text-sec);
+            cursor: pointer;
+        }
+
+        .wiz-check input { width: 18px; height: 18px; accent-color: var(--brand); cursor: pointer; }
+
+        /* Exclude checkboxes */
+        .wiz-checks { display: flex; flex-direction: column; gap: 10px; }
+
+        /* No website toggle */
+        .wiz-optional-toggle {
+            margin-top: -8px;
+            margin-bottom: 12px;
+        }
+
+        /* Summary card */
+        .wiz-summary {
+            background: var(--brand-light);
+            border: 1px solid #C8E6C9;
+            border-radius: var(--radius);
+            padding: 14px 16px;
+            margin-bottom: 18px;
+            font-size: 0.84rem;
+            color: var(--brand-dark);
+            line-height: 1.6;
+            display: none;
+        }
+
+        .wiz-summary.vis { display: block; }
+
+        .wiz-summary-label {
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        /* Example customer fields */
+        .wiz-examples {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .wiz-example-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .wiz-example-num {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            min-width: 18px;
+        }
+
+        /* Buttons */
+        .wiz-btns {
+            display: flex;
+            gap: 10px;
+            margin-top: 28px;
+        }
+
+        .wiz-btn {
+            padding: 12px 24px;
+            border-radius: var(--radius);
+            font-family: var(--font);
+            font-size: 0.88rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.12s;
+        }
+
+        .wiz-btn-primary {
+            background: var(--brand);
+            color: #fff;
+            flex: 1;
+        }
+
+        .wiz-btn-primary:hover { background: var(--accent-hover); }
+        .wiz-btn-primary:active { transform: translateY(1px); }
+        .wiz-btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        .wiz-btn-back {
+            background: transparent;
+            color: var(--text-sec);
+            border: 1px solid var(--border);
+        }
+
+        .wiz-btn-back:hover { background: var(--bg-alt); }
+
+        .wiz-spinner {
+            display: inline-block;
+            width: 14px; height: 14px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            vertical-align: middle;
+            margin-right: 6px;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .wiz-status {
+            padding: 12px 16px;
+            border-radius: var(--radius);
+            font-size: 0.86rem;
+            margin-bottom: 18px;
+            display: none;
+        }
+
+        .wiz-status.err { display: block; background: var(--red-bg); color: #C43333; border: 1px solid #EF9A9A; }
+        .wiz-status.ok { display: block; background: var(--brand-light); color: var(--brand); border: 1px solid #A5D6A7; }
+
+        .wiz-confirmation {
+            text-align: center;
+            padding: 48px 24px;
+        }
+
+        .wiz-conf-icon {
+            width: 56px; height: 56px;
+            background: var(--brand-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 18px;
+            font-size: 1.6rem;
+            color: var(--brand);
+        }
+
+        .wiz-confirmation h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .wiz-confirmation p {
+            color: var(--text-sec);
+            font-size: 0.9rem;
+            max-width: 360px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .wiz-step { display: none; }
+        .wiz-step.active { display: block; }
+
+        /* ================================================================
+           TRUST
+           ================================================================ */
+        .trust-bar {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            padding: 32px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .trust-dot {
+            width: 6px; height: 6px;
+            background: var(--brand);
+            border-radius: 50%;
+        }
+
+        /* ================================================================
+           FOOTER
+           ================================================================ */
+        footer {
+            padding: 48px 0 32px;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-brand {
+            font-family: var(--mono);
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text);
+        }
+
+        .footer-brand span { color: var(--brand); }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            font-size: 0.82rem;
+        }
+
+        .footer-links a {
+            color: var(--text-sec);
+            text-decoration: none;
+            transition: color 0.15s;
+        }
+
+        .footer-links a:hover { color: var(--brand); }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            font-size: 0.76rem;
+            color: var(--text-muted);
+        }
+
+        /* ================================================================
+           RESPONSIVE
+           ================================================================ */
+        @media (max-width: 900px) {
+            .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+            .hero-visual { max-width: 500px; }
+            .steps-grid { grid-template-columns: repeat(2, 1fr); }
+            .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 0 20px; }
+            section { padding: 72px 0; }
+            .hero { padding: 120px 0 60px; }
+            .steps-grid { grid-template-columns: 1fr; }
+            .diff-grid { grid-template-columns: 1fr; }
+            .pricing-grid { grid-template-columns: 1fr; }
+            .hero-stats { gap: 20px; flex-wrap: wrap; }
+            .hero-float { display: none; }
+            .wizard-box { padding: 24px 18px; }
+            .wiz-row { grid-template-columns: 1fr; }
+            .wiz-count-grid { grid-template-columns: repeat(3, 1fr); }
+            .preview-table { font-size: 0.74rem; }
+            .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
+        }
+    </style>
 </head>
 <body>
-<nav><div class="ni"><a href="/" class="logo">LEADVAULT</a><div class="nc"><a href="mailto:akseli@leadvault.eu">akseli@leadvault.eu</a></div></div></nav>
 
-<div class="hero"><div class="c"><h1>AI-curated leads<br>built to your brief</h1><p>Tell us who you want to reach. Our AI agent researches, verifies, scores, and ranks every contact — with a written explanation of why they’re a fit.</p><p>Delivered in 48 hours. No subscriptions. No self-serve portal. Just precision-targeted leads, built to order.</p><p class="sub">Serving European B2B companies · Powered by AI research agents</p></div></div>
+    <!-- === NAV === -->
+    <nav id="nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">Lead<span>Vault</span></a>
+            <div class="nav-links">
+                <a href="#how">How it works</a>
+                <a href="#report">Sample report</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#brief" class="nav-cta">Get your report &rarr;</a>
+            </div>
+        </div>
+    </nav>
 
-<section><div class="c"><div class="sl">What makes this different</div><h2>Every lead is researched, not just scraped</h2><div class="sd">This isn’t a database export. Each contact is individually evaluated by our AI agent against your specific brief, scored for relevance, and delivered with a written explanation of why they made the list.</div>
-<div class="sc"><div class="sh">Sample contact from a real delivery</div><div class="sr"><div class="sl2">Full Name</div><div class="sv">Lars Hansen</div></div><div class="sr"><div class="sl2">Job Title</div><div class="sv">CEO</div></div><div class="sr"><div class="sl2">Company</div><div class="sv">NordicHire ApS</div></div><div class="sr"><div class="sl2">Industry</div><div class="sv">Recruitment</div></div><div class="sr"><div class="sl2">Size</div><div class="sv">11–50 employees</div></div><div class="sr"><div class="sl2">Country</div><div class="sv">Denmark</div></div><div class="sr"><div class="sl2">Email</div><div class="sv">lars@nordichire.dk <span class="vf">✓ verified</span></div></div><div class="sr"><div class="sl2">Score</div><div class="sv">92/100 — Tier A</div></div><div class="sr"><div class="sl2">Why this lead</div><div class="sv">CEO at a Nordic recruitment firm with direct purchasing authority; strong ICP alignment and company size matches target segment.</div></div></div>
-<div class="cks"><div class="ck"><span class="ic">✓</span> AI-scored relevance — every contact ranked against your brief</div><div class="ck"><span class="ic">✓</span> Written fit explanations — you know exactly why each lead was selected</div><div class="ck"><span class="ic">✓</span> Tiered by priority — A/B/C ranking so you know who to call first</div><div class="ck"><span class="ic">✓</span> Verified business emails only — no personal addresses, no stale data</div><div class="ck"><span class="ic">✓</span> Max 3 contacts per company — no single employer dominates the list</div></div></div></section>
+    <!-- === HERO === -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content reveal">
+                    <div class="hero-eyebrow">Sales Intelligence for European B2B</div>
+                    <h1>Every lead comes with a <em>reason to call</em></h1>
+                    <p class="hero-desc">We find companies that are actually growing and spending money&mdash;then give you the right person's verified email with audited financials, growth signals, and a brief on why they're a fit this week.</p>
+                    <a href="#brief" class="hero-cta">Get your first report &rarr;</a>
+                    <div class="hero-stats">
+                        <div>
+                            <div class="hero-stat-num">29</div>
+                            <div class="hero-stat-label">Countries covered</div>
+                        </div>
+                        <div>
+                            <div class="hero-stat-num" style="font-size:1.1rem;">Nordic, DACH, UK &amp; Benelux</div>
+                            <div class="hero-stat-label">Deep regional coverage</div>
+                        </div>
+                        <div>
+                            <div class="hero-stat-num">100%</div>
+                            <div class="hero-stat-label">Website-validated</div>
+                        </div>
+                    </div>
+                </div>
 
-<section class="pricing"><div class="c"><div class="sl">Pricing</div><h2>Quality over volume</h2><div class="sd">You don’t need 500 leads. You need 25 that actually respond. Every contact is AI-curated to your specific criteria — not pulled from a generic database.</div>
-<div class="pg"><div class="pc"><div class="pt">Starter</div><div class="pa">€249</div><div class="pd">25 curated leads, one-time, 48h delivery</div></div><div class="pc ft"><div class="badge">Best value</div><div class="pt">Growth</div><div class="pa">€449</div><div class="pd">50 curated leads — best per-lead value</div></div><div class="pc"><div class="pt">Monthly</div><div class="pa">€799 <span>/mo</span></div><div class="pd">100 leads/month in weekly batches of 25</div></div><div class="pc"><div class="pt">Agency</div><div class="pa">€499 <span>/mo per client</span></div><div class="pd">White-label leads under your brand</div></div></div></div></section>
+                <div class="hero-visual reveal" style="animation-delay: 0.2s;">
+                    <div class="hero-float top-right">
+                        <div class="float-label">Growth detected</div>
+                        <div class="float-value">+38% revenue YoY</div>
+                    </div>
+                    <div class="hero-float bottom-left">
+                        <div class="float-label">Verified via</div>
+                        <div class="float-value">Gov. registers &bull; TrueList</div>
+                    </div>
 
-<section><div class="c"><div class="sl">How to start</div><h2>Three steps. First one is free.</h2><div class="steps"><div class="step"><div class="sn">01</div><div class="st"><h3>Send your target criteria</h3><p>Email akseli@leadvault.eu with your ideal customer profile: job titles, industries, countries, company size.</p></div></div><div class="step"><div class="sn">02</div><div class="st"><h3>Get a free sample</h3><p>25 AI-curated leads matching your criteria within 48 hours. Scored, ranked, with fit explanations. No cost, no commitment.</p></div></div><div class="step"><div class="sn">03</div><div class="st"><h3>Review and order</h3><p>Check the quality. If the leads match, place your first order. If not, no obligation.</p></div></div></div></div></section>
+                    <div class="report-mockup">
+                        <div class="report-header">
+                            <div class="report-header-top">
+                                <span class="report-logo">LEADVAULT</span>
+                                <span class="report-badge">INTELLIGENCE REPORT</span>
+                            </div>
+                            <div class="report-title">Prefab Timber Elements &mdash; Finland</div>
+                            <div class="report-subtitle">39 verified contacts &bull; Delivered March 15, 2026</div>
+                        </div>
+                        <div class="report-body">
+                            <div class="report-summary">
+                                <strong>Executive summary:</strong> We identified 39 potential buyers across Finland. 15 are at companies showing active revenue growth. 8 are procurement decision-makers at mid-size construction firms with verified purchasing authority.
+                            </div>
+                            <div class="report-lead">
+                                <div class="lead-score">94</div>
+                                <div class="lead-info">
+                                    <div class="lead-name">Mikko Virtanen &mdash; Head of Procurement</div>
+                                    <div class="lead-detail">Rakennusliike Virtanen Oy &bull; Rev &euro;12M, profit &euro;1.8M (2024)</div>
+                                </div>
+                                <div class="lead-badges">
+                                    <span class="lead-badge badge-growing">GROWING</span>
+                                    <span class="lead-badge badge-profitable">PROFITABLE</span>
+                                </div>
+                            </div>
+                            <div class="report-lead">
+                                <div class="lead-score">91</div>
+                                <div class="lead-info">
+                                    <div class="lead-name">Anna Korhonen &mdash; Project Director</div>
+                                    <div class="lead-detail">NordicBuild Group &bull; Rev &euro;55M, profit &euro;8M (2024)</div>
+                                </div>
+                                <div class="lead-badges">
+                                    <span class="lead-badge badge-hiring">HIRING</span>
+                                    <span class="lead-badge badge-growing">GROWING</span>
+                                </div>
+                            </div>
+                            <div class="report-lead">
+                                <div class="lead-score">87</div>
+                                <div class="lead-info">
+                                    <div class="lead-name">Jari M&auml;kinen &mdash; Technical Director</div>
+                                    <div class="lead-detail">Pohjola Rakennus Oy &bull; Rev &euro;28M, profit &euro;3.2M (2024)</div>
+                                </div>
+                                <div class="lead-badges">
+                                    <span class="lead-badge badge-funded">FUNDED</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<div class="cta"><div class="c"><h2>Ready to skip the prospecting grind?</h2><p>Send us your ICP and get 25 free AI-curated leads within 48 hours.</p><a href="mailto:akseli@leadvault.eu?subject=Free%20sample%20request&body=Hi%20Akseli%2C%0A%0ATarget%20criteria%3A%0AJob%20titles%3A%20%0AIndustries%3A%20%0ACountries%3A%20%0ACompany%20size%3A%20" class="btn">Request free sample →</a></div></div>
+    <!-- === TRUST BAR === -->
+    <div class="container">
+        <div class="trust-bar reveal">
+            <div class="trust-item"><span class="trust-dot"></span> Real financials from government tax records</div>
+            <div class="trust-item"><span class="trust-dot"></span> Every email TrueList-verified</div>
+            <div class="trust-item"><span class="trust-dot"></span> AI-curated relevance scoring</div>
+            <div class="trust-item"><span class="trust-dot"></span> GDPR compliant</div>
+        </div>
+    </div>
 
-<div class="comp"><div class="c"><div class="sl">Compliance</div><div class="ci">— GDPR compliant — Legitimate Interest basis (Article 6(1)(f)), full LIA on file</div><div class="ci">— Business emails only — personal addresses filtered at source</div><div class="ci">— Opt-out honoured within 30 days — permanent suppression list</div></div></div>
+    <!-- === HOW IT WORKS === -->
+    <section class="how-section" id="how">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-eyebrow">How it works</div>
+                <h2 class="section-title">From brief to intelligence report in 48 hours</h2>
+                <p class="section-desc">Tell us who you want to reach. Our AI agent does the rest.</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card reveal">
+                    <div class="step-num">01</div>
+                    <h3>Brief us on your ideal buyer</h3>
+                    <p>Fill out our intake form with your target: job titles, industries, countries, company size. We auto-research your business to understand what you sell.</p>
+                </div>
+                <div class="step-card reveal" style="animation-delay: 0.1s;">
+                    <div class="step-num">02</div>
+                    <h3>AI researches &amp; validates</h3>
+                    <p>Our AI agent searches company databases, pulls financial records from government registers, fetches websites, and detects growth signals.</p>
+                </div>
+                <div class="step-card reveal" style="animation-delay: 0.2s;">
+                    <div class="step-num">03</div>
+                    <h3>Every lead is scored</h3>
+                    <p>Each contact is evaluated against your brief, scored 0&ndash;100 for relevance, and tagged with growth badges. No padding, no filler.</p>
+                </div>
+                <div class="step-card reveal" style="animation-delay: 0.3s;">
+                    <div class="step-num">04</div>
+                    <h3>You get an intelligence report</h3>
+                    <p>Branded PDF with executive summary, per-company financials, verified emails, growth signals, and optional cold email drafts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<footer><div class="c"><p>LeadVault · Synlig Media · CVR DK 44784416 · akseli@leadvault.eu · Copenhagen, Denmark<br><a href="mailto:akseli@leadvault.eu">Contact</a> · <a href="/privacy.html">Privacy Policy</a></p></div></footer>
+    <!-- === DIFFERENTIATORS === -->
+    <section id="diff">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-eyebrow">Why LeadVault</div>
+                <h2 class="section-title">Intelligence, not data dumps</h2>
+                <p class="section-desc">No competitor at this price point gives you audited financials, growth signals, and AI-curated relevance scoring.</p>
+            </div>
+            <div class="diff-grid">
+                <div class="diff-card reveal">
+                    <div class="diff-icon">&#x1F4CA;</div>
+                    <h3>Real audited financials</h3>
+                    <p>We pull actual revenue and profit directly from official government business registers across Europe. A company that went from &euro;5M to &euro;8M revenue is <em>actually</em> growing&mdash;not just tagged that way.</p>
+                    <span class="diff-tag">Government tax records</span>
+                </div>
+                <div class="diff-card reveal" style="animation-delay: 0.1s;">
+                    <div class="diff-icon">&#x1F916;</div>
+                    <h3>AI-verified relevance</h3>
+                    <p>Our AI reads every company's actual website and validates they're in your target industry. Apollo says &ldquo;building materials&rdquo;? We check if they actually build things&mdash;or just sell LED strips.</p>
+                    <span class="diff-tag">Website-validated</span>
+                </div>
+                <div class="diff-card reveal" style="animation-delay: 0.2s;">
+                    <div class="diff-icon">&#x1F4C8;</div>
+                    <h3>Growth signal detection</h3>
+                    <p>We scan for funding rounds, hiring sprees, office expansions, and product launches. You contact companies that are spending money now&mdash;not ones that went quiet 3 years ago.</p>
+                    <span class="diff-tag">Timing intelligence</span>
+                </div>
+                <div class="diff-card reveal" style="animation-delay: 0.3s;">
+                    <div class="diff-icon">&#x1F30D;</div>
+                    <h3>European specialist</h3>
+                    <p>Deep coverage in Nordics, France, DACH, UK/IE, and Benelux. Local government registries, local languages, local market knowledge. We don't guess European companies&mdash;we know them.</p>
+                    <span class="diff-tag">29 countries</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- === REPORT PREVIEW === -->
+    <section class="preview-section" id="report">
+        <div class="container">
+            <div class="section-header" style="text-align: center;">
+                <div class="section-eyebrow reveal">What you get</div>
+                <h2 class="section-title reveal">A complete intelligence report</h2>
+                <p class="section-desc reveal" style="margin: 12px auto 0;">Not a CSV. A branded PDF with executive summary, financial data, growth signals, and a reason to call every contact.</p>
+            </div>
+            <div class="preview-card reveal">
+                <div class="preview-bar">
+                    <span>Intelligence Report &mdash; Prefab Timber Elements, Finland</span>
+                    <span class="preview-bar-logo">LEADVAULT</span>
+                </div>
+                <div class="preview-content">
+                    <div class="preview-exec">
+                        <strong>Executive summary:</strong> We identified 39 potential buyers for your prefab timber elements across Finland. 15 are at companies showing active revenue growth. 8 are procurement decision-makers at mid-size construction firms. Top leads include Rakennusliike Virtanen (revenue up 38% YoY) and NordicBuild Group (actively hiring project managers).
+                    </div>
+                    <table class="preview-table">
+                        <thead>
+                            <tr>
+                                <th>Score</th>
+                                <th>Contact</th>
+                                <th>Financials</th>
+                                <th>Signals</th>
+                                <th>Why this lead</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="lead-score" style="display:inline-flex;">94</span></td>
+                                <td>
+                                    <div class="td-name">Mikko Virtanen</div>
+                                    <div class="td-company">Head of Procurement &bull; Rakennusliike Virtanen Oy</div>
+                                </td>
+                                <td class="td-revenue">Rev &euro;12M<br>Profit &euro;1.8M</td>
+                                <td>
+                                    <span class="lead-badge badge-growing">GROWING</span>
+                                    <span class="lead-badge badge-profitable">PROFITABLE</span>
+                                </td>
+                                <td class="td-why">Mid-size contractor with 38% revenue growth; actively expanding prefab capacity. Direct procurement authority.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="lead-score" style="display:inline-flex;">91</span></td>
+                                <td>
+                                    <div class="td-name">Anna Korhonen</div>
+                                    <div class="td-company">Project Director &bull; NordicBuild Group</div>
+                                </td>
+                                <td class="td-revenue">Rev &euro;55M<br>Profit &euro;8M</td>
+                                <td>
+                                    <span class="lead-badge badge-hiring">HIRING</span>
+                                    <span class="lead-badge badge-growing">GROWING</span>
+                                </td>
+                                <td class="td-why">Large-scale residential developer; hiring 12 project managers. Strong fit for volume element supply.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="lead-score" style="display:inline-flex;">87</span></td>
+                                <td>
+                                    <div class="td-name">Jari M&auml;kinen</div>
+                                    <div class="td-company">Technical Director &bull; Pohjola Rakennus Oy</div>
+                                </td>
+                                <td class="td-revenue">Rev &euro;28M<br>Profit &euro;3.2M</td>
+                                <td>
+                                    <span class="lead-badge badge-funded">FUNDED</span>
+                                </td>
+                                <td class="td-why">Recently secured &euro;4M facility expansion loan. Evaluating new material suppliers for Q3 projects.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="preview-note">Sample data from a real delivery &mdash; names anonymised. Full reports include 25&ndash;500 contacts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- === PRICING === -->
+    <section id="pricing">
+        <div class="container">
+            <div class="section-header" style="text-align: center;">
+                <div class="section-eyebrow reveal">Pricing</div>
+                <h2 class="section-title reveal">Intelligence reports, not subscriptions</h2>
+                <p class="section-desc reveal" style="margin: 12px auto 0;">Every tier includes: verified emails, AI curation, company validation, PDF report, growth signals, and financial data.</p>
+            </div>
+
+            <!-- ============================================================
+                 PRICING CONFIG — change values here
+                 ============================================================ -->
+            <div class="pricing-grid reveal">
+                <div class="pricing-card">
+                    <div class="pricing-tier">Starter</div>
+                    <div class="pricing-price">&euro;249</div>
+                    <div class="pricing-desc">100 verified leads, one-time, 48h delivery</div>
+                    <ul class="pricing-features">
+                        <li>AI-curated leads</li>
+                        <li>Verified emails</li>
+                        <li>Growth signals</li>
+                        <li>PDF intelligence report</li>
+                        <li>Company financials</li>
+                    </ul>
+                    <a href="#brief" class="pricing-cta">Get started</a>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="pricing-tier">Growth</div>
+                    <div class="pricing-price">&euro;449</div>
+                    <div class="pricing-desc">300 verified leads &mdash; best per-lead value</div>
+                    <ul class="pricing-features">
+                        <li>Everything in Starter</li>
+                        <li>Detailed company profiles</li>
+                        <li>Priority delivery</li>
+                        <li>Cold email drafts included</li>
+                        <li>Enhanced CSV (18 cols)</li>
+                    </ul>
+                    <a href="#brief" class="pricing-cta">Get started</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-tier">Monthly</div>
+                    <div class="pricing-price">&euro;799 <span>/mo</span></div>
+                    <div class="pricing-desc">500 leads/month in weekly batches</div>
+                    <ul class="pricing-features">
+                        <li>Everything in Growth</li>
+                        <li>Weekly refresh batches</li>
+                        <li>Dedicated analyst</li>
+                        <li>Monthly strategy call</li>
+                        <li>Cancel anytime</li>
+                    </ul>
+                    <a href="#brief" class="pricing-cta">Get started</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-tier">Agency</div>
+                    <div class="pricing-price">&euro;499 <span>/mo per client</span></div>
+                    <div class="pricing-desc">White-label reports for your clients</div>
+                    <ul class="pricing-features">
+                        <li>Everything in Monthly</li>
+                        <li>Your brand on reports</li>
+                        <li>Multi-client dashboard</li>
+                        <li>Volume discounts</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <a href="#brief" class="pricing-cta">Get started</a>
+                </div>
+            </div>
+            <p class="pricing-note">First report is free &mdash; 25 leads, 48h delivery, no commitment. <a href="#brief" style="color: var(--brand); font-weight: 600; text-decoration: none;">Start here &rarr;</a></p>
+        </div>
+    </section>
+
+    <!-- === INTAKE FORM === -->
+    <section class="form-section" id="brief">
+        <div class="container">
+            <div class="section-header" style="text-align: center;">
+                <div class="section-eyebrow reveal">Get your report</div>
+                <h2 class="section-title reveal">Brief our AI analyst</h2>
+                <p class="section-desc reveal" style="margin: 12px auto 0;">Tell us who you want to reach. Your first report is free &mdash; 25 leads with verified emails, financials, and growth signals.</p>
+            </div>
+
+            <div class="wizard-container">
+                <div class="wizard-progress" id="wizProg">
+                    <div class="wizard-seg active"></div>
+                    <div class="wizard-seg"></div>
+                    <div class="wizard-seg"></div>
+                    <div class="wizard-seg"></div>
+                    <div class="wizard-seg"></div>
+                </div>
+                <div class="wizard-step-label" id="wizLabel">
+                    <span class="cur">Step 1 of 5</span>
+                    <span>About your company</span>
+                </div>
+
+                <div id="wizStatus" class="wiz-status"></div>
+
+                <div class="wizard-box">
+
+                    <!-- STEP 1 -->
+                    <div class="wiz-step active" id="ws1">
+                        <div class="wiz-title">Tell us about your company</div>
+                        <div class="wiz-desc">If you have a website, we'll auto-research your business to understand what you sell.</div>
+                        <div class="wiz-field">
+                            <label class="wiz-label">Company name *</label>
+                            <input class="wiz-input" type="text" id="w_company" placeholder="e.g. RP-Karmi Oy">
+                            <div class="wiz-field-error" id="w_companyErr">Required.</div>
+                        </div>
+                        <div class="wiz-field" id="websiteField">
+                            <label class="wiz-label">Website</label>
+                            <input class="wiz-input" type="url" id="w_website" placeholder="e.g. https://rpkarmi.fi">
+                        </div>
+                        <div class="wiz-optional-toggle">
+                            <label class="wiz-check"><input type="checkbox" id="w_nosite" onchange="toggleSite()"> We don't have a website</label>
+                        </div>
+                        <div class="wiz-row">
+                            <div class="wiz-field">
+                                <label class="wiz-label">Your name</label>
+                                <input class="wiz-input" type="text" id="w_name" placeholder="e.g. Kari Karmi">
+                            </div>
+                            <div class="wiz-field">
+                                <label class="wiz-label">Your email *</label>
+                                <input class="wiz-input" type="email" id="w_email" placeholder="e.g. kari@rpkarmi.fi">
+                                <div class="wiz-field-error" id="w_emailErr">Valid email required.</div>
+                            </div>
+                        </div>
+                        <div class="wiz-summary" id="w_summary">
+                            <div class="wiz-summary-label">We found this about your company</div>
+                            <div id="w_summaryText"></div>
+                        </div>
+                        <div class="wiz-btns">
+                            <button class="wiz-btn wiz-btn-primary" id="wBtn1" onclick="wizStep1()">Research my company &rarr;</button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2 -->
+                    <div class="wiz-step" id="ws2">
+                        <div class="wiz-title">What do you sell?</div>
+                        <div class="wiz-desc">The more specific, the better the leads. We've pre-filled this from your website &mdash; edit freely.</div>
+                        <div class="wiz-field">
+                            <label class="wiz-label">Product or service description *</label>
+                            <span class="wiz-hint">At least 20 characters. Think: what does a buyer Google before finding you?</span>
+                            <textarea class="wiz-textarea" id="w_product" rows="4" placeholder="e.g. Prefab timber frame elements for residential and commercial construction"></textarea>
+                            <div class="wiz-field-error" id="w_productErr">Needs at least 20 characters.</div>
+                        </div>
+                        <div class="wiz-btns">
+                            <button class="wiz-btn wiz-btn-back" onclick="wizGo(1)">&larr; Back</button>
+                            <button class="wiz-btn wiz-btn-primary" onclick="wizStep2()">Next &rarr;</button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 3 -->
+                    <div class="wiz-step" id="ws3">
+                        <div class="wiz-title">Who is your ideal buyer?</div>
+                        <div class="wiz-desc">Be specific. &ldquo;Head of Procurement&rdquo; beats &ldquo;decision maker&rdquo; every time.</div>
+                        <div class="wiz-field">
+                            <label class="wiz-label">Companies that already buy from you</label>
+                            <span class="wiz-hint">Optional &mdash; helps us find similar companies.</span>
+                            <div class="wiz-examples">
+                                <div class="wiz-example-row"><span class="wiz-example-num">1.</span><input class="wiz-input" id="w_ex1" placeholder="e.g. Valmet"></div>
+                                <div class="wiz-example-row"><span class="wiz-example-num">2.</span><input class="wiz-input" id="w_ex2" placeholder="e.g. Kone"></div>
+                                <div class="wiz-example-row"><span class="wiz-example-num">3.</span><input class="wiz-input" id="w_ex3" placeholder="e.g. W&auml;rtsil&auml;"></div>
+                            </div>
+                        </div>
+                        <div class="wiz-field">
+                            <label class="wiz-label">Job title of the person who buys from you *</label>
+                            <span class="wiz-hint">The actual title &mdash; not &ldquo;decision maker&rdquo;.</span>
+                            <input class="wiz-input" type="text" id="w_title" placeholder="e.g. Head of Procurement">
+                            <div class="wiz-field-error" id="w_titleErr">Required.</div>
+                        </div>
+                        <div class="wiz-field">
+                            <label class="wiz-label">Company size *</label>
+                            <div class="wiz-chips" id="w_sizes">
+                                <span class="wiz-chip" data-v="1-10" onclick="tChip(this)">1&ndash;10</span>
+                                <span class="wiz-chip sel" data-v="11-50" onclick="tChip(this)">11&ndash;50</span>
+                                <span class="wiz-chip sel" data-v="51-200" onclick="tChip(this)">51&ndash;200</span>
+                                <span class="wiz-chip sel" data-v="201-500" onclick="tChip(this)">201&ndash;500</span>
+                                <span class="wiz-chip" data-v="501+" onclick="tChip(this)">500+</span>
+                            </div>
+                            <div class="wiz-field-error" id="w_sizesErr">Select at least one.</div>
+                        </div>
+                        <div class="wiz-field">
+                            <label class="wiz-label">Countries *</label>
+                            <div class="wiz-chips" id="w_countries">
+                                <span class="wiz-chip sel" data-v="DK" onclick="tChip(this)">Denmark</span>
+                                <span class="wiz-chip sel" data-v="SE" onclick="tChip(this)">Sweden</span>
+                                <span class="wiz-chip sel" data-v="NO" onclick="tChip(this)">Norway</span>
+                                <span class="wiz-chip sel" data-v="FI" onclick="tChip(this)">Finland</span>
+                                <span class="wiz-chip" data-v="FR" onclick="tChip(this)">France</span>
+                                <span class="wiz-chip" data-v="DE" onclick="tChip(this)">Germany</span>
+                                <span class="wiz-chip" data-v="AT" onclick="tChip(this)">Austria</span>
+                                <span class="wiz-chip" data-v="CH" onclick="tChip(this)">Switzerland</span>
+                                <span class="wiz-chip" data-v="GB" onclick="tChip(this)">UK</span>
+                                <span class="wiz-chip" data-v="IE" onclick="tChip(this)">Ireland</span>
+                                <span class="wiz-chip" data-v="NL" onclick="tChip(this)">Netherlands</span>
+                                <span class="wiz-chip" data-v="BE" onclick="tChip(this)">Belgium</span>
+                            </div>
+                            <div class="wiz-field-error" id="w_countriesErr">Select at least one.</div>
+                        </div>
+                        <div class="wiz-field">
+                            <label class="wiz-label">Target industries</label>
+                            <span class="wiz-hint">Optional &mdash; comma-separated.</span>
+                            <input class="wiz-input" type="text" id="w_industries" placeholder="e.g. Construction, Manufacturing, Engineering">
+                        </div>
+                        <div class="wiz-btns">
+                            <button class="wiz-btn wiz-btn-back" onclick="wizGo(2)">&larr; Back</button>
+                            <button class="wiz-btn wiz-btn-primary" onclick="wizStep3()">Next &rarr;</button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 4 -->
+                    <div class="wiz-step" id="ws4">
+                        <div class="wiz-title">Who should we exclude?</div>
+                        <div class="wiz-desc">Help us filter out noise. Cleaner exclusions = better leads.</div>
+                        <div class="wiz-field">
+                            <label class="wiz-label">Competitors</label>
+                            <span class="wiz-hint">Comma-separated company names.</span>
+                            <input class="wiz-input" type="text" id="w_competitors" placeholder="e.g. Siemens MindSphere, ABB Ability">
+                        </div>
+                        <div class="wiz-field">
+                            <label class="wiz-label">Exclude these types</label>
+                            <div class="wiz-checks">
+                                <label class="wiz-check"><input type="checkbox" value="industry_association"> Industry associations</label>
+                                <label class="wiz-check"><input type="checkbox" value="government"> Government bodies</label>
+                                <label class="wiz-check"><input type="checkbox" value="retail"> Retail stores</label>
+                                <label class="wiz-check"><input type="checkbox" value="agents_brokers"> Agents / brokers</label>
+                                <label class="wiz-check"><input type="checkbox" value="consultancies"> Consultancies</label>
+                            </div>
+                        </div>
+                        <div class="wiz-field">
+                            <label class="wiz-label">Other exclusions</label>
+                            <input class="wiz-input" type="text" id="w_otherExcl" placeholder="e.g. No companies we've already contacted">
+                        </div>
+                        <div class="wiz-btns">
+                            <button class="wiz-btn wiz-btn-back" onclick="wizGo(3)">&larr; Back</button>
+                            <button class="wiz-btn wiz-btn-primary" onclick="wizStep4()">Next &rarr;</button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 5 -->
+                    <div class="wiz-step" id="ws5">
+                        <div class="wiz-title">Your report</div>
+                        <div class="wiz-desc">Almost done. Pick your report size and add any extras.</div>
+                        <div class="wiz-field">
+                            <label class="wiz-label">Number of leads</label>
+                            <div class="wiz-count-grid">
+                                <label class="wiz-count-opt">
+                                    <input type="radio" name="w_count" value="100" checked>
+                                    <div class="wiz-count-card">
+                                        <div class="wiz-count-num">100</div>
+                                        <div class="wiz-count-label">&euro;249</div>
+                                    </div>
+                                </label>
+                                <label class="wiz-count-opt">
+                                    <input type="radio" name="w_count" value="300">
+                                    <div class="wiz-count-card">
+                                        <div class="wiz-count-num">300</div>
+                                        <div class="wiz-count-label">&euro;449</div>
+                                    </div>
+                                </label>
+                                <label class="wiz-count-opt">
+                                    <input type="radio" name="w_count" value="500">
+                                    <div class="wiz-count-card">
+                                        <div class="wiz-count-num">500</div>
+                                        <div class="wiz-count-label">&euro;799/mo</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="wiz-field">
+                            <label class="wiz-check"><input type="checkbox" id="w_drafts"> Include personalised cold email drafts</label>
+                        </div>
+                        <div class="wiz-field">
+                            <label class="wiz-label">Dream leads</label>
+                            <span class="wiz-hint">Optional &mdash; specific companies or people you'd love to reach.</span>
+                            <textarea class="wiz-textarea" id="w_dream" rows="2" placeholder="e.g. Outokumpu production managers, LEGO procurement team"></textarea>
+                        </div>
+                        <div class="wiz-field">
+                            <label class="wiz-label">How did you hear about us?</label>
+                            <input class="wiz-input" type="text" id="w_source" placeholder="e.g. LinkedIn, referral, Google">
+                        </div>
+                        <div class="wiz-btns">
+                            <button class="wiz-btn wiz-btn-back" onclick="wizGo(4)">&larr; Back</button>
+                            <button class="wiz-btn wiz-btn-primary" id="wBtnSubmit" onclick="wizSubmit()">Submit brief &rarr;</button>
+                        </div>
+                    </div>
+
+                    <!-- DONE -->
+                    <div class="wiz-step" id="wsDone">
+                        <div class="wiz-confirmation" id="confMailto">
+                            <div class="wiz-conf-icon">&#9993;</div>
+                            <h2>One last step &mdash; send us your brief</h2>
+                            <p>Your email client should have opened with your brief ready to send. Just hit send and we'll get started.</p>
+                            <div style="margin-top: 20px; font-size: 0.84rem; color: var(--text-sec);">
+                                Email didn't open? No problem:
+                            </div>
+                            <div style="margin-top: 12px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                                <button class="wiz-btn wiz-btn-primary" style="flex: none; padding: 10px 20px; font-size: 0.84rem;" onclick="copyBrief()">Copy brief to clipboard</button>
+                                <a href="#" id="mailtoRetry" class="wiz-btn wiz-btn-back" style="text-decoration: none; text-align: center; padding: 10px 20px; font-size: 0.84rem;">Try opening email again</a>
+                            </div>
+                            <div id="copyConfirm" style="display:none; margin-top: 10px; font-size: 0.82rem; color: var(--brand); font-weight: 600;">Copied! Paste it in an email to akseli@leadvault.eu</div>
+                            <div style="margin-top: 16px;">
+                                <a href="mailto:akseli@leadvault.eu" style="font-family: var(--mono); font-size: 0.82rem; color: var(--brand); font-weight: 600;">akseli@leadvault.eu</a>
+                            </div>
+                        </div>
+                        <div class="wiz-confirmation" id="confDirect" style="display:none;">
+                            <div class="wiz-conf-icon">&#10003;</div>
+                            <h2>Brief received</h2>
+                            <p>Our AI analyst is building your intelligence report. We'll email you within 24&ndash;48 hours with verified contacts, financials, growth signals, and scoring.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- === FOOTER === -->
+    <footer>
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-brand">Lead<span>Vault</span></div>
+                <div class="footer-links">
+                    <a href="mailto:akseli@leadvault.eu">akseli@leadvault.eu</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                LeadVault &middot; Synlig Media &middot; CVR DK 44784416 &middot; Copenhagen, Denmark &middot; Built in Denmark &#x1F1E9;&#x1F1F0;
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    // ================================================================
+    // CONFIG — change these when ready
+    // ================================================================
+    const USE_API = false; // Set true when API endpoint is public
+    const API_BASE = 'http://156.67.28.74:8095/api/intake';
+    const API_AUTH = 'Basic ' + btoa('admin:changeme'); // Change after rotating creds
+    const MAILTO = 'akseli@leadvault.eu';
+    // ================================================================
+
+    let wData = {};
+    let wStep = 1;
+
+    // Nav scroll
+    window.addEventListener('scroll', () => {
+        document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // Reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Chip toggle
+    function tChip(el) { el.classList.toggle('sel'); }
+    function getChips(id) { return [...document.querySelectorAll(`#${id} .wiz-chip.sel`)].map(c => c.dataset.v); }
+
+    // Website toggle
+    function toggleSite() {
+        const off = document.getElementById('w_nosite').checked;
+        const f = document.getElementById('websiteField');
+        f.style.opacity = off ? '0.35' : '1';
+        f.style.pointerEvents = off ? 'none' : 'auto';
+        if (off) document.getElementById('w_website').value = '';
+    }
+
+    // Navigation
+    function wizGo(s) {
+        document.querySelectorAll('.wiz-step').forEach(el => el.classList.remove('active'));
+        document.getElementById(`ws${s}`).classList.add('active');
+        wStep = s;
+        updateProg();
+        clrStatus();
+    }
+
+    function updateProg() {
+        const segs = document.querySelectorAll('.wizard-seg');
+        const labels = ['About your company','Your product','Your ideal buyer','Exclusions','Your report'];
+        segs.forEach((s,i) => {
+            s.classList.remove('active','done');
+            if (i < wStep - 1) s.classList.add('done');
+            if (i === wStep - 1) s.classList.add('active');
+        });
+        document.getElementById('wizLabel').innerHTML = `<span class="cur">Step ${wStep} of 5</span><span>${labels[wStep-1]}</span>`;
+    }
+
+    // Validation
+    function req(id, errId) {
+        const v = document.getElementById(id).value.trim();
+        if (!v) {
+            document.getElementById(id).classList.add('invalid');
+            document.getElementById(errId).classList.add('visible');
+            return false;
+        }
+        document.getElementById(id).classList.remove('invalid');
+        document.getElementById(errId).classList.remove('visible');
+        return true;
+    }
+
+    function showStatus(msg, type) {
+        const el = document.getElementById('wizStatus');
+        el.textContent = msg;
+        el.className = `wiz-status ${type}`;
+    }
+
+    function clrStatus() { document.getElementById('wizStatus').className = 'wiz-status'; }
+
+    function setLoad(id, on) {
+        const btn = document.getElementById(id);
+        if (on) {
+            btn.disabled = true;
+            btn.dataset.orig = btn.innerHTML;
+            btn.innerHTML = '<span class="wiz-spinner"></span>Working...';
+        } else {
+            btn.disabled = false;
+            btn.innerHTML = btn.dataset.orig || 'Next &rarr;';
+        }
+    }
+
+    // === STEP HANDLERS ===
+
+    async function wizStep1() {
+        let ok = true;
+        if (!req('w_company', 'w_companyErr')) ok = false;
+        if (!req('w_email', 'w_emailErr')) ok = false;
+        if (!ok) return;
+
+        const hasSite = !document.getElementById('w_nosite').checked;
+        const site = document.getElementById('w_website').value.trim();
+
+        wData.company_name = document.getElementById('w_company').value.trim();
+        wData.website = hasSite ? site : '';
+        wData.contact_name = document.getElementById('w_name').value.trim();
+        wData.contact_email = document.getElementById('w_email').value.trim();
+
+        if (!USE_API || !hasSite || !site) {
+            wizGo(2);
+            return;
+        }
+
+        setLoad('wBtn1', true);
+        clrStatus();
+
+        try {
+            const res = await fetch(`${API_BASE}/step1`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': API_AUTH },
+                body: JSON.stringify(wData)
+            });
+            if (!res.ok) throw new Error(res.status);
+            const d = await res.json();
+
+            if (d.company_summary) {
+                document.getElementById('w_summaryText').textContent = d.company_summary;
+                document.getElementById('w_summary').classList.add('vis');
+            }
+            if (d.product_prefill) document.getElementById('w_product').value = d.product_prefill;
+            wData.domain = d.domain || '';
+
+            setLoad('wBtn1', false);
+            document.getElementById('wBtn1').innerHTML = 'Looks right &mdash; next &rarr;';
+            document.getElementById('wBtn1').onclick = () => wizGo(2);
+        } catch (e) {
+            setLoad('wBtn1', false);
+            showStatus('Could not research your company — no problem, fill in manually.', 'err');
+            setTimeout(() => { clrStatus(); wizGo(2); }, 1500);
+        }
+    }
+
+    function wizStep2() {
+        const v = document.getElementById('w_product').value.trim();
+        if (v.length < 20) {
+            document.getElementById('w_product').classList.add('invalid');
+            document.getElementById('w_productErr').classList.add('visible');
+            return;
+        }
+        wData.product_description = v;
+        wizGo(3);
+    }
+
+    function wizStep3() {
+        let ok = true;
+        if (!req('w_title', 'w_titleErr')) ok = false;
+        const sizes = getChips('w_sizes');
+        if (!sizes.length) { document.getElementById('w_sizesErr').classList.add('visible'); ok = false; }
+        else document.getElementById('w_sizesErr').classList.remove('visible');
+        const countries = getChips('w_countries');
+        if (!countries.length) { document.getElementById('w_countriesErr').classList.add('visible'); ok = false; }
+        else document.getElementById('w_countriesErr').classList.remove('visible');
+        if (!ok) return;
+
+        wData.buyer_title = document.getElementById('w_title').value.trim();
+        wData.example_customers = [
+            document.getElementById('w_ex1').value.trim(),
+            document.getElementById('w_ex2').value.trim(),
+            document.getElementById('w_ex3').value.trim(),
+        ].filter(Boolean);
+        wData.company_sizes = sizes;
+        wData.countries = countries;
+        wData.industries = document.getElementById('w_industries').value.trim();
+        wizGo(4);
+    }
+
+    function wizStep4() {
+        wData.competitors = document.getElementById('w_competitors').value.trim().split(',').map(s=>s.trim()).filter(Boolean);
+        wData.exclude_types = [...document.querySelectorAll('#ws4 input[type="checkbox"]:checked')].map(c=>c.value);
+        const other = document.getElementById('w_otherExcl').value.trim();
+        if (other) wData.other_exclusions = other;
+        wizGo(5);
+    }
+
+    async function wizSubmit() {
+        wData.lead_count = parseInt(document.querySelector('input[name="w_count"]:checked').value);
+        wData.include_email_drafts = document.getElementById('w_drafts').checked;
+        const dream = document.getElementById('w_dream').value.trim();
+        if (dream) wData.dream_leads = dream;
+        const source = document.getElementById('w_source').value.trim();
+        if (source) wData.referral_source = source;
+
+        const btn = document.getElementById('wBtnSubmit');
+        btn.disabled = true;
+        btn.innerHTML = '<span class="wiz-spinner"></span>Submitting...';
+        clrStatus();
+
+        // Store formatted brief globally for copy fallback
+        window._briefText = formatBrief(wData);
+        window._briefSubject = `Intelligence Report Brief: ${wData.company_name}`;
+
+        if (USE_API) {
+            try {
+                const res = await fetch(`${API_BASE}/submit`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': API_AUTH },
+                    body: JSON.stringify(wData)
+                });
+                if (!res.ok) throw new Error(res.status);
+                showDone('direct');
+                return;
+            } catch (e) {
+                // Fall through to mailto
+            }
+        }
+
+        // Mailto flow
+        const subj = encodeURIComponent(window._briefSubject);
+        const body = encodeURIComponent(window._briefText);
+        const mailtoUrl = `mailto:${MAILTO}?subject=${subj}&body=${body}`;
+        
+        // Set retry link
+        document.getElementById('mailtoRetry').href = mailtoUrl;
+        
+        // Try opening mailto
+        window.location.href = mailtoUrl;
+        showDone('mailto');
+    }
+
+    function showDone(mode) {
+        document.querySelectorAll('.wiz-step').forEach(s => s.classList.remove('active'));
+        document.getElementById('wsDone').classList.add('active');
+        document.querySelectorAll('.wizard-seg').forEach(s => { s.classList.remove('active'); s.classList.add('done'); });
+        document.getElementById('wizLabel').innerHTML = '<span class="cur">Complete</span><span>Brief submitted</span>';
+        
+        if (mode === 'direct') {
+            document.getElementById('confMailto').style.display = 'none';
+            document.getElementById('confDirect').style.display = 'block';
+        } else {
+            document.getElementById('confMailto').style.display = 'block';
+            document.getElementById('confDirect').style.display = 'none';
+        }
+    }
+
+    function copyBrief() {
+        const text = `Subject: ${window._briefSubject}\n\n${window._briefText}`;
+        navigator.clipboard.writeText(text).then(() => {
+            document.getElementById('copyConfirm').style.display = 'block';
+        }).catch(() => {
+            // Fallback for older browsers
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            document.getElementById('copyConfirm').style.display = 'block';
+        });
+    }
+
+    function formatBrief(d) {
+        return `LEADVAULT INTELLIGENCE BRIEF\n${'='.repeat(40)}\n\n` +
+            `Company: ${d.company_name}\n` +
+            `Website: ${d.website || 'N/A'}\n` +
+            `Contact: ${d.contact_name} (${d.contact_email})\n\n` +
+            `Product: ${d.product_description}\n\n` +
+            `Buyer title: ${d.buyer_title}\n` +
+            `Example customers: ${(d.example_customers||[]).join(', ') || 'None'}\n` +
+            `Company sizes: ${(d.company_sizes||[]).join(', ')}\n` +
+            `Countries: ${(d.countries||[]).join(', ')}\n` +
+            `Industries: ${d.industries || 'Any'}\n\n` +
+            `Competitors: ${(d.competitors||[]).join(', ') || 'None'}\n` +
+            `Exclude types: ${(d.exclude_types||[]).join(', ') || 'None'}\n` +
+            `Other exclusions: ${d.other_exclusions || 'None'}\n\n` +
+            `Lead count: ${d.lead_count}\n` +
+            `Email drafts: ${d.include_email_drafts ? 'Yes' : 'No'}\n` +
+            `Dream leads: ${d.dream_leads || 'None'}\n` +
+            `Source: ${d.referral_source || 'Not specified'}`;
+    }
+
+    // Clear validation on input
+    document.querySelectorAll('.wiz-input, .wiz-textarea').forEach(el => {
+        el.addEventListener('input', () => {
+            el.classList.remove('invalid');
+            const err = el.parentElement.querySelector('.wiz-field-error');
+            if (err) err.classList.remove('visible');
+        });
+    });
+    </script>
+
 </body>
 </html>
