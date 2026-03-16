@@ -1611,11 +1611,11 @@
                         <div class="wiz-row">
                             <div class="wiz-field">
                                 <label class="wiz-label">Your name</label>
-                                <input class="wiz-input" type="text" id="w_name" placeholder="e.g. Kari Karmi">
+                                <input class="wiz-input" type="text" id="w_name" placeholder="A. Schwarzenegger">
                             </div>
                             <div class="wiz-field">
                                 <label class="wiz-label">Your email *</label>
-                                <input class="wiz-input" type="email" id="w_email" placeholder="e.g. kari@rpkarmi.fi">
+                                <input class="wiz-input" type="email" id="w_email" placeholder="arnold@gettothedeals.com">
                                 <div class="wiz-field-error" id="w_emailErr">Valid email required.</div>
                             </div>
                         </div>
@@ -1803,6 +1803,21 @@
                             <h2>Brief received</h2>
                             <p>Our AI analyst is building your intelligence report. We'll email you within 24&ndash;48 hours with verified contacts, financials, growth signals, and scoring.</p>
                         </div>
+                        <div id="confFallback" style="display:none; padding: 24px 0;">
+                            <div style="text-align: center; margin-bottom: 20px;">
+                                <div class="wiz-conf-icon">&#128203;</div>
+                                <h2 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 8px;">Almost there &mdash; send us your brief</h2>
+                                <p style="color: var(--text-sec); font-size: 0.88rem;">Copy the brief below and email it to us. We'll start building your report immediately.</p>
+                            </div>
+                            <div style="background: var(--bg-alt); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; margin-bottom: 16px; max-height: 240px; overflow-y: auto;">
+                                <pre id="fallbackBrief" style="font-family: var(--mono); font-size: 0.72rem; line-height: 1.5; color: var(--text-sec); white-space: pre-wrap; word-break: break-word; margin: 0;"></pre>
+                            </div>
+                            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                                <button class="wiz-btn wiz-btn-primary" style="flex: none; padding: 12px 24px;" onclick="copyBrief()">Copy to clipboard</button>
+                                <a href="mailto:akseli@leadvault.eu" class="wiz-btn wiz-btn-back" style="text-decoration: none; text-align: center; padding: 12px 24px;">Open email</a>
+                            </div>
+                            <div id="copyConfirm2" style="display:none; text-align: center; margin-top: 10px; font-size: 0.82rem; color: var(--brand); font-weight: 600;">Copied! Paste it in an email to akseli@leadvault.eu</div>
+                        </div>
                     </div>
 
                 </div>
@@ -1828,12 +1843,11 @@
 
     <script>
     // ================================================================
-    // CONFIG — change these when ready
+    // CONFIG
     // ================================================================
-    const USE_API = false; // Set true when API endpoint is public
+    const USE_API = true;
     const API_BASE = 'http://156.67.28.74:8095/api/intake';
-    const API_AUTH = 'Basic ' + btoa('admin:changeme'); // Change after rotating creds
-    const MAILTO = 'akseli@leadvault.eu';
+    const MAILTO = 'akseli@leadvault.eu'; // Fallback only
     // ================================================================
 
     let wData = {};
@@ -1943,7 +1957,7 @@
         try {
             const res = await fetch(`${API_BASE}/step1`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Authorization': API_AUTH },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(wData)
             });
             if (!res.ok) throw new Error(res.status);
@@ -2021,9 +2035,11 @@
         btn.innerHTML = '<span class="wiz-spinner"></span>Submitting...';
         clrStatus();
 
-        // Store formatted brief globally for copy fallback
+        // Store formatted brief globally
         window._briefText = formatBrief(wData);
         window._briefSubject = `Intelligence Report Brief: ${wData.company_name}`;
+
+        let apiSuccess = false;
 
         if (USE_API) {
             try {
@@ -2033,24 +2049,18 @@
                     body: JSON.stringify(wData)
                 });
                 if (!res.ok) throw new Error(res.status);
-                showDone('direct');
-                return;
+                apiSuccess = true;
             } catch (e) {
-                // Fall through to mailto
+                console.log('API submit failed:', e);
             }
         }
 
-        // Mailto flow
-        const subj = encodeURIComponent(window._briefSubject);
-        const body = encodeURIComponent(window._briefText);
-        const mailtoUrl = `mailto:${MAILTO}?subject=${subj}&body=${body}`;
-        
-        // Set retry link
-        document.getElementById('mailtoRetry').href = mailtoUrl;
-        
-        // Try opening mailto
-        window.location.href = mailtoUrl;
-        showDone('mailto');
+        if (apiSuccess) {
+            showDone('direct');
+        } else {
+            // API failed or not enabled — show the brief on screen so no lead is lost
+            showDone('fallback');
+        }
     }
 
     function showDone(mode) {
@@ -2062,25 +2072,37 @@
         if (mode === 'direct') {
             document.getElementById('confMailto').style.display = 'none';
             document.getElementById('confDirect').style.display = 'block';
+            document.getElementById('confFallback').style.display = 'none';
+        } else if (mode === 'fallback') {
+            document.getElementById('confMailto').style.display = 'none';
+            document.getElementById('confDirect').style.display = 'none';
+            document.getElementById('confFallback').style.display = 'block';
+            document.getElementById('fallbackBrief').textContent = window._briefText;
         } else {
             document.getElementById('confMailto').style.display = 'block';
             document.getElementById('confDirect').style.display = 'none';
+            document.getElementById('confFallback').style.display = 'none';
         }
     }
 
     function copyBrief() {
         const text = `Subject: ${window._briefSubject}\n\n${window._briefText}`;
         navigator.clipboard.writeText(text).then(() => {
-            document.getElementById('copyConfirm').style.display = 'block';
+            const c1 = document.getElementById('copyConfirm');
+            const c2 = document.getElementById('copyConfirm2');
+            if (c1) c1.style.display = 'block';
+            if (c2) c2.style.display = 'block';
         }).catch(() => {
-            // Fallback for older browsers
             const ta = document.createElement('textarea');
             ta.value = text;
             document.body.appendChild(ta);
             ta.select();
             document.execCommand('copy');
             document.body.removeChild(ta);
-            document.getElementById('copyConfirm').style.display = 'block';
+            const c1 = document.getElementById('copyConfirm');
+            const c2 = document.getElementById('copyConfirm2');
+            if (c1) c1.style.display = 'block';
+            if (c2) c2.style.display = 'block';
         });
     }
 
