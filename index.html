@@ -1638,6 +1638,11 @@
                             <textarea class="wiz-textarea" id="w_product" rows="4" placeholder="e.g. Prefab timber frame elements for residential and commercial construction"></textarea>
                             <div class="wiz-field-error" id="w_productErr">Needs at least 20 characters.</div>
                         </div>
+                        <div class="wiz-field">
+                            <label class="wiz-label">What problem does this solve for your customers?</label>
+                            <span class="wiz-hint">This helps our AI understand why someone would buy from you.</span>
+                            <textarea class="wiz-textarea" id="w_problem" rows="3" placeholder="e.g. Cuts construction time by 40% vs traditional framing, reducing labour costs on residential projects"></textarea>
+                        </div>
                         <div class="wiz-btns">
                             <button class="wiz-btn wiz-btn-back" onclick="wizGo(1)">&larr; Back</button>
                             <button class="wiz-btn wiz-btn-primary" onclick="wizStep2()">Next &rarr;</button>
@@ -1649,8 +1654,8 @@
                         <div class="wiz-title">Who is your ideal buyer?</div>
                         <div class="wiz-desc">Be specific. &ldquo;Head of Procurement&rdquo; beats &ldquo;decision maker&rdquo; every time.</div>
                         <div class="wiz-field">
-                            <label class="wiz-label">Companies that already buy from you</label>
-                            <span class="wiz-hint">Optional &mdash; helps us find similar companies.</span>
+                            <label class="wiz-label">Name 3 companies similar to your ideal customer</label>
+                            <span class="wiz-hint">Optional &mdash; we'll find companies like these.</span>
                             <div class="wiz-examples">
                                 <div class="wiz-example-row"><span class="wiz-example-num">1.</span><input class="wiz-input" id="w_ex1" placeholder="e.g. Valmet"></div>
                                 <div class="wiz-example-row"><span class="wiz-example-num">2.</span><input class="wiz-input" id="w_ex2" placeholder="e.g. Kone"></div>
@@ -1694,8 +1699,45 @@
                         </div>
                         <div class="wiz-field">
                             <label class="wiz-label">Target industries</label>
-                            <span class="wiz-hint">Optional &mdash; comma-separated.</span>
-                            <input class="wiz-input" type="text" id="w_industries" placeholder="e.g. Construction, Manufacturing, Engineering">
+                            <span class="wiz-hint">Select all that apply.</span>
+                            <div class="wiz-chips wiz-chips-wrap" id="w_industries">
+                                <span class="wiz-chip" data-v="construction" onclick="tChip(this)">Construction</span>
+                                <span class="wiz-chip" data-v="manufacturing" onclick="tChip(this)">Manufacturing</span>
+                                <span class="wiz-chip" data-v="saas" onclick="tChip(this)">SaaS / Tech</span>
+                                <span class="wiz-chip" data-v="recruitment" onclick="tChip(this)">Recruitment</span>
+                                <span class="wiz-chip" data-v="logistics" onclick="tChip(this)">Logistics</span>
+                                <span class="wiz-chip" data-v="fintech" onclick="tChip(this)">Fintech</span>
+                                <span class="wiz-chip" data-v="hospitality" onclick="tChip(this)">Hospitality</span>
+                                <span class="wiz-chip" data-v="retail_fashion" onclick="tChip(this)">Retail / Fashion</span>
+                                <span class="wiz-chip" data-v="real_estate" onclick="tChip(this)">Real Estate</span>
+                                <span class="wiz-chip" data-v="healthcare" onclick="tChip(this)">Healthcare</span>
+                                <span class="wiz-chip" data-v="education" onclick="tChip(this)">Education</span>
+                                <span class="wiz-chip" data-v="professional_services" onclick="tChip(this)">Professional Services</span>
+                                <span class="wiz-chip" data-v="marketing_agency" onclick="tChip(this)">Marketing / Agency</span>
+                            </div>
+                            <input class="wiz-input" type="text" id="w_industries_other" placeholder="Other industry (optional)" style="margin-top: 8px;">
+                        </div>
+                        <div class="wiz-field">
+                            <label class="wiz-label">Minimum company revenue</label>
+                            <span class="wiz-hint">We have real financials from government registers &mdash; filter by actual revenue.</span>
+                            <div class="wiz-chips" id="w_minrev">
+                                <span class="wiz-chip sel" data-v="any" onclick="tChipRadio(this,'w_minrev')">Any</span>
+                                <span class="wiz-chip" data-v="1m" onclick="tChipRadio(this,'w_minrev')">&euro;1M+</span>
+                                <span class="wiz-chip" data-v="5m" onclick="tChipRadio(this,'w_minrev')">&euro;5M+</span>
+                                <span class="wiz-chip" data-v="10m" onclick="tChipRadio(this,'w_minrev')">&euro;10M+</span>
+                                <span class="wiz-chip" data-v="50m" onclick="tChipRadio(this,'w_minrev')">&euro;50M+</span>
+                            </div>
+                        </div>
+                        <div class="wiz-field">
+                            <label class="wiz-label">Growth signals that matter to you</label>
+                            <span class="wiz-hint">We detect these from public sources. Select the ones relevant to your sale.</span>
+                            <div class="wiz-chips wiz-chips-wrap" id="w_signals">
+                                <span class="wiz-chip sel" data-v="any" onclick="tChip(this)">Any growth</span>
+                                <span class="wiz-chip" data-v="funding" onclick="tChip(this)">Recently funded</span>
+                                <span class="wiz-chip" data-v="hiring" onclick="tChip(this)">Actively hiring</span>
+                                <span class="wiz-chip" data-v="expansion" onclick="tChip(this)">Expanding / new markets</span>
+                                <span class="wiz-chip" data-v="product_launch" onclick="tChip(this)">Launched new product</span>
+                            </div>
                         </div>
                         <div class="wiz-btns">
                             <button class="wiz-btn wiz-btn-back" onclick="wizGo(2)">&larr; Back</button>
@@ -1726,6 +1768,16 @@
                             <label class="wiz-label">Other exclusions</label>
                             <input class="wiz-input" type="text" id="w_otherExcl" placeholder="e.g. No companies we've already contacted">
                         </div>
+                        <div class="wiz-field">
+                            <label class="wiz-label">Must-have characteristics</label>
+                            <span class="wiz-hint">Only include leads that meet these criteria.</span>
+                            <div class="wiz-checks">
+                                <label class="wiz-check"><input type="checkbox" value="must_website" id="w_mustWeb"> Must have a website</label>
+                                <label class="wiz-check"><input type="checkbox" value="must_profitable" id="w_mustProfit"> Must be profitable</label>
+                                <label class="wiz-check"><input type="checkbox" value="must_email" id="w_mustEmail" checked> Must have verified email</label>
+                                <label class="wiz-check"><input type="checkbox" value="must_growing" id="w_mustGrow"> Must show growth signals</label>
+                            </div>
+                        </div>
                         <div class="wiz-btns">
                             <button class="wiz-btn wiz-btn-back" onclick="wizGo(3)">&larr; Back</button>
                             <button class="wiz-btn wiz-btn-primary" onclick="wizStep4()">Next &rarr;</button>
@@ -1755,9 +1807,10 @@
                                 </label>
                                 <label class="wiz-count-opt">
                                     <input type="radio" name="w_count" value="500">
-                                    <div class="wiz-count-card">
+                                    <div class="wiz-count-card" style="border: 1px dashed var(--border);">
                                         <div class="wiz-count-num">500</div>
                                         <div class="wiz-count-label">&euro;799/mo</div>
+                                        <div style="font-size: 0.65rem; color: var(--text-sec); margin-top: 2px;">monthly subscription</div>
                                     </div>
                                 </label>
                             </div>
@@ -1847,6 +1900,7 @@
     // ================================================================
     const USE_API = true;
     const API_BASE = 'http://156.67.28.74:8095/api/intake';
+    const API_AUTH = '';  // Set when HTTPS is configured
     const MAILTO = 'akseli@leadvault.eu'; // Fallback only
     // ================================================================
 
@@ -1864,8 +1918,13 @@
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // Chip toggle
+    // Chip toggle (multi-select)
     function tChip(el) { el.classList.toggle('sel'); }
+    // Chip toggle (single-select / radio style)
+    function tChipRadio(el, groupId) {
+        document.querySelectorAll(`#${groupId} .wiz-chip`).forEach(c => c.classList.remove('sel'));
+        el.classList.add('sel');
+    }
     function getChips(id) { return [...document.querySelectorAll(`#${id} .wiz-chip.sel`)].map(c => c.dataset.v); }
 
     // Website toggle
@@ -1988,6 +2047,7 @@
             return;
         }
         wData.product_description = v;
+        wData.problem_solved = document.getElementById('w_problem').value.trim();
         wizGo(3);
     }
 
@@ -2010,13 +2070,18 @@
         ].filter(Boolean);
         wData.company_sizes = sizes;
         wData.countries = countries;
-        wData.industries = document.getElementById('w_industries').value.trim();
+        wData.industries = getChips('w_industries');
+        const otherInd = document.getElementById('w_industries_other').value.trim();
+        if (otherInd) wData.industries.push(otherInd);
+        wData.min_revenue = getChips('w_minrev')[0] || 'any';
+        wData.growth_signals = getChips('w_signals');
         wizGo(4);
     }
 
     function wizStep4() {
         wData.competitors = document.getElementById('w_competitors').value.trim().split(',').map(s=>s.trim()).filter(Boolean);
-        wData.exclude_types = [...document.querySelectorAll('#ws4 input[type="checkbox"]:checked')].map(c=>c.value);
+        wData.exclude_types = [...document.querySelectorAll('#ws4 .wiz-checks:first-of-type input[type="checkbox"]:checked')].map(c=>c.value);
+        wData.must_have = [...document.querySelectorAll('#ws4 .wiz-checks:last-of-type input[type="checkbox"]:checked')].map(c=>c.value);
         const other = document.getElementById('w_otherExcl').value.trim();
         if (other) wData.other_exclusions = other;
         wizGo(5);
@@ -2107,19 +2172,30 @@
     }
 
     function formatBrief(d) {
+        const ind = Array.isArray(d.industries) ? d.industries.join(', ') : (d.industries || 'Any');
+        const sig = Array.isArray(d.growth_signals) ? d.growth_signals.join(', ') : (d.growth_signals || 'Any');
+        const must = Array.isArray(d.must_have) ? d.must_have.join(', ') : 'None';
         return `LEADVAULT INTELLIGENCE BRIEF\n${'='.repeat(40)}\n\n` +
             `Company: ${d.company_name}\n` +
             `Website: ${d.website || 'N/A'}\n` +
             `Contact: ${d.contact_name} (${d.contact_email})\n\n` +
-            `Product: ${d.product_description}\n\n` +
+            `PRODUCT\n` +
+            `Description: ${d.product_description}\n` +
+            `Problem solved: ${d.problem_solved || 'Not specified'}\n\n` +
+            `IDEAL BUYER\n` +
             `Buyer title: ${d.buyer_title}\n` +
-            `Example customers: ${(d.example_customers||[]).join(', ') || 'None'}\n` +
+            `Similar companies: ${(d.example_customers||[]).join(', ') || 'None'}\n` +
             `Company sizes: ${(d.company_sizes||[]).join(', ')}\n` +
             `Countries: ${(d.countries||[]).join(', ')}\n` +
-            `Industries: ${d.industries || 'Any'}\n\n` +
+            `Industries: ${ind}\n` +
+            `Min revenue: ${d.min_revenue || 'Any'}\n` +
+            `Growth signals: ${sig}\n\n` +
+            `FILTERS\n` +
             `Competitors: ${(d.competitors||[]).join(', ') || 'None'}\n` +
             `Exclude types: ${(d.exclude_types||[]).join(', ') || 'None'}\n` +
-            `Other exclusions: ${d.other_exclusions || 'None'}\n\n` +
+            `Other exclusions: ${d.other_exclusions || 'None'}\n` +
+            `Must-have: ${must}\n\n` +
+            `REPORT\n` +
             `Lead count: ${d.lead_count}\n` +
             `Email drafts: ${d.include_email_drafts ? 'Yes' : 'No'}\n` +
             `Dream leads: ${d.dream_leads || 'None'}\n` +
