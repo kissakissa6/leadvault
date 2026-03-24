@@ -2123,7 +2123,9 @@
         window._briefSubject = `Intelligence Report Brief: ${wData.company_name}`;
 
         let apiSuccess = false;
+        let briefId = '';
 
+        // Step 1: Submit brief to API
         if (USE_API) {
             try {
                 const res = await fetch(`${API_BASE}/submit`, {
@@ -2132,13 +2134,38 @@
                     body: JSON.stringify(wData)
                 });
                 if (!res.ok) throw new Error(res.status);
+                const result = await res.json();
+                briefId = result.brief_id || '';
                 apiSuccess = true;
             } catch (e) {
                 console.log('API submit failed:', e);
             }
         }
 
+        // Step 2: Create payment and redirect to Revolut checkout
         if (apiSuccess) {
+            try {
+                btn.innerHTML = '<span class="wiz-spinner"></span>Setting up payment...';
+                const payRes = await fetch('https://api.leadvault.eu/api/payment/create', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        lead_count: wData.lead_count,
+                        email: wData.contact_email,
+                        name: wData.contact_name || wData.company_name,
+                        brief_id: briefId,
+                    })
+                });
+                const payData = await payRes.json();
+                if (payData.success && payData.checkout_url) {
+                    // Redirect to Revolut checkout
+                    window.location.href = payData.checkout_url;
+                    return;
+                }
+            } catch (e) {
+                console.log('Payment setup failed:', e);
+            }
+            // If payment fails, still show success (brief was submitted)
             showDone('direct');
         } else {
             // API failed or not enabled — show the brief on screen so no lead is lost
