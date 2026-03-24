@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LeadVault — Sales Intelligence for European B2B</title>
-    <meta name="description" content="AI-curated sales intelligence reports for Nordic B2B. 413K+ companies, real financials from government registers, verified emails, timing intelligence, and a recommended approach for every lead.">
+    <meta name="description" content="AI-curated sales intelligence reports for Nordic B2B. 400,000+ companies, real financials from government registers, verified emails, timing intelligence, and a recommended approach for every lead.">
     <meta name="keywords" content="B2B leads, sales intelligence, Nordic leads, verified contacts, growth signals, government financial data, construction leads, SaaS leads">
     <link rel="canonical" href="https://leadvault.eu/">
     <meta property="og:title" content="LeadVault — Sales Intelligence for European B2B">
@@ -1287,7 +1287,7 @@
                     </div>
                     <div class="hero-float bottom-left">
                         <div class="float-label">Verified via</div>
-                        <div class="float-value">Gov. registers &bull; TrueList</div>
+                        <div class="float-value">Gov. registers &bull; Email verification</div>
                     </div>
 
                     <div class="report-mockup">
@@ -1433,7 +1433,7 @@
                 <div class="diff-card reveal" style="animation-delay: 0.3s;">
                     <div class="diff-icon">&#x1F30D;</div>
                     <h3>Nordic &amp; European depth</h3>
-                    <p>413,000+ companies across Denmark, Sweden, Norway, Finland, and France. Financial APIs in Norway and France. Local registries, local languages. Deep coverage where it matters for B2B.</p>
+                    <p>400,000+ companies across Denmark, Sweden, Norway, Finland, and France. Financial APIs in Norway and France. Local registries, local languages. Deep coverage where it matters for B2B.</p>
                     <span class="diff-tag">Nordic + France</span>
                 </div>
             </div>
@@ -1699,6 +1699,7 @@
                         </div>
                         <div class="wiz-field">
                             <label class="wiz-label">Countries *</label>
+                            <span class="wiz-hint">Best coverage in Nordics &amp; France (financial data available). Other European countries available with contact data only.</span>
                             <div class="wiz-chips" id="w_countries">
                                 <span class="wiz-chip sel" data-v="DK" onclick="tChip(this)">Denmark</span>
                                 <span class="wiz-chip sel" data-v="SE" onclick="tChip(this)">Sweden</span>
@@ -1808,7 +1809,7 @@
                         <div class="wiz-desc">Almost done. Pick your report size and add any extras.</div>
                         <div class="wiz-field">
                             <label class="wiz-label">Number of leads</label>
-                            <div class="wiz-count-grid">
+                            <div class="wiz-count-grid" style="grid-template-columns: repeat(4, 1fr);">
                                 <label class="wiz-count-opt">
                                     <input type="radio" name="w_count" value="25" checked>
                                     <div class="wiz-count-card">
@@ -1828,6 +1829,13 @@
                                     <div class="wiz-count-card">
                                         <div class="wiz-count-num">100</div>
                                         <div class="wiz-count-label">&euro;449</div>
+                                    </div>
+                                </label>
+                                <label class="wiz-count-opt">
+                                    <input type="radio" name="w_count" value="200">
+                                    <div class="wiz-count-card" style="border: 1px dashed var(--border);">
+                                        <div class="wiz-count-num">200</div>
+                                        <div class="wiz-count-label">&euro;699/mo</div>
                                     </div>
                                 </label>
                             </div>
@@ -2164,8 +2172,8 @@
             } catch (e) {
                 console.log('Payment setup failed:', e);
             }
-            // If payment fails, still show success (brief was submitted)
-            showDone('direct');
+            // Brief submitted but payment didn't go through — show fallback with email instructions
+            showDone('payment_fallback');
         } else {
             // API failed or not enabled — show the brief on screen so no lead is lost
             showDone('fallback');
@@ -2178,10 +2186,14 @@
         document.querySelectorAll('.wizard-seg').forEach(s => { s.classList.remove('active'); s.classList.add('done'); });
         document.getElementById('wizLabel').innerHTML = '<span class="cur">Complete</span><span>Brief submitted</span>';
         
-        if (mode === 'direct') {
+        if (mode === 'direct' || mode === 'payment_fallback') {
             document.getElementById('confMailto').style.display = 'none';
             document.getElementById('confDirect').style.display = 'block';
             document.getElementById('confFallback').style.display = 'none';
+            if (mode === 'payment_fallback') {
+                document.getElementById('confDirect').querySelector('p').textContent =
+                    'Your brief is received. We\u2019ll email you a payment link shortly. Your report will be delivered within 48 hours of payment.';
+            }
         } else if (mode === 'fallback') {
             document.getElementById('confMailto').style.display = 'none';
             document.getElementById('confDirect').style.display = 'none';
