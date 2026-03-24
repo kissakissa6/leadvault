@@ -1637,6 +1637,15 @@
                                 <div class="wiz-field-error" id="w_emailErr">Valid email required.</div>
                             </div>
                         </div>
+                        <div class="wiz-field">
+                            <label class="wiz-label">What are you looking for? *</label>
+                            <div class="wiz-chips wiz-chips-wrap" id="w_reltype" style="gap:10px;">
+                                <span class="wiz-chip sel" data-v="seller" onclick="tChipRadio(this,'w_reltype');updateRelType('seller')" style="padding:10px 18px;">Find new customers</span>
+                                <span class="wiz-chip" data-v="buyer" onclick="tChipRadio(this,'w_reltype');updateRelType('buyer')" style="padding:10px 18px;">Find suppliers</span>
+                                <span class="wiz-chip" data-v="partner" onclick="tChipRadio(this,'w_reltype');updateRelType('partner')" style="padding:10px 18px;">Find partners</span>
+                                <span class="wiz-chip" data-v="researcher" onclick="tChipRadio(this,'w_reltype');updateRelType('researcher')" style="padding:10px 18px;">Market research</span>
+                            </div>
+                        </div>
                         <div class="wiz-summary" id="w_summary">
                             <div class="wiz-summary-label">We found this about your company</div>
                             <div id="w_summaryText"></div>
@@ -1648,18 +1657,40 @@
 
                     <!-- STEP 2 -->
                     <div class="wiz-step" id="ws2">
-                        <div class="wiz-title">What do you sell?</div>
-                        <div class="wiz-desc">The more specific, the better the leads. We've pre-filled this from your website &mdash; edit freely.</div>
-                        <div class="wiz-field">
+                        <div class="wiz-title" id="ws2_title">What do you sell?</div>
+                        <div class="wiz-desc" id="ws2_desc">The more specific, the better the leads. We've pre-filled this from your website &mdash; edit freely.</div>
+                        <!-- Seller mode (default) -->
+                        <div class="wiz-field" id="ws2_seller">
                             <label class="wiz-label">Product or service description *</label>
                             <span class="wiz-hint">At least 20 characters. Think: what does a buyer Google before finding you?</span>
                             <textarea class="wiz-textarea" id="w_product" rows="4" placeholder="e.g. Prefab timber frame elements for residential and commercial construction"></textarea>
                             <div class="wiz-field-error" id="w_productErr">Needs at least 20 characters.</div>
                         </div>
-                        <div class="wiz-field">
+                        <div class="wiz-field" id="ws2_problem">
                             <label class="wiz-label">What problem does this solve for your customers?</label>
                             <span class="wiz-hint">This helps our AI understand why someone would buy from you.</span>
                             <textarea class="wiz-textarea" id="w_problem" rows="3" placeholder="e.g. Cuts construction time by 40% vs traditional framing, reducing labour costs on residential projects"></textarea>
+                        </div>
+                        <!-- Buyer mode -->
+                        <div class="wiz-field" id="ws2_buyer" style="display:none;">
+                            <label class="wiz-label">What are you looking to buy or source? *</label>
+                            <span class="wiz-hint">At least 20 characters. Describe what you need so we can find the right vendors.</span>
+                            <textarea class="wiz-textarea" id="w_buying_need" rows="4" placeholder="e.g. Reliable suppliers of structural steel and reinforcement bars for large-scale construction projects"></textarea>
+                            <div class="wiz-field-error" id="w_buyingErr">Needs at least 20 characters.</div>
+                        </div>
+                        <!-- Partner mode -->
+                        <div class="wiz-field" id="ws2_partner" style="display:none;">
+                            <label class="wiz-label">What kind of partnership are you looking for? *</label>
+                            <span class="wiz-hint">At least 20 characters. Referral partners, distribution, co-creation, joint ventures?</span>
+                            <textarea class="wiz-textarea" id="w_partner_goal" rows="4" placeholder="e.g. Looking for architecture firms to refer projects to each other &mdash; we do 3D visualization, they do design"></textarea>
+                            <div class="wiz-field-error" id="w_partnerErr">Needs at least 20 characters.</div>
+                        </div>
+                        <!-- Researcher mode -->
+                        <div class="wiz-field" id="ws2_researcher" style="display:none;">
+                            <label class="wiz-label">What do you want to research? *</label>
+                            <span class="wiz-hint">At least 20 characters. Describe your research objective &mdash; we'll rank matches by relevance.</span>
+                            <textarea class="wiz-textarea" id="w_research_objective" rows="4" placeholder="e.g. Map all SaaS companies in the Nordics with revenue above 10M NOK that could be ready for Series A"></textarea>
+                            <div class="wiz-field-error" id="w_researchErr">Needs at least 20 characters.</div>
                         </div>
                         <div class="wiz-btns">
                             <button class="wiz-btn wiz-btn-back" onclick="wizGo(1)">&larr; Back</button>
@@ -1681,10 +1712,15 @@
                             </div>
                         </div>
                         <div class="wiz-field">
-                            <label class="wiz-label">Job title of the person who buys from you *</label>
-                            <span class="wiz-hint">The actual title &mdash; not &ldquo;decision maker&rdquo;.</span>
+                            <label class="wiz-label" id="w_titleLabel">Job title of the person who buys from you *</label>
+                            <span class="wiz-hint" id="w_titleHint">The actual title &mdash; not &ldquo;decision maker&rdquo;.</span>
                             <input class="wiz-input" type="text" id="w_title" placeholder="e.g. Head of Procurement">
                             <div class="wiz-field-error" id="w_titleErr">Required.</div>
+                        </div>
+                        <div class="wiz-field" id="ws3_signer">
+                            <label class="wiz-label">Who signs the deal?</label>
+                            <span class="wiz-hint">If different from the contact above &mdash; e.g. the CFO approves, but the buyer evaluates.</span>
+                            <input class="wiz-input" type="text" id="w_signer" placeholder="e.g. CFO or CEO">
                         </div>
                         <div class="wiz-field">
                             <label class="wiz-label">Company size *</label>
@@ -1758,6 +1794,21 @@
                                 <span class="wiz-chip" data-v="product_launch" onclick="tChip(this)">Launched new product</span>
                             </div>
                         </div>
+                        <div class="wiz-field" id="ws3_triggers">
+                            <label class="wiz-label">What triggers them to act?</label>
+                            <span class="wiz-hint">What makes companies start looking for a solution like yours?</span>
+                            <div class="wiz-chips wiz-chips-wrap" id="w_triggers">
+                                <span class="wiz-chip sel" data-v="any" onclick="tChip(this)">Not sure yet</span>
+                                <span class="wiz-chip" data-v="budget_cycle" onclick="tChip(this)">Budget cycle</span>
+                                <span class="wiz-chip" data-v="expansion" onclick="tChip(this)">Expansion</span>
+                                <span class="wiz-chip" data-v="hiring" onclick="tChip(this)">Hiring surge</span>
+                                <span class="wiz-chip" data-v="regulation" onclick="tChip(this)">New regulation</span>
+                                <span class="wiz-chip" data-v="project_launch" onclick="tChip(this)">Project launch</span>
+                                <span class="wiz-chip" data-v="funding_round" onclick="tChip(this)">Funding round</span>
+                                <span class="wiz-chip" data-v="contract_renewal" onclick="tChip(this)">Contract renewal</span>
+                                <span class="wiz-chip" data-v="pain_event" onclick="tChip(this)">Pain event</span>
+                            </div>
+                        </div>
                         <div class="wiz-btns">
                             <button class="wiz-btn wiz-btn-back" onclick="wizGo(2)">&larr; Back</button>
                             <button class="wiz-btn wiz-btn-primary" onclick="wizStep3()">Next &rarr;</button>
@@ -1809,14 +1860,16 @@
                         <div class="wiz-desc">Almost done. Pick your report size and add any extras.</div>
                         <div class="wiz-field">
                             <label class="wiz-label">Number of leads</label>
-                            <div class="wiz-count-grid" style="grid-template-columns: repeat(4, 1fr);">
+                            <div class="wiz-count-grid" style="grid-template-columns: repeat(5, 1fr);">
                                 <label class="wiz-count-opt">
-                                    <input type="radio" name="w_count" value="25" checked>
-                                    <div class="wiz-count-card">
-                                        <div class="wiz-count-num">25</div>
-                                        <div class="wiz-count-label">&euro;149</div>
+                                    <input type="radio" name="w_count" value="10" checked>
+                                    <div class="wiz-count-card" style="border: 2px solid var(--brand);">
+                                        <div class="wiz-count-num">10</div>
+                                        <div class="wiz-count-label">Free</div>
                                     </div>
                                 </label>
+                                <label class="wiz-count-opt">
+                                    <input type="radio" name="w_count" value="25">
                                 <label class="wiz-count-opt">
                                     <input type="radio" name="w_count" value="50">
                                     <div class="wiz-count-card">
@@ -1842,11 +1895,6 @@
                         </div>
                         <div class="wiz-field">
                             <label class="wiz-check"><input type="checkbox" id="w_drafts"> Include personalised cold email drafts</label>
-                        </div>
-                        <div class="wiz-field">
-                            <label class="wiz-label">Dream leads</label>
-                            <span class="wiz-hint">Optional &mdash; specific companies or people you'd love to reach.</span>
-                            <textarea class="wiz-textarea" id="w_dream" rows="2" placeholder="e.g. Outokumpu production managers, LEGO procurement team"></textarea>
                         </div>
                         <div class="wiz-field">
                             <label class="wiz-label">How did you hear about us?</label>
@@ -2014,6 +2062,33 @@
         }
     }
 
+    // === RELATIONSHIP TYPE TOGGLING ===
+
+    function updateRelType(type) {
+        // Step 2: show/hide fields based on relationship type
+        document.getElementById('ws2_seller').style.display = (type === 'seller') ? '' : 'none';
+        document.getElementById('ws2_problem').style.display = (type === 'seller') ? '' : 'none';
+        document.getElementById('ws2_buyer').style.display = (type === 'buyer') ? '' : 'none';
+        document.getElementById('ws2_partner').style.display = (type === 'partner') ? '' : 'none';
+        document.getElementById('ws2_researcher').style.display = (type === 'researcher') ? '' : 'none';
+
+        // Step 2 titles
+        const titles = { seller: 'What do you sell?', buyer: 'What do you need?', partner: 'Tell us about your business', researcher: 'Your research objective' };
+        const descs = { seller: 'The more specific, the better the leads.', buyer: 'Describe what you need so we can find the right vendors.', partner: 'We\'ll find companies that complement your business.', researcher: 'Describe what you want to research \u2014 we\'ll find and rank matches.' };
+        document.getElementById('ws2_title').textContent = titles[type] || titles.seller;
+        document.getElementById('ws2_desc').textContent = descs[type] || descs.seller;
+
+        // Step 3: update buyer title label
+        const titleLabels = { seller: 'Job title of the person who buys from you *', buyer: 'Job title at companies you want to buy from *', partner: 'Job title of potential partners *', researcher: 'Job title of people you\'re researching *' };
+        const titleHints = { seller: 'The actual title \u2014 not \u201cdecision maker\u201d.', buyer: 'e.g. Sales Director, Account Manager', partner: 'e.g. Managing Partner, Head of Business Development', researcher: 'e.g. CEO, CTO, VP Engineering' };
+        document.getElementById('w_titleLabel').textContent = titleLabels[type] || titleLabels.seller;
+        document.getElementById('w_titleHint').textContent = titleHints[type] || titleHints.seller;
+
+        // Hide signer + triggers for researcher (not relevant)
+        document.getElementById('ws3_signer').style.display = (type === 'researcher') ? 'none' : '';
+        document.getElementById('ws3_triggers').style.display = (type === 'researcher') ? 'none' : '';
+    }
+
     // === STEP HANDLERS ===
 
     async function wizStep1() {
@@ -2029,6 +2104,7 @@
         wData.website = hasSite ? site : '';
         wData.contact_name = document.getElementById('w_name').value.trim();
         wData.contact_email = document.getElementById('w_email').value.trim();
+        wData.relationship_type = getChips('w_reltype')[0] || 'seller';
 
         if (!USE_API || !hasSite || !site) {
             wizGo(2);
@@ -2065,14 +2141,26 @@
     }
 
     function wizStep2() {
-        const v = document.getElementById('w_product').value.trim();
-        if (v.length < 20) {
-            document.getElementById('w_product').classList.add('invalid');
-            document.getElementById('w_productErr').classList.add('visible');
-            return;
+        const type = wData.relationship_type || 'seller';
+        let v = '';
+        if (type === 'researcher') {
+            v = document.getElementById('w_research_objective').value.trim();
+            if (v.length < 20) { document.getElementById('w_research_objective').classList.add('invalid'); document.getElementById('w_researchErr').classList.add('visible'); return; }
+            wData.research_objective = v;
+        } else if (type === 'buyer') {
+            v = document.getElementById('w_buying_need').value.trim();
+            if (v.length < 20) { document.getElementById('w_buying_need').classList.add('invalid'); document.getElementById('w_buyingErr').classList.add('visible'); return; }
+            wData.buying_need = v;
+        } else if (type === 'partner') {
+            v = document.getElementById('w_partner_goal').value.trim();
+            if (v.length < 20) { document.getElementById('w_partner_goal').classList.add('invalid'); document.getElementById('w_partnerErr').classList.add('visible'); return; }
+            wData.partner_goal = v;
+        } else {
+            v = document.getElementById('w_product').value.trim();
+            if (v.length < 20) { document.getElementById('w_product').classList.add('invalid'); document.getElementById('w_productErr').classList.add('visible'); return; }
+            wData.product_description = v;
+            wData.problem_solved = document.getElementById('w_problem').value.trim();
         }
-        wData.product_description = v;
-        wData.problem_solved = document.getElementById('w_problem').value.trim();
         wizGo(3);
     }
 
@@ -2088,6 +2176,8 @@
         if (!ok) return;
 
         wData.buyer_title = document.getElementById('w_title').value.trim();
+        wData.decision_maker = (document.getElementById('w_signer') || {}).value || '';
+        wData.decision_maker = wData.decision_maker.trim();
         wData.example_customers = [
             document.getElementById('w_ex1').value.trim(),
             document.getElementById('w_ex2').value.trim(),
@@ -2100,6 +2190,7 @@
         if (otherInd) wData.industries.push(otherInd);
         wData.min_revenue = getChips('w_minrev')[0] || 'any';
         wData.growth_signals = getChips('w_signals');
+        wData.purchase_triggers = getChips('w_triggers');
         wizGo(4);
     }
 
@@ -2115,8 +2206,6 @@
     async function wizSubmit() {
         wData.lead_count = parseInt(document.querySelector('input[name="w_count"]:checked').value);
         wData.include_email_drafts = document.getElementById('w_drafts').checked;
-        const dream = document.getElementById('w_dream').value.trim();
-        if (dream) wData.dream_leads = dream;
         const source = document.getElementById('w_source').value.trim();
         if (source) wData.referral_source = source;
 
@@ -2149,7 +2238,11 @@
             }
         }
 
-        // Step 2: Create payment and redirect to Revolut checkout
+        // Step 2: Free tier → done, paid tier → Revolut checkout
+        if (apiSuccess && wData.lead_count === 10) {
+            showDone('direct');
+            return;
+        }
         if (apiSuccess) {
             try {
                 btn.innerHTML = '<span class="wiz-spinner"></span>Setting up payment...';
@@ -2161,6 +2254,7 @@
                         email: wData.contact_email,
                         name: wData.contact_name || wData.company_name,
                         brief_id: briefId,
+                        country: (wData.countries && wData.countries[0]) || '',
                     })
                 });
                 const payData = await payRes.json();
