@@ -1736,19 +1736,38 @@
                         <div class="wiz-field">
                             <label class="wiz-label">Countries *</label>
                             <span class="wiz-hint">Best coverage in Nordics &amp; France (financial data available). Other European countries available with contact data only.</span>
-                            <div class="wiz-chips" id="w_countries">
+                            <div class="wiz-chips wiz-chips-wrap" id="w_countries">
                                 <span class="wiz-chip sel" data-v="DK" onclick="tChip(this)">Denmark</span>
                                 <span class="wiz-chip sel" data-v="SE" onclick="tChip(this)">Sweden</span>
                                 <span class="wiz-chip sel" data-v="NO" onclick="tChip(this)">Norway</span>
                                 <span class="wiz-chip sel" data-v="FI" onclick="tChip(this)">Finland</span>
                                 <span class="wiz-chip" data-v="FR" onclick="tChip(this)">France</span>
                                 <span class="wiz-chip" data-v="DE" onclick="tChip(this)">Germany</span>
-                                <span class="wiz-chip" data-v="AT" onclick="tChip(this)">Austria</span>
-                                <span class="wiz-chip" data-v="CH" onclick="tChip(this)">Switzerland</span>
-                                <span class="wiz-chip" data-v="GB" onclick="tChip(this)">UK</span>
-                                <span class="wiz-chip" data-v="IE" onclick="tChip(this)">Ireland</span>
                                 <span class="wiz-chip" data-v="NL" onclick="tChip(this)">Netherlands</span>
                                 <span class="wiz-chip" data-v="BE" onclick="tChip(this)">Belgium</span>
+                                <span class="wiz-chip" data-v="AT" onclick="tChip(this)">Austria</span>
+                                <span class="wiz-chip" data-v="IE" onclick="tChip(this)">Ireland</span>
+                                <span class="wiz-chip" data-v="ES" onclick="tChip(this)">Spain</span>
+                                <span class="wiz-chip" data-v="IT" onclick="tChip(this)">Italy</span>
+                                <span class="wiz-chip" data-v="PT" onclick="tChip(this)">Portugal</span>
+                                <span class="wiz-chip" data-v="PL" onclick="tChip(this)">Poland</span>
+                                <span class="wiz-chip" data-v="CZ" onclick="tChip(this)">Czech Republic</span>
+                                <span class="wiz-chip" data-v="RO" onclick="tChip(this)">Romania</span>
+                                <span class="wiz-chip" data-v="HU" onclick="tChip(this)">Hungary</span>
+                                <span class="wiz-chip" data-v="GR" onclick="tChip(this)">Greece</span>
+                                <span class="wiz-chip" data-v="BG" onclick="tChip(this)">Bulgaria</span>
+                                <span class="wiz-chip" data-v="HR" onclick="tChip(this)">Croatia</span>
+                                <span class="wiz-chip" data-v="SK" onclick="tChip(this)">Slovakia</span>
+                                <span class="wiz-chip" data-v="SI" onclick="tChip(this)">Slovenia</span>
+                                <span class="wiz-chip" data-v="LT" onclick="tChip(this)">Lithuania</span>
+                                <span class="wiz-chip" data-v="LV" onclick="tChip(this)">Latvia</span>
+                                <span class="wiz-chip" data-v="EE" onclick="tChip(this)">Estonia</span>
+                                <span class="wiz-chip" data-v="LU" onclick="tChip(this)">Luxembourg</span>
+                                <span class="wiz-chip" data-v="CY" onclick="tChip(this)">Cyprus</span>
+                                <span class="wiz-chip" data-v="MT" onclick="tChip(this)">Malta</span>
+                                <span class="wiz-chip" data-v="GB" onclick="tChip(this)">UK</span>
+                                <span class="wiz-chip" data-v="CH" onclick="tChip(this)">Switzerland</span>
+                                <span class="wiz-chip" data-v="IS" onclick="tChip(this)">Iceland</span>
                             </div>
                             <div class="wiz-field-error" id="w_countriesErr">Select at least one.</div>
                         </div>
@@ -1870,6 +1889,11 @@
                                 </label>
                                 <label class="wiz-count-opt">
                                     <input type="radio" name="w_count" value="25">
+                                    <div class="wiz-count-card">
+                                        <div class="wiz-count-num">25</div>
+                                        <div class="wiz-count-label">&euro;149</div>
+                                    </div>
+                                </label>
                                 <label class="wiz-count-opt">
                                     <input type="radio" name="w_count" value="50">
                                     <div class="wiz-count-card">
@@ -1908,22 +1932,7 @@
 
                     <!-- DONE -->
                     <div class="wiz-step" id="wsDone">
-                        <div class="wiz-confirmation" id="confMailto">
-                            <div class="wiz-conf-icon">&#9993;</div>
-                            <h2>One last step &mdash; send us your brief</h2>
-                            <p>Your email client should have opened with your brief ready to send. Just hit send and we'll get started.</p>
-                            <div style="margin-top: 20px; font-size: 0.84rem; color: var(--text-sec);">
-                                Email didn't open? No problem:
-                            </div>
-                            <div style="margin-top: 12px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-                                <button class="wiz-btn wiz-btn-primary" style="flex: none; padding: 10px 20px; font-size: 0.84rem;" onclick="copyBrief()">Copy brief to clipboard</button>
-                                <a href="#" id="mailtoRetry" class="wiz-btn wiz-btn-back" style="text-decoration: none; text-align: center; padding: 10px 20px; font-size: 0.84rem;">Try opening email again</a>
-                            </div>
-                            <div id="copyConfirm" style="display:none; margin-top: 10px; font-size: 0.82rem; color: var(--brand); font-weight: 600;">Copied! Paste it in an email to akseli@leadvault.eu</div>
-                            <div style="margin-top: 16px;">
-                                <a href="mailto:akseli@leadvault.eu" style="font-family: var(--mono); font-size: 0.82rem; color: var(--brand); font-weight: 600;">akseli@leadvault.eu</a>
-                            </div>
-                        </div>
+                        <!-- confMailto removed — was dead code (unreachable in current flow) -->
                         <div class="wiz-confirmation" id="confDirect" style="display:none;">
                             <div class="wiz-conf-icon">&#10003;</div>
                             <h2>Brief received</h2>
@@ -2325,15 +2334,26 @@
         const ind = Array.isArray(d.industries) ? d.industries.join(', ') : (d.industries || 'Any');
         const sig = Array.isArray(d.growth_signals) ? d.growth_signals.join(', ') : (d.growth_signals || 'Any');
         const must = Array.isArray(d.must_have) ? d.must_have.join(', ') : 'None';
+        const rt = d.relationship_type || 'seller';
+        let objective = '';
+        if (rt === 'seller') {
+            objective = `PRODUCT\nDescription: ${d.product_description}\nProblem solved: ${d.problem_solved || 'Not specified'}`;
+        } else if (rt === 'buyer') {
+            objective = `SOURCING NEED\n${d.buying_need}`;
+        } else if (rt === 'partner') {
+            objective = `PARTNERSHIP GOAL\n${d.partner_goal}`;
+        } else if (rt === 'researcher') {
+            objective = `RESEARCH OBJECTIVE\n${d.research_objective}`;
+        }
+        const targetLabel = rt === 'buyer' ? 'Target vendor' : rt === 'partner' ? 'Target partner' : rt === 'researcher' ? 'Target contact' : 'Buyer title';
         return `LEADVAULT INTELLIGENCE BRIEF\n${'='.repeat(40)}\n\n` +
             `Company: ${d.company_name}\n` +
             `Website: ${d.website || 'N/A'}\n` +
-            `Contact: ${d.contact_name} (${d.contact_email})\n\n` +
-            `PRODUCT\n` +
-            `Description: ${d.product_description}\n` +
-            `Problem solved: ${d.problem_solved || 'Not specified'}\n\n` +
-            `IDEAL BUYER\n` +
-            `Buyer title: ${d.buyer_title}\n` +
+            `Contact: ${d.contact_name} (${d.contact_email})\n` +
+            `Type: ${rt}\n\n` +
+            `${objective}\n\n` +
+            `TARGET\n` +
+            `${targetLabel}: ${d.buyer_title}\n` +
             `Similar companies: ${(d.example_customers||[]).join(', ') || 'None'}\n` +
             `Company sizes: ${(d.company_sizes||[]).join(', ')}\n` +
             `Countries: ${(d.countries||[]).join(', ')}\n` +
@@ -2348,7 +2368,6 @@
             `REPORT\n` +
             `Lead count: ${d.lead_count}\n` +
             `Email drafts: ${d.include_email_drafts ? 'Yes' : 'No'}\n` +
-            `Dream leads: ${d.dream_leads || 'None'}\n` +
             `Source: ${d.referral_source || 'Not specified'}`;
     }
 
