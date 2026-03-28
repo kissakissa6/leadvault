@@ -1250,6 +1250,7 @@
                 <a href="#how">How it works</a>
                 <a href="#report">Sample report</a>
                 <a href="#pricing">Pricing</a>
+                <a href="https://api.leadvault.eu/blog" target="_blank">Blog</a>
                 <a href="#brief" class="nav-cta">Get free report &rarr;</a>
             </div>
         </div>
@@ -1616,12 +1617,12 @@
                         <div class="wiz-desc">If you have a website, we'll auto-research your business to understand what you sell.</div>
                         <div class="wiz-field">
                             <label class="wiz-label">Company name *</label>
-                            <input class="wiz-input" type="text" id="w_company" placeholder="e.g. RP-Karmi Oy">
+                            <input class="wiz-input" type="text" id="w_company" placeholder="e.g. Meridian Group">
                             <div class="wiz-field-error" id="w_companyErr">Required.</div>
                         </div>
                         <div class="wiz-field" id="websiteField">
                             <label class="wiz-label">Website</label>
-                            <input class="wiz-input" type="url" id="w_website" placeholder="e.g. https://rpkarmi.fi">
+                            <input class="wiz-input" type="url" id="w_website" placeholder="e.g. https://meridiangroup.com">
                         </div>
                         <div class="wiz-optional-toggle">
                             <label class="wiz-check"><input type="checkbox" id="w_nosite" onchange="toggleSite()"> We don't have a website</label>
@@ -1689,7 +1690,7 @@
                         <div class="wiz-field" id="ws2_researcher" style="display:none;">
                             <label class="wiz-label">What do you want to research? *</label>
                             <span class="wiz-hint">At least 20 characters. Describe your research objective &mdash; we'll rank matches by relevance.</span>
-                            <textarea class="wiz-textarea" id="w_research_objective" rows="4" placeholder="e.g. Map all SaaS companies in the Nordics with revenue above 10M NOK that could be ready for Series A"></textarea>
+                            <textarea class="wiz-textarea" id="w_research_objective" rows="4" placeholder="e.g. Map all SaaS companies in Europe with revenue above &euro;5M that could be ready for Series A"></textarea>
                             <div class="wiz-field-error" id="w_researchErr">Needs at least 20 characters.</div>
                         </div>
                         <div class="wiz-btns">
@@ -1706,9 +1707,9 @@
                             <label class="wiz-label">Name 3 companies similar to your ideal customer</label>
                             <span class="wiz-hint">Optional &mdash; we'll find companies like these.</span>
                             <div class="wiz-examples">
-                                <div class="wiz-example-row"><span class="wiz-example-num">1.</span><input class="wiz-input" id="w_ex1" placeholder="e.g. Valmet"></div>
-                                <div class="wiz-example-row"><span class="wiz-example-num">2.</span><input class="wiz-input" id="w_ex2" placeholder="e.g. Kone"></div>
-                                <div class="wiz-example-row"><span class="wiz-example-num">3.</span><input class="wiz-input" id="w_ex3" placeholder="e.g. W&auml;rtsil&auml;"></div>
+                                <div class="wiz-example-row"><span class="wiz-example-num">1.</span><input class="wiz-input" id="w_ex1" placeholder="e.g. Siemens"></div>
+                                <div class="wiz-example-row"><span class="wiz-example-num">2.</span><input class="wiz-input" id="w_ex2" placeholder="e.g. Schneider Electric"></div>
+                                <div class="wiz-example-row"><span class="wiz-example-num">3.</span><input class="wiz-input" id="w_ex3" placeholder="e.g. ABB"></div>
                             </div>
                         </div>
                         <div class="wiz-field">
@@ -1735,12 +1736,12 @@
                         </div>
                         <div class="wiz-field">
                             <label class="wiz-label">Countries *</label>
-                            <span class="wiz-hint">Best coverage in Nordics &amp; France (financial data available). Other European countries available with contact data only.</span>
+                            <span class="wiz-hint">Select the markets you want to reach. Financial data available in select countries.</span>
                             <div class="wiz-chips wiz-chips-wrap" id="w_countries">
-                                <span class="wiz-chip sel" data-v="DK" onclick="tChip(this)">Denmark</span>
-                                <span class="wiz-chip sel" data-v="SE" onclick="tChip(this)">Sweden</span>
-                                <span class="wiz-chip sel" data-v="NO" onclick="tChip(this)">Norway</span>
-                                <span class="wiz-chip sel" data-v="FI" onclick="tChip(this)">Finland</span>
+                                <span class="wiz-chip" data-v="DK" onclick="tChip(this)">Denmark</span>
+                                <span class="wiz-chip" data-v="SE" onclick="tChip(this)">Sweden</span>
+                                <span class="wiz-chip" data-v="NO" onclick="tChip(this)">Norway</span>
+                                <span class="wiz-chip" data-v="FI" onclick="tChip(this)">Finland</span>
                                 <span class="wiz-chip" data-v="FR" onclick="tChip(this)">France</span>
                                 <span class="wiz-chip" data-v="DE" onclick="tChip(this)">Germany</span>
                                 <span class="wiz-chip" data-v="NL" onclick="tChip(this)">Netherlands</span>
@@ -1882,7 +1883,7 @@
                             <div class="wiz-count-grid" style="grid-template-columns: repeat(5, 1fr);">
                                 <label class="wiz-count-opt">
                                     <input type="radio" name="w_count" value="10" checked>
-                                    <div class="wiz-count-card" style="border: 2px solid var(--brand);">
+                                    <div class="wiz-count-card">
                                         <div class="wiz-count-num">10</div>
                                         <div class="wiz-count-label">Free</div>
                                     </div>
@@ -2301,8 +2302,9 @@
         document.querySelectorAll('.wizard-seg').forEach(s => { s.classList.remove('active'); s.classList.add('done'); });
         document.getElementById('wizLabel').innerHTML = '<span class="cur">Complete</span><span>Brief submitted</span>';
         
+        const confMailto = document.getElementById('confMailto');
         if (mode === 'direct' || mode === 'payment_fallback') {
-            document.getElementById('confMailto').style.display = 'none';
+            if (confMailto) confMailto.style.display = 'none';
             document.getElementById('confDirect').style.display = 'block';
             document.getElementById('confFallback').style.display = 'none';
             if (mode === 'payment_fallback') {
@@ -2310,12 +2312,12 @@
                     'Your brief is received. We\u2019ll email you a payment link shortly. Your report will be delivered within 48 hours of payment.';
             }
         } else if (mode === 'fallback') {
-            document.getElementById('confMailto').style.display = 'none';
+            if (confMailto) confMailto.style.display = 'none';
             document.getElementById('confDirect').style.display = 'none';
             document.getElementById('confFallback').style.display = 'block';
             document.getElementById('fallbackBrief').textContent = window._briefText;
         } else {
-            document.getElementById('confMailto').style.display = 'block';
+            if (confMailto) confMailto.style.display = 'block';
             document.getElementById('confDirect').style.display = 'none';
             document.getElementById('confFallback').style.display = 'none';
         }
