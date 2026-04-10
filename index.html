@@ -1624,6 +1624,10 @@
                             </div>
                         </div>
                         <div class="wiz-field">
+                            <label class="wiz-label">EU VAT number <span style="color:#999;font-weight:400">(optional — for reverse charge invoicing)</span></label>
+                            <input class="wiz-input" type="text" id="w_vat" placeholder="e.g. DK12345678 or FI12345678" style="max-width:320px;">
+                        </div>
+                        <div class="wiz-field">
                             <label class="wiz-label">What are you looking for? *</label>
                             <div class="wiz-chips wiz-chips-wrap" id="w_reltype" style="gap:10px;">
                                 <span class="wiz-chip sel" data-v="seller" onclick="tChipRadio(this,'w_reltype');updateRelType('seller')" style="padding:10px 18px;">Find new customers</span>
@@ -1831,12 +1835,12 @@
                         </div>
                         <div class="wiz-field">
                             <label class="wiz-label">Exclude these types</label>
-                            <div class="wiz-checks">
-                                <label class="wiz-check"><input type="checkbox" value="industry_association"> Industry associations</label>
-                                <label class="wiz-check"><input type="checkbox" value="government"> Government bodies</label>
-                                <label class="wiz-check"><input type="checkbox" value="retail"> Retail stores</label>
-                                <label class="wiz-check"><input type="checkbox" value="agents_brokers"> Agents / brokers</label>
-                                <label class="wiz-check"><input type="checkbox" value="consultancies"> Consultancies</label>
+                            <div class="wiz-chips wiz-chips-wrap" id="w_excludes">
+                                <span class="wiz-chip" data-v="industry_association" onclick="tChip(this)">Industry associations</span>
+                                <span class="wiz-chip" data-v="government" onclick="tChip(this)">Government bodies</span>
+                                <span class="wiz-chip" data-v="retail" onclick="tChip(this)">Retail stores</span>
+                                <span class="wiz-chip" data-v="agents_brokers" onclick="tChip(this)">Agents / brokers</span>
+                                <span class="wiz-chip" data-v="consultancies" onclick="tChip(this)">Consultancies</span>
                             </div>
                         </div>
                         <div class="wiz-field">
@@ -1846,11 +1850,11 @@
                         <div class="wiz-field">
                             <label class="wiz-label">Must-have characteristics</label>
                             <span class="wiz-hint">Only include leads that meet these criteria.</span>
-                            <div class="wiz-checks">
-                                <label class="wiz-check"><input type="checkbox" value="must_website" id="w_mustWeb"> Must have a website</label>
-                                <label class="wiz-check"><input type="checkbox" value="must_profitable" id="w_mustProfit"> Must be profitable</label>
-                                <label class="wiz-check"><input type="checkbox" value="must_email" id="w_mustEmail" checked> Must have verified email</label>
-                                <label class="wiz-check"><input type="checkbox" value="must_growing" id="w_mustGrow"> Must show growth signals</label>
+                            <div class="wiz-chips wiz-chips-wrap" id="w_musthave">
+                                <span class="wiz-chip" data-v="must_website" onclick="tChip(this)">Has a website</span>
+                                <span class="wiz-chip" data-v="must_profitable" onclick="tChip(this)">Profitable</span>
+                                <span class="wiz-chip sel" data-v="must_email" onclick="tChip(this)">Verified email</span>
+                                <span class="wiz-chip" data-v="must_growing" onclick="tChip(this)">Growth signals</span>
                             </div>
                         </div>
                         <div class="wiz-btns">
@@ -2111,6 +2115,7 @@
         wData.website = hasSite ? site : '';
         wData.contact_name = document.getElementById('w_name').value.trim();
         wData.contact_email = document.getElementById('w_email').value.trim();
+        wData.vat_number = (document.getElementById('w_vat').value || '').trim().replace(/[\s\-.]/g, '').toUpperCase();
         wData.relationship_type = getChips('w_reltype')[0] || 'seller';
 
         if (!USE_API || !hasSite || !site) {
@@ -2203,8 +2208,8 @@
 
     function wizStep4() {
         wData.competitors = document.getElementById('w_competitors').value.trim().split(',').map(s=>s.trim()).filter(Boolean);
-        wData.exclude_types = [...document.querySelectorAll('#ws4 .wiz-checks:first-of-type input[type="checkbox"]:checked')].map(c=>c.value);
-        wData.must_have = [...document.querySelectorAll('#ws4 .wiz-checks:last-of-type input[type="checkbox"]:checked')].map(c=>c.value);
+        wData.exclude_types = getChips('w_excludes');
+        wData.must_have = getChips('w_musthave');
         const other = document.getElementById('w_otherExcl').value.trim();
         if (other) wData.other_exclusions = other;
         wizGo(5);
@@ -2262,6 +2267,7 @@
                         name: wData.contact_name || wData.company_name,
                         brief_id: briefId,
                         country: (wData.countries && wData.countries[0]) || '',
+                        vat_number: wData.vat_number || '',
                     })
                 });
                 const payData = await payRes.json();
