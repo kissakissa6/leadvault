@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LeadVault — Sales Intelligence Reports</title>
-    <meta name="description" content="Sales intelligence reports with real financials, verified emails, growth signals, and a recommended approach for every lead. Not a database — a research team.">
+    <meta name="description" content="Sales intelligence reports with real financials, verified emails, growth signals, and a recommended approach for every lead. Not a database — a research engine.">
     <meta name="keywords" content="B2B leads, sales intelligence, verified contacts, growth signals, financial data, lead scoring, sales prospecting">
     <link rel="canonical" href="https://leadvault.eu/">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>V</text></svg>">
@@ -1474,8 +1474,8 @@
                             <div class="hero-stat-label">From 20+ government registers</div>
                         </div>
                         <div>
-                            <div class="hero-stat-num">Every email verified</div>
-                            <div class="hero-stat-label">Plus LinkedIn for every contact</div>
+                            <div class="hero-stat-num">Verified before delivery</div>
+                            <div class="hero-stat-label">Email + LinkedIn for every contact</div>
                         </div>
                     </div>
                 </div>
@@ -1571,10 +1571,6 @@
                 </div>
                 <div class="demo-form reveal" id="demoForm">
                     <div class="demo-form-grid">
-                        <div class="demo-field full">
-                            <label for="demoEmail">Business email</label>
-                            <input type="email" id="demoEmail" placeholder="you@company.com">
-                        </div>
                         <div class="demo-field">
                             <label for="demoCountry">Country</label>
                             <select id="demoCountry">
@@ -1707,8 +1703,8 @@
                 </div>
                 <div class="diff-card reveal" style="animation-delay: 0.3s;">
                     <div class="diff-icon">&#x1F30D;</div>
-                    <h3>25M+ companies across Europe</h3>
-                    <p>We pull directly from official government registers &mdash; audited revenue, profit, and balance sheets filed by the companies themselves. Not scraped. Not estimated. Not self-reported.</p>
+                    <h3>14M+ companies across Europe</h3>
+                    <p>We pull directly from official government registers &mdash; officially filed revenue, profit, and balance sheets. Not scraped. Not estimated. Not self-reported.</p>
                     <span class="diff-tag">Pan-European</span>
                 </div>
             </div>
@@ -1773,7 +1769,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <p class="preview-note">Based on real data from 20+ official European government registers. Names abbreviated for privacy. Reports include 25&ndash;200 contacts with verified emails.</p>
+                    <p class="preview-note">Based on real data from official European government registers across 10+ countries. Names abbreviated for privacy. Reports include 25&ndash;200 contacts with verified emails.</p>
                 </div>
             </div>
         </div>
@@ -1854,7 +1850,7 @@
         <div class="container">
             <div class="section-header" style="text-align: center;">
                 <div class="section-eyebrow reveal">Get your report</div>
-                <h2 class="section-title reveal">Brief our research team</h2>
+                <h2 class="section-title reveal">Brief our research engine</h2>
                 <p class="section-desc reveal" style="margin: 12px auto 0;">Tell us who you want to reach. Your first report is free &mdash; 10 scored leads with verified emails and real financial data.</p>
             </div>
 
@@ -2670,7 +2666,6 @@
     const DEMO_API = (location.hostname === 'leadvault.eu' ? 'https://api.leadvault.eu' : '') + '/api/demo';
 
     async function demoSearch() {
-        const email = document.getElementById('demoEmail').value.trim();
         const country = document.getElementById('demoCountry').value;
         const industry = document.getElementById('demoIndustry').value;
         const btn = document.getElementById('demoBtn');
@@ -2678,23 +2673,10 @@
         const resultsEl = document.getElementById('demoResults');
         const countEl = document.getElementById('demoCountOnly');
 
-        // Reset
         errEl.style.display = 'none';
         resultsEl.style.display = 'none';
         countEl.style.display = 'none';
 
-        // Validate
-        if (!email || !email.includes('@') || !email.split('@')[1].includes('.')) {
-            errEl.textContent = 'Please enter a valid business email.';
-            errEl.style.display = 'block';
-            return;
-        }
-        const personalDomains = ['gmail.com','yahoo.com','hotmail.com','outlook.com','live.com','icloud.com','aol.com','protonmail.com','proton.me'];
-        if (personalDomains.includes(email.split('@')[1].toLowerCase())) {
-            errEl.textContent = 'Please use your business email address.';
-            errEl.style.display = 'block';
-            return;
-        }
         if (!country) {
             errEl.textContent = 'Please select a country.';
             errEl.style.display = 'block';
@@ -2706,7 +2688,6 @@
             return;
         }
 
-        // Loading state
         btn.disabled = true;
         btn.textContent = 'Searching...';
 
@@ -2714,7 +2695,7 @@
             const resp = await fetch(DEMO_API, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({email, country, industry}),
+                body: JSON.stringify({country, industry}),
             });
             const data = await resp.json();
 
@@ -2728,14 +2709,13 @@
                 countEl.innerHTML =
                     '<span class="demo-count-num">' + data.total.toLocaleString() + '</span>' +
                     data.industry + ' companies in ' + data.country + '.<br>' +
-                    '<a href="#wizard" style="color:var(--brand);font-weight:600;">Submit a brief</a> for a curated report with financials and contacts.';
+                    '<a href="#wizard" style="color:var(--brand);font-weight:600;">Submit a brief</a> for a curated report with contacts.';
                 countEl.style.display = 'block';
                 return;
             }
 
-            // Show results table
             document.getElementById('demoResultsTitle').textContent = data.industry + ' in ' + data.country;
-            document.getElementById('demoResultsTotal').textContent = data.total.toLocaleString() + ' total';
+            document.getElementById('demoResultsTotal').textContent = data.total.toLocaleString() + '+ total';
 
             const hasTrend = data.companies.some(c => c.growth);
             const thead = document.getElementById('demoTableHead');
@@ -2757,7 +2737,7 @@
             });
 
             document.getElementById('demoCta').innerHTML =
-                data.cta + ' <a href="#wizard">Get your report</a>';
+                'Want contacts and exact financials for these companies? <a href="#wizard">Get your report</a>';
 
             resultsEl.style.display = 'block';
         } catch (e) {
