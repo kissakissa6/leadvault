@@ -2718,8 +2718,9 @@
             document.getElementById('demoResultsTotal').textContent = data.total.toLocaleString() + '+ total';
 
             const hasTrend = data.companies.some(c => c.growth);
+            const cur = data.currency || '';
             const thead = document.getElementById('demoTableHead');
-            thead.innerHTML = '<tr><th>Company</th><th>City</th><th>Revenue</th>' +
+            thead.innerHTML = '<tr><th>Company</th><th>City</th><th>Revenue (' + esc(cur) + ')</th>' +
                 (hasTrend ? '<th>Trend</th>' : '') + '</tr>';
 
             const tbody = document.getElementById('demoTableBody');
