@@ -1228,7 +1228,7 @@
         }
 
         .demo-inner {
-            max-width: 720px;
+            max-width: 940px;
             margin: 0 auto;
         }
 
@@ -1371,6 +1371,24 @@
         .demo-badge.stable { background: var(--blue-bg); color: var(--blue); }
         .demo-badge.declining { background: var(--red-bg); color: #C43333; }
         .demo-badge.flat { background: var(--amber-bg); color: var(--amber); }
+
+        .demo-growth-pos { color: var(--brand); }
+        .demo-growth-neg { color: #C43333; }
+        .demo-profit-pos { color: var(--brand); }
+        .demo-profit-neg { color: #C43333; }
+        .demo-years-badge {
+            display: inline-block;
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 99px;
+            background: var(--blue-bg);
+            color: var(--blue);
+            letter-spacing: 0.02em;
+        }
+        .demo-table td.mono { font-family: var(--mono); font-size: 0.8rem; text-align: right; }
+        .demo-table th.right { text-align: right; }
 
         .demo-cta-bar {
             margin-top: 18px;
@@ -2717,28 +2735,62 @@
             document.getElementById('demoResultsTitle').textContent = data.industry + ' in ' + data.country;
             document.getElementById('demoResultsTotal').textContent = data.total.toLocaleString() + '+ total';
 
-            const hasTrend = data.companies.some(c => c.growth);
-            const cur = data.currency || '';
+            const hasGrowth = data.companies.some(c => c.growth_pct !== null && c.growth_pct !== undefined);
+            const hasProfit = data.companies.some(c => c.profit && c.profit !== 0);
+            const hasMultiYear = data.companies.some(c => c.financial_years >= 2);
             const thead = document.getElementById('demoTableHead');
-            thead.innerHTML = '<tr><th>Company</th><th>City</th><th>Revenue (' + esc(cur) + ')</th>' +
-                (hasTrend ? '<th>Trend</th>' : '') + '</tr>';
+            let hdr = '<tr><th>Company</th><th>City</th><th class="right">Revenue</th>';
+            if (hasGrowth) hdr += '<th class="right">Growth</th>';
+            if (hasProfit) hdr += '<th class="right">Profit</th>';
+            if (hasMultiYear) hdr += '<th>Data</th>';
+            hdr += '</tr>';
+            thead.innerHTML = hdr;
 
             const tbody = document.getElementById('demoTableBody');
             tbody.innerHTML = '';
             data.companies.forEach(c => {
-                const badgeClass = c.growth ? c.growth.toLowerCase() : '';
-                const badgeHtml = c.growth ? '<span class="demo-badge ' + badgeClass + '">' + c.growth + '</span>' : '';
+                const cur = c.currency || data.currency || '';
+                // Growth badge
+                let growthHtml = '';
+                if (hasGrowth) {
+                    if (c.growth_pct !== null && c.growth_pct !== undefined) {
+                        const sign = c.growth_pct > 0 ? '+' : '';
+                        const cls = c.growth_pct > 0 ? 'demo-growth-pos' : (c.growth_pct < 0 ? 'demo-growth-neg' : '');
+                        growthHtml = '<td class="mono ' + cls + '">' + sign + c.growth_pct.toFixed(1) + '%</td>';
+                    } else {
+                        growthHtml = '<td class="mono" style="color:var(--text-muted);">&mdash;</td>';
+                    }
+                }
+                // Profit
+                let profitHtml = '';
+                if (hasProfit) {
+                    if (c.profit && c.profit !== 0) {
+                        const cls = c.profit > 0 ? 'demo-profit-pos' : 'demo-profit-neg';
+                        profitHtml = '<td class="mono ' + cls + '">' + formatAmount(c.profit, cur) + '</td>';
+                    } else {
+                        profitHtml = '<td class="mono" style="color:var(--text-muted);">&mdash;</td>';
+                    }
+                }
+                // Multi-year badge
+                let yearsHtml = '';
+                if (hasMultiYear) {
+                    if (c.financial_years >= 2) {
+                        yearsHtml = '<td><span class="demo-years-badge">' + c.financial_years + 'yr</span></td>';
+                    } else {
+                        yearsHtml = '<td></td>';
+                    }
+                }
                 const row = document.createElement('tr');
                 row.innerHTML =
                     '<td class="demo-name">' + esc(c.name) + '</td>' +
                     '<td>' + esc(c.city) + '</td>' +
-                    '<td style="font-family:var(--mono);font-size:0.8rem;">' + esc(c.revenue_range) + '</td>' +
-                    (hasTrend ? '<td>' + badgeHtml + '</td>' : '');
+                    '<td class="mono">' + formatAmount(c.revenue, cur) + '</td>' +
+                    growthHtml + profitHtml + yearsHtml;
                 tbody.appendChild(row);
             });
 
             document.getElementById('demoCta').innerHTML =
-                'Want contacts and exact financials for these companies? <a href="#wizard">Get your report</a>';
+                'Want verified contacts and intelligence signals for these companies? <a href="#wizard">Get your report</a>';
 
             resultsEl.style.display = 'block';
         } catch (e) {
@@ -2748,6 +2800,18 @@
             btn.disabled = false;
             btn.textContent = 'Search';
         }
+    }
+
+    function formatAmount(val, currency) {
+        if (!val || val === 0) return '';
+        const neg = val < 0;
+        const abs = Math.abs(val);
+        let num;
+        if (abs >= 1e9) num = (abs / 1e9).toFixed(1) + 'B';
+        else if (abs >= 1e6) num = (abs / 1e6).toFixed(1) + 'M';
+        else if (abs >= 1e3) num = Math.round(abs / 1e3) + 'K';
+        else num = abs.toLocaleString();
+        return (neg ? '-' : '') + (currency ? currency + ' ' : '') + num;
     }
 
     function esc(s) {
