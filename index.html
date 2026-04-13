@@ -1390,6 +1390,48 @@
         .demo-table td.mono { font-family: var(--mono); font-size: 0.8rem; text-align: right; }
         .demo-table th.right { text-align: right; }
 
+        .demo-credits-bar {
+            margin-top: 16px;
+            padding: 14px 20px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.84rem;
+        }
+        .demo-credits-info { color: var(--text-sec); }
+        .demo-credits-info strong { color: var(--text); }
+        .demo-credits-btns { display: flex; gap: 8px; }
+        .credits-btn {
+            padding: 8px 14px;
+            font-family: var(--font);
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .credits-btn-small { background: var(--bg-alt); color: var(--text); border: 1px solid var(--border); }
+        .credits-btn-small:hover { background: var(--border); }
+        .credits-btn-main { background: var(--brand); color: #fff; }
+        .credits-btn-main:hover { background: var(--accent-hover); }
+        .unlock-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.75rem;
+            color: var(--brand);
+            font-family: var(--mono);
+            padding: 2px 6px;
+            border-radius: 4px;
+            transition: background 0.15s;
+        }
+        .unlock-btn:hover { background: var(--brand-light); }
+
         .demo-cta-bar {
             margin-top: 18px;
             padding: 16px;
@@ -2852,7 +2894,7 @@
             if (hasGrowth) hdr += '<th class="right">Growth</th>';
             if (hasProfit) hdr += '<th class="right">Profit</th>';
             if (hasMultiYear) hdr += '<th>Data</th>';
-            hdr += '</tr>';
+            hdr += '<th></th></tr>';
             thead.innerHTML = hdr;
 
             const tbody = document.getElementById('demoTableBody');
@@ -2889,17 +2931,25 @@
                         yearsHtml = '<td></td>';
                     }
                 }
+                const unlockId = c.id || '';
                 const row = document.createElement('tr');
                 row.innerHTML =
                     '<td class="demo-name">' + esc(c.name) + '</td>' +
                     '<td>' + esc(c.city) + '</td>' +
                     '<td class="mono">' + formatAmount(c.revenue, cur) + '</td>' +
-                    growthHtml + profitHtml + yearsHtml;
+                    growthHtml + profitHtml + yearsHtml +
+                    '<td><button class="unlock-btn" onclick="unlockCompany(\'' + esc(unlockId) + '\', this)" title="Unlock contacts">Unlock</button></td>';
                 tbody.appendChild(row);
             });
 
             document.getElementById('demoCta').innerHTML =
-                'Want verified contacts and intelligence signals for these companies? <a href="#wizard">Get your report</a>';
+                '<div class="demo-credits-bar">' +
+                    '<span class="demo-credits-info">Unlock full profiles with contacts: <strong>1 credit per company</strong></span>' +
+                    '<span class="demo-credits-btns">' +
+                        '<button class="credits-btn credits-btn-small" onclick="buyCredits(\'10\')">10 credits &mdash; EUR 29</button>' +
+                        '<button class="credits-btn credits-btn-main" onclick="buyCredits(\'50\')">50 credits &mdash; EUR 99</button>' +
+                    '</span>' +
+                '</div>';
 
             resultsEl.style.display = 'block';
         } catch (e) {
@@ -3020,6 +3070,91 @@
 
     // Load packs on page load
     loadPacks();
+
+    // ================================================================
+    // SELF-SERVE CREDITS
+    // ================================================================
+    const CREDITS_API = (location.hostname === 'leadvault.eu' ? 'https://api.leadvault.eu' : '');
+    let _creditEmail = localStorage.getItem('lv_email') || '';
+
+    async function buyCredits(pkg) {
+        const email = _creditEmail || prompt('Enter your email:');
+        if (!email || !email.includes('@')) return;
+        _creditEmail = email.toLowerCase();
+        localStorage.setItem('lv_email', _creditEmail);
+        try {
+            const resp = await fetch(CREDITS_API + '/api/credits/purchase', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({email: _creditEmail, package: pkg}),
+            });
+            const data = await resp.json();
+            if (data.success && data.checkout_url) {
+                window.location.href = data.checkout_url;
+            } else {
+                alert(data.error || 'Purchase failed.');
+            }
+        } catch (e) { alert('Connection error.'); }
+    }
+
+    async function unlockCompany(companyId, btn) {
+        if (!companyId) return;
+        const email = _creditEmail || prompt('Enter your email (must have credits):');
+        if (!email || !email.includes('@')) return;
+        _creditEmail = email.toLowerCase();
+        localStorage.setItem('lv_email', _creditEmail);
+
+        btn.disabled = true;
+        btn.textContent = '...';
+        try {
+            const resp = await fetch(CREDITS_API + '/api/credits/unlock', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({email: _creditEmail, company_id: companyId}),
+            });
+            const data = await resp.json();
+            if (data.success) {
+                // Show contacts in an expanded row
+                const row = btn.closest('tr');
+                let detailRow = row.nextElementSibling;
+                if (!detailRow || !detailRow.classList.contains('unlock-detail')) {
+                    detailRow = document.createElement('tr');
+                    detailRow.className = 'unlock-detail';
+                    row.after(detailRow);
+                }
+                let html = '<td colspan="99" style="padding:12px;background:var(--bg-alt);font-size:0.82rem;">';
+                if (data.contacts && data.contacts.length) {
+                    html += '<strong>Key People:</strong> ';
+                    html += data.contacts.map(c => esc(c.name) + ' <span style="color:var(--text-muted)">(' + esc(c.title) + ')</span>').join(' · ');
+                } else {
+                    html += '<span style="color:var(--text-muted)">No registry contacts found for this company.</span>';
+                }
+                if (data.financials && data.financials.length > 1) {
+                    html += '<br><strong>History:</strong> ';
+                    html += data.financials.map(f => f.year + ': ' + formatAmount(f.revenue, '')).join(' → ');
+                }
+                if (data.credits_remaining !== undefined) {
+                    html += '<br><span style="color:var(--text-muted)">Credits remaining: ' + data.credits_remaining + '</span>';
+                }
+                html += '</td>';
+                detailRow.innerHTML = html;
+                btn.textContent = 'Unlocked';
+                btn.style.color = 'var(--text-muted)';
+            } else if (data.purchase_url) {
+                if (confirm('No credits remaining. Buy credits now?')) buyCredits('10');
+                btn.disabled = false;
+                btn.textContent = 'Unlock';
+            } else {
+                alert(data.error || 'Unlock failed.');
+                btn.disabled = false;
+                btn.textContent = 'Unlock';
+            }
+        } catch (e) {
+            alert('Connection error.');
+            btn.disabled = false;
+            btn.textContent = 'Unlock';
+        }
+    }
     </script>
 
 </body>
