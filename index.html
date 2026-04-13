@@ -2014,6 +2014,49 @@
         </div>
     </section>
 
+    <!-- === GROWTH ALERTS === -->
+    <section class="packs-section" id="alerts" style="background: var(--bg-alt); border-top: 1px solid var(--border);">
+        <div class="container">
+            <div class="section-header reveal" style="text-align: center; margin-bottom: 32px;">
+                <div class="section-eyebrow">Never miss a signal</div>
+                <h2 class="section-title">Growth Alert Subscriptions</h2>
+                <p class="section-desc" style="margin: 8px auto 0;">Weekly email alerts when companies matching your criteria cross growth thresholds. Set it once, get fresh leads delivered.</p>
+            </div>
+            <div class="packs-grid" style="max-width: 800px; margin: 0 auto;">
+                <div class="pack-card reveal">
+                    <span class="pack-card-type industry">Starter</span>
+                    <h3>1 country, 1 industry</h3>
+                    <div class="pack-card-desc">Weekly alerts for one market segment. Perfect for testing the waters.</div>
+                    <div class="pack-card-meta">
+                        <span class="pack-card-leads">Weekly digest</span>
+                        <span class="pack-card-price">EUR 49/mo</span>
+                    </div>
+                    <button class="pack-btn pack-btn-buy" onclick="subscribeGrowth('starter')">Subscribe</button>
+                </div>
+                <div class="pack-card reveal" style="border-color: var(--brand);">
+                    <span class="pack-card-type key_person">Growth</span>
+                    <h3>3 countries, 3 industries</h3>
+                    <div class="pack-card-desc">Cover your main markets. Multi-country growth tracking with full financial context.</div>
+                    <div class="pack-card-meta">
+                        <span class="pack-card-leads">Weekly digest</span>
+                        <span class="pack-card-price">EUR 149/mo</span>
+                    </div>
+                    <button class="pack-btn pack-btn-buy" onclick="subscribeGrowth('growth')">Subscribe</button>
+                </div>
+                <div class="pack-card reveal">
+                    <span class="pack-card-type industry">Pro</span>
+                    <h3>Unlimited countries + industries</h3>
+                    <div class="pack-card-desc">Full coverage across all our markets. Never miss a high-growth company in Europe.</div>
+                    <div class="pack-card-meta">
+                        <span class="pack-card-leads">Weekly digest</span>
+                        <span class="pack-card-price">EUR 299/mo</span>
+                    </div>
+                    <button class="pack-btn pack-btn-buy" onclick="subscribeGrowth('pro')">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- === INTAKE FORM === -->
     <section class="form-section" id="brief">
         <div class="container">
@@ -3070,6 +3113,41 @@
 
     // Load packs on page load
     loadPacks();
+
+    // ================================================================
+    // GROWTH SUBSCRIPTIONS
+    // ================================================================
+    async function subscribeGrowth(tier) {
+        const email = _creditEmail || prompt('Your email:');
+        if (!email || !email.includes('@')) return;
+        const name = prompt('Your name:') || '';
+        _creditEmail = email.toLowerCase();
+        localStorage.setItem('lv_email', _creditEmail);
+
+        let countries = '', industries = '', threshold = 15;
+        if (tier === 'starter') {
+            countries = prompt('Country code (e.g., NO, DK, SE):') || 'NO';
+            industries = prompt('Industry (e.g., construction, saas_tech):') || '';
+        } else if (tier === 'growth') {
+            countries = prompt('Countries (comma-separated, e.g., NO,DK,SE):') || 'NO,DK,SE';
+            industries = prompt('Industries (comma-separated):') || '';
+        }
+        threshold = parseFloat(prompt('Minimum growth % to alert on (default 15):') || '15') || 15;
+
+        try {
+            const resp = await fetch(CREDITS_API + '/api/subscriptions/create', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({email: _creditEmail, name, tier, countries, industries, growth_threshold: threshold}),
+            });
+            const data = await resp.json();
+            if (data.success && data.checkout_url) {
+                window.location.href = data.checkout_url;
+            } else {
+                alert(data.error || 'Subscription failed.');
+            }
+        } catch (e) { alert('Connection error.'); }
+    }
 
     // ================================================================
     // SELF-SERVE CREDITS
