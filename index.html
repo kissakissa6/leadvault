@@ -54,7 +54,11 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
 
         body {
             font-family: var(--font);
@@ -63,6 +67,15 @@
             -webkit-font-smoothing: antialiased;
             line-height: 1.6;
             overflow-x: hidden;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        /* Responsive table wrapper — used around .preview-table / .demo-table */
+        .table-scroll {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         /* ================================================================
@@ -1417,25 +1430,87 @@
             .hero-visual { max-width: 500px; }
             .steps-grid { grid-template-columns: repeat(2, 1fr); }
             .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+            .nav-inner { padding: 0 24px; }
         }
 
         @media (max-width: 600px) {
-            .container { padding: 0 20px; }
-            section { padding: 72px 0; }
-            .hero { padding: 120px 0 60px; }
-            .steps-grid { grid-template-columns: 1fr; }
-            .diff-grid { grid-template-columns: 1fr; }
-            .pricing-grid { grid-template-columns: 1fr; }
-            .hero-stats { gap: 20px; flex-wrap: wrap; }
+            .container { padding: 0 18px; }
+            section { padding: 60px 0; }
+            .section-header { margin-bottom: 36px; }
+            .hero { padding: 100px 0 48px; }
+
+            /* NAV — drop secondary links, keep logo + CTA only */
+            .nav-inner { padding: 0 18px; height: 56px; }
+            .nav-links { gap: 0; }
+            .nav-links a:not(.nav-cta) { display: none; }
+            .nav-cta { padding: 7px 14px !important; font-size: 0.8rem !important; }
+
+            /* HERO */
+            .hero-stats {
+                flex-direction: column;
+                gap: 14px;
+                margin-top: 28px;
+                padding-top: 22px;
+            }
+            .hero-stat-num { font-size: 1.25rem; }
+            .hero-cta { width: 100%; justify-content: center; padding: 14px 22px; }
             .hero-float { display: none; }
+            .hero h1 { hyphens: auto; }
+
+            /* GRIDS */
+            .steps-grid { grid-template-columns: 1fr; gap: 14px; }
+            .diff-grid { grid-template-columns: 1fr; gap: 14px; }
+            .pricing-grid { grid-template-columns: 1fr; gap: 14px; }
+
+            /* TABLES — handled via .table-scroll wrapper, but tighten typography */
+            .preview-table { font-size: 0.74rem; min-width: 460px; }
+            .demo-table { font-size: 0.78rem; min-width: 460px; }
+            .preview-content { padding: 22px 18px; }
+
+            /* PRICING tighter */
+            .pricing-card { padding: 28px 22px; }
+            .pricing-price { font-size: 2rem; }
+
+            /* WIZARD — 16px inputs to suppress iOS auto-zoom */
             .wizard-box { padding: 24px 18px; }
             .wiz-row { grid-template-columns: 1fr; }
-            .wiz-count-grid { grid-template-columns: repeat(3, 1fr); }
-            .preview-table { font-size: 0.74rem; }
+            .wiz-count-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+            .wiz-count-card { padding: 13px 4px; }
+            .wiz-count-num { font-size: 1.1rem; }
+            .wiz-count-label { font-size: 0.66rem; }
+            .wiz-input,
+            .wiz-textarea,
+            .wiz-select,
+            .demo-field input,
+            .demo-field select { font-size: 16px; }
+            .wiz-btns { flex-direction: column-reverse; gap: 8px; }
+            .wiz-btn { width: 100%; }
+
+            /* TRUST */
+            .trust-bar { gap: 14px 24px; padding: 24px 0; font-size: 0.76rem; }
+
+            /* FOOTER */
             .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
+            .footer-links { gap: 16px; flex-wrap: wrap; justify-content: center; }
+
+            /* DEMO */
+            .demo-form { padding: 22px 18px; }
             .demo-form-grid { grid-template-columns: 1fr; }
-            .demo-form { padding: 20px; }
-            .demo-section { padding: 60px 0; }
+            .demo-section { padding: 56px 0; }
+            .demo-results-header { flex-direction: column; align-items: flex-start; gap: 4px; }
+        }
+
+        @media (max-width: 380px) {
+            .container { padding: 0 14px; }
+            .nav-inner { padding: 0 14px; }
+            .nav-cta { padding: 6px 11px !important; font-size: 0.75rem !important; }
+            .pricing-price { font-size: 1.7rem; }
+            .pricing-card { padding: 24px 18px; }
+            .wiz-count-num { font-size: 0.95rem; }
+            .wiz-count-card { padding: 11px 2px; }
+            .wiz-count-label { font-size: 0.62rem; }
+            .hero-stat-num { font-size: 1.1rem; }
+            .hero-cta { padding: 13px 18px; font-size: 0.9rem; }
         }
     </style>
 </head>
@@ -1630,10 +1705,12 @@
                         <h3 id="demoResultsTitle"></h3>
                         <span class="demo-total" id="demoResultsTotal"></span>
                     </div>
-                    <table class="demo-table" id="demoTable">
-                        <thead id="demoTableHead"></thead>
-                        <tbody id="demoTableBody"></tbody>
-                    </table>
+                    <div class="table-scroll">
+                        <table class="demo-table" id="demoTable">
+                            <thead id="demoTableHead"></thead>
+                            <tbody id="demoTableBody"></tbody>
+                        </table>
+                    </div>
                     <div class="demo-cta-bar" id="demoCta"></div>
                 </div>
 
@@ -1730,6 +1807,7 @@
                     <div class="preview-exec">
                         <strong>Executive summary:</strong> 25 companies matched to your brief, with all decision-makers included (typically 75&ndash;100 contacts). 18 companies with verified revenue over &euro;5M. 7 Priority tier companies &mdash; profitable, high buying power.
                     </div>
+                    <div class="table-scroll">
                     <table class="preview-table">
                         <thead>
                             <tr>
@@ -1771,6 +1849,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    </div>
                     <p class="preview-note">Illustrative example with fictional companies. Real reports use officially filed data from European government registers across 16 countries. Reports include 25&ndash;100 companies with all decision-makers included.</p>
                 </div>
             </div>
