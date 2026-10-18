@@ -2,215 +2,190 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<title>LeadVault Privacy</title>
+<title>Privacy | LeadVault</title>
 <meta name="description" content="How LeadVault, run by Synlig Media in Copenhagen, handles business contact data: what we collect, where it comes from, why, how long we keep it, and how to object.">
 <link rel="canonical" href="https://leadvault.eu/privacy.html">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231B5E20'/%3E%3Cpath d='M7 22h18M7 16h18M7 10h18' stroke='%23FAFBF8' stroke-width='2'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#15181D">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2315181D'/%3E%3Cpath d='M11 8v16h11' fill='none' stroke='%23FFC93C' stroke-width='3.5'/%3E%3C/svg%3E">
+<link rel="preload" href="fonts/familjen-grotesk.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/albert-sans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="site.css">
 <style>
-:root{
-  --paper:#FAFBF8; --paper-2:#F2F4EE; --sheet:#FFFFFF;
-  --ink:#111912; --ink-2:#4A5244; --ink-3:#5A6255;
-  --rule:#D9DDD2; --rule-soft:#E8EBE3;
-  --green:#1B5E20; --amber:#9A4708; --focus:#1B5E20;
-  --btn-bg:#0D3311; --btn-ink:#FAFBF8;
-  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Charter,"Bitstream Charter",Georgia,"DejaVu Serif",serif;
-  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"DejaVu Sans Mono","Liberation Mono",monospace;
+.page-head{padding:72px 0 8px}
+.page-head .wrap,.doc{max-width:800px}
+.page-head h1{font:700 60px/1 var(--display);letter-spacing:-.032em}
+.page-head p{margin-top:16px;font-size:20px}
+.page-head .when{margin-top:8px;font-size:15.5px;color:var(--muted)}
+.doc{padding-top:40px;padding-bottom:96px}
+.short{border-top:2px solid var(--rule);border-bottom:1px solid var(--line);padding:24px 0 28px}
+.short h2{font:700 24px/1.25 var(--display);letter-spacing:-.015em}
+.short ul{margin-top:12px;padding-left:20px}
+.short li{margin:8px 0}
+.toc{margin-top:28px}
+.toc h2{font:600 16px/1.3 var(--text);color:var(--muted)}
+.toc ul{list-style:none;padding:0;margin-top:8px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:28px}
+.toc a{display:flex;align-items:center;min-height:44px;border-bottom:1px solid var(--line);font-size:16.5px;font-weight:500;text-decoration:none}
+.toc a:hover{text-decoration:underline}
+.doc section{padding-top:56px;scroll-margin-top:16px}
+.doc section h2{font:700 32px/1.15 var(--display);letter-spacing:-.022em}
+.doc h3{font:700 20px/1.3 var(--display);letter-spacing:-.01em;margin:28px 0 6px}
+.doc section > p,.doc section > ul,.doc section > dl{margin-top:14px}
+.doc section h3 + p,.doc section h3 + ul{margin-top:6px}
+.doc ul{padding-left:22px}
+.doc li{margin:6px 0}
+.doc a{font-weight:500}
+.facts{display:grid;grid-template-columns:auto minmax(0,1fr);gap:0 28px;border-top:1px solid var(--line)}
+.facts dt,.facts dd{padding:10px 0;border-bottom:1px solid var(--line)}
+.facts dt{font-weight:600;color:var(--muted)}
+.facts dd{margin:0}
+.aside{margin-top:18px;color:var(--muted);font-size:16.5px;border-left:2px solid var(--line);padding:2px 0 2px 16px}
+@media (max-width:720px){
+  .page-head{padding:40px 0 0}
+  .page-head h1{font-size:40px}
+  .page-head p{font-size:17.5px;margin-top:12px}
+  .doc{padding-top:28px;padding-bottom:60px}
+  .short{padding:20px 0 22px}
+  .short h2{font-size:21px}
+  .short ul{padding-left:18px}
+  .toc ul{grid-template-columns:minmax(0,1fr)}
+  .doc section{padding-top:44px}
+  .doc section h2{font-size:26px}
+  .facts{grid-template-columns:minmax(0,1fr)}
+  .facts dt{padding-bottom:0;border-bottom:0}
+  .facts dd{padding-top:2px}
 }
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --paper:#0E130F; --paper-2:#131A14; --sheet:#161C17;
-    --ink:#E7ECE4; --ink-2:#B7C0B2; --ink-3:#9AA396;
-    --rule:#2B342C; --rule-soft:#222A23;
-    --green:#86C98A; --amber:#E0A458; --focus:#86C98A;
-    --btn-bg:#86C98A; --btn-ink:#0E130F;
-  }
-}
-:root[data-theme="dark"]{
-  --paper:#0E130F; --paper-2:#131A14; --sheet:#161C17;
-  --ink:#E7ECE4; --ink-2:#B7C0B2; --ink-3:#9AA396;
-  --rule:#2B342C; --rule-soft:#222A23;
-  --green:#86C98A; --amber:#E0A458; --focus:#86C98A;
-  --btn-bg:#86C98A; --btn-ink:#0E130F;
-}
-*,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.65 var(--sans);overflow-wrap:break-word}
-a{color:var(--green);text-underline-offset:3px;text-decoration-thickness:1px}
-a:hover{text-decoration-thickness:2px}
-a:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:1px}
-.skip{position:absolute;left:16px;top:-60px;background:var(--btn-bg);color:var(--btn-ink);padding:10px 14px;font-weight:600;z-index:10}
-.skip:focus{top:8px}
-.wrap{max-width:760px;margin:0 auto;padding:0 24px}
-.mast{border-top:4px solid var(--green);border-bottom:1px solid var(--rule)}
-.mast .wrap{max-width:1120px;display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:16px;padding-bottom:12px}
-.mark{font:600 19px/1 var(--mono);letter-spacing:-.03em;color:var(--ink);text-decoration:none}
-.mark b{font-weight:600;color:var(--green)}
-.mast nav a{display:inline-block;font:500 13px/1.4 var(--mono);color:var(--ink-2);text-decoration:none;padding:8px 0;margin-left:18px}
-.mast nav a:first-child{margin-left:0}
-.mast nav a:hover{color:var(--green);text-decoration:underline}
-header.doc{padding:48px 0 8px}
-.kicker{font:600 12px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:0 0 14px}
-h1{font:400 clamp(32px,4.4vw,48px)/1.1 var(--serif);letter-spacing:-.015em;margin:0}
-.updated{display:inline-block;margin:18px 0 0;font:600 13px/1.5 var(--mono);color:var(--ink);border:1px solid var(--rule);background:var(--paper-2);padding:4px 10px}
-.summary{margin:28px 0 0;padding:18px 20px;background:var(--sheet);border:1px solid var(--rule);border-left:4px solid var(--green)}
-.summary h2{font:600 13px/1.4 var(--mono);letter-spacing:.06em;text-transform:uppercase;margin:0 0 8px;color:var(--ink)}
-.summary ul{margin:0;padding-left:20px}
-.summary li{margin:4px 0}
-.toc{margin:28px 0 0;font-size:15px}
-.toc h2{font:600 12px/1.4 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);margin:0 0 6px}
-.toc ol{margin:0;padding-left:22px;columns:2;column-gap:32px}
-.toc li{margin:2px 0;break-inside:avoid}
-main section{padding:36px 0 0}
-main section h2{font:400 clamp(24px,2.8vw,30px)/1.2 var(--serif);margin:0 0 12px;padding-top:14px;border-top:1px solid var(--ink)}
-main section h3{font:600 16px/1.4 var(--sans);margin:22px 0 6px}
-main p{margin:0 0 14px}
-main ul{margin:0 0 14px;padding-left:22px}
-main li{margin:4px 0}
-.muted{color:var(--ink-2)}
-dl.facts{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 18px;margin:0 0 14px}
-dl.facts dt{font:600 14px/1.65 var(--mono);color:var(--ink-2)}
-dl.facts dd{margin:0}
-.note{font-size:15.5px;color:var(--ink-2);background:var(--paper-2);border-left:3px solid var(--amber);padding:10px 14px;margin:0 0 14px}
-footer{border-top:4px solid var(--green);margin-top:56px}
-footer .wrap{max-width:1120px;display:flex;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;padding-top:18px;padding-bottom:40px;font-size:14px;color:var(--ink-3)}
-footer a{color:var(--ink-2)}
-@media (max-width:640px){
-  .wrap{padding:0 16px}
-  body{font-size:16.5px}
-  header.doc{padding-top:32px}
-  .toc ol{columns:1}
-  dl.facts{grid-template-columns:minmax(0,1fr);gap:0}
-  dl.facts dd{margin-bottom:10px}
-}
-@media print{.mast nav,.skip{display:none}body{background:#fff}}
+@media (max-width:440px){.nav .btn-sm{display:none}}
+@media print{.nav,.skip,.toc{display:none}body{background:#fff}}
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="mast">
-  <div class="wrap">
-    <a class="mark" href="index.html" aria-label="LeadVault, home page">Lead<b>Vault</b></a>
-    <nav aria-label="Site"><a href="index.html">Home</a><a href="#object">Opt out</a><a href="mailto:akseli@leadvault.eu">akseli@leadvault.eu</a></nav>
+
+<header class="nav"><div class="wrap">
+  <a class="logo" href="index.html">LeadVault</a>
+  <div class="nav-end">
+    <a class="nav-link" href="#object">How to opt out</a>
+    <a class="btn btn-sun btn-sm" href="mailto:akseli@leadvault.eu?subject=Free%20sample&amp;body=Our%20website%3A%20%0D%0AWhat%20we%20sell%3A%20%0D%0ACountries%20we%20want%3A%20">Free sample</a>
   </div>
-</header>
+</div></header>
 
 <main id="main">
-  <div class="wrap">
-    <header class="doc">
-      <p class="kicker">Privacy</p>
-      <h1>How we handle business contact data</h1>
-      <p class="updated">Last updated 18 October 2026</p>
+  <div class="page-head"><div class="wrap">
+    <h1>Privacy</h1>
+    <p>How we handle business contact data.</p>
+    <p class="when">Last updated 18 October 2026</p>
+  </div></div>
 
-      <div class="summary">
-        <h2>In short</h2>
-        <ul>
-          <li>We hold the work details of people at companies (name, role, work email, work phone), taken from what companies publish themselves and from official business registers.</li>
-          <li>We use them to put together lists of likely buyers for companies that sell to businesses, and to contact businesses about LeadVault ourselves.</li>
-          <li>We do not buy contact data from data brokers.</li>
-          <li>To stop: reply “no thanks” to any email from us, or write to <a href="mailto:akseli@leadvault.eu?subject=Opt%20out">akseli@leadvault.eu</a>. We put your address on our suppression list, which our email system checks before every email it sends.</li>
-        </ul>
-      </div>
+  <div class="wrap doc">
+    <div class="short">
+      <h2>In short</h2>
+      <ul>
+        <li>We hold the work details of people at companies (name, role, work email, work phone), taken from what companies publish themselves and from official business registers.</li>
+        <li>We use them to build lists of likely buyers for companies that sell to businesses, and to contact businesses about LeadVault ourselves.</li>
+        <li>We do not buy contact data from data brokers.</li>
+        <li>To stop: reply &ldquo;no thanks&rdquo; to any email from us, or write to <a href="mailto:akseli@leadvault.eu?subject=Opt%20out">akseli@leadvault.eu</a>. Your address goes on our suppression list, which our email system checks before every email it sends.</li>
+      </ul>
+    </div>
 
-      <nav class="toc" aria-label="On this page">
-        <h2>On this page</h2>
-        <ol>
-          <li><a href="#who">Who is responsible</a></li>
-          <li><a href="#what">What we collect, and from where</a></li>
-          <li><a href="#why">Why we use it, and on what legal basis</a></li>
-          <li><a href="#share">Who receives it</a></li>
-          <li><a href="#keep">How long we keep it</a></li>
-          <li><a href="#object">How to opt out or object</a></li>
-          <li><a href="#rights">Your rights</a></li>
-          <li><a href="#site">What this website collects</a></li>
-          <li><a href="#changes">Changes to this page</a></li>
-        </ol>
-      </nav>
-    </header>
+    <nav class="toc" aria-label="On this page">
+      <h2>On this page</h2>
+      <ul>
+        <li><a href="#who">Who is responsible</a></li>
+        <li><a href="#what">What we collect</a></li>
+        <li><a href="#why">Why, and on what basis</a></li>
+        <li><a href="#share">Who receives it</a></li>
+        <li><a href="#keep">How long we keep it</a></li>
+        <li><a href="#object">Opt out or object</a></li>
+        <li><a href="#rights">Your rights</a></li>
+        <li><a href="#site">This website</a></li>
+        <li><a href="#changes">Changes</a></li>
+      </ul>
+    </nav>
 
     <section id="who" aria-labelledby="who-h">
-      <h2 id="who-h">1. Who is responsible</h2>
+      <h2 id="who-h">Who is responsible</h2>
       <p>The controller of the data described here is:</p>
       <dl class="facts">
         <dt>Business</dt><dd>Synlig Media, which runs LeadVault</dd>
         <dt>CVR</dt><dd>DK 44784416</dd>
         <dt>Location</dt><dd>Copenhagen, Denmark</dd>
-        <dt>Contact</dt><dd><a href="mailto:akseli@leadvault.eu">akseli@leadvault.eu</a> · <a href="tel:+358445964003">+358 44 596 4003</a> (Akseli Mattila)</dd>
+        <dt>Contact</dt><dd><a href="mailto:akseli@leadvault.eu">akseli@leadvault.eu</a> &middot; <a href="tel:+358445964003">+358 44 596 4003</a> (Akseli Mattila)</dd>
       </dl>
-      <p>Write to that address about anything on this page. There is no separate data protection officer; Akseli Mattila answers these requests himself.</p>
+      <p>There is no separate data protection officer. Akseli Mattila answers these requests himself.</p>
     </section>
 
     <section id="what" aria-labelledby="what-h">
-      <h2 id="what-h">2. What we collect, and from where</h2>
+      <h2 id="what-h">What we collect, and from where</h2>
       <h3>About people, in their work role</h3>
       <ul>
         <li>Name and job title</li>
         <li>Work email address</li>
         <li>Work phone number, where the company publishes one</li>
         <li>The company the person works for</li>
-        <li>Where we found these details (the company website, and often the exact page, or the register entry), so we can say where any detail came from</li>
+        <li>Where we found these details (the company website, often the exact page, or the register entry)</li>
         <li>A link to a public professional profile, in the few cases where we found one</li>
       </ul>
       <h3>About companies</h3>
-      <p>Public company-level data: registered name and number, address, industry, size, founding year, filed annual accounts (such as revenue), the company’s website and what it says it does, and public notices such as registry changes and public contract awards.</p>
+      <p>Public company data: registered name and number, address, industry, size, founding year, filed annual accounts (such as revenue), the website and what it says the company does, and public notices such as registry changes and public contract awards.</p>
       <h3>Where it comes from</h3>
       <ul>
-        <li><strong>Companies’ own websites</strong>: team, contact and about pages, and press releases the company published.</li>
+        <li><strong>Companies&rsquo; own websites</strong>: team, contact and about pages, and their press releases.</li>
         <li><strong>Official business registers and public filings</strong> in each country, including annual accounts and the people a register lists for a company.</li>
         <li><strong>Public notices</strong>, such as registry change feeds and public procurement awards.</li>
       </ul>
       <p>We do not buy contact data from data brokers or contact-data aggregators.</p>
       <h3>Addresses we work out, and how we check them</h3>
-      <p>Sometimes a company publishes a person’s name and role but not their email address. We may then work out the likely work address from the format the company uses (for example firstname.lastname@company.com). Our records note which addresses were worked out this way, and we only deliver one after the company’s mail server has accepted it. To check whether an address can receive mail, we ask the company’s mail server; this does not send you an email.</p>
+      <p>Sometimes a company publishes a person&rsquo;s name and role but not their email. We may then work out the likely address from the format the company uses (for example firstname.lastname@company.com). Our records note which addresses were worked out this way, and we only deliver one after the company&rsquo;s mail server has accepted it.</p>
+      <p>To check whether an address can receive mail, we ask the company&rsquo;s mail server. This does not send you an email.</p>
     </section>
 
     <section id="why" aria-labelledby="why-h">
-      <h2 id="why-h">3. Why we use it, and on what legal basis</h2>
+      <h2 id="why-h">Why we use it, and on what legal basis</h2>
       <ul>
-        <li><strong>Lists for our customers.</strong> We put together lists of companies likely to buy a customer’s product, with the people whose role makes them relevant to that product. Customers are companies that sell to other businesses.</li>
+        <li><strong>Lists for our customers.</strong> We build lists of companies likely to buy a customer&rsquo;s product, with the people whose role makes them relevant. Our customers are companies that sell to other businesses.</li>
         <li><strong>Our own outreach.</strong> We email businesses about LeadVault. These emails include a short free sample of a few companies, with the names and roles of people there, so the recipient can judge the quality of a list.</li>
       </ul>
-      <p>The legal basis is <strong>legitimate interest</strong> (Article 6(1)(f) of the GDPR): our interest, and our customers’ interest, in contacting businesses about products relevant to the work of the person contacted. We limit what we hold to work details in a business role, keep where each detail came from, and stop as soon as someone objects.</p>
-      <p>We do not make automated decisions about people that have legal or similarly significant effects on them.</p>
+      <p>The legal basis is <strong>legitimate interest</strong> (Article 6(1)(f) of the GDPR): our interest, and our customers&rsquo; interest, in contacting businesses about products relevant to the work of the person contacted. We hold only work details in a business role, keep where each detail came from, and stop as soon as someone objects.</p>
+      <p>We make no automated decisions about people that have legal or similarly significant effects on them.</p>
     </section>
 
     <section id="share" aria-labelledby="share-h">
-      <h2 id="share-h">4. Who receives it</h2>
+      <h2 id="share-h">Who receives it</h2>
       <ul>
-        <li><strong>Our customers</strong>, who receive the list they ordered, and prospective customers, who receive a free sample of a few rows.</li>
-        <li><strong>Service providers that run our systems for us</strong>: server hosting, backup storage, email sending, and AI language-model services we use to read and summarise company web pages.</li>
-        <li><strong>Web search services</strong>, which receive a person’s name and company as a search query when we look for a public professional profile.</li>
+        <li><strong>Our customers</strong> receive the list they ordered. Prospective customers receive a free sample of a few rows.</li>
+        <li><strong>Service providers that run our systems</strong>: server hosting, backup storage, email sending, and AI language-model services we use to read and summarise company web pages.</li>
+        <li><strong>Web search services</strong> receive a person&rsquo;s name and company as a search query when we look for a public professional profile.</li>
       </ul>
       <p>Some of these providers are based outside the EU and EEA, for example GitHub, which hosts this website, and some web search services, in the United States. Ask us and we will tell you which providers have handled your details and where they are based.</p>
       <p>We do not publish personal contact details, and we do not share them with advertising networks.</p>
     </section>
 
     <section id="keep" aria-labelledby="keep-h">
-      <h2 id="keep-h">5. How long we keep it</h2>
+      <h2 id="keep-h">How long we keep it</h2>
       <p>We have not yet set a fixed period after which records are deleted automatically. This is what we do today:</p>
       <ul>
-        <li>We keep a person’s work details while they are part of the company data we build lists from.</li>
-        <li>If you ask us to delete your details, we delete your record from our database and keep only a suppression entry (below). Lists we have already delivered to customers are held by those customers.</li>
-        <li>If you object or opt out, we keep only what we need to recognise you (your email address, and your name and company where needed) on a suppression list, so that our email system does not contact you again. We keep that entry for as long as we operate, because deleting it would undo your opt-out.</li>
-        <li>Our database backups are kept for 7 days, so a record deleted from the database is gone from the backups within about a week.</li>
+        <li>We keep a person&rsquo;s work details while they are part of the company data we build lists from.</li>
+        <li>If you ask us to delete your details, we delete your record from our database and keep only a suppression entry (below). Lists already delivered to customers are held by those customers.</li>
+        <li>If you object or opt out, we keep only what we need to recognise you (your email address, and your name and company where needed) on a suppression list, so our email system does not contact you again. We keep that entry for as long as we operate, because deleting it would undo your opt-out.</li>
+        <li>Database backups are kept for 7 days, so a deleted record is gone from the backups within about a week.</li>
       </ul>
       <p>When we set a fixed retention period, it will be written here.</p>
     </section>
 
     <section id="object" aria-labelledby="object-h">
-      <h2 id="object-h">6. How to opt out or object</h2>
+      <h2 id="object-h">How to opt out or object</h2>
       <p>Either of these is enough:</p>
       <ul>
-        <li>Reply <strong>“no thanks”</strong> to any email from us.</li>
-        <li>Email <a href="mailto:akseli@leadvault.eu?subject=Opt%20out">akseli@leadvault.eu</a>, for example with the subject “Opt out”.</li>
+        <li>Reply <strong>&ldquo;no thanks&rdquo;</strong> to any email from us.</li>
+        <li>Email <a href="mailto:akseli@leadvault.eu?subject=Opt%20out">akseli@leadvault.eu</a>, for example with the subject &ldquo;Opt out&rdquo;.</li>
       </ul>
-      <p>Both reach the same mailbox. We add your address to our suppression list, and our email system checks that list before every email it sends. If you also want to be left out of the lists we put together for customers, say so and we will delete your details from our database (see “Erase” below). You do not need to give a reason.</p>
+      <p>Both reach the same mailbox. We add your address to our suppression list, which our email system checks before every email it sends. If you also want to be left out of the lists we build for customers, say so and we will delete your details from our database (see &ldquo;Erase&rdquo; below). You do not need to give a reason.</p>
     </section>
 
     <section id="rights" aria-labelledby="rights-h">
-      <h2 id="rights-h">7. Your rights</h2>
+      <h2 id="rights-h">Your rights</h2>
       <p>If we hold details about you, you can ask us to:</p>
       <ul>
         <li><strong>Access</strong>: tell you what we hold about you and where it came from.</li>
@@ -225,25 +200,22 @@ footer a{color:var(--ink-2)}
     </section>
 
     <section id="site" aria-labelledby="site-h">
-      <h2 id="site-h">8. What this website collects</h2>
+      <h2 id="site-h">What this website collects</h2>
       <p>This website (leadvault.eu) has no forms, sets no cookies, runs no scripts and no analytics, and loads nothing from other sites, including fonts.</p>
-      <p>The site is hosted by <strong>GitHub</strong> (GitHub Pages). When you open a page, your browser sends GitHub the usual technical request, including your IP address, and GitHub keeps server logs of these requests. We do not receive or see those logs. GitHub explains its handling in the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub General Privacy Statement</a>.</p>
+      <p>The site is hosted by <strong>GitHub</strong> (GitHub Pages). When you open a page, your browser sends GitHub the usual technical request, including your IP address, and GitHub keeps server logs of these requests. We do not receive or see those logs. See the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub General Privacy Statement</a>.</p>
       <p>If you email or call us, we keep your message and contact details to answer you and, if you order, to deliver your list.</p>
-      <p class="note">Before 18 October 2026 this website had a request form and a demo search, and loaded fonts from Google. Details sent through the old form are kept so we can answer and handle those requests.</p>
+      <p class="aside">Before 18 October 2026 this website had a request form and a demo search, and loaded fonts from Google. Details sent through the old form are kept so we can answer and handle those requests.</p>
     </section>
 
     <section id="changes" aria-labelledby="changes-h">
-      <h2 id="changes-h">9. Changes to this page</h2>
+      <h2 id="changes-h">Changes to this page</h2>
       <p>When we change how we handle data, we update this page and the date at the top. This version replaces the one dated 14 April 2026.</p>
     </section>
   </div>
 </main>
 
-<footer>
-  <div class="wrap">
-    <span>LeadVault is run by Synlig Media · CVR DK 44784416 · Copenhagen, Denmark</span>
-    <span><a href="index.html">Home</a> · <a href="mailto:akseli@leadvault.eu">akseli@leadvault.eu</a></span>
-  </div>
-</footer>
+<div class="band"><footer class="foot"><div class="wrap">
+  <p><span><span class="name">LeadVault</span> is run by Synlig Media</span><span class="nw">CVR DK 44784416</span><span>Copenhagen</span><a href="mailto:akseli@leadvault.eu">akseli@leadvault.eu</a><a href="index.html">Home</a></p>
+</div></footer></div>
 </body>
 </html>

@@ -2,677 +2,287 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<title>LeadVault Buyer Lists</title>
-<meta name="description" content="Lists of the companies that buy what you sell in Sweden, Finland, Norway and Denmark, with the people who decide there, by name, and the reason each company fits. From €149.">
-<meta property="og:title" content="LeadVault: the people who buy what you sell, by name">
-<meta property="og:description" content="Companies from the official registers, people from the companies' own websites, a proof label on every email and a reason for every company. Ask for a free sample of your market.">
-<meta property="og:url" content="https://leadvault.eu/">
+<title>LeadVault | Researched B2B buyer lists</title>
+<meta name="description" content="The companies most likely to buy what you sell, with the person who decides at each, a checked work email and the reason each one fits. Free sample first. From €149.">
 <link rel="canonical" href="https://leadvault.eu/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231B5E20'/%3E%3Cpath d='M7 22h18M7 16h18M7 10h18' stroke='%23FAFBF8' stroke-width='2'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#15181D">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2315181D'/%3E%3Cpath d='M11 8v16h11' fill='none' stroke='%23FFC93C' stroke-width='3.5'/%3E%3C/svg%3E">
+<link rel="preload" href="fonts/familjen-grotesk.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/albert-sans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="site.css">
 <style>
-:root{
-  --paper:#FAFBF8; --paper-2:#F2F4EE; --sheet:#FFFFFF;
-  --ink:#111912; --ink-2:#4A5244; --ink-3:#5A6255;
-  --rule:#D9DDD2; --rule-soft:#E8EBE3;
-  --green:#1B5E20; --green-deep:#0D3311; --green-wash:#E8F5E9;
-  --amber:#9A4708; --bar:#1B5E20; --bar-track:#E2E5DC;
-  --redact:#2A322B; --focus:#1B5E20;
-  --btn-bg:#0D3311; --btn-ink:#FAFBF8;
-  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Charter,"Bitstream Charter",Georgia,"DejaVu Serif",serif;
-  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"DejaVu Sans Mono","Liberation Mono",monospace;
+/* ---------- hero ---------- */
+.hero{padding:84px 0 0;overflow:hidden}
+.hero-top{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:24px 64px;align-items:end}
+h1{font:700 76px/.98 var(--display);letter-spacing:-.035em;max-width:9.5em}
+.sub{font-size:20px;line-height:1.55;max-width:30em}
+.ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.facts-line{margin-top:18px;font-size:15.5px;color:var(--muted)}
+
+/* ---------- the spreadsheet crop ---------- */
+.shot{margin-top:64px}
+.sheet{margin-right:calc(50% - 50vw);overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;
+  background:#fff;color:#222;border:1px solid #D0D3D8;border-right:0;border-radius:8px 0 0 8px;
+  box-shadow:0 1px 2px rgba(0,0,0,.05),0 18px 48px -20px rgba(0,0,0,.25);
+  font:400 13.5px/1.35 Aptos,Calibri,Carlito,"Segoe UI",Arial,sans-serif;
+  -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 48px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 48px),transparent)}
+.sheet::-webkit-scrollbar{display:none}
+.sheet-in{width:max-content;min-width:100%}
+.titlebar{background:#1D6B40;color:#fff;font-size:12.5px;height:32px;display:flex;align-items:center;padding:0 14px;gap:18px}
+.titlebar b{font-weight:600}
+.titlebar span{opacity:.8}
+.fx{display:flex;align-items:stretch;height:30px;border-bottom:1px solid #D4D4D4;background:#fff}
+.fx .nb{width:72px;border-right:1px solid #D4D4D4;display:flex;align-items:center;padding:0 10px;color:#333}
+.fx .f{width:40px;border-right:1px solid #D4D4D4;display:flex;align-items:center;justify-content:center;color:#666;font-style:italic}
+.fx .v{display:flex;align-items:center;padding:0 10px;white-space:nowrap;color:#222}
+table{border-collapse:collapse;table-layout:fixed}
+.cr{width:36px}.ca{width:150px}.cb{width:310px}.cc{width:136px}.cd{width:150px}.ce{width:84px}.cf{width:168px}.cg{width:176px}.ch{width:96px}
+th,td{border:1px solid #E1E1E1;padding:5px 7px;text-align:left;vertical-align:top;font-weight:400}
+thead th{background:#F5F5F5;color:#555;font-size:12px;text-align:center;padding:3px 0;border-color:#D9D9D9}
+thead th.on{background:#D3E9DB;color:#0B4A2A;box-shadow:inset 0 -2px 0 #107C41}
+tbody th{background:#F5F5F5;color:#555;font-size:12px;text-align:center;padding:5px 0;border-color:#D9D9D9}
+tbody th.on{background:#D3E9DB;color:#0B4A2A;box-shadow:inset -2px 0 0 #107C41}
+tr.h td{background:#E2EFDA;font-weight:700}
+td.sel{position:relative;box-shadow:inset 0 0 0 2px #107C41}
+td.sel::after{content:"";position:absolute;right:-4px;bottom:-4px;width:7px;height:7px;background:#107C41;border:1px solid #fff}
+tr.blank td{height:26px}
+.x{display:inline-block;height:.78em;background:#D5D7DA;border-radius:2px;vertical-align:-1px}
+.tabs{display:flex;align-items:stretch;height:30px;background:#F3F3F3;border-top:1px solid #D4D4D4;font-size:12.5px;color:#555}
+.tabs span{display:flex;align-items:center;padding:0 16px}
+.tabs .on{background:#fff;color:#107C41;font-weight:600;box-shadow:inset 0 -2px 0 #107C41}
+.shot figcaption{margin-top:16px;font-size:15px;color:var(--muted);max-width:44em}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .sheet{border-color:#3A3F47;box-shadow:none}}
+:root[data-theme="dark"] .sheet{border-color:#3A3F47;box-shadow:none}
+
+/* ---------- how it works / what you get ---------- */
+.inner{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:24px 64px}
+.seq{list-style:none;padding:0;counter-reset:s;display:grid;gap:26px;max-width:40em}
+.seq li{counter-increment:s;display:grid;grid-template-columns:36px minmax(0,1fr);font-size:19px;line-height:1.55}
+.seq li::before{content:counter(s);font:700 19px/1.55 var(--display);color:var(--muted)}
+.seq b{font-weight:650}
+.prose{max-width:40em}
+.prose p{font-size:18px;line-height:1.62}
+.prose p + p{margin-top:18px}
+.prose .big{font-size:22px;line-height:1.5;letter-spacing:-.005em}
+.prose a{font-weight:600}
+
+/* ---------- prices ---------- */
+.prices-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:10px 40px}
+.prices-head p{font-size:19px;color:var(--muted)}
+.plans{margin-top:44px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px}
+.plan{display:flex;flex-direction:column;border-top:2px solid var(--rule);padding-top:22px}
+.plan h3{font:700 21px/1.2 var(--display);letter-spacing:-.01em}
+.price{margin-top:10px;font:700 50px/1 var(--display);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.price small{font:500 17px/1 var(--text);letter-spacing:0;color:var(--muted);margin-left:3px}
+.qty{margin-top:12px;font-weight:600}
+.desc{margin-top:4px;color:var(--muted);flex:1}
+.plan .btn{margin-top:24px;align-self:start}
+.terms{margin-top:44px;max-width:44em;font-size:18px}
+.terms a{font-weight:600}
+
+/* ---------- founder ---------- */
+.about .prose p{font-size:19px}
+.sign{margin-top:22px;display:flex;flex-wrap:wrap;align-items:baseline;gap:0 18px}
+.sign b{font-weight:650}
+.sign a{display:inline-block;padding:10px 0;font-weight:500}
+
+/* ---------- closing call ---------- */
+.close{padding:88px 0 64px}
+.close .inner{align-items:start}
+.close h2{color:#fff;font-size:44px}
+.close p{font-size:19px;max-width:30em;color:var(--on-dark)}
+.close .btn{margin-top:28px}
+.close .alt{margin-top:18px;font-size:16px;color:var(--on-dark-muted)}
+.close .alt a{color:#fff;font-weight:600;display:inline-block;padding:10px 0;margin:-10px 0}
+.band .foot .wrap > p{border-top:1px solid var(--dark-line);padding-top:24px}
+
+/* ---------- tablet ---------- */
+@media (max-width:1060px){
+  h1{font-size:64px}
+  .hero-top{grid-template-columns:minmax(0,1fr)}
+  .sub{max-width:34em}
+  .inner{grid-template-columns:minmax(0,1fr)}
+  .plans{gap:28px}
+  .price{font-size:42px}
 }
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --paper:#0E130F; --paper-2:#131A14; --sheet:#161C17;
-    --ink:#E7ECE4; --ink-2:#B7C0B2; --ink-3:#9AA396;
-    --rule:#2B342C; --rule-soft:#222A23;
-    --green:#86C98A; --green-deep:#1E3B22; --green-wash:#1C251D;
-    --amber:#E0A458; --bar:#86C98A; --bar-track:#2B342C;
-    --redact:#B7C0B2; --focus:#86C98A;
-    --btn-bg:#86C98A; --btn-ink:#0E130F;
-  }
+@media (max-width:860px){
+  .plans{grid-template-columns:minmax(0,1fr);gap:0;margin-top:28px}
+  .plan{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:16px;align-items:baseline;border-top:1px solid var(--line);padding:22px 0 24px}
+  .plan:first-child{border-top:2px solid var(--rule)}
+  .plan h3{grid-column:1;grid-row:1}
+  .price{grid-column:2;grid-row:1;margin-top:0;font-size:34px}
+  .price small{font-size:15px}
+  .qty,.desc,.plan .btn{grid-column:1/-1}
+  .qty{margin-top:4px}
+  .desc{margin-top:2px}
+  .plan .btn{margin-top:14px;justify-self:start}
 }
-:root[data-theme="dark"]{
-  --paper:#0E130F; --paper-2:#131A14; --sheet:#161C17;
-  --ink:#E7ECE4; --ink-2:#B7C0B2; --ink-3:#9AA396;
-  --rule:#2B342C; --rule-soft:#222A23;
-  --green:#86C98A; --green-deep:#1E3B22; --green-wash:#1C251D;
-  --amber:#E0A458; --bar:#86C98A; --bar-track:#2B342C;
-  --redact:#B7C0B2; --focus:#86C98A;
-  --btn-bg:#86C98A; --btn-ink:#0E130F;
+
+/* ---------- phone ---------- */
+@media (max-width:720px){
+  .hero{padding-top:36px}
+  h1{font-size:44px;line-height:1;letter-spacing:-.032em}
+  .hero-top{gap:18px}
+  .sub{font-size:18px}
+  .ctas{margin-top:24px;gap:10px}
+  .ctas .btn{flex:1 1 auto}
+  .facts-line{font-size:15px}
+  .shot{margin-top:36px}
+  .sheet{font-size:13px}
+  .cr{width:28px}.ca{width:92px}.cb{width:252px}
+  .sheet{-webkit-mask-image:none;mask-image:none}
+  .sheet .x{max-width:76px}
+  .fx .nb{width:52px}.fx .f{width:32px}
+  .sheet tbody tr:nth-child(n+5){display:none}
+  .shot figcaption{font-size:14.5px;padding-right:4px}
+  .seq{gap:18px}
+  .seq li{grid-template-columns:28px minmax(0,1fr);font-size:17.5px}
+  .seq li::before{font-size:17.5px}
+  .prose p{font-size:17px}
+  .prose p + p{margin-top:14px}
+  .inner{gap:18px}
+  .prose .big{font-size:19px}
+  .prices-head p{font-size:17px}
+  .terms{margin-top:22px;font-size:17px}
+  .about .prose p{font-size:17.5px}
+  .sign{margin-top:14px}
+  .sign b{flex-basis:100%}
+  .close{padding:52px 0 40px}
+  .close .inner{gap:16px}
+  .close h2{font-size:31px}
+  .close p{font-size:17.5px}
+  .close .btn{width:100%;margin-top:24px}
 }
-*,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 var(--sans);font-variant-numeric:tabular-nums;overflow-wrap:break-word}
-a{color:var(--green);text-underline-offset:3px;text-decoration-thickness:1px}
-a:hover{text-decoration-thickness:2px}
-a:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:1px}
-.skip{position:absolute;left:16px;top:-60px;background:var(--btn-bg);color:var(--btn-ink);padding:10px 14px;font-weight:600;z-index:10}
-.skip:focus{top:8px}
-.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
-.num{font-family:var(--mono);font-variant-numeric:tabular-nums lining-nums;letter-spacing:-.01em}
-.smallcaps{font:600 12px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-sup.fn{font:600 11px var(--mono);margin-left:1px}
-sup.fn a{text-decoration:none;padding:4px 3px}
-
-/* masthead */
-.mast{border-bottom:1px solid var(--rule);border-top:4px solid var(--green)}
-.mast .wrap{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:16px;padding-bottom:12px}
-.mark{font:600 19px/1 var(--mono);letter-spacing:-.03em;color:var(--ink);text-decoration:none}
-.mark b{font-weight:600;color:var(--green)}
-.mast nav ul{display:flex;gap:4px 20px;flex-wrap:wrap;list-style:none;margin:0;padding:0}
-.mast nav a{display:inline-block;font:500 13px/1.4 var(--mono);color:var(--ink-2);text-decoration:none;padding:8px 0}
-.mast nav a:hover{color:var(--green);text-decoration:underline}
-.edition{border-bottom:1px solid var(--rule);background:var(--paper-2)}
-.edition .wrap{display:flex;justify-content:space-between;gap:4px 12px;flex-wrap:wrap;padding-top:7px;padding-bottom:7px;font:12px/1.5 var(--mono);color:var(--ink-3)}
-
-/* lead */
-.lead{padding:44px 0 4px}
-.kicker{margin:0 0 16px}
-h1{font:400 clamp(32px,4.8vw,56px)/1.08 var(--serif);letter-spacing:-.015em;margin:0;max-width:25ch}
-h1 em{font-style:italic;color:var(--green);white-space:nowrap}
-.deck{font:400 clamp(18px,1.9vw,21px)/1.5 var(--serif);color:var(--ink-2);max-width:40em;margin:22px 0 0}
-.act{display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px;margin-top:28px}
-.btn{display:inline-block;background:var(--btn-bg);color:var(--btn-ink);font:600 15px/1.2 var(--sans);padding:15px 22px;text-decoration:none;border:1px solid var(--btn-bg)}
-.btn:hover{text-decoration:underline}
-.act .alt{font-size:15px;color:var(--ink-2)}
-.act .alt a{color:var(--ink);font-family:var(--mono);white-space:nowrap}
-.from{margin:18px 0 0;font-size:14.5px;color:var(--ink-2)}
-.from a{color:var(--ink)}
-
-/* sections */
-section{padding:56px 0 8px}
-section.first{padding-top:40px}
-.sec-head{display:grid;grid-template-columns:120px minmax(0,1fr);gap:0 24px;border-top:1px solid var(--ink);padding-top:14px;margin-bottom:26px}
-.sec-head .ex{font:600 12px/1.8 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--green)}
-h2{font:400 clamp(26px,3vw,36px)/1.15 var(--serif);margin:0;letter-spacing:-.01em}
-.sec-head p{margin:10px 0 0;color:var(--ink-2);max-width:46em}
-
-/* exhibit 1: sample */
-.sheet{background:var(--sheet);border:1px solid var(--rule)}
-.sheet-head{background:var(--green-deep);color:#E8F5E9;padding:12px 20px;display:flex;justify-content:space-between;gap:4px 10px;flex-wrap:wrap;font:600 12px/1.5 var(--mono);letter-spacing:.07em;text-transform:uppercase}
-.sheet-head span:last-child{letter-spacing:0;text-transform:none;font-weight:400;color:#C3DEC5}
-.sheet-sum{padding:14px 20px;border-bottom:1px solid var(--rule);font-size:15px;display:flex;flex-wrap:wrap;gap:6px 22px;margin:0}
-.sheet-sum .num{font-weight:600}
-.colhead{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr) minmax(0,1.5fr);gap:24px;padding:10px 20px;border-bottom:1px solid var(--rule)}
-.entry{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr) minmax(0,1.5fr);gap:24px;padding:20px;border-bottom:1px solid var(--rule-soft)}
-.entry:last-of-type{border-bottom:0}
-.entry h3{margin:0}
-.co .idx{font:600 12px var(--mono);color:var(--ink-3)}
-.co .name{display:flex;align-items:center;gap:8px;margin:4px 0 10px;font-weight:600}
-.co .name .ab{font:600 13px var(--mono);color:var(--ink-2)}
-.redact{display:inline-block;height:.82em;max-width:100%;background:var(--redact);vertical-align:-.06em;border-radius:1px}
-.co dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:3px 14px;margin:0;font-size:14px}
-.co dt{color:var(--ink-3)}
-.co dd{margin:0;font-family:var(--mono);font-size:13.5px}
-.why .tag{font:700 12px/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--amber)}
-.why p{margin:6px 0 0;font:400 16.5px/1.5 var(--serif)}
-.people{list-style:none;margin:0;padding:0}
-.people li{padding:0 0 11px;margin:0 0 11px;border-bottom:1px dotted var(--rule)}
-.people li:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}
-.people .who{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-weight:600;font-size:15px}
-.people .who .role{font-weight:500}
-.people .meta{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:4px;font:12.5px/1.5 var(--mono);color:var(--ink-2)}
-.lab{display:inline-block;white-space:nowrap;border:1px solid currentColor;padding:0 6px;font:600 12px/1.6 var(--mono);color:var(--green)}
-.lab.none{color:var(--ink-3)}
-.gap{font-size:14px;color:var(--ink-2);background:var(--paper-2);border-left:3px solid var(--amber);padding:8px 12px;margin:0 0 12px}
-.sheet-foot{padding:14px 20px;border-top:1px solid var(--rule);background:var(--paper-2);font-size:14px;color:var(--ink-2);display:grid;gap:6px}
-.caption{font-size:14px;color:var(--ink-3);margin:12px 0 0;max-width:62em}
-
-/* generic ledger tables */
-table{border-collapse:collapse;width:100%}
-caption{text-align:left;padding:0 0 10px}
-caption b{display:block;font:400 22px/1.3 var(--serif);color:var(--ink)}
-caption span{display:block;font-size:14.5px;color:var(--ink-2);margin-top:4px}
-.led th,.led td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--rule-soft);vertical-align:top}
-.led thead th{font:600 12px/1.4 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);border-bottom:1px solid var(--ink);vertical-align:bottom}
-.led tbody th{font-weight:600}
-.led td.n,.led th.r{text-align:right}
-.led td.n{font-family:var(--mono);white-space:nowrap}
-.led td.d{color:var(--ink-2);font-size:15px}
-.led td.src{font-size:14px;color:var(--ink-2)}
-.led tfoot td{font-size:14px;color:var(--ink-3);padding-top:14px;border-bottom:0}
-
-/* exhibit 2: what a row holds */
-.anatomy tbody th{white-space:nowrap;font-family:var(--mono);font-size:14px;font-weight:600}
-.anatomy tbody th small{display:block;font-weight:400;color:var(--ink-3);font-size:12.5px;white-space:normal}
-
-/* exhibit 3: coverage */
-.standing{border-top:2px solid var(--ink);border-bottom:1px solid var(--rule);margin:0 0 36px}
-.standing-head{display:flex;justify-content:space-between;gap:4px 12px;flex-wrap:wrap;padding:10px 0;border-bottom:1px solid var(--rule)}
-.standing-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:0}
-.fig{padding:18px 20px 20px 0;border-right:1px solid var(--rule);margin:0}
-.fig+.fig{padding-left:20px}
-.fig:last-child{border-right:0}
-.fig dd{font:500 clamp(28px,3.4vw,40px)/1 var(--mono);letter-spacing:-.03em;margin:0}
-.fig dt{margin-top:8px;font-size:14px;color:var(--ink-2)}
-.fig{display:flex;flex-direction:column-reverse;justify-content:flex-end}
-.standing-note{padding:10px 0 12px;font-size:14px;color:var(--ink-3);max-width:62em;margin:0}
-.cov tbody th{white-space:nowrap}
-.cov tbody th .cc{font:500 12px var(--mono);color:var(--ink-3);margin-left:6px}
-.cov td{vertical-align:middle}
-.bar{display:block;height:8px;background:var(--bar-track);min-width:60px}
-.bar i{display:block;height:100%;background:var(--bar)}
-.cls{font-size:14px;white-space:nowrap}
-.nw{white-space:nowrap}
-.cls .num{color:var(--ink-3);font-size:12.5px;margin-left:6px}
-.st{font:600 12px/1.5 var(--mono);white-space:nowrap;color:var(--green)}
-.st.ask{color:var(--amber)}
-.st.thin{color:var(--ink-3)}
-.twocol{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:40px;align-items:start}
-.aside{font-size:15px;color:var(--ink-2);border-left:1px solid var(--rule);padding-left:24px}
-.aside h3{font:600 12px/1.5 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink);margin:0 0 8px}
-.aside p{margin:0 0 16px}
-.notyet{margin-top:40px}
-.notyet td.n{color:var(--ink-2)}
-
-/* method */
-.steps{list-style:none;margin:0;padding:0;counter-reset:s;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--rule)}
-.steps li{counter-increment:s;padding:20px 22px 8px 0;border-right:1px solid var(--rule)}
-.steps li+li{padding-left:22px}
-.steps li:last-child{border-right:0}
-.steps li::before{content:"§" counter(s);display:block;font:600 13px var(--mono);color:var(--green);margin-bottom:8px}
-.steps h3{font:600 17px/1.35 var(--sans);margin:0 0 6px}
-.steps p{margin:0;font-size:15px;color:var(--ink-2)}
-
-/* labels */
-.labels th[scope=row]{white-space:nowrap}
-.labels2{margin-top:36px}
-
-/* terms */
-.terms{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);border:1px solid var(--rule);background:var(--sheet)}
-.terms > div{padding:26px 28px}
-.terms > div+div{border-left:1px solid var(--rule)}
-.terms h3{font:400 24px/1.25 var(--serif);margin:0 0 12px}
-.terms p{margin:0 0 12px;color:var(--ink-2)}
-.prices{margin:0 0 20px}
-.prices th,.prices td{padding:14px 0;border-top:1px solid var(--rule);text-align:left;vertical-align:top}
-.prices tr:first-child th,.prices tr:first-child td{border-top:2px solid var(--ink)}
-.prices tr:last-child th,.prices tr:last-child td{border-bottom:1px solid var(--rule)}
-.prices th{font-weight:400}
-.prices th b{display:block;font:600 17px/1.3 var(--sans)}
-.prices th span{display:block;font-size:14.5px;color:var(--ink-2);margin-top:2px}
-.prices td{text-align:right;white-space:nowrap;padding-left:16px}
-.prices td b{font:600 24px/1.1 var(--mono);letter-spacing:-.02em}
-.prices td small{display:block;font-size:13px;color:var(--ink-3)}
-.every h4{font:600 12px/1.5 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink);margin:0 0 6px}
-.every ul{margin:0 0 16px;padding:0;list-style:none}
-.every li{padding:7px 0 7px 18px;border-bottom:1px dotted var(--rule);font-size:15px;position:relative}
-.every li::before{content:"";position:absolute;left:2px;top:15px;width:7px;height:7px;background:var(--green)}
-.every li:last-child{border-bottom:0}
-.contact{font-family:var(--mono);font-size:15px;line-height:1.9;margin:0 0 20px}
-.contact a{color:var(--ink)}
-
-/* notes */
-.notes{padding:72px 0 32px}
-.notes ol{margin:0;padding:0 0 0 22px;font-size:14px;color:var(--ink-2);columns:2;column-gap:40px}
-.notes li{margin:0 0 10px;break-inside:avoid}
-.notes code{font:13px var(--mono);color:var(--ink);overflow-wrap:anywhere}
-.notes h2{font-size:22px}
-footer{border-top:4px solid var(--green);margin-top:24px}
-footer .wrap{display:flex;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;padding-top:18px;padding-bottom:40px;font-size:14px;color:var(--ink-3)}
-footer a{color:var(--ink-2)}
-
-@media (max-width:900px){
-  .standing-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .fig:nth-child(2){border-right:0}
-  .fig:nth-child(3){padding-left:0;border-top:1px solid var(--rule)}
-  .fig:nth-child(4){border-top:1px solid var(--rule)}
-  .colhead{display:none}
-  .entry{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
-  .entry .why{grid-column:1 / -1;grid-row:1}
-  .twocol{grid-template-columns:minmax(0,1fr)}
-  .aside{border-left:0;padding-left:0;border-top:1px solid var(--rule);padding-top:18px}
-  .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .steps li:nth-child(2){border-right:0}
-  .steps li:nth-child(3){padding-left:0}
-  .steps li:nth-child(n+3){border-top:1px solid var(--rule)}
-  .terms{grid-template-columns:minmax(0,1fr)}
-  .terms > div+div{border-left:0;border-top:1px solid var(--rule)}
-  .notes ol{columns:1}
-}
-@media (max-width:640px){
-  .wrap{padding:0 16px}
-  .mast nav ul{gap:0 16px}
-  .mast nav li.opt{display:none}
-  .lead{padding:36px 0 4px}
-  .fig{padding:14px 12px 16px 0}
-  .fig+.fig{padding-left:12px}
-  .fig:nth-child(3){padding-left:0}
-  section{padding-top:48px}
-  section.first{padding-top:32px}
-  .sec-head{grid-template-columns:minmax(0,1fr);gap:6px}
-  .sheet-head,.sheet-sum,.entry,.sheet-foot{padding-left:14px;padding-right:14px}
-  .entry{grid-template-columns:minmax(0,1fr);gap:14px}
-  .entry .why{grid-row:auto}
-  .led th,.led td{padding:10px 6px}
-  .cov .barcol{display:none}
-  .cls,.st{white-space:normal}
-  .cls .num{display:block;margin-left:0}
-  /* stacked rows for the wide tables */
-  .stack thead{display:none}
-  .stack tr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;padding:12px 0;border-bottom:1px solid var(--rule-soft)}
-  .stack th,.stack td{border:0;padding:0;white-space:normal}
-  .stack td.d,.stack td.src{grid-column:1 / -1}
-  .stack tfoot tr{border-top:1px solid var(--ink);border-bottom:0}
-  .anatomy tr{grid-template-columns:minmax(0,1fr)}
-  .anatomy td.src::before{content:"Source: ";color:var(--ink-3)}
-  .steps{grid-template-columns:minmax(0,1fr)}
-  .steps li,.steps li+li{padding:16px 0 12px;border-right:0;border-top:1px solid var(--rule)}
-  .terms > div{padding:20px 16px}
-  .prices td b{font-size:21px}
-  .btn{display:block;width:100%;text-align:center}
-}
-@media print{.mast nav,.btn,.skip{display:none}body{background:#fff}}
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="mast">
-  <div class="wrap">
-    <a class="mark" href="#top" aria-label="LeadVault, top of page">Lead<b>Vault</b></a>
-    <nav aria-label="Sections">
-      <ul>
-        <li><a href="#sample">Sample</a></li>
-        <li class="opt"><a href="#row">What you get</a></li>
-        <li class="opt"><a href="#coverage">Coverage</a></li>
-        <li><a href="#terms">Price</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
+<header class="nav"><div class="wrap">
+  <a class="logo" href="#top">LeadVault</a>
+  <div class="nav-end">
+    <a class="nav-link" href="#prices">Prices</a>
+    <a class="btn btn-sun btn-sm" href="mailto:akseli@leadvault.eu?subject=Free%20sample&amp;body=Our%20website%3A%20%0D%0AWhat%20we%20sell%3A%20%0D%0ACountries%20we%20want%3A%20">Free sample</a>
   </div>
-</header>
-<div class="edition">
-  <div class="wrap">
-    <span>Buyer lists for B2B sellers · Sweden, Finland, Norway, Denmark</span>
-    <span>Figures on this page as of 18 Oct 2026, 05:40–05:43 UTC</span>
-  </div>
-</div>
+</div></header>
 
 <main id="main">
-  <div class="wrap" id="top">
-    <div class="lead">
-      <p class="kicker smallcaps">For companies that sell to other companies</p>
-      <h1>The people who buy what you sell, in Sweden, Finland, Norway and Denmark. <em>By name.</em></h1>
-      <p class="deck">We read your website, work out which companies buy from you, and find the people who decide there on those companies’ own websites. Every company comes with the reason it fits, and every email is labelled by the proof we hold for it.</p>
-      <div class="act">
-        <a class="btn" href="mailto:akseli@leadvault.eu?subject=Sample%20of%20my%20market&amp;body=Our%20website%3A%20%0D%0ARegion%20we%20sell%20in%3A%20">Ask for a free sample of your market</a>
-        <span class="alt">or call Akseli on <a href="tel:+358445964003">+358 44 596 4003</a></span>
+
+<section class="hero" id="top"><div class="wrap">
+  <div class="hero-top">
+    <h1>Your next customers, by&nbsp;name.</h1>
+    <div>
+      <p class="sub">We research which companies across Europe are likely to buy from you, and find the person at each who decides. Deepest today in the Nordics.</p>
+      <div class="ctas">
+        <a class="btn btn-sun" href="mailto:akseli@leadvault.eu?subject=Free%20sample&amp;body=Our%20website%3A%20%0D%0AWhat%20we%20sell%3A%20%0D%0ACountries%20we%20want%3A%20">Get a free sample <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4.5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="btn btn-line" href="#prices">See prices</a>
       </div>
-      <p class="from">Lists from €149 for 25 companies. <a href="#terms">See the three prices</a>.</p>
+      <p class="facts-line">From &euro;149 &middot; Delivered within 48&nbsp;hours &middot; Bounced contacts replaced free</p>
     </div>
   </div>
 
-  <!-- EXHIBIT 1: the real sample -->
-  <section id="sample" class="first" aria-labelledby="sample-title">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="ex">Exhibit 1</span>
-        <div>
-          <h2 id="sample-title">A real sample we sent on 18 October 2026</h2>
-          <p>Built for a contract electronics maker in Sweden and emailed to them the same morning.<sup class="fn"><a href="#n1" aria-label="Note 1">1</a></sup> On this public page the names of companies and people are removed, revenue and staff are shown as wide ranges, places are left out and each company’s activity is described in general terms. The recipient’s file shows everything in full.</p>
-        </div>
-      </div>
-
-      <div class="sheet">
-        <div class="sheet-head"><span>Sample of the full list · Sweden</span><span>for a contract electronics maker · 2026-10-18</span></div>
-        <p class="sheet-sum">
-          <span><span class="num">5</span> companies</span>
-          <span><span class="num">7</span> decision-makers by name</span>
-          <span><span class="num">7</span> with an email</span>
-          <span><span class="num">6</span> with a phone</span>
-        </p>
-        <div class="colhead smallcaps" aria-hidden="true"><span>Company, from the register</span><span>Why this company</span><span>People, from the company’s own site</span></div>
-
-        <article class="entry">
-          <div class="co">
-            <h3 class="sr">Company 1 of 5</h3>
-            <span class="idx" aria-hidden="true">01</span>
-            <div class="name"><span class="redact" style="width:6em" role="img" aria-label="Company name removed"></span><span class="ab">AB</span></div>
-            <dl>
-              <dt>Staff</dt><dd>10–49</dd>
-              <dt>Filed revenue</dt><dd>€5–10M · FY2025</dd>
-            </dl>
-          </div>
-          <div class="why">
-            <span class="tag">Why they fit</span>
-            <p>A maker of heavy industrial equipment, a manufacturer that needs your PCB and cabling services.</p>
-          </div>
-          <ul class="people">
-            <li><div class="who"><span class="redact" style="width:7em" role="img" aria-label="Name removed"></span><span class="role">Production and Purchasing Planner</span></div>
-              <div class="meta"><span class="lab">Verified (company website)</span><span>email · phone</span></div></li>
-          </ul>
-        </article>
-
-        <article class="entry">
-          <div class="co">
-            <h3 class="sr">Company 2 of 5</h3>
-            <span class="idx" aria-hidden="true">02</span>
-            <div class="name"><span class="redact" style="width:9.5em" role="img" aria-label="Company name removed"></span><span class="ab">AB</span></div>
-            <dl>
-              <dt>Staff</dt><dd>10–49</dd>
-              <dt>Filed revenue</dt><dd>€5–10M · FY2024</dd>
-            </dl>
-          </div>
-          <div class="why">
-            <span class="tag">Why they fit</span>
-            <p>A supplier of building-equipment components and control systems, a maker for your PCB and electronics production services.</p>
-          </div>
-          <ul class="people">
-            <li><div class="who"><span class="redact" style="width:8em" role="img" aria-label="Name removed"></span><span class="role">Purchasing</span></div>
-              <div class="meta"><span class="lab">Verified (company website)</span><span>email</span></div></li>
-          </ul>
-        </article>
-
-        <article class="entry">
-          <div class="co">
-            <h3 class="sr">Company 3 of 5</h3>
-            <span class="idx" aria-hidden="true">03</span>
-            <div class="name"><span class="redact" style="width:10em" role="img" aria-label="Company name removed"></span><span class="ab">AB</span></div>
-            <dl>
-              <dt>Staff</dt><dd>10–49</dd>
-              <dt>Filed revenue</dt><dd>€1–5M · FY2025</dd>
-            </dl>
-          </div>
-          <div class="why">
-            <span class="tag">Why they fit</span>
-            <p>A maker of industrial machinery, a manufacturer for your PCB and cabling services.</p>
-          </div>
-          <ul class="people">
-            <li><div class="who"><span class="redact" style="width:7em" role="img" aria-label="Name removed"></span><span class="role">Purchasing, Production Planning</span></div>
-              <div class="meta"><span class="lab">Verified (company website)</span><span>email · phone</span></div></li>
-            <li><div class="who"><span class="redact" style="width:7.5em" role="img" aria-label="Name removed"></span><span class="role">CEO</span></div>
-              <div class="meta"><span class="lab">Verified (company website)</span><span>email · phone</span></div></li>
-          </ul>
-        </article>
-
-        <article class="entry">
-          <div class="co">
-            <h3 class="sr">Company 4 of 5</h3>
-            <span class="idx" aria-hidden="true">04</span>
-            <div class="name"><span class="redact" style="width:6.5em" role="img" aria-label="Company name removed"></span><span class="ab">AB</span></div>
-            <dl>
-              <dt>Staff</dt><dd>10–49</dd>
-              <dt>Filed revenue</dt><dd>€1–5M · FY2024</dd>
-            </dl>
-          </div>
-          <div class="why">
-            <span class="tag">Why they fit</span>
-            <p>A maker of commercial equipment with electrical parts, a manufacturer for your electronics production services.</p>
-          </div>
-          <ul class="people">
-            <li><div class="who"><span class="redact" style="width:6em" role="img" aria-label="Name removed"></span><span class="role">Production and Purchasing Manager</span></div>
-              <div class="meta"><span class="lab">Verified (company website)</span><span>email · phone</span></div></li>
-            <li><div class="who"><span class="redact" style="width:8em" role="img" aria-label="Name removed"></span><span class="role">CEO</span></div>
-              <div class="meta"><span class="lab">Verified (company website)</span><span>email · phone</span></div></li>
-          </ul>
-        </article>
-
-        <article class="entry">
-          <div class="co">
-            <h3 class="sr">Company 5 of 5</h3>
-            <span class="idx" aria-hidden="true">05</span>
-            <div class="name"><span class="redact" style="width:5.5em" role="img" aria-label="Company name removed"></span><span class="ab">AB</span></div>
-            <dl>
-              <dt>Staff</dt><dd>1–9</dd>
-              <dt>Filed revenue</dt><dd>€1–5M · FY2025</dd>
-            </dl>
-          </div>
-          <div class="why">
-            <span class="tag">Why they fit</span>
-            <p>A maker of industrial production lines, a manufacturer that needs your custom electronics and cabling.</p>
-          </div>
-          <div>
-            <p class="gap">We hold no purchasing or R&amp;D manager at this company, so the file names the CEO, who chooses suppliers at a company this size. The file says so in the row.</p>
-            <ul class="people">
-              <li><div class="who"><span class="redact" style="width:8em" role="img" aria-label="Name removed"></span><span class="role">CEO</span></div>
-                <div class="meta"><span class="lab">Verified (company website)</span><span>email · phone</span></div></li>
-            </ul>
-          </div>
-        </article>
-
-        <div class="sheet-foot">
-          <span><b>Buying signal:</b> none for these five. We show one only when we judge it strong, such as a registry change or a public contract won. Hiring on its own never counts.</span>
-          <span>The recipient’s file has one row per person with the full name, email, phone, website and business activity. <a href="#row">See every column</a>.</span>
-        </div>
-      </div>
-      <p class="caption">The “Why they fit” lines come from the email that delivered the sample, shortened and made general here so the companies cannot be identified. “Verified (company website)” is the label in the file: every address in this sample was published on the company’s own website.</p>
-    </div>
-  </section>
-
-  <!-- EXHIBIT 2: what a delivered row holds -->
-  <section id="row" aria-labelledby="row-title">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="ex">Exhibit 2</span>
-        <div>
-          <h2 id="row-title">What a delivered row holds, and where each column comes from</h2>
-          <p>One row per decision-maker, as an Excel file and a HubSpot import file (CSV). The CSV holds the same companies and people under HubSpot’s column names, without the Buying power and Reach columns. Gaps are left as gaps.</p>
-        </div>
-      </div>
-      <table class="led anatomy stack" role="table">
-        <thead role="rowgroup"><tr role="row"><th scope="col" role="columnheader">Column</th><th scope="col" role="columnheader">What it holds</th><th scope="col" role="columnheader">Where it comes from</th></tr></thead>
-        <tbody role="rowgroup">
-          <tr role="row"><th scope="row" role="rowheader">Company, country, city</th><td class="d" role="cell">The registered name and address.</td><td class="src" role="cell">The country’s official company register</td></tr>
-          <tr role="row"><th scope="row" role="rowheader">Employees, founded</th><td class="d" role="cell">Staff count and the year the company was registered.</td><td class="src" role="cell">The register or the company’s filed accounts</td></tr>
-          <tr role="row"><th scope="row" role="rowheader">Revenue (EUR)</th><td class="d" role="cell">The latest revenue the company filed, converted to euros. Empty where we hold no filed figure.</td><td class="src" role="cell">Filed annual accounts</td></tr>
-          <tr role="row"><th scope="row" role="rowheader">Buying power</th><td class="d" role="cell">A plain band (High, Medium) with the filed figure and its year, for example “Medium (Rev €2.7M Fy24)”.</td><td class="src" role="cell">Worked out by us from the filed revenue</td></tr>
-          <tr role="row"><th scope="row" role="rowheader">Website</th><td class="d" role="cell">The company’s own domain.</td><td class="src" role="cell">The company’s website, matched to its register entry</td></tr>
-          <tr role="row"><th scope="row" role="rowheader">Contact, title</th><td class="d" role="cell">The person and their role.</td><td class="src" role="cell">What the company publishes: its team, contact or about pages, press releases, official filings</td></tr>
-          <tr role="row"><th scope="row" role="rowheader">Email</th><td class="d" role="cell">Their work address.</td><td class="src" role="cell">The company’s website, or worked out from the company’s address format and then accepted by its mail server</td></tr>
-          <tr role="row"><th scope="row" role="rowheader">Email status</th><td class="d" role="cell">One of three labels for the proof behind the address. <a href="#labels">The labels are explained below</a>.</td><td class="src" role="cell">Where we found it, and our own mail-server check</td></tr>
-          <tr role="row"><th scope="row" role="rowheader">Reach</th><td class="d" role="cell">How to reach the person: by email, or through the company switchboard or company email, asking for them by name.</td><td class="src" role="cell">Worked out by us from the contact details we hold</td></tr>
-          <tr role="row"><th scope="row" role="rowheader">Phone</th><td class="d" role="cell">A work number, where the company publishes one.</td><td class="src" role="cell">The company’s website</td></tr>
-          <tr role="row"><th scope="row" role="rowheader">LinkedIn<small>company and contact</small></th><td class="d" role="cell">A link, where we found a public page. Often empty.</td><td class="src" role="cell">Public web search</td></tr>
-          <tr role="row"><th scope="row" role="rowheader">Buying signal</th><td class="d" role="cell">A reason to act now, with a link in the CSV, where we have one we judge strong. Many companies have none, and the row says so.</td><td class="src" role="cell">Registry changes, public procurement awards and public research grants</td></tr>
-          <tr role="row"><th scope="row" role="rowheader">Why this lead</th><td class="d" role="cell">One line on why the company fits what you sell, and any gap, such as “we hold no purchasing manager here”.</td><td class="src" role="cell">Written by us from the register, the company’s site and your website</td></tr>
-          <tr role="row"><th scope="row" role="rowheader">Business activity</th><td class="d" role="cell">What the company says it does.</td><td class="src" role="cell">The company’s website, summarised</td></tr>
-        </tbody>
-        <tfoot role="rowgroup"><tr role="row"><td colspan="3" role="cell">We keep the website, and often the exact page, or the register entry each contact came from. Ask about any cell in your file and we will tell you where it is from.</td></tr></tfoot>
-      </table>
-    </div>
-  </section>
-
-  <!-- EXHIBIT 3: coverage -->
-  <section id="coverage" aria-labelledby="coverage-title">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="ex">Exhibit 3</span>
-        <div>
-          <h2 id="coverage-title">Where we can build a list today, and where we can’t yet</h2>
-          <p>Two numbers per country: how many companies we hold a named person’s own email address for, and how often we hold a revenue figure the company filed with its register.</p>
-        </div>
-      </div>
-
-      <div class="standing">
-        <div class="standing-head">
-          <span class="smallcaps" id="standing-title">Companies where we hold a named person’s own email address<sup class="fn"><a href="#n2" aria-label="Note 2">2</a></sup></span>
-          <span class="smallcaps">As of 18 Oct 2026, 05:40 UTC</span>
-        </div>
-        <div role="group" aria-labelledby="standing-title"><dl class="standing-grid">
-          <div class="fig"><dt>Norway</dt><dd>14,057</dd></div>
-          <div class="fig"><dt>Finland</dt><dd>13,843</dd></div>
-          <div class="fig"><dt>Sweden</dt><dd>11,540</dd></div>
-          <div class="fig"><dt>Denmark</dt><dd>11,166</dd></div>
-        </dl></div>
-        <p class="standing-note">A company counts here when we hold at least one named person there with their own email address, not a shared one such as info@ or sales@. Each company is one register entry, so a business with several registered entities can count more than once.<sup class="fn"><a href="#n2" aria-label="Note 2">2</a></sup> Figures are recomputed nightly; the date travels with the number.</p>
-      </div>
-
-      <div class="twocol">
-        <div>
-          <table class="led cov">
-            <caption><b>Countries we offer, or can on request</b></caption>
-            <thead>
-              <tr>
-                <th scope="col">Country</th>
-                <th scope="col" class="r">Companies with a named email<sup class="fn"><a href="#n2" aria-label="Note 2">2</a></sup></th>
-                <th scope="col" class="barcol"><span class="sr">Relative size</span></th>
-                <th scope="col">Filed revenue held<sup class="fn"><a href="#n3" aria-label="Note 3">3</a></sup></th>
-                <th scope="col">Lists</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><th scope="row">Norway<span class="cc">NO</span></th><td class="n">14,057</td><td class="barcol"><span class="bar"><i style="width:100%"></i></span></td><td class="cls"><span class="nw">about 6 in 10</span><span class="num">62.6%</span></td><td><span class="st">Available</span></td></tr>
-              <tr><th scope="row">Finland<span class="cc">FI</span></th><td class="n">13,843</td><td class="barcol"><span class="bar"><i style="width:98.5%"></i></span></td><td class="cls"><span class="nw">about 1 in 4</span><span class="num">23.2%</span></td><td><span class="st">Available</span></td></tr>
-              <tr><th scope="row">Sweden<span class="cc">SE</span></th><td class="n">11,540</td><td class="barcol"><span class="bar"><i style="width:82.1%"></i></span></td><td class="cls"><span class="nw">about 1 in 3</span><span class="num">35.0%</span></td><td><span class="st">Available</span></td></tr>
-              <tr><th scope="row">Denmark<span class="cc">DK</span></th><td class="n">11,166</td><td class="barcol"><span class="bar"><i style="width:79.4%"></i></span></td><td class="cls"><span class="nw">about 1 in 7</span><span class="num">13.9%</span></td><td><span class="st">Available</span></td></tr>
-              <tr><th scope="row">France<span class="cc">FR</span></th><td class="n">6,438</td><td class="barcol"><span class="bar"><i style="width:45.8%"></i></span></td><td class="cls"><span class="nw">about 1 in 5</span><span class="num">21.1%</span></td><td><span class="st ask">Ask first</span></td></tr>
-              <tr><th scope="row">Estonia<span class="cc">EE</span></th><td class="n">4,025</td><td class="barcol"><span class="bar"><i style="width:28.6%"></i></span></td><td class="cls"><span class="nw">about 4 in 10</span><span class="num">43.1%</span></td><td><span class="st ask">Ask first</span></td></tr>
-              <tr><th scope="row">Latvia<span class="cc">LV</span></th><td class="n">202</td><td class="barcol"><span class="bar"><i style="width:1.4%"></i></span></td><td class="cls"><span class="nw">about 3 in 4</span><span class="num">77.1%</span></td><td><span class="st thin">Few named people</span></td></tr>
-              <tr><th scope="row">Lithuania<span class="cc">LT</span></th><td class="n">78</td><td class="barcol"><span class="bar"><i style="width:.6%"></i></span></td><td class="cls"><span class="nw">over half</span><span class="num">57.8%</span></td><td><span class="st thin">Few named people</span></td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="aside">
-          <h3>How to read the revenue column</h3>
-          <p>It is an estimate from a fixed 0.5% sample of the companies we hold, so read it as a level, not a decimal. Where a register publishes accounts (Latvia, Norway, Lithuania) we hold most of them; where it publishes few, we hold few.</p>
-          <h3>Where the companies come from</h3>
-          <p>Every company in a list is a company in its country’s official register. The register gives the name, address and size; the filings give the revenue and the year it was filed for.</p>
-          <h3>Selling somewhere else?</h3>
-          <p>Ask before you order. We will tell you what we hold for your country and industry before you pay anything.</p>
-        </div>
-      </div>
-
-      <table class="led notyet">
-        <caption><b>Not offered yet</b><span>We hold these countries’ registered companies, but too few named people to sell a list.</span></caption>
-        <thead><tr><th scope="col">Country</th><th scope="col" class="r">Companies with a named email<sup class="fn"><a href="#n2" aria-label="Note 2">2</a></sup></th><th scope="col" class="r">Filed revenue held<sup class="fn"><a href="#n3" aria-label="Note 3">3</a></sup></th></tr></thead>
-        <tbody>
-          <tr><th scope="row">Germany</th><td class="n">104</td><td class="n">none in sample</td></tr>
-          <tr><th scope="row">United Kingdom</th><td class="n">49</td><td class="n">about 2%</td></tr>
-          <tr><th scope="row">Spain</th><td class="n">30</td><td class="n">none in sample</td></tr>
-          <tr><th scope="row">Italy</th><td class="n">23</td><td class="n">none in sample</td></tr>
-          <tr><th scope="row">Portugal</th><td class="n">18</td><td class="n">not measured</td></tr>
-          <tr><th scope="row">Czechia</th><td class="n">4</td><td class="n">none in sample</td></tr>
-          <tr><th scope="row">Greece</th><td class="n">3</td><td class="n">not measured</td></tr>
-          <tr><th scope="row">Romania</th><td class="n">2</td><td class="n">about 1 in 3</td></tr>
-          <tr><th scope="row">Ireland</th><td class="n">2</td><td class="n">none in sample</td></tr>
-          <tr><th scope="row">Austria</th><td class="n">2</td><td class="n">not measured</td></tr>
-          <tr><th scope="row">Netherlands, Switzerland, Poland</th><td class="n">1 each</td><td class="n">none in sample</td></tr>
-          <tr><th scope="row">Belgium</th><td class="n">1</td><td class="n">not measured</td></tr>
-          <tr><th scope="row">Slovakia, Luxembourg, Slovenia and every other European country</th><td class="n">0</td><td class="n">varies</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- METHOD -->
-  <section id="method" aria-labelledby="method-title">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="ex">Method</span>
-        <div>
-          <h2 id="method-title">How a list is built</h2>
-          <p>The same four steps produced Exhibit 1.</p>
-        </div>
-      </div>
-      <ol class="steps">
-        <li><h3>You send your website</h3><p>Or you reply to the email we sent you, which means we have already read it.</p></li>
-        <li><h3>We work out who buys from you</h3><p>From what your site says you make and who you serve, we pick the kinds of company that buy it, then draw them from the register for your region.</p></li>
-        <li><h3>We find the people who decide</h3><p>On each company’s own website, keeping the website, and often the exact page, each person came from. Where a strong buying signal exists, such as a registry change or a public contract won, we add it.</p></li>
-        <li><h3>You see a sample first</h3><p>Three to five of your own likely buyers, free. If it is useful, you order a list and get it within 48 hours as Excel and HubSpot CSV.</p></li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- EXHIBIT 4: labels -->
-  <section id="labels" aria-labelledby="labels-title">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="ex">Exhibit 4</span>
-        <div>
-          <h2 id="labels-title">Every address carries a label for its proof</h2>
-          <p>Each email in your file carries one of three labels. An address with none of them behind it is left out of the file. Below the labels: how the work addresses we hold at the companies’ own domains break down today, before any delivery check.<sup class="fn"><a href="#n4" aria-label="Note 4">4</a></sup></p>
-        </div>
-      </div>
-      <table class="led labels stack" role="table">
-        <caption><b>The three labels in your file</b></caption>
-        <thead role="rowgroup"><tr role="row"><th scope="col" role="columnheader">Label in the file</th><th scope="col" role="columnheader">What it means</th></tr></thead>
-        <tbody role="rowgroup">
-          <tr role="row"><th scope="row" role="rowheader"><span class="lab">Verified (company website)</span></th><td class="d" role="cell">Published on the company’s own website.</td></tr>
-          <tr role="row"><th scope="row" role="rowheader"><span class="lab">Verified</span></th><td class="d" role="cell">The company’s mail server accepted the address when we checked it. This includes addresses we worked out from the person’s name and the company’s address format. A server can still accept an address and bounce it later; that is what the free replacement is for.</td></tr>
-          <tr role="row"><th scope="row" role="rowheader"><span class="lab none">Likely (domain accepts all mail)</span></th><td class="d" role="cell">We have not seen the address published, and the company’s mail server says yes to every address, so our check cannot confirm this one.</td></tr>
-        </tbody>
-      </table>
-      <table class="led labels labels2 stack" role="table">
-        <caption><b>What we hold today, by the best evidence for each address</b></caption>
-        <thead role="rowgroup"><tr role="row"><th scope="col" role="columnheader">Evidence</th><th scope="col" role="columnheader">What happens at delivery</th><th scope="col" class="r" role="columnheader">Addresses held</th></tr></thead>
-        <tbody role="rowgroup">
-          <tr role="row"><th scope="row" role="rowheader"><span class="lab">Published on company website</span></th><td class="d" role="cell">Delivered as “Verified (company website)”. We keep the website it was on.</td><td class="n" role="cell">85,432</td></tr>
-          <tr role="row"><th scope="row" role="rowheader"><span class="lab">Mail-server check passed</span></th><td class="d" role="cell">Delivered as “Verified”, or as “Likely” on a domain that accepts all mail.</td><td class="n" role="cell">9,933</td></tr>
-          <tr role="row"><th scope="row" role="rowheader"><span class="lab none">Worked out, not yet checked</span></th><td class="d" role="cell">Made from the person’s name and the company’s address format, never seen published. Delivered only after the mail server accepts it.</td><td class="n" role="cell">90,885</td></tr>
-          <tr role="row"><th scope="row" role="rowheader"><span class="lab none">No result yet</span></th><td class="d" role="cell">Not yet checked, or the check gave no clear answer. Delivered only after a check passes.</td><td class="n" role="cell">77,636</td></tr>
-          <tr role="row"><th scope="row" role="rowheader"><span class="lab none">Failed check</span></th><td class="d" role="cell">The mail server rejected it. Never delivered.</td><td class="n" role="cell">134</td></tr>
-        </tbody>
-        <tfoot role="rowgroup"><tr role="row"><td colspan="2" role="cell">Total work addresses at own company domains · 18 Oct 2026, 05:41 UTC</td><td class="n" role="cell">264,020</td></tr></tfoot>
-      </table>
-    </div>
-  </section>
-
-  <!-- TERMS -->
-  <section id="terms" aria-labelledby="terms-title">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="ex">Terms</span>
-        <div><h2 id="terms-title">Price and contact</h2><p>No account, no checkout. Email or call, and we agree the region and industry with you first.</p></div>
-      </div>
-      <div class="terms">
-        <div>
-          <h3>Three ways to buy</h3>
-          <table class="prices">
-            <tbody>
-              <tr><th scope="row"><b>Try it</b><span>25 companies</span></th><td><b>€149</b></td></tr>
-              <tr><th scope="row"><b>Standard</b><span>100 companies</span></th><td><b>€449</b></td></tr>
-              <tr><th scope="row"><b>Monthly</b><span>100 new companies a month, never repeated. Cancel any time.</span></th><td><b>€349</b><small>per month</small></td></tr>
-            </tbody>
-          </table>
-          <div class="every">
-            <h4>Every list</h4>
-            <ul>
-              <li>A free replacement for any contact that bounces or turns out wrong</li>
-              <li>Delivered within 48 hours, in Excel and as a HubSpot CSV</li>
-              <li>The reason for every company</li>
-              <li>Companies from the official register, people from the companies’ own websites, a label on every email</li>
-            </ul>
-          </div>
-        </div>
-        <div id="contact">
-          <h3>Ask for a sample of your market</h3>
-          <p>Tell us your website and the region you sell in. We reply with a free sample of three to five of your own likely buyers.</p>
-          <p class="contact">
-            Akseli Mattila<br>
-            <a href="mailto:akseli@leadvault.eu?subject=Sample%20of%20my%20market&amp;body=Our%20website%3A%20%0D%0ARegion%20we%20sell%20in%3A%20">akseli@leadvault.eu</a><br>
-            <a href="tel:+358445964003">+358 44 596 4003</a>
-          </p>
-          <a class="btn" href="mailto:akseli@leadvault.eu?subject=Sample%20of%20my%20market&amp;body=Our%20website%3A%20%0D%0ARegion%20we%20sell%20in%3A%20">Email for a sample</a>
-        </div>
+  <figure class="shot">
+    <div class="sheet" role="img" aria-label="A spreadsheet with example rows. Columns: company, why they fit, decision-maker, job title, country, line of business, work email and email check. The selected cell reads: Opened a second warehouse in Jönköping in March; its job ads mention manual picking. Company names, person names and email addresses are hidden.">
+      <div class="sheet-in" aria-hidden="true">
+        <div class="titlebar"><b>Buyer list.xlsx</b><span>Excel</span></div>
+        <div class="fx"><span class="nb">B2</span><span class="f">fx</span><span class="v">Opened a second warehouse in J&ouml;nk&ouml;ping in March; its job ads mention manual picking.</span></div>
+        <table>
+          <colgroup><col class="cr"><col class="ca"><col class="cb"><col class="cc"><col class="cd"><col class="ce"><col class="cf"><col class="cg"><col class="ch"></colgroup>
+          <thead><tr><th></th><th>A</th><th class="on">B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>H</th></tr></thead>
+          <tbody>
+            <tr class="h"><th>1</th><td>Company</td><td>Why they fit</td><td>Decision-maker</td><td>Job title</td><td>Country</td><td>Line of business</td><td>Work email</td><td>Email check</td></tr>
+            <tr><th class="on">2</th><td><span class="x" style="width:96px"></span></td><td class="sel">Opened a second warehouse in J&ouml;nk&ouml;ping in March; its job ads mention manual picking.</td><td><span class="x" style="width:88px"></span></td><td>Head of Logistics</td><td>Sweden</td><td>Wholesale, building supplies</td><td><span class="x" style="width:52px"></span>@<span class="x" style="width:58px"></span>.se</td><td>valid</td></tr>
+            <tr><th>3</th><td><span class="x" style="width:78px"></span></td><td>Moving production to a larger site in Tampere next year, according to its annual report.</td><td><span class="x" style="width:70px"></span></td><td>COO</td><td>Finland</td><td>Machine manufacturer</td><td><span class="x" style="width:44px"></span>@<span class="x" style="width:64px"></span>.fi</td><td>valid</td></tr>
+            <tr><th>4</th><td><span class="x" style="width:110px"></span></td><td>Won a public contract to supply hospitals in the Oslo region and is hiring warehouse staff.</td><td><span class="x" style="width:92px"></span></td><td>Purchasing Manager</td><td>Norway</td><td>Medical supplies</td><td><span class="x" style="width:60px"></span>@<span class="x" style="width:50px"></span>.no</td><td>catch-all</td></tr>
+            <tr><th>5</th><td><span class="x" style="width:84px"></span></td><td>Same size and trade as your best customers; ships its webshop orders from Aarhus.</td><td><span class="x" style="width:76px"></span></td><td>CEO and owner</td><td>Denmark</td><td>Garden products</td><td><span class="x" style="width:40px"></span>@<span class="x" style="width:62px"></span>.dk</td><td>valid</td></tr>
+            <tr class="blank"><th>6</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          </tbody>
+        </table>
+        <div class="tabs"><span class="on">Buyer list</span><span>Notes</span></div>
       </div>
     </div>
-  </section>
+    <figcaption>Example rows for a business that sells warehouse equipment. Names are hidden here; your list has them in&nbsp;full.</figcaption>
+  </figure>
+</div></section>
 
-  <div class="notes" id="notes">
-    <div class="wrap">
-      <div class="sec-head"><span class="ex">Notes</span><div><h2>Sources for the figures on this page</h2></div></div>
-      <ol>
-        <li id="n1">Sample file generated and sent on 2026-10-18 (sent 08:36 UTC): 5 companies, 7 named people, 7 with an email, 6 with a phone. Revenue is as filed for the fiscal year shown, converted to euros, and shown here in wide ranges (€1–5M, €5–10M).</li>
-        <li id="n2">Companies with at least one named contact holding a personal, non-generic email address; registry dumps excluded. Metric <code>named_email_companies_by_country</code>, as of 2026-10-18 05:40:49 UTC. These are company register entries, not organisations: across every country we hold, the 65,428 such entries (<code>named_email_companies_outreach</code>, 05:40:11 UTC) belong to 56,128 distinct organisations counted by website (<code>person_email_websites</code>, 05:40:58 UTC).</li>
-        <li id="n3">Share of companies with a filed revenue figure (any year, not zero), estimated from a 0.5% block sample with a fixed seed; small samples can move by several points. “Not measured” means too few companies in the sample to report. Metric <code>filed_revenue_coverage_by_country</code>, as of 2026-10-18 05:43:09 UTC.</li>
-        <li id="n4">Work addresses at the company’s own domain, each counted once under the best evidence held. Metric <code>person_email_people_own_domain_by_evidence</code>, as of 2026-10-18 05:41:12 UTC.</li>
-</ol>
+<section class="sec" id="how" aria-labelledby="how-h"><div class="wrap"><div class="inner">
+  <h2 id="how-h">How it works</h2>
+  <ol class="seq">
+    <li><span><b>Send us your website</b> and tell us who your best customers are. That&rsquo;s all we need to start.</span></li>
+    <li><span><b>We send back a few companies from your market,</b> with the person to contact at each and why they fit. This costs you nothing.</span></li>
+    <li><span><b>If it looks right, order a list.</b> We research each company, find the decision-maker and check their work email. You get the file within 48&nbsp;hours.</span></li>
+  </ol>
+</div></div></section>
+
+<section class="sec" id="list" aria-labelledby="list-h"><div class="wrap"><div class="inner">
+  <h2 id="list-h">What you get</h2>
+  <div class="prose">
+    <p class="big">Every row is a company you could call tomorrow: its name, country, region and line of business, the person who decides there by name and job title, and one sentence on why they&rsquo;d buy, so you know how to start the conversation.</p>
+    <p>We check each work email with the company&rsquo;s mail server and note the result in the list. Some servers accept any address, so a few can&rsquo;t be fully confirmed, and those are marked.</p>
+    <p>The file comes as Excel and as a HubSpot CSV. Open it in any spreadsheet or import it straight into HubSpot.</p>
+    <p>Contact details come from companies&rsquo; own websites and official business registers, never from data brokers. <a href="privacy.html">How we handle data</a></p>
+  </div>
+</div></div></section>
+
+<section class="sec" id="prices" aria-labelledby="prices-h"><div class="wrap"><div>
+  <div class="prices-head">
+    <h2 id="prices-h">Prices</h2>
+    <p>Buy a single list, or get new companies every month.</p>
+  </div>
+  <div class="plans">
+    <article class="plan">
+      <h3>Try it</h3>
+      <p class="price">&euro;149</p>
+      <p class="qty">25 companies</p>
+      <p class="desc">Test the fit before you order a full list.</p>
+      <a class="btn btn-line" href="mailto:akseli@leadvault.eu?subject=Order%3A%2025%20companies%20(%E2%82%AC149)&amp;body=Our%20website%3A%20%0D%0AWhat%20we%20sell%3A%20%0D%0ACountries%20we%20want%3A%20">Order 25 companies</a>
+    </article>
+    <article class="plan">
+      <h3>Standard</h3>
+      <p class="price">&euro;449</p>
+      <p class="qty">100 companies</p>
+      <p class="desc">A full list for one market or one product.</p>
+      <a class="btn btn-line" href="mailto:akseli@leadvault.eu?subject=Order%3A%20100%20companies%20(%E2%82%AC449)&amp;body=Our%20website%3A%20%0D%0AWhat%20we%20sell%3A%20%0D%0ACountries%20we%20want%3A%20">Order 100 companies</a>
+    </article>
+    <article class="plan">
+      <h3>Monthly</h3>
+      <p class="price">&euro;349<small>/month</small></p>
+      <p class="qty">100 new companies a month</p>
+      <p class="desc">No company appears twice. Cancel any time.</p>
+      <a class="btn btn-line" href="mailto:akseli@leadvault.eu?subject=Order%3A%20Monthly%2C%20100%20new%20companies%20a%20month%20(%E2%82%AC349)&amp;body=Our%20website%3A%20%0D%0AWhat%20we%20sell%3A%20%0D%0ACountries%20we%20want%3A%20">Start monthly</a>
+    </article>
+  </div>
+  <p class="terms">Every list arrives within 48&nbsp;hours with the reason each company fits, and we replace bounced or wrong contacts free. Not sure yet? <a href="mailto:akseli@leadvault.eu?subject=Free%20sample&amp;body=Our%20website%3A%20%0D%0AWhat%20we%20sell%3A%20%0D%0ACountries%20we%20want%3A%20">Ask for a free sample first.</a></p>
+</div></div></section>
+
+<section class="sec about" id="about" aria-labelledby="about-h"><div class="wrap"><div class="inner">
+  <h2 id="about-h">Who you&rsquo;ll deal with</h2>
+  <div class="prose">
+    <p>I&rsquo;m Akseli Mattila, and I run LeadVault. It&rsquo;s a small company, so when you email or call, you get me. If a contact on your list turns out to be wrong, tell me and I&rsquo;ll replace it.</p>
+    <div class="sign">
+      <b>Akseli Mattila, founder</b>
+      <a href="mailto:akseli@leadvault.eu">akseli@leadvault.eu</a>
+      <a href="tel:+358445964003">+358 44 596 4003</a>
     </div>
   </div>
+</div></div></section>
+
 </main>
 
-<footer>
-  <div class="wrap">
-    <span>LeadVault is run by Synlig Media · CVR DK 44784416 · Copenhagen, Denmark</span>
-    <span><a href="privacy.html">How we handle business contact data</a> · This page sets no cookies, runs no scripts and loads nothing from other sites.</span>
-  </div>
-</footer>
+<div class="band">
+  <section class="close" id="contact" aria-labelledby="close-h"><div class="wrap"><div class="inner">
+    <h2 id="close-h">See your own market first.</h2>
+    <div>
+      <p>Send us your website and we&rsquo;ll reply with a few companies from your market that fit, who to contact at each, and why. Free.</p>
+      <a class="btn btn-sun" href="mailto:akseli@leadvault.eu?subject=Free%20sample&amp;body=Our%20website%3A%20%0D%0AWhat%20we%20sell%3A%20%0D%0ACountries%20we%20want%3A%20">Get a free sample <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4.5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <p class="alt">or call Akseli on <a href="tel:+358445964003">+358&nbsp;44&nbsp;596&nbsp;4003</a></p>
+    </div>
+  </div></div></section>
+  <footer class="foot"><div class="wrap">
+    <p><span><span class="name">LeadVault</span> is run by Synlig Media</span><span class="nw">CVR DK 44784416</span><span>Copenhagen</span><a href="mailto:akseli@leadvault.eu">akseli@leadvault.eu</a><a href="privacy.html">Privacy</a></p>
+  </div></footer>
+</div>
 </body>
 </html>
