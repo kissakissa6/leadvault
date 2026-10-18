@@ -1,141 +1,249 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy — LeadVault</title>
-    <meta name="description" content="LeadVault privacy policy. How we collect, use, and protect personal data under GDPR.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root { --bg: #fafaf7; --bg-warm: #f5f4f0; --surface: #ffffff; --text: #1a1a1a; --text-secondary: #6b6b6b; --text-muted: #999999; --accent: #c8ff00; --accent-light: #d4ff33; --accent-dim: rgba(200, 255, 0, 0.1); --accent-border: rgba(200, 255, 0, 0.3); --border: #e5e5e0; --border-light: #eeeeea; --highlight: rgba(200, 255, 0, 0.08); --radius: 14px; --radius-lg: 20px; --shadow-sm: 0 2px 12px rgba(0,0,0,0.04); --shadow-md: 0 8px 30px rgba(0,0,0,0.06); --font-display: 'Sora', sans-serif; --font-body: 'DM Sans', sans-serif; }
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: var(--font-body); background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; line-height: 1.6; }
-        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 18px 40px; display: flex; justify-content: space-between; align-items: center; background: rgba(250, 250, 247, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-light); transition: all 0.3s; }
-        .nav-brand { font-family: var(--font-display); font-weight: 800; font-size: 1.15rem; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
-        .nav-contact { font-size: 0.85rem; color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
-        .nav-contact:hover { color: var(--text); }
-        .container { max-width: 720px; margin: 0 auto; padding: 0 24px; }
-        .policy-header { padding-top: 120px; padding-bottom: 40px; }
-        .section-label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--text-muted); font-weight: 700; margin-bottom: 12px; }
-        h1 { font-family: var(--font-display); font-size: clamp(1.8rem, 3.5vw, 2.4rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; color: var(--text); margin-bottom: 12px; }
-        .last-updated { font-size: 0.88rem; color: var(--text-muted); }
-        .policy-body { padding-bottom: 80px; }
-        .policy-body h2 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--text); margin-top: 40px; margin-bottom: 12px; letter-spacing: -0.01em; }
-        .policy-body p { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 14px; }
-        .policy-body ul { list-style: none; margin-bottom: 14px; padding-left: 0; }
-        .policy-body ul li { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.7; padding: 4px 0 4px 20px; position: relative; }
-        .policy-body ul li::before { content: '—'; position: absolute; left: 0; color: var(--text-muted); }
-        .policy-body a { color: var(--text); text-decoration: underline; text-decoration-color: var(--border); text-underline-offset: 3px; transition: text-decoration-color 0.2s; }
-        .policy-body a:hover { text-decoration-color: var(--text); }
-        .policy-body strong { color: var(--text); font-weight: 600; }
-        .divider { height: 1px; background: var(--border); margin: 40px 0; }
-        footer { border-top: 1px solid var(--border); padding: 32px 40px; text-align: center; }
-        .footer-text { font-size: 0.78rem; color: var(--text-muted); line-height: 1.6; }
-        .footer-text a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
-        .footer-text a:hover { color: var(--text); }
-        @media (max-width: 600px) { nav { padding: 14px 20px; } .policy-header { padding-top: 100px; } }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>LeadVault Privacy</title>
+<meta name="description" content="How LeadVault, run by Synlig Media in Copenhagen, handles business contact data: what we collect, where it comes from, why, how long we keep it, and how to object.">
+<link rel="canonical" href="https://leadvault.eu/privacy.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231B5E20'/%3E%3Cpath d='M7 22h18M7 16h18M7 10h18' stroke='%23FAFBF8' stroke-width='2'/%3E%3C/svg%3E">
+<style>
+:root{
+  --paper:#FAFBF8; --paper-2:#F2F4EE; --sheet:#FFFFFF;
+  --ink:#111912; --ink-2:#4A5244; --ink-3:#5A6255;
+  --rule:#D9DDD2; --rule-soft:#E8EBE3;
+  --green:#1B5E20; --amber:#9A4708; --focus:#1B5E20;
+  --btn-bg:#0D3311; --btn-ink:#FAFBF8;
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Charter,"Bitstream Charter",Georgia,"DejaVu Serif",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"DejaVu Sans Mono","Liberation Mono",monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E130F; --paper-2:#131A14; --sheet:#161C17;
+    --ink:#E7ECE4; --ink-2:#B7C0B2; --ink-3:#9AA396;
+    --rule:#2B342C; --rule-soft:#222A23;
+    --green:#86C98A; --amber:#E0A458; --focus:#86C98A;
+    --btn-bg:#86C98A; --btn-ink:#0E130F;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0E130F; --paper-2:#131A14; --sheet:#161C17;
+  --ink:#E7ECE4; --ink-2:#B7C0B2; --ink-3:#9AA396;
+  --rule:#2B342C; --rule-soft:#222A23;
+  --green:#86C98A; --amber:#E0A458; --focus:#86C98A;
+  --btn-bg:#86C98A; --btn-ink:#0E130F;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.65 var(--sans);overflow-wrap:break-word}
+a{color:var(--green);text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{text-decoration-thickness:2px}
+a:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:1px}
+.skip{position:absolute;left:16px;top:-60px;background:var(--btn-bg);color:var(--btn-ink);padding:10px 14px;font-weight:600;z-index:10}
+.skip:focus{top:8px}
+.wrap{max-width:760px;margin:0 auto;padding:0 24px}
+.mast{border-top:4px solid var(--green);border-bottom:1px solid var(--rule)}
+.mast .wrap{max-width:1120px;display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:16px;padding-bottom:12px}
+.mark{font:600 19px/1 var(--mono);letter-spacing:-.03em;color:var(--ink);text-decoration:none}
+.mark b{font-weight:600;color:var(--green)}
+.mast nav a{display:inline-block;font:500 13px/1.4 var(--mono);color:var(--ink-2);text-decoration:none;padding:8px 0;margin-left:18px}
+.mast nav a:first-child{margin-left:0}
+.mast nav a:hover{color:var(--green);text-decoration:underline}
+header.doc{padding:48px 0 8px}
+.kicker{font:600 12px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:0 0 14px}
+h1{font:400 clamp(32px,4.4vw,48px)/1.1 var(--serif);letter-spacing:-.015em;margin:0}
+.updated{display:inline-block;margin:18px 0 0;font:600 13px/1.5 var(--mono);color:var(--ink);border:1px solid var(--rule);background:var(--paper-2);padding:4px 10px}
+.summary{margin:28px 0 0;padding:18px 20px;background:var(--sheet);border:1px solid var(--rule);border-left:4px solid var(--green)}
+.summary h2{font:600 13px/1.4 var(--mono);letter-spacing:.06em;text-transform:uppercase;margin:0 0 8px;color:var(--ink)}
+.summary ul{margin:0;padding-left:20px}
+.summary li{margin:4px 0}
+.toc{margin:28px 0 0;font-size:15px}
+.toc h2{font:600 12px/1.4 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);margin:0 0 6px}
+.toc ol{margin:0;padding-left:22px;columns:2;column-gap:32px}
+.toc li{margin:2px 0;break-inside:avoid}
+main section{padding:36px 0 0}
+main section h2{font:400 clamp(24px,2.8vw,30px)/1.2 var(--serif);margin:0 0 12px;padding-top:14px;border-top:1px solid var(--ink)}
+main section h3{font:600 16px/1.4 var(--sans);margin:22px 0 6px}
+main p{margin:0 0 14px}
+main ul{margin:0 0 14px;padding-left:22px}
+main li{margin:4px 0}
+.muted{color:var(--ink-2)}
+dl.facts{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 18px;margin:0 0 14px}
+dl.facts dt{font:600 14px/1.65 var(--mono);color:var(--ink-2)}
+dl.facts dd{margin:0}
+.note{font-size:15.5px;color:var(--ink-2);background:var(--paper-2);border-left:3px solid var(--amber);padding:10px 14px;margin:0 0 14px}
+footer{border-top:4px solid var(--green);margin-top:56px}
+footer .wrap{max-width:1120px;display:flex;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;padding-top:18px;padding-bottom:40px;font-size:14px;color:var(--ink-3)}
+footer a{color:var(--ink-2)}
+@media (max-width:640px){
+  .wrap{padding:0 16px}
+  body{font-size:16.5px}
+  header.doc{padding-top:32px}
+  .toc ol{columns:1}
+  dl.facts{grid-template-columns:minmax(0,1fr);gap:0}
+  dl.facts dd{margin-bottom:10px}
+}
+@media print{.mast nav,.skip{display:none}body{background:#fff}}
+</style>
 </head>
 <body>
-    <nav>
-        <a href="https://leadvault.eu" class="nav-brand">LEADVAULT</a>
-        <a href="mailto:akseli@leadvault.eu" class="nav-contact">akseli@leadvault.eu</a>
-    </nav>
-    <div class="container">
-        <div class="policy-header">
-            <div class="section-label">Legal</div>
-            <h1>Privacy Policy</h1>
-            <p class="last-updated">Last updated: 14 April 2026</p>
-        </div>
-        <div class="policy-body">
-            <h2>Who we are</h2>
-            <p>LeadVault is a B2B sales intelligence service operated by Synlig Media, a sole proprietorship (enkeltmandsvirksomhed) registered in Denmark.</p>
-            <ul>
-                <li><strong>Business name:</strong> Synlig Media</li>
-                <li><strong>CVR:</strong> DK 44784416</li>
-                <li><strong>Address:</strong> Copenhagen, Denmark</li>
-                <li><strong>Contact:</strong> <a href="mailto:akseli@leadvault.eu">akseli@leadvault.eu</a></li>
-            </ul>
-            <h2>What data we collect</h2>
-            <p>We collect and process business contact data for the purpose of B2B sales intelligence. This includes:</p>
-            <ul>
-                <li>Full name and job title</li>
-                <li>Business email address (verified)</li>
-                <li>Business phone number (where publicly available)</li>
-                <li>Company name, industry, and size</li>
-                <li>Country and city (business location)</li>
-                <li>LinkedIn profile URL</li>
-            </ul>
-            <p>We do not collect or process personal email addresses (Gmail, Yahoo, Outlook, etc.), home addresses, personal mobile numbers, or any special category data. Business phone numbers sourced from public directories or commercial providers may be included in reports.</p>
-            <h2>How we source data</h2>
-            <p>Business contact data is sourced from publicly available business information and commercial data providers. All email addresses are verified through a third-party verification service before delivery to clients.</p>
-            <h2>Legal basis for processing</h2>
-            <p>We process business contact data under <strong>legitimate interest</strong> (GDPR Article 6(1)(f)). Our legitimate interest is providing B2B sales intelligence services to help businesses connect with relevant professional contacts.</p>
-            <p>A Legitimate Interest Assessment (LIA) has been conducted and is on file. The assessment balances our business interest against the rights of data subjects, considering that:</p>
-            <ul>
-                <li>Only business contact data is processed — no personal or sensitive data</li>
-                <li>Data subjects can opt out at any time</li>
-                <li>Data is used exclusively for professional B2B communication</li>
-                <li>Processing has minimal impact on data subjects' private lives</li>
-            </ul>
-            <h2>How we use data</h2>
-            <p>Business contact data is used to:</p>
-            <ul>
-                <li>Build curated company lists matching client-defined criteria</li>
-                <li>Score and rank contacts by relevance</li>
-                <li>Deliver verified contact lists to our clients</li>
-            </ul>
-            <p>We do not use data for automated decision-making or profiling that produces legal effects.</p>
-            <h2>Who we share data with</h2>
-            <p>Contact data is shared only with the specific client who ordered the company list. We do not sell data to third parties, publish contact data publicly, or share data with advertising networks.</p>
-            <p>We use the following third-party services in our operations:</p>
-            <ul>
-                <li><strong>Apollo.io</strong> — contact data sourcing</li>
-                <li><strong>TrueList</strong> — email verification</li>
-            </ul>
-            <h2>Data retention</h2>
-            <p>We retain business contact data for as long as it is relevant and accurate for our sales intelligence services. Contact data is reviewed periodically and deleted when no longer needed. Data subjects who opt out are added to a permanent suppression list to prevent future contact.</p>
-            <h2>Your rights</h2>
-            <p>If your business contact information appears in our database, you have the right to:</p>
-            <ul>
-                <li><strong>Access</strong> — request a copy of the data we hold about you</li>
-                <li><strong>Rectification</strong> — request correction of inaccurate data</li>
-                <li><strong>Erasure</strong> — request deletion of your data</li>
-                <li><strong>Object</strong> — object to processing based on legitimate interest</li>
-                <li><strong>Restriction</strong> — request restricted processing while a complaint is resolved</li>
-            </ul>
-            <p>To exercise any of these rights, email <a href="mailto:akseli@leadvault.eu">akseli@leadvault.eu</a>. We will respond within 30 days.</p>
-            <h2>Opt-out</h2>
-            <p>If you do not wish to be contacted or included in our company lists, email <a href="mailto:akseli@leadvault.eu?subject=Opt%20out">akseli@leadvault.eu</a> with the subject line "Opt out". We will remove your data and add you to our permanent suppression list within 30 days.</p>
-            <h2>Client obligations</h2>
-            <p>Clients who receive company lists from LeadVault are required to:</p>
-            <ul>
-                <li>Include a clear opt-out mechanism in all outreach</li>
-                <li>Identify the data source in first contact, per GDPR Article 14</li>
-                <li>Remove contacts who opt out immediately</li>
-                <li>Not resell or redistribute the data without a separate agreement</li>
-            </ul>
-            <h2>Website visitors</h2>
-            <p>The LeadVault website (leadvault.eu) does not use cookies, tracking scripts, or analytics tools. We do not collect any data from website visitors. If you send us an email, we store your email address and message solely for the purpose of responding to your enquiry.</p>
-            <h2>Complaints</h2>
-            <p>If you believe we have processed your data unlawfully, you have the right to lodge a complaint with the Danish Data Protection Agency (Datatilsynet):</p>
-            <ul>
-                <li><strong>Website:</strong> <a href="https://www.datatilsynet.dk" target="_blank" rel="noopener">datatilsynet.dk</a></li>
-                <li><strong>Email:</strong> dt@datatilsynet.dk</li>
-            </ul>
-            <h2>Changes to this policy</h2>
-            <p>We may update this privacy policy from time to time. The latest version will always be available at this page. Material changes will be noted with an updated date at the top.</p>
-            <div class="divider"></div>
-            <p>Questions about this policy? Contact <a href="mailto:akseli@leadvault.eu">akseli@leadvault.eu</a>.</p>
-        </div>
-    </div>
-    <footer>
-        <p class="footer-text">
-            LeadVault · Synlig Media · CVR DK 44784416 · akseli@leadvault.eu · Copenhagen, Denmark<br>
-            <a href="https://leadvault.eu">Home</a> · <a href="mailto:akseli@leadvault.eu">Contact</a>
-        </p>
-    </footer>
+<a class="skip" href="#main">Skip to content</a>
+<header class="mast">
+  <div class="wrap">
+    <a class="mark" href="index.html" aria-label="LeadVault, home page">Lead<b>Vault</b></a>
+    <nav aria-label="Site"><a href="index.html">Home</a><a href="#object">Opt out</a><a href="mailto:akseli@leadvault.eu">akseli@leadvault.eu</a></nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <header class="doc">
+      <p class="kicker">Privacy</p>
+      <h1>How we handle business contact data</h1>
+      <p class="updated">Last updated 18 October 2026</p>
+
+      <div class="summary">
+        <h2>In short</h2>
+        <ul>
+          <li>We hold the work details of people at companies (name, role, work email, work phone), taken from what companies publish themselves and from official business registers.</li>
+          <li>We use them to put together lists of likely buyers for companies that sell to businesses, and to contact businesses about LeadVault ourselves.</li>
+          <li>We do not buy contact data from data brokers.</li>
+          <li>To stop: reply “no thanks” to any email from us, or write to <a href="mailto:akseli@leadvault.eu?subject=Opt%20out">akseli@leadvault.eu</a>. We put your address on our suppression list, which our email system checks before every email it sends.</li>
+        </ul>
+      </div>
+
+      <nav class="toc" aria-label="On this page">
+        <h2>On this page</h2>
+        <ol>
+          <li><a href="#who">Who is responsible</a></li>
+          <li><a href="#what">What we collect, and from where</a></li>
+          <li><a href="#why">Why we use it, and on what legal basis</a></li>
+          <li><a href="#share">Who receives it</a></li>
+          <li><a href="#keep">How long we keep it</a></li>
+          <li><a href="#object">How to opt out or object</a></li>
+          <li><a href="#rights">Your rights</a></li>
+          <li><a href="#site">What this website collects</a></li>
+          <li><a href="#changes">Changes to this page</a></li>
+        </ol>
+      </nav>
+    </header>
+
+    <section id="who" aria-labelledby="who-h">
+      <h2 id="who-h">1. Who is responsible</h2>
+      <p>The controller of the data described here is:</p>
+      <dl class="facts">
+        <dt>Business</dt><dd>Synlig Media, which runs LeadVault</dd>
+        <dt>CVR</dt><dd>DK 44784416</dd>
+        <dt>Location</dt><dd>Copenhagen, Denmark</dd>
+        <dt>Contact</dt><dd><a href="mailto:akseli@leadvault.eu">akseli@leadvault.eu</a> · <a href="tel:+358445964003">+358 44 596 4003</a> (Akseli Mattila)</dd>
+      </dl>
+      <p>Write to that address about anything on this page. There is no separate data protection officer; Akseli Mattila answers these requests himself.</p>
+    </section>
+
+    <section id="what" aria-labelledby="what-h">
+      <h2 id="what-h">2. What we collect, and from where</h2>
+      <h3>About people, in their work role</h3>
+      <ul>
+        <li>Name and job title</li>
+        <li>Work email address</li>
+        <li>Work phone number, where the company publishes one</li>
+        <li>The company the person works for</li>
+        <li>Where we found these details (the company website, and often the exact page, or the register entry), so we can say where any detail came from</li>
+        <li>A link to a public professional profile, in the few cases where we found one</li>
+      </ul>
+      <h3>About companies</h3>
+      <p>Public company-level data: registered name and number, address, industry, size, founding year, filed annual accounts (such as revenue), the company’s website and what it says it does, and public notices such as registry changes and public contract awards.</p>
+      <h3>Where it comes from</h3>
+      <ul>
+        <li><strong>Companies’ own websites</strong>: team, contact and about pages, and press releases the company published.</li>
+        <li><strong>Official business registers and public filings</strong> in each country, including annual accounts and the people a register lists for a company.</li>
+        <li><strong>Public notices</strong>, such as registry change feeds and public procurement awards.</li>
+      </ul>
+      <p>We do not buy contact data from data brokers or contact-data aggregators.</p>
+      <h3>Addresses we work out, and how we check them</h3>
+      <p>Sometimes a company publishes a person’s name and role but not their email address. We may then work out the likely work address from the format the company uses (for example firstname.lastname@company.com). Our records note which addresses were worked out this way, and we only deliver one after the company’s mail server has accepted it. To check whether an address can receive mail, we ask the company’s mail server; this does not send you an email.</p>
+    </section>
+
+    <section id="why" aria-labelledby="why-h">
+      <h2 id="why-h">3. Why we use it, and on what legal basis</h2>
+      <ul>
+        <li><strong>Lists for our customers.</strong> We put together lists of companies likely to buy a customer’s product, with the people whose role makes them relevant to that product. Customers are companies that sell to other businesses.</li>
+        <li><strong>Our own outreach.</strong> We email businesses about LeadVault. These emails include a short free sample of a few companies, with the names and roles of people there, so the recipient can judge the quality of a list.</li>
+      </ul>
+      <p>The legal basis is <strong>legitimate interest</strong> (Article 6(1)(f) of the GDPR): our interest, and our customers’ interest, in contacting businesses about products relevant to the work of the person contacted. We limit what we hold to work details in a business role, keep where each detail came from, and stop as soon as someone objects.</p>
+      <p>We do not make automated decisions about people that have legal or similarly significant effects on them.</p>
+    </section>
+
+    <section id="share" aria-labelledby="share-h">
+      <h2 id="share-h">4. Who receives it</h2>
+      <ul>
+        <li><strong>Our customers</strong>, who receive the list they ordered, and prospective customers, who receive a free sample of a few rows.</li>
+        <li><strong>Service providers that run our systems for us</strong>: server hosting, backup storage, email sending, and AI language-model services we use to read and summarise company web pages.</li>
+        <li><strong>Web search services</strong>, which receive a person’s name and company as a search query when we look for a public professional profile.</li>
+      </ul>
+      <p>Some of these providers are based outside the EU and EEA, for example GitHub, which hosts this website, and some web search services, in the United States. Ask us and we will tell you which providers have handled your details and where they are based.</p>
+      <p>We do not publish personal contact details, and we do not share them with advertising networks.</p>
+    </section>
+
+    <section id="keep" aria-labelledby="keep-h">
+      <h2 id="keep-h">5. How long we keep it</h2>
+      <p>We have not yet set a fixed period after which records are deleted automatically. This is what we do today:</p>
+      <ul>
+        <li>We keep a person’s work details while they are part of the company data we build lists from.</li>
+        <li>If you ask us to delete your details, we delete your record from our database and keep only a suppression entry (below). Lists we have already delivered to customers are held by those customers.</li>
+        <li>If you object or opt out, we keep only what we need to recognise you (your email address, and your name and company where needed) on a suppression list, so that our email system does not contact you again. We keep that entry for as long as we operate, because deleting it would undo your opt-out.</li>
+        <li>Our database backups are kept for 7 days, so a record deleted from the database is gone from the backups within about a week.</li>
+      </ul>
+      <p>When we set a fixed retention period, it will be written here.</p>
+    </section>
+
+    <section id="object" aria-labelledby="object-h">
+      <h2 id="object-h">6. How to opt out or object</h2>
+      <p>Either of these is enough:</p>
+      <ul>
+        <li>Reply <strong>“no thanks”</strong> to any email from us.</li>
+        <li>Email <a href="mailto:akseli@leadvault.eu?subject=Opt%20out">akseli@leadvault.eu</a>, for example with the subject “Opt out”.</li>
+      </ul>
+      <p>Both reach the same mailbox. We add your address to our suppression list, and our email system checks that list before every email it sends. If you also want to be left out of the lists we put together for customers, say so and we will delete your details from our database (see “Erase” below). You do not need to give a reason.</p>
+    </section>
+
+    <section id="rights" aria-labelledby="rights-h">
+      <h2 id="rights-h">7. Your rights</h2>
+      <p>If we hold details about you, you can ask us to:</p>
+      <ul>
+        <li><strong>Access</strong>: tell you what we hold about you and where it came from.</li>
+        <li><strong>Rectify</strong>: correct details that are wrong or out of date.</li>
+        <li><strong>Erase</strong>: delete your details.</li>
+        <li><strong>Object</strong>: stop using your details. Because we use them for business outreach, an objection always stops it.</li>
+        <li><strong>Restrict</strong>: pause our use of your details while a question about them is sorted out.</li>
+      </ul>
+      <p>Email <a href="mailto:akseli@leadvault.eu">akseli@leadvault.eu</a>. We answer within one month, as the GDPR requires.</p>
+      <h3>Complaints</h3>
+      <p>You can complain to the Danish Data Protection Agency, <strong>Datatilsynet</strong>: <a href="https://www.datatilsynet.dk/">datatilsynet.dk</a>, <a href="mailto:dt@datatilsynet.dk">dt@datatilsynet.dk</a>. You can also complain to the data protection authority in the country where you live or work.</p>
+    </section>
+
+    <section id="site" aria-labelledby="site-h">
+      <h2 id="site-h">8. What this website collects</h2>
+      <p>This website (leadvault.eu) has no forms, sets no cookies, runs no scripts and no analytics, and loads nothing from other sites, including fonts.</p>
+      <p>The site is hosted by <strong>GitHub</strong> (GitHub Pages). When you open a page, your browser sends GitHub the usual technical request, including your IP address, and GitHub keeps server logs of these requests. We do not receive or see those logs. GitHub explains its handling in the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub General Privacy Statement</a>.</p>
+      <p>If you email or call us, we keep your message and contact details to answer you and, if you order, to deliver your list.</p>
+      <p class="note">Before 18 October 2026 this website had a request form and a demo search, and loaded fonts from Google. Details sent through the old form are kept so we can answer and handle those requests.</p>
+    </section>
+
+    <section id="changes" aria-labelledby="changes-h">
+      <h2 id="changes-h">9. Changes to this page</h2>
+      <p>When we change how we handle data, we update this page and the date at the top. This version replaces the one dated 14 April 2026.</p>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>LeadVault is run by Synlig Media · CVR DK 44784416 · Copenhagen, Denmark</span>
+    <span><a href="index.html">Home</a> · <a href="mailto:akseli@leadvault.eu">akseli@leadvault.eu</a></span>
+  </div>
+</footer>
 </body>
 </html>

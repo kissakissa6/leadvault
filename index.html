@@ -1,2812 +1,678 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LeadVault — Sales Intelligence Reports</title>
-    <meta name="description" content="Sales intelligence reports with real financials, verified emails, growth signals, and a recommended approach for every company. Not a database — a research engine.">
-    <meta name="keywords" content="B2B sales intelligence, verified decision-makers, growth signals, financial data, company scoring, sales prospecting">
-    <link rel="canonical" href="https://leadvault.eu/">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>V</text></svg>">
-    <meta property="og:title" content="LeadVault — Sales Intelligence Reports">
-    <meta property="og:description" content="Every company comes with a reason to call. Curated reports with real financial data, growth signals, and a recommended approach.">
-    <meta property="og:type" content="website">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
-    <style>
-        /* ================================================================
-           LEADVAULT — DESIGN TOKENS
-           ================================================================ */
-        :root {
-            --bg: #FAFBF8;
-            --bg-alt: #F2F4EE;
-            --surface: #FFFFFF;
-            --surface-elevated: #FFFFFF;
-            --border: #E2E5DC;
-            --border-strong: #C8CEC0;
-            --text: #111912;
-            --text-sec: #4A5244;
-            --text-muted: #7D8577;
-            --brand: #1B5E20;
-            --brand-light: #E8F5E9;
-            --brand-dark: #0D3311;
-            --brand-mid: #2E7D32;
-            --accent: #1B5E20;
-            --accent-hover: #145018;
-            --amber: #F57F17;
-            --amber-bg: #FFF8E1;
-            --blue: #1565C0;
-            --blue-bg: #E3F2FD;
-            --red-bg: #FFEBEE;
-            --radius: 6px;
-            --radius-md: 10px;
-            --radius-lg: 14px;
-            --font: 'DM Sans', -apple-system, sans-serif;
-            --mono: 'JetBrains Mono', monospace;
-            --shadow-sm: 0 1px 2px rgba(17,25,18,0.04);
-            --shadow: 0 2px 8px rgba(17,25,18,0.06);
-            --shadow-md: 0 4px 20px rgba(17,25,18,0.08);
-            --shadow-lg: 0 12px 40px rgba(17,25,18,0.12);
-            --max-w: 1120px;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html {
-            scroll-behavior: smooth;
-            -webkit-text-size-adjust: 100%;
-            text-size-adjust: 100%;
-        }
-
-        body {
-            font-family: var(--font);
-            background: var(--bg);
-            color: var(--text);
-            -webkit-font-smoothing: antialiased;
-            line-height: 1.6;
-            overflow-x: hidden;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-        }
-
-        /* Responsive table wrapper — used around .preview-table / .demo-table */
-        .table-scroll {
-            width: 100%;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        /* ================================================================
-           UTILITY
-           ================================================================ */
-        .container { max-width: var(--max-w); margin: 0 auto; padding: 0 32px; }
-        section { padding: 100px 0; }
-
-        /* Reveal animation */
-        .reveal {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ================================================================
-           NAV
-           ================================================================ */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            background: rgba(250,251,248,0.92);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
-            transition: box-shadow 0.3s;
-        }
-
-        nav.scrolled { box-shadow: var(--shadow); }
-
-        .nav-inner {
-            max-width: var(--max-w);
-            margin: 0 auto;
-            padding: 0 32px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 60px;
-        }
-
-        .nav-logo {
-            font-family: var(--mono);
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: var(--text);
-            text-decoration: none;
-            letter-spacing: -0.02em;
-        }
-
-        .nav-logo span { color: var(--brand); }
-
-        .nav-links {
-            display: flex;
-            gap: 6px;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--text-sec);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            padding: 7px 14px;
-            border-radius: var(--radius);
-            transition: all 0.15s;
-        }
-
-        .nav-links a:hover { color: var(--text); background: var(--bg-alt); }
-
-        .nav-cta {
-            background: var(--brand) !important;
-            color: #fff !important;
-            font-weight: 600 !important;
-            padding: 8px 18px !important;
-        }
-
-        .nav-cta:hover { background: var(--accent-hover) !important; }
-
-        /* ================================================================
-           HERO
-           ================================================================ */
-        .hero {
-            padding: 140px 0 80px;
-            position: relative;
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 64px;
-            align-items: center;
-        }
-
-        .hero-content { max-width: 520px; }
-
-        .hero-eyebrow {
-            font-family: var(--mono);
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: var(--brand);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .hero-eyebrow::before {
-            content: '';
-            width: 8px;
-            height: 8px;
-            background: var(--brand);
-            border-radius: 50%;
-            animation: pulse-dot 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse-dot {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-        }
-
-        .hero h1 {
-            font-size: clamp(2.2rem, 4.5vw, 3.2rem);
-            font-weight: 700;
-            line-height: 1.12;
-            letter-spacing: -0.035em;
-            margin-bottom: 20px;
-            color: var(--text);
-        }
-
-        .hero h1 em {
-            font-style: normal;
-            color: var(--brand);
-        }
-
-        .hero-desc {
-            font-size: 1.05rem;
-            color: var(--text-sec);
-            line-height: 1.65;
-            margin-bottom: 32px;
-            max-width: 460px;
-        }
-
-        .hero-cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--brand);
-            color: #fff;
-            padding: 14px 28px;
-            border-radius: var(--radius-md);
-            font-weight: 600;
-            font-size: 0.95rem;
-            text-decoration: none;
-            transition: all 0.2s;
-            border: none;
-            cursor: pointer;
-        }
-
-        .hero-cta:hover { background: var(--accent-hover); transform: translateY(-1px); box-shadow: var(--shadow-md); }
-
-        .hero-stats {
-            display: flex;
-            gap: 32px;
-            margin-top: 36px;
-            padding-top: 28px;
-            border-top: 1px solid var(--border);
-        }
-
-        .hero-stat-num {
-            font-family: var(--mono);
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--text);
-            letter-spacing: -0.02em;
-        }
-
-        .hero-stat-label {
-            font-size: 0.78rem;
-            color: var(--text-muted);
-            margin-top: 2px;
-        }
-
-        /* === REPORT MOCKUP === */
-        .hero-visual {
-            position: relative;
-        }
-
-        .report-mockup {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-lg);
-            overflow: hidden;
-        }
-
-        .report-header {
-            background: var(--brand-dark);
-            padding: 20px 24px;
-            color: #fff;
-        }
-
-        .report-header-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .report-logo {
-            font-family: var(--mono);
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            opacity: 0.7;
-        }
-
-        .report-badge {
-            font-family: var(--mono);
-            font-size: 0.65rem;
-            background: rgba(255,255,255,0.15);
-            padding: 3px 10px;
-            border-radius: 99px;
-            letter-spacing: 0.05em;
-        }
-
-        .report-title {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .report-subtitle {
-            font-size: 0.78rem;
-            opacity: 0.65;
-        }
-
-        .report-body { padding: 20px 24px; }
-
-        .report-summary {
-            background: var(--brand-light);
-            border: 1px solid #C8E6C9;
-            border-radius: var(--radius);
-            padding: 14px 16px;
-            margin-bottom: 18px;
-            font-size: 0.82rem;
-            color: var(--brand-dark);
-            line-height: 1.6;
-        }
-
-        .report-summary strong {
-            color: var(--brand);
-        }
-
-        /* Lead rows in mockup */
-        .report-lead {
-            display: grid;
-            grid-template-columns: auto 1fr auto;
-            gap: 12px;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--border);
-            font-size: 0.8rem;
-        }
-
-        .report-lead:last-child { border-bottom: none; }
-
-        .lead-score {
-            font-family: var(--mono);
-            font-weight: 600;
-            font-size: 0.72rem;
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: var(--radius);
-            background: var(--brand-light);
-            color: var(--brand);
-        }
-
-        .lead-info { min-width: 0; }
-
-        .lead-name {
-            font-weight: 600;
-            color: var(--text);
-            font-size: 0.82rem;
-        }
-
-        .lead-detail {
-            color: var(--text-muted);
-            font-size: 0.74rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .lead-badges {
-            display: flex;
-            gap: 4px;
-            flex-shrink: 0;
-        }
-
-        .lead-badge {
-            font-family: var(--mono);
-            font-size: 0.6rem;
-            font-weight: 600;
-            padding: 2px 7px;
-            border-radius: 4px;
-            letter-spacing: 0.03em;
-        }
-
-        .badge-growing { background: #E8F5E9; color: #1B5E20; }
-        .badge-profitable { background: #E3F2FD; color: #1565C0; }
-        .badge-hiring { background: #FFF8E1; color: #F57F17; }
-        .badge-funded { background: #F3E5F5; color: #6A1B9A; }
-
-        /* Float cards on mockup */
-        .hero-float {
-            position: absolute;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-md);
-            padding: 12px 16px;
-            box-shadow: var(--shadow-md);
-            font-size: 0.78rem;
-            z-index: 2;
-            animation: float 5s ease-in-out infinite;
-        }
-
-        .hero-float.top-right {
-            top: -10px;
-            right: -20px;
-            animation-delay: 0s;
-        }
-
-        .hero-float.bottom-left {
-            bottom: 20px;
-            left: -24px;
-            animation-delay: 2.5s;
-        }
-
-        .float-label {
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            margin-bottom: 4px;
-        }
-
-        .float-value {
-            font-family: var(--mono);
-            font-weight: 600;
-            color: var(--brand);
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
-        }
-
-        /* ================================================================
-           HOW IT WORKS
-           ================================================================ */
-        .how-section { background: var(--bg-alt); }
-
-        .section-eyebrow {
-            font-family: var(--mono);
-            font-size: 0.72rem;
-            font-weight: 600;
-            color: var(--brand);
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            margin-bottom: 12px;
-        }
-
-        .section-title {
-            font-size: clamp(1.6rem, 3vw, 2.2rem);
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            line-height: 1.15;
-            margin-bottom: 16px;
-        }
-
-        .section-desc {
-            color: var(--text-sec);
-            font-size: 1rem;
-            max-width: 540px;
-            line-height: 1.6;
-        }
-
-        .section-header { margin-bottom: 56px; }
-
-        .steps-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-        }
-
-        .step-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 28px 24px;
-            position: relative;
-            transition: all 0.25s;
-        }
-
-        .step-card:hover {
-            border-color: var(--brand);
-            box-shadow: var(--shadow);
-            transform: translateY(-2px);
-        }
-
-        .step-num {
-            font-family: var(--mono);
-            font-size: 0.7rem;
-            font-weight: 600;
-            color: var(--brand);
-            background: var(--brand-light);
-            width: 28px;
-            height: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: var(--radius);
-            margin-bottom: 16px;
-        }
-
-        .step-card h3 {
-            font-size: 0.95rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-            letter-spacing: -0.01em;
-        }
-
-        .step-card p {
-            font-size: 0.84rem;
-            color: var(--text-sec);
-            line-height: 1.55;
-        }
-
-        /* ================================================================
-           DIFFERENTIATORS
-           ================================================================ */
-        .diff-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-
-        .diff-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 32px 28px;
-            transition: all 0.25s;
-        }
-
-        .diff-card:hover {
-            border-color: var(--brand);
-            box-shadow: var(--shadow);
-        }
-
-        .diff-icon {
-            font-size: 1.5rem;
-            margin-bottom: 16px;
-        }
-
-        .diff-card h3 {
-            font-size: 1.05rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-            letter-spacing: -0.01em;
-        }
-
-        .diff-card p {
-            font-size: 0.88rem;
-            color: var(--text-sec);
-            line-height: 1.6;
-        }
-
-        .diff-tag {
-            display: inline-block;
-            font-family: var(--mono);
-            font-size: 0.65rem;
-            font-weight: 600;
-            color: var(--brand);
-            background: var(--brand-light);
-            padding: 3px 10px;
-            border-radius: 4px;
-            margin-top: 12px;
-            letter-spacing: 0.03em;
-        }
-
-        /* ================================================================
-           REPORT PREVIEW
-           ================================================================ */
-        .preview-section { background: var(--bg-alt); }
-
-        .preview-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-md);
-            overflow: hidden;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .preview-bar {
-            background: var(--brand-dark);
-            color: #fff;
-            padding: 16px 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.82rem;
-        }
-
-        .preview-bar-logo {
-            font-family: var(--mono);
-            font-weight: 600;
-            font-size: 0.72rem;
-            letter-spacing: 0.05em;
-            opacity: 0.7;
-        }
-
-        .preview-content { padding: 28px; }
-
-        .preview-exec {
-            background: var(--brand-light);
-            border-left: 3px solid var(--brand);
-            padding: 16px 20px;
-            margin-bottom: 24px;
-            font-size: 0.88rem;
-            line-height: 1.6;
-            color: var(--brand-dark);
-            border-radius: 0 var(--radius) var(--radius) 0;
-        }
-
-        .preview-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.82rem;
-        }
-
-        .preview-table th {
-            text-align: left;
-            font-family: var(--mono);
-            font-size: 0.68rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--text-muted);
-            padding: 10px 12px;
-            border-bottom: 2px solid var(--border-strong);
-        }
-
-        .preview-table td {
-            padding: 12px;
-            border-bottom: 1px solid var(--border);
-            vertical-align: top;
-        }
-
-        .preview-table .td-name {
-            font-weight: 600;
-            color: var(--text);
-        }
-
-        .preview-table .td-company {
-            color: var(--text-sec);
-            font-size: 0.76rem;
-        }
-
-        .preview-table .td-revenue {
-            font-family: var(--mono);
-            font-size: 0.76rem;
-            color: var(--text-sec);
-        }
-
-        .preview-table .td-why {
-            font-size: 0.76rem;
-            color: var(--text-sec);
-            line-height: 1.45;
-            max-width: 260px;
-        }
-
-        .preview-note {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 0.78rem;
-            color: var(--text-muted);
-            font-style: italic;
-        }
-
-        /* ================================================================
-           PRICING
-           ================================================================ */
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            max-width: 960px;
-            margin: 0 auto;
-        }
-
-        .pricing-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 32px 24px;
-            text-align: center;
-            position: relative;
-            transition: all 0.25s;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .pricing-card:hover {
-            border-color: var(--brand);
-            box-shadow: var(--shadow);
-        }
-
-        .pricing-card.featured {
-            border-color: var(--brand);
-            box-shadow: 0 0 0 1px var(--brand);
-        }
-
-        .pricing-card.featured::before {
-            content: 'Most popular';
-            position: absolute;
-            top: -11px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--brand);
-            color: #fff;
-            padding: 3px 14px;
-            border-radius: 99px;
-            font-family: var(--mono);
-            font-size: 0.65rem;
-            font-weight: 600;
-            letter-spacing: 0.04em;
-        }
-
-        .pricing-tier {
-            font-family: var(--mono);
-            font-size: 0.72rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--text-muted);
-            margin-bottom: 14px;
-        }
-
-        .pricing-price {
-            font-size: 2.2rem;
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            margin-bottom: 4px;
-        }
-
-        .pricing-price span {
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--text-muted);
-        }
-
-        .pricing-desc {
-            font-size: 0.84rem;
-            color: var(--text-sec);
-            margin-bottom: 24px;
-            line-height: 1.5;
-        }
-
-        .pricing-features {
-            list-style: none;
-            text-align: left;
-            font-size: 0.82rem;
-            flex: 1;
-        }
-
-        .pricing-features li {
-            padding: 8px 0;
-            border-bottom: 1px solid var(--border);
-            color: var(--text-sec);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .pricing-features li:last-child { border-bottom: none; }
-
-        .pricing-features li::before {
-            content: '✓';
-            color: var(--brand);
-            font-weight: 700;
-            font-size: 0.85rem;
-            flex-shrink: 0;
-        }
-
-        .pricing-cta {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            border-radius: var(--radius);
-            font-family: var(--font);
-            font-size: 0.88rem;
-            font-weight: 600;
-            text-decoration: none;
-            text-align: center;
-            margin-top: 24px;
-            transition: all 0.15s;
-            cursor: pointer;
-            border: 1px solid var(--border);
-            background: var(--surface);
-            color: var(--text);
-        }
-
-        .pricing-cta:hover { border-color: var(--brand); color: var(--brand); }
-
-        .pricing-card.featured .pricing-cta {
-            background: var(--brand);
-            color: #fff;
-            border-color: var(--brand);
-        }
-
-        .pricing-card.featured .pricing-cta:hover { background: var(--accent-hover); }
-
-        .pricing-note {
-            text-align: center;
-            margin-top: 24px;
-            font-size: 0.82rem;
-            color: var(--text-muted);
-        }
-
-        /* ================================================================
-           INTAKE FORM (5-step wizard)
-           ================================================================ */
-        .form-section { background: var(--bg-alt); }
-
-        .wizard-container {
-            max-width: 640px;
-            margin: 0 auto;
-        }
-
-        .wizard-progress {
-            display: flex;
-            gap: 5px;
-            margin-bottom: 8px;
-        }
-
-        .wizard-seg {
-            flex: 1;
-            height: 3px;
-            background: var(--border);
-            border-radius: 2px;
-            transition: background 0.3s;
-        }
-
-        .wizard-seg.done { background: var(--brand); }
-        .wizard-seg.active { background: var(--brand); }
-
-        .wizard-step-label {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.76rem;
-            color: var(--text-muted);
-            margin-bottom: 24px;
-        }
-
-        .wizard-step-label .cur { color: var(--text); font-weight: 600; }
-
-        .wizard-box {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 36px 32px;
-            box-shadow: var(--shadow);
-        }
-
-        .wiz-title {
-            font-size: 1.15rem;
-            font-weight: 700;
-            margin-bottom: 4px;
-            letter-spacing: -0.01em;
-        }
-
-        .wiz-desc {
-            color: var(--text-sec);
-            font-size: 0.86rem;
-            margin-bottom: 24px;
-            line-height: 1.55;
-        }
-
-        .wiz-field { margin-bottom: 18px; }
-        .wiz-field:last-of-type { margin-bottom: 0; }
-
-        .wiz-label {
-            display: block;
-            font-size: 0.84rem;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .wiz-hint {
-            display: block;
-            font-size: 0.74rem;
-            color: var(--text-muted);
-            margin-bottom: 6px;
-        }
-
-        .wiz-input,
-        .wiz-textarea,
-        .wiz-select {
-            width: 100%;
-            padding: 11px 13px;
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            font-family: var(--font);
-            font-size: 0.88rem;
-            color: var(--text);
-            background: var(--surface);
-            outline: none;
-            transition: border-color 0.2s, box-shadow 0.2s;
-        }
-
-        .wiz-input:focus, .wiz-textarea:focus, .wiz-select:focus {
-            border-color: var(--brand);
-            box-shadow: 0 0 0 3px rgba(27,94,32,0.08);
-        }
-
-        .wiz-input::placeholder, .wiz-textarea::placeholder { color: var(--text-muted); }
-        .wiz-textarea { min-height: 80px; resize: vertical; }
-        .wiz-input.invalid { border-color: #C43333; }
-
-        .wiz-field-error {
-            font-size: 0.72rem;
-            color: #C43333;
-            margin-top: 3px;
-            display: none;
-        }
-        .wiz-field-error.visible { display: block; }
-
-        .wiz-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-        }
-
-        /* Chips in form */
-        .wiz-chips {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 7px;
-        }
-
-        .wiz-chip {
-            display: inline-block;
-            padding: 6px 13px;
-            border: 1px solid var(--border);
-            border-radius: 99px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.12s;
-            user-select: none;
-            color: var(--text-sec);
-        }
-
-        .wiz-chip:hover { border-color: var(--text-muted); }
-        .wiz-chip.sel { background: var(--brand); color: #fff; border-color: var(--brand); }
-
-        /* Lead count selector */
-        .wiz-count-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-        }
-
-        .wiz-count-opt { position: relative; }
-        .wiz-count-opt input { position: absolute; opacity: 0; pointer-events: none; }
-
-        .wiz-count-card {
-            display: block;
-            text-align: center;
-            padding: 16px 8px;
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            cursor: pointer;
-            transition: all 0.12s;
-        }
-
-        .wiz-count-card:hover { border-color: var(--text-muted); }
-
-        .wiz-count-opt input:checked + .wiz-count-card {
-            border-color: var(--brand);
-            background: var(--brand-light);
-            box-shadow: 0 0 0 1px var(--brand);
-        }
-
-        .wiz-count-num {
-            font-family: var(--mono);
-            font-size: 1.3rem;
-            font-weight: 700;
-        }
-
-        .wiz-count-label {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            margin-top: 2px;
-        }
-
-        /* Checkbox */
-        .wiz-check {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.86rem;
-            color: var(--text-sec);
-            cursor: pointer;
-        }
-
-        .wiz-check input { width: 18px; height: 18px; accent-color: var(--brand); cursor: pointer; }
-
-        /* Exclude checkboxes */
-        .wiz-checks { display: flex; flex-direction: column; gap: 10px; }
-
-        /* No website toggle */
-        .wiz-optional-toggle {
-            margin-top: -8px;
-            margin-bottom: 12px;
-        }
-
-        /* Summary card */
-        .wiz-summary {
-            background: var(--brand-light);
-            border: 1px solid #C8E6C9;
-            border-radius: var(--radius);
-            padding: 14px 16px;
-            margin-bottom: 18px;
-            font-size: 0.84rem;
-            color: var(--brand-dark);
-            line-height: 1.6;
-            display: none;
-        }
-
-        .wiz-summary.vis { display: block; }
-
-        .wiz-summary-label {
-            font-family: var(--mono);
-            font-size: 0.65rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            color: var(--text-muted);
-            margin-bottom: 5px;
-        }
-
-        /* Example customer fields */
-        .wiz-examples {
-            display: flex;
-            flex-direction: column;
-            gap: 7px;
-        }
-
-        .wiz-example-row {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .wiz-example-num {
-            font-family: var(--mono);
-            font-size: 0.72rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            min-width: 18px;
-        }
-
-        /* Buttons */
-        .wiz-btns {
-            display: flex;
-            gap: 10px;
-            margin-top: 28px;
-        }
-
-        .wiz-btn {
-            padding: 12px 24px;
-            border-radius: var(--radius);
-            font-family: var(--font);
-            font-size: 0.88rem;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            transition: all 0.12s;
-        }
-
-        .wiz-btn-primary {
-            background: var(--brand);
-            color: #fff;
-            flex: 1;
-        }
-
-        .wiz-btn-primary:hover { background: var(--accent-hover); }
-        .wiz-btn-primary:active { transform: translateY(1px); }
-        .wiz-btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
-
-        .wiz-btn-back {
-            background: transparent;
-            color: var(--text-sec);
-            border: 1px solid var(--border);
-        }
-
-        .wiz-btn-back:hover { background: var(--bg-alt); }
-
-        .wiz-spinner {
-            display: inline-block;
-            width: 14px; height: 14px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-top-color: #fff;
-            border-radius: 50%;
-            animation: spin 0.6s linear infinite;
-            vertical-align: middle;
-            margin-right: 6px;
-        }
-
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        .wiz-status {
-            padding: 12px 16px;
-            border-radius: var(--radius);
-            font-size: 0.86rem;
-            margin-bottom: 18px;
-            display: none;
-        }
-
-        .wiz-status.err { display: block; background: var(--red-bg); color: #C43333; border: 1px solid #EF9A9A; }
-        .wiz-status.ok { display: block; background: var(--brand-light); color: var(--brand); border: 1px solid #A5D6A7; }
-
-        .wiz-confirmation {
-            text-align: center;
-            padding: 48px 24px;
-        }
-
-        .wiz-conf-icon {
-            width: 56px; height: 56px;
-            background: var(--brand-light);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 18px;
-            font-size: 1.6rem;
-            color: var(--brand);
-        }
-
-        .wiz-confirmation h2 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .wiz-confirmation p {
-            color: var(--text-sec);
-            font-size: 0.9rem;
-            max-width: 360px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-
-        .wiz-step { display: none; }
-        .wiz-step.active { display: block; }
-
-        /* ================================================================
-           TRUST
-           ================================================================ */
-        .trust-bar {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
-            padding: 32px 0;
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .trust-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .trust-dot {
-            width: 6px; height: 6px;
-            background: var(--brand);
-            border-radius: 50%;
-        }
-
-        /* ================================================================
-           FOOTER
-           ================================================================ */
-        footer {
-            padding: 48px 0 32px;
-            border-top: 1px solid var(--border);
-        }
-
-        .footer-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .footer-brand {
-            font-family: var(--mono);
-            font-weight: 600;
-            font-size: 0.85rem;
-            color: var(--text);
-        }
-
-        .footer-brand span { color: var(--brand); }
-
-        .footer-links {
-            display: flex;
-            gap: 24px;
-            font-size: 0.82rem;
-        }
-
-        .footer-links a {
-            color: var(--text-sec);
-            text-decoration: none;
-            transition: color 0.15s;
-        }
-
-        .footer-links a:hover { color: var(--brand); }
-
-        .footer-bottom {
-            text-align: center;
-            margin-top: 24px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border);
-            font-size: 0.76rem;
-            color: var(--text-muted);
-        }
-
-        /* ================================================================
-           DEMO SEARCH
-           ================================================================ */
-        .demo-section {
-            padding: 80px 0;
-            background: var(--bg-alt);
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .demo-inner {
-            max-width: 720px;
-            margin: 0 auto;
-        }
-
-        .demo-form {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 32px;
-            box-shadow: var(--shadow);
-        }
-
-        .demo-form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-        }
-
-        .demo-field {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .demo-field.full { grid-column: 1 / -1; }
-
-        .demo-field label {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--text-sec);
-        }
-
-        .demo-field input,
-        .demo-field select {
-            font-family: var(--font);
-            font-size: 0.88rem;
-            padding: 10px 12px;
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            background: var(--bg);
-            color: var(--text);
-            transition: border 0.15s;
-        }
-
-        .demo-field input:focus,
-        .demo-field select:focus {
-            outline: none;
-            border-color: var(--brand);
-        }
-
-        .demo-submit {
-            margin-top: 18px;
-            width: 100%;
-            padding: 13px;
-            background: var(--brand);
-            color: #fff;
-            font-family: var(--font);
-            font-size: 0.9rem;
-            font-weight: 600;
-            border: none;
-            border-radius: var(--radius);
-            cursor: pointer;
-            transition: all 0.15s;
-        }
-
-        .demo-submit:hover { background: var(--accent-hover); }
-        .demo-submit:disabled { opacity: 0.5; cursor: not-allowed; }
-
-        .demo-error {
-            margin-top: 12px;
-            padding: 10px 14px;
-            border-radius: var(--radius);
-            font-size: 0.84rem;
-            background: var(--red-bg);
-            color: #C43333;
-            border: 1px solid #EF9A9A;
-            display: none;
-        }
-
-        .demo-results {
-            margin-top: 24px;
-            display: none;
-        }
-
-        .demo-results-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 14px;
-        }
-
-        .demo-results-header h3 {
-            font-size: 1rem;
-            font-weight: 600;
-        }
-
-        .demo-results-header .demo-total {
-            font-family: var(--mono);
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .demo-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.84rem;
-        }
-
-        .demo-table th {
-            text-align: left;
-            font-weight: 600;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            padding: 8px 10px;
-            border-bottom: 2px solid var(--border);
-        }
-
-        .demo-table td {
-            padding: 10px;
-            border-bottom: 1px solid var(--border);
-            color: var(--text);
-        }
-
-        .demo-table tr:last-child td { border-bottom: none; }
-
-        .demo-table .demo-name { font-weight: 600; }
-
-        .demo-badge {
-            display: inline-block;
-            font-family: var(--mono);
-            font-size: 0.7rem;
-            font-weight: 500;
-            padding: 2px 8px;
-            border-radius: 99px;
-            letter-spacing: 0.02em;
-        }
-
-        .demo-badge.growing { background: var(--brand-light); color: var(--brand); }
-        .demo-badge.stable { background: var(--blue-bg); color: var(--blue); }
-        .demo-badge.declining { background: var(--red-bg); color: #C43333; }
-        .demo-badge.flat { background: var(--amber-bg); color: var(--amber); }
-
-        .demo-cta-bar {
-            margin-top: 18px;
-            padding: 16px;
-            background: var(--brand-light);
-            border: 1px solid #A5D6A7;
-            border-radius: var(--radius);
-            text-align: center;
-            font-size: 0.88rem;
-            color: var(--brand-dark);
-        }
-
-        .demo-cta-bar a {
-            color: var(--brand);
-            font-weight: 600;
-            text-decoration: underline;
-        }
-
-        .demo-count-only {
-            margin-top: 20px;
-            text-align: center;
-            padding: 32px 20px;
-            color: var(--text-sec);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        .demo-count-only .demo-count-num {
-            font-family: var(--mono);
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: var(--text);
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        /* ================================================================
-           RESPONSIVE
-           ================================================================ */
-        @media (max-width: 900px) {
-            .hero-grid { grid-template-columns: 1fr; gap: 40px; }
-            .hero-visual { max-width: 500px; }
-            .steps-grid { grid-template-columns: repeat(2, 1fr); }
-            .pricing-grid { grid-template-columns: repeat(2, 1fr); }
-            .nav-inner { padding: 0 24px; }
-        }
-
-        @media (max-width: 600px) {
-            .container { padding: 0 18px; }
-            section { padding: 60px 0; }
-            .section-header { margin-bottom: 36px; }
-            .hero { padding: 100px 0 48px; }
-
-            /* NAV — drop secondary links, keep logo + CTA only */
-            .nav-inner { padding: 0 18px; height: 56px; }
-            .nav-links { gap: 0; }
-            .nav-links a:not(.nav-cta) { display: none; }
-            .nav-cta { padding: 7px 14px !important; font-size: 0.8rem !important; }
-
-            /* HERO */
-            .hero-stats {
-                flex-direction: column;
-                gap: 14px;
-                margin-top: 28px;
-                padding-top: 22px;
-            }
-            .hero-stat-num { font-size: 1.25rem; }
-            .hero-cta { width: 100%; justify-content: center; padding: 14px 22px; }
-            .hero-float { display: none; }
-            .hero h1 { hyphens: auto; }
-
-            /* GRIDS */
-            .steps-grid { grid-template-columns: 1fr; gap: 14px; }
-            .diff-grid { grid-template-columns: 1fr; gap: 14px; }
-            .pricing-grid { grid-template-columns: 1fr; gap: 14px; }
-
-            /* TABLES — handled via .table-scroll wrapper, but tighten typography */
-            .preview-table { font-size: 0.74rem; min-width: 460px; }
-            .demo-table { font-size: 0.78rem; min-width: 460px; }
-            .preview-content { padding: 22px 18px; }
-
-            /* PRICING tighter */
-            .pricing-card { padding: 28px 22px; }
-            .pricing-price { font-size: 2rem; }
-
-            /* WIZARD — 16px inputs to suppress iOS auto-zoom */
-            .wizard-box { padding: 24px 18px; }
-            .wiz-row { grid-template-columns: 1fr; }
-            .wiz-count-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
-            .wiz-count-card { padding: 13px 4px; }
-            .wiz-count-num { font-size: 1.1rem; }
-            .wiz-count-label { font-size: 0.66rem; }
-            .wiz-input,
-            .wiz-textarea,
-            .wiz-select,
-            .demo-field input,
-            .demo-field select { font-size: 16px; }
-            .wiz-btns { flex-direction: column-reverse; gap: 8px; }
-            .wiz-btn { width: 100%; }
-
-            /* TRUST */
-            .trust-bar { gap: 14px 24px; padding: 24px 0; font-size: 0.76rem; }
-
-            /* FOOTER */
-            .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
-            .footer-links { gap: 16px; flex-wrap: wrap; justify-content: center; }
-
-            /* DEMO */
-            .demo-form { padding: 22px 18px; }
-            .demo-form-grid { grid-template-columns: 1fr; }
-            .demo-section { padding: 56px 0; }
-            .demo-results-header { flex-direction: column; align-items: flex-start; gap: 4px; }
-        }
-
-        @media (max-width: 380px) {
-            .container { padding: 0 14px; }
-            .nav-inner { padding: 0 14px; }
-            .nav-cta { padding: 6px 11px !important; font-size: 0.75rem !important; }
-            .pricing-price { font-size: 1.7rem; }
-            .pricing-card { padding: 24px 18px; }
-            .wiz-count-num { font-size: 0.95rem; }
-            .wiz-count-card { padding: 11px 2px; }
-            .wiz-count-label { font-size: 0.62rem; }
-            .hero-stat-num { font-size: 1.1rem; }
-            .hero-cta { padding: 13px 18px; font-size: 0.9rem; }
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>LeadVault Buyer Lists</title>
+<meta name="description" content="Lists of the companies that buy what you sell in Sweden, Finland, Norway and Denmark, with the people who decide there, by name, and the reason each company fits. From €149.">
+<meta property="og:title" content="LeadVault: the people who buy what you sell, by name">
+<meta property="og:description" content="Companies from the official registers, people from the companies' own websites, a proof label on every email and a reason for every company. Ask for a free sample of your market.">
+<meta property="og:url" content="https://leadvault.eu/">
+<link rel="canonical" href="https://leadvault.eu/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231B5E20'/%3E%3Cpath d='M7 22h18M7 16h18M7 10h18' stroke='%23FAFBF8' stroke-width='2'/%3E%3C/svg%3E">
+<style>
+:root{
+  --paper:#FAFBF8; --paper-2:#F2F4EE; --sheet:#FFFFFF;
+  --ink:#111912; --ink-2:#4A5244; --ink-3:#5A6255;
+  --rule:#D9DDD2; --rule-soft:#E8EBE3;
+  --green:#1B5E20; --green-deep:#0D3311; --green-wash:#E8F5E9;
+  --amber:#9A4708; --bar:#1B5E20; --bar-track:#E2E5DC;
+  --redact:#2A322B; --focus:#1B5E20;
+  --btn-bg:#0D3311; --btn-ink:#FAFBF8;
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Charter,"Bitstream Charter",Georgia,"DejaVu Serif",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"DejaVu Sans Mono","Liberation Mono",monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E130F; --paper-2:#131A14; --sheet:#161C17;
+    --ink:#E7ECE4; --ink-2:#B7C0B2; --ink-3:#9AA396;
+    --rule:#2B342C; --rule-soft:#222A23;
+    --green:#86C98A; --green-deep:#1E3B22; --green-wash:#1C251D;
+    --amber:#E0A458; --bar:#86C98A; --bar-track:#2B342C;
+    --redact:#B7C0B2; --focus:#86C98A;
+    --btn-bg:#86C98A; --btn-ink:#0E130F;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0E130F; --paper-2:#131A14; --sheet:#161C17;
+  --ink:#E7ECE4; --ink-2:#B7C0B2; --ink-3:#9AA396;
+  --rule:#2B342C; --rule-soft:#222A23;
+  --green:#86C98A; --green-deep:#1E3B22; --green-wash:#1C251D;
+  --amber:#E0A458; --bar:#86C98A; --bar-track:#2B342C;
+  --redact:#B7C0B2; --focus:#86C98A;
+  --btn-bg:#86C98A; --btn-ink:#0E130F;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 var(--sans);font-variant-numeric:tabular-nums;overflow-wrap:break-word}
+a{color:var(--green);text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{text-decoration-thickness:2px}
+a:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:1px}
+.skip{position:absolute;left:16px;top:-60px;background:var(--btn-bg);color:var(--btn-ink);padding:10px 14px;font-weight:600;z-index:10}
+.skip:focus{top:8px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums lining-nums;letter-spacing:-.01em}
+.smallcaps{font:600 12px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+sup.fn{font:600 11px var(--mono);margin-left:1px}
+sup.fn a{text-decoration:none;padding:4px 3px}
+
+/* masthead */
+.mast{border-bottom:1px solid var(--rule);border-top:4px solid var(--green)}
+.mast .wrap{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:16px;padding-bottom:12px}
+.mark{font:600 19px/1 var(--mono);letter-spacing:-.03em;color:var(--ink);text-decoration:none}
+.mark b{font-weight:600;color:var(--green)}
+.mast nav ul{display:flex;gap:4px 20px;flex-wrap:wrap;list-style:none;margin:0;padding:0}
+.mast nav a{display:inline-block;font:500 13px/1.4 var(--mono);color:var(--ink-2);text-decoration:none;padding:8px 0}
+.mast nav a:hover{color:var(--green);text-decoration:underline}
+.edition{border-bottom:1px solid var(--rule);background:var(--paper-2)}
+.edition .wrap{display:flex;justify-content:space-between;gap:4px 12px;flex-wrap:wrap;padding-top:7px;padding-bottom:7px;font:12px/1.5 var(--mono);color:var(--ink-3)}
+
+/* lead */
+.lead{padding:44px 0 4px}
+.kicker{margin:0 0 16px}
+h1{font:400 clamp(32px,4.8vw,56px)/1.08 var(--serif);letter-spacing:-.015em;margin:0;max-width:25ch}
+h1 em{font-style:italic;color:var(--green);white-space:nowrap}
+.deck{font:400 clamp(18px,1.9vw,21px)/1.5 var(--serif);color:var(--ink-2);max-width:40em;margin:22px 0 0}
+.act{display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px;margin-top:28px}
+.btn{display:inline-block;background:var(--btn-bg);color:var(--btn-ink);font:600 15px/1.2 var(--sans);padding:15px 22px;text-decoration:none;border:1px solid var(--btn-bg)}
+.btn:hover{text-decoration:underline}
+.act .alt{font-size:15px;color:var(--ink-2)}
+.act .alt a{color:var(--ink);font-family:var(--mono);white-space:nowrap}
+.from{margin:18px 0 0;font-size:14.5px;color:var(--ink-2)}
+.from a{color:var(--ink)}
+
+/* sections */
+section{padding:56px 0 8px}
+section.first{padding-top:40px}
+.sec-head{display:grid;grid-template-columns:120px minmax(0,1fr);gap:0 24px;border-top:1px solid var(--ink);padding-top:14px;margin-bottom:26px}
+.sec-head .ex{font:600 12px/1.8 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--green)}
+h2{font:400 clamp(26px,3vw,36px)/1.15 var(--serif);margin:0;letter-spacing:-.01em}
+.sec-head p{margin:10px 0 0;color:var(--ink-2);max-width:46em}
+
+/* exhibit 1: sample */
+.sheet{background:var(--sheet);border:1px solid var(--rule)}
+.sheet-head{background:var(--green-deep);color:#E8F5E9;padding:12px 20px;display:flex;justify-content:space-between;gap:4px 10px;flex-wrap:wrap;font:600 12px/1.5 var(--mono);letter-spacing:.07em;text-transform:uppercase}
+.sheet-head span:last-child{letter-spacing:0;text-transform:none;font-weight:400;color:#C3DEC5}
+.sheet-sum{padding:14px 20px;border-bottom:1px solid var(--rule);font-size:15px;display:flex;flex-wrap:wrap;gap:6px 22px;margin:0}
+.sheet-sum .num{font-weight:600}
+.colhead{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr) minmax(0,1.5fr);gap:24px;padding:10px 20px;border-bottom:1px solid var(--rule)}
+.entry{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr) minmax(0,1.5fr);gap:24px;padding:20px;border-bottom:1px solid var(--rule-soft)}
+.entry:last-of-type{border-bottom:0}
+.entry h3{margin:0}
+.co .idx{font:600 12px var(--mono);color:var(--ink-3)}
+.co .name{display:flex;align-items:center;gap:8px;margin:4px 0 10px;font-weight:600}
+.co .name .ab{font:600 13px var(--mono);color:var(--ink-2)}
+.redact{display:inline-block;height:.82em;max-width:100%;background:var(--redact);vertical-align:-.06em;border-radius:1px}
+.co dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:3px 14px;margin:0;font-size:14px}
+.co dt{color:var(--ink-3)}
+.co dd{margin:0;font-family:var(--mono);font-size:13.5px}
+.why .tag{font:700 12px/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--amber)}
+.why p{margin:6px 0 0;font:400 16.5px/1.5 var(--serif)}
+.people{list-style:none;margin:0;padding:0}
+.people li{padding:0 0 11px;margin:0 0 11px;border-bottom:1px dotted var(--rule)}
+.people li:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}
+.people .who{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-weight:600;font-size:15px}
+.people .who .role{font-weight:500}
+.people .meta{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:4px;font:12.5px/1.5 var(--mono);color:var(--ink-2)}
+.lab{display:inline-block;white-space:nowrap;border:1px solid currentColor;padding:0 6px;font:600 12px/1.6 var(--mono);color:var(--green)}
+.lab.none{color:var(--ink-3)}
+.gap{font-size:14px;color:var(--ink-2);background:var(--paper-2);border-left:3px solid var(--amber);padding:8px 12px;margin:0 0 12px}
+.sheet-foot{padding:14px 20px;border-top:1px solid var(--rule);background:var(--paper-2);font-size:14px;color:var(--ink-2);display:grid;gap:6px}
+.caption{font-size:14px;color:var(--ink-3);margin:12px 0 0;max-width:62em}
+
+/* generic ledger tables */
+table{border-collapse:collapse;width:100%}
+caption{text-align:left;padding:0 0 10px}
+caption b{display:block;font:400 22px/1.3 var(--serif);color:var(--ink)}
+caption span{display:block;font-size:14.5px;color:var(--ink-2);margin-top:4px}
+.led th,.led td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--rule-soft);vertical-align:top}
+.led thead th{font:600 12px/1.4 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);border-bottom:1px solid var(--ink);vertical-align:bottom}
+.led tbody th{font-weight:600}
+.led td.n,.led th.r{text-align:right}
+.led td.n{font-family:var(--mono);white-space:nowrap}
+.led td.d{color:var(--ink-2);font-size:15px}
+.led td.src{font-size:14px;color:var(--ink-2)}
+.led tfoot td{font-size:14px;color:var(--ink-3);padding-top:14px;border-bottom:0}
+
+/* exhibit 2: what a row holds */
+.anatomy tbody th{white-space:nowrap;font-family:var(--mono);font-size:14px;font-weight:600}
+.anatomy tbody th small{display:block;font-weight:400;color:var(--ink-3);font-size:12.5px;white-space:normal}
+
+/* exhibit 3: coverage */
+.standing{border-top:2px solid var(--ink);border-bottom:1px solid var(--rule);margin:0 0 36px}
+.standing-head{display:flex;justify-content:space-between;gap:4px 12px;flex-wrap:wrap;padding:10px 0;border-bottom:1px solid var(--rule)}
+.standing-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:0}
+.fig{padding:18px 20px 20px 0;border-right:1px solid var(--rule);margin:0}
+.fig+.fig{padding-left:20px}
+.fig:last-child{border-right:0}
+.fig dd{font:500 clamp(28px,3.4vw,40px)/1 var(--mono);letter-spacing:-.03em;margin:0}
+.fig dt{margin-top:8px;font-size:14px;color:var(--ink-2)}
+.fig{display:flex;flex-direction:column-reverse;justify-content:flex-end}
+.standing-note{padding:10px 0 12px;font-size:14px;color:var(--ink-3);max-width:62em;margin:0}
+.cov tbody th{white-space:nowrap}
+.cov tbody th .cc{font:500 12px var(--mono);color:var(--ink-3);margin-left:6px}
+.cov td{vertical-align:middle}
+.bar{display:block;height:8px;background:var(--bar-track);min-width:60px}
+.bar i{display:block;height:100%;background:var(--bar)}
+.cls{font-size:14px;white-space:nowrap}
+.nw{white-space:nowrap}
+.cls .num{color:var(--ink-3);font-size:12.5px;margin-left:6px}
+.st{font:600 12px/1.5 var(--mono);white-space:nowrap;color:var(--green)}
+.st.ask{color:var(--amber)}
+.st.thin{color:var(--ink-3)}
+.twocol{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:40px;align-items:start}
+.aside{font-size:15px;color:var(--ink-2);border-left:1px solid var(--rule);padding-left:24px}
+.aside h3{font:600 12px/1.5 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink);margin:0 0 8px}
+.aside p{margin:0 0 16px}
+.notyet{margin-top:40px}
+.notyet td.n{color:var(--ink-2)}
+
+/* method */
+.steps{list-style:none;margin:0;padding:0;counter-reset:s;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--rule)}
+.steps li{counter-increment:s;padding:20px 22px 8px 0;border-right:1px solid var(--rule)}
+.steps li+li{padding-left:22px}
+.steps li:last-child{border-right:0}
+.steps li::before{content:"§" counter(s);display:block;font:600 13px var(--mono);color:var(--green);margin-bottom:8px}
+.steps h3{font:600 17px/1.35 var(--sans);margin:0 0 6px}
+.steps p{margin:0;font-size:15px;color:var(--ink-2)}
+
+/* labels */
+.labels th[scope=row]{white-space:nowrap}
+.labels2{margin-top:36px}
+
+/* terms */
+.terms{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);border:1px solid var(--rule);background:var(--sheet)}
+.terms > div{padding:26px 28px}
+.terms > div+div{border-left:1px solid var(--rule)}
+.terms h3{font:400 24px/1.25 var(--serif);margin:0 0 12px}
+.terms p{margin:0 0 12px;color:var(--ink-2)}
+.prices{margin:0 0 20px}
+.prices th,.prices td{padding:14px 0;border-top:1px solid var(--rule);text-align:left;vertical-align:top}
+.prices tr:first-child th,.prices tr:first-child td{border-top:2px solid var(--ink)}
+.prices tr:last-child th,.prices tr:last-child td{border-bottom:1px solid var(--rule)}
+.prices th{font-weight:400}
+.prices th b{display:block;font:600 17px/1.3 var(--sans)}
+.prices th span{display:block;font-size:14.5px;color:var(--ink-2);margin-top:2px}
+.prices td{text-align:right;white-space:nowrap;padding-left:16px}
+.prices td b{font:600 24px/1.1 var(--mono);letter-spacing:-.02em}
+.prices td small{display:block;font-size:13px;color:var(--ink-3)}
+.every h4{font:600 12px/1.5 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink);margin:0 0 6px}
+.every ul{margin:0 0 16px;padding:0;list-style:none}
+.every li{padding:7px 0 7px 18px;border-bottom:1px dotted var(--rule);font-size:15px;position:relative}
+.every li::before{content:"";position:absolute;left:2px;top:15px;width:7px;height:7px;background:var(--green)}
+.every li:last-child{border-bottom:0}
+.contact{font-family:var(--mono);font-size:15px;line-height:1.9;margin:0 0 20px}
+.contact a{color:var(--ink)}
+
+/* notes */
+.notes{padding:72px 0 32px}
+.notes ol{margin:0;padding:0 0 0 22px;font-size:14px;color:var(--ink-2);columns:2;column-gap:40px}
+.notes li{margin:0 0 10px;break-inside:avoid}
+.notes code{font:13px var(--mono);color:var(--ink);overflow-wrap:anywhere}
+.notes h2{font-size:22px}
+footer{border-top:4px solid var(--green);margin-top:24px}
+footer .wrap{display:flex;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;padding-top:18px;padding-bottom:40px;font-size:14px;color:var(--ink-3)}
+footer a{color:var(--ink-2)}
+
+@media (max-width:900px){
+  .standing-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fig:nth-child(2){border-right:0}
+  .fig:nth-child(3){padding-left:0;border-top:1px solid var(--rule)}
+  .fig:nth-child(4){border-top:1px solid var(--rule)}
+  .colhead{display:none}
+  .entry{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .entry .why{grid-column:1 / -1;grid-row:1}
+  .twocol{grid-template-columns:minmax(0,1fr)}
+  .aside{border-left:0;padding-left:0;border-top:1px solid var(--rule);padding-top:18px}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .steps li:nth-child(2){border-right:0}
+  .steps li:nth-child(3){padding-left:0}
+  .steps li:nth-child(n+3){border-top:1px solid var(--rule)}
+  .terms{grid-template-columns:minmax(0,1fr)}
+  .terms > div+div{border-left:0;border-top:1px solid var(--rule)}
+  .notes ol{columns:1}
+}
+@media (max-width:640px){
+  .wrap{padding:0 16px}
+  .mast nav ul{gap:0 16px}
+  .mast nav li.opt{display:none}
+  .lead{padding:36px 0 4px}
+  .fig{padding:14px 12px 16px 0}
+  .fig+.fig{padding-left:12px}
+  .fig:nth-child(3){padding-left:0}
+  section{padding-top:48px}
+  section.first{padding-top:32px}
+  .sec-head{grid-template-columns:minmax(0,1fr);gap:6px}
+  .sheet-head,.sheet-sum,.entry,.sheet-foot{padding-left:14px;padding-right:14px}
+  .entry{grid-template-columns:minmax(0,1fr);gap:14px}
+  .entry .why{grid-row:auto}
+  .led th,.led td{padding:10px 6px}
+  .cov .barcol{display:none}
+  .cls,.st{white-space:normal}
+  .cls .num{display:block;margin-left:0}
+  /* stacked rows for the wide tables */
+  .stack thead{display:none}
+  .stack tr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;padding:12px 0;border-bottom:1px solid var(--rule-soft)}
+  .stack th,.stack td{border:0;padding:0;white-space:normal}
+  .stack td.d,.stack td.src{grid-column:1 / -1}
+  .stack tfoot tr{border-top:1px solid var(--ink);border-bottom:0}
+  .anatomy tr{grid-template-columns:minmax(0,1fr)}
+  .anatomy td.src::before{content:"Source: ";color:var(--ink-3)}
+  .steps{grid-template-columns:minmax(0,1fr)}
+  .steps li,.steps li+li{padding:16px 0 12px;border-right:0;border-top:1px solid var(--rule)}
+  .terms > div{padding:20px 16px}
+  .prices td b{font-size:21px}
+  .btn{display:block;width:100%;text-align:center}
+}
+@media print{.mast nav,.btn,.skip{display:none}body{background:#fff}}
+</style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
-    <!-- === NAV === -->
-    <nav id="nav">
-        <div class="nav-inner">
-            <a href="#" class="nav-logo">Lead<span>Vault</span></a>
-            <div class="nav-links">
-                <a href="#demo">Try it</a>
-                <a href="#how">How it works</a>
-                <a href="#report">Sample report</a>
-                <a href="#pricing">Pricing</a>
-                <!-- Blog link hidden until content is ready -->
-                <!-- <a href="https://api.leadvault.eu/blog" target="_blank">Blog</a> -->
-                <a href="#brief" class="nav-cta">Get your first report &rarr;</a>
-            </div>
-        </div>
+<header class="mast">
+  <div class="wrap">
+    <a class="mark" href="#top" aria-label="LeadVault, top of page">Lead<b>Vault</b></a>
+    <nav aria-label="Sections">
+      <ul>
+        <li><a href="#sample">Sample</a></li>
+        <li class="opt"><a href="#row">What you get</a></li>
+        <li class="opt"><a href="#coverage">Coverage</a></li>
+        <li><a href="#terms">Price</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
     </nav>
+  </div>
+</header>
+<div class="edition">
+  <div class="wrap">
+    <span>Buyer lists for B2B sellers · Sweden, Finland, Norway, Denmark</span>
+    <span>Figures on this page as of 18 Oct 2026, 05:40–05:43 UTC</span>
+  </div>
+</div>
 
-    <!-- === HERO === -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-grid">
-                <div class="hero-content reveal">
-                    <div class="hero-eyebrow">European B2B sales intelligence</div>
-                    <h1>Know which companies can actually buy &mdash; <em>before you call</em></h1>
-                    <p class="hero-desc">We match you with decision-makers at companies that are profitable and growing. Real revenue and profit data from official sources across Europe &mdash; not estimates, not guesses. Verified emails included.</p>
-                    <a href="#brief" class="hero-cta">Get your first report &rarr;</a>
-                    <div class="hero-stats">
-                        <div>
-                            <div class="hero-stat-num">48 hours</div>
-                            <div class="hero-stat-label">From brief to report</div>
-                        </div>
-                        <div>
-                            <div class="hero-stat-num">Real financials</div>
-                            <div class="hero-stat-label">Verified financial data from 8+ countries</div>
-                        </div>
-                        <div>
-                            <div class="hero-stat-num">Verified before delivery</div>
-                            <div class="hero-stat-label">Email + LinkedIn for every contact</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="hero-visual reveal" style="animation-delay: 0.2s;">
-                    <div class="hero-float top-right">
-                        <div class="float-label">Revenue</div>
-                        <div class="float-value">&euro;42M &uarr; 18% YoY</div>
-                    </div>
-                    <div class="hero-float bottom-left">
-                        <div class="float-label">Buying power</div>
-                        <div class="float-value">HIGH &bull; Profitable &bull; Growing</div>
-                    </div>
-
-                    <div class="report-mockup">
-                        <div class="report-header">
-                            <div class="report-header-top">
-                                <span class="report-logo">LEADVAULT</span>
-                                <span class="report-badge">INTELLIGENCE REPORT</span>
-                            </div>
-                            <div class="report-title">European B2B &mdash; Prospect Report</div>
-                            <div class="report-subtitle">25 curated companies &bull; ~100 decision-makers</div>
-                        </div>
-                        <div class="report-body">
-                            <div class="report-summary">
-                                <strong>Executive summary:</strong> 25 companies matched to your brief, with all decision-makers included (typically 75&ndash;100 contacts). 18 companies with verified revenue over &euro;5M. 7 Priority tier companies &mdash; profitable, high buying power.
-                            </div>
-                            <div class="report-lead" style="display:block; padding:14px 0; border-bottom:1px solid var(--border);">
-                                <div style="display:flex; align-items:center; gap:12px;">
-                                    <div class="lead-score">94</div>
-                                    <div class="lead-info" style="flex:1;">
-                                        <div class="lead-name">A. Johansen &mdash; CEO</div>
-                                        <div class="lead-detail">NordicTech Solutions &bull; SaaS &bull; Oslo &bull; Rev NOK 280M &bull; Profit NOK 24M</div>
-                                        <div style="margin-top:3px; font-size:0.68rem;"><span style="color:#1B5E20;">a.johansen@example.no</span> <span style="color:#7D8577;">&bull;</span> <span style="color:#1B5E20;">LinkedIn</span></div>
-                                    </div>
-                                    <div class="lead-badges">
-                                        <span class="lead-badge badge-growing">PROFITABLE</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="report-lead" style="display:block; padding:14px 0; border-bottom:1px solid var(--border);">
-                                <div style="display:flex; align-items:center; gap:12px;">
-                                    <div class="lead-score">91</div>
-                                    <div class="lead-info" style="flex:1;">
-                                        <div class="lead-name">E. Lindqvist &mdash; Sales Director</div>
-                                        <div class="lead-detail">Fjord Foods AS &bull; Food &amp; Beverage &bull; Bergen &bull; Rev NOK 620M &bull; Profit NOK 41M</div>
-                                        <div style="margin-top:3px; font-size:0.68rem;"><span style="color:#1B5E20;">e.lindqvist@example.no</span> <span style="color:#7D8577;">&bull;</span> <span style="color:#1B5E20;">LinkedIn</span></div>
-                                    </div>
-                                    <div class="lead-badges">
-                                        <span class="lead-badge badge-growing">GROWING</span>
-                                        <span class="lead-badge badge-profitable">PROFITABLE</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="report-lead" style="display:block; padding:14px 0;">
-                                <div style="display:flex; align-items:center; gap:12px;">
-                                    <div class="lead-score">88</div>
-                                    <div class="lead-info" style="flex:1;">
-                                        <div class="lead-name">T. Haugen &mdash; Head of Growth</div>
-                                        <div class="lead-detail">Solvik Consulting &bull; Consulting &bull; Trondheim &bull; Rev NOK 195M &bull; Profit NOK 32M</div>
-                                        <div style="margin-top:3px; font-size:0.68rem;"><span style="color:#1B5E20;">t.haugen@example.no</span> <span style="color:#7D8577;">&bull;</span> <span style="color:#1B5E20;">LinkedIn</span></div>
-                                    </div>
-                                    <div class="lead-badges">
-                                        <span class="lead-badge badge-profitable">PROFITABLE</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- === TRUST BAR === -->
-    <div class="container">
-        <div class="trust-bar reveal">
-            <div class="trust-item"><span class="trust-dot"></span> Real financials from official sources</div>
-            <div class="trust-item"><span class="trust-dot"></span> Emails verified before delivery</div>
-            <div class="trust-item"><span class="trust-dot"></span> Scored and ranked by buying power</div>
-            <div class="trust-item"><span class="trust-dot"></span> Built with GDPR in mind</div>
-        </div>
+<main id="main">
+  <div class="wrap" id="top">
+    <div class="lead">
+      <p class="kicker smallcaps">For companies that sell to other companies</p>
+      <h1>The people who buy what you sell, in Sweden, Finland, Norway and Denmark. <em>By name.</em></h1>
+      <p class="deck">We read your website, work out which companies buy from you, and find the people who decide there on those companies’ own websites. Every company comes with the reason it fits, and every email is labelled by the proof we hold for it.</p>
+      <div class="act">
+        <a class="btn" href="mailto:akseli@leadvault.eu?subject=Sample%20of%20my%20market&amp;body=Our%20website%3A%20%0D%0ARegion%20we%20sell%20in%3A%20">Ask for a free sample of your market</a>
+        <span class="alt">or call Akseli on <a href="tel:+358445964003">+358 44 596 4003</a></span>
+      </div>
+      <p class="from">Lists from €149 for 25 companies. <a href="#terms">See the three prices</a>.</p>
     </div>
+  </div>
 
-    <!-- === LIVE DEMO === -->
-    <section class="demo-section" id="demo">
-        <div class="container">
-            <div class="demo-inner">
-                <div class="section-header reveal" style="text-align: center; margin-bottom: 32px;">
-                    <div class="section-eyebrow">Try it</div>
-                    <h2 class="section-title">See real companies from our database</h2>
-                    <p class="section-desc" style="margin: 8px auto 0;">Pick a country and industry. We'll show you a sample of real companies with verified financial data.</p>
-                </div>
-                <div class="demo-form reveal" id="demoForm">
-                    <div class="demo-form-grid">
-                        <div class="demo-field">
-                            <label for="demoCountry">Country</label>
-                            <select id="demoCountry">
-                                <option value="">Select country</option>
-                                <option value="NO">Norway</option>
-                                <option value="SE">Sweden</option>
-                                <option value="DK">Denmark</option>
-                                <option value="FI">Finland</option>
-                                <option value="FR">France</option>
-                                <option value="RO">Romania</option>
-                                <option value="GB">United Kingdom</option>
-                                <option value="EE">Estonia</option>
-                                <option value="LV">Latvia</option>
-                                <option value="LT">Lithuania</option>
-                            </select>
-                        </div>
-                        <div class="demo-field">
-                            <label for="demoIndustry">Industry</label>
-                            <select id="demoIndustry">
-                                <option value="">Select industry</option>
-                                <option value="agriculture">Agriculture</option>
-                                <option value="architecture_engineering">Architecture & Engineering</option>
-                                <option value="automotive">Automotive</option>
-                                <option value="building_materials">Building Materials</option>
-                                <option value="business_services">Business Services</option>
-                                <option value="consulting">Consulting</option>
-                                <option value="construction">Construction</option>
-                                <option value="education">Education</option>
-                                <option value="energy">Energy</option>
-                                <option value="fashion_retail">Fashion & Retail</option>
-                                <option value="finance">Finance</option>
-                                <option value="food_beverage">Food & Beverage</option>
-                                <option value="healthcare">Healthcare</option>
-                                <option value="hospitality_tourism">Hospitality & Tourism</option>
-                                <option value="legal_accounting">Legal & Accounting</option>
-                                <option value="manufacturing">Manufacturing</option>
-                                <option value="maritime">Maritime</option>
-                                <option value="marketing_advertising">Marketing & Advertising</option>
-                                <option value="media_telecom">Media & Telecom</option>
-                                <option value="real_estate">Real Estate</option>
-                                <option value="recruitment">Recruitment</option>
-                                <option value="retail">Retail</option>
-                                <option value="saas_tech">SaaS & Tech</option>
-                                <option value="transport_logistics">Transport & Logistics</option>
-                            </select>
-                        </div>
-                    </div>
-                    <button class="demo-submit" id="demoBtn" onclick="demoSearch()">Search</button>
-                    <div class="demo-error" id="demoError"></div>
-                </div>
-
-                <!-- Results area -->
-                <div class="demo-results" id="demoResults">
-                    <div class="demo-results-header">
-                        <h3 id="demoResultsTitle"></h3>
-                        <span class="demo-total" id="demoResultsTotal"></span>
-                    </div>
-                    <div class="table-scroll">
-                        <table class="demo-table" id="demoTable">
-                            <thead id="demoTableHead"></thead>
-                            <tbody id="demoTableBody"></tbody>
-                        </table>
-                    </div>
-                    <div class="demo-cta-bar" id="demoCta"></div>
-                </div>
-
-                <!-- Count-only fallback -->
-                <div class="demo-count-only" id="demoCountOnly" style="display:none;"></div>
-            </div>
+  <!-- EXHIBIT 1: the real sample -->
+  <section id="sample" class="first" aria-labelledby="sample-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="ex">Exhibit 1</span>
+        <div>
+          <h2 id="sample-title">A real sample we sent on 18 October 2026</h2>
+          <p>Built for a contract electronics maker in Sweden and emailed to them the same morning.<sup class="fn"><a href="#n1" aria-label="Note 1">1</a></sup> On this public page the names of companies and people are removed, revenue and staff are shown as wide ranges, places are left out and each company’s activity is described in general terms. The recipient’s file shows everything in full.</p>
         </div>
-    </section>
+      </div>
 
-    <!-- === HOW IT WORKS === -->
-    <section class="how-section" id="how">
-        <div class="container">
-            <div class="section-header reveal">
-                <div class="section-eyebrow">How it works</div>
-                <h2 class="section-title">From brief to companies in 48 hours</h2>
-                <p class="section-desc">Tell us who you sell to. We do the rest.</p>
-            </div>
-            <div class="steps-grid">
-                <div class="step-card reveal">
-                    <div class="step-num">01</div>
-                    <h3>Tell us who you sell to</h3>
-                    <p>Industry, country, company size, job titles. Takes 2 minutes. We research your business to understand what kind of buyer you need.</p>
-                </div>
-                <div class="step-card reveal" style="animation-delay: 0.1s;">
-                    <div class="step-num">02</div>
-                    <h3>We find the right companies</h3>
-                    <p>We search millions of companies, pull real financials, and filter to the ones that are profitable, growing, and the right size.</p>
-                </div>
-                <div class="step-card reveal" style="animation-delay: 0.2s;">
-                    <div class="step-num">03</div>
-                    <h3>Every company scored 0&ndash;100</h3>
-                    <p>Each company scored by financial health, buying power, and fit for your market. Grouped into Priority, High Value, and Pipeline tiers.</p>
-                </div>
-                <div class="step-card reveal" style="animation-delay: 0.3s;">
-                    <div class="step-num">04</div>
-                    <h3>Report with verified emails</h3>
-                    <p>PDF + CSV with the right person at each company. Verified email, LinkedIn, real revenue and profit data. Ready to use.</p>
-                </div>
-            </div>
+      <div class="sheet">
+        <div class="sheet-head"><span>Sample of the full list · Sweden</span><span>for a contract electronics maker · 2026-10-18</span></div>
+        <p class="sheet-sum">
+          <span><span class="num">5</span> companies</span>
+          <span><span class="num">7</span> decision-makers by name</span>
+          <span><span class="num">7</span> with an email</span>
+          <span><span class="num">6</span> with a phone</span>
+        </p>
+        <div class="colhead smallcaps" aria-hidden="true"><span>Company, from the register</span><span>Why this company</span><span>People, from the company’s own site</span></div>
+
+        <article class="entry">
+          <div class="co">
+            <h3 class="sr">Company 1 of 5</h3>
+            <span class="idx" aria-hidden="true">01</span>
+            <div class="name"><span class="redact" style="width:6em" role="img" aria-label="Company name removed"></span><span class="ab">AB</span></div>
+            <dl>
+              <dt>Staff</dt><dd>10–49</dd>
+              <dt>Filed revenue</dt><dd>€5–10M · FY2025</dd>
+            </dl>
+          </div>
+          <div class="why">
+            <span class="tag">Why they fit</span>
+            <p>A maker of heavy industrial equipment, a manufacturer that needs your PCB and cabling services.</p>
+          </div>
+          <ul class="people">
+            <li><div class="who"><span class="redact" style="width:7em" role="img" aria-label="Name removed"></span><span class="role">Production and Purchasing Planner</span></div>
+              <div class="meta"><span class="lab">Verified (company website)</span><span>email · phone</span></div></li>
+          </ul>
+        </article>
+
+        <article class="entry">
+          <div class="co">
+            <h3 class="sr">Company 2 of 5</h3>
+            <span class="idx" aria-hidden="true">02</span>
+            <div class="name"><span class="redact" style="width:9.5em" role="img" aria-label="Company name removed"></span><span class="ab">AB</span></div>
+            <dl>
+              <dt>Staff</dt><dd>10–49</dd>
+              <dt>Filed revenue</dt><dd>€5–10M · FY2024</dd>
+            </dl>
+          </div>
+          <div class="why">
+            <span class="tag">Why they fit</span>
+            <p>A supplier of building-equipment components and control systems, a maker for your PCB and electronics production services.</p>
+          </div>
+          <ul class="people">
+            <li><div class="who"><span class="redact" style="width:8em" role="img" aria-label="Name removed"></span><span class="role">Purchasing</span></div>
+              <div class="meta"><span class="lab">Verified (company website)</span><span>email</span></div></li>
+          </ul>
+        </article>
+
+        <article class="entry">
+          <div class="co">
+            <h3 class="sr">Company 3 of 5</h3>
+            <span class="idx" aria-hidden="true">03</span>
+            <div class="name"><span class="redact" style="width:10em" role="img" aria-label="Company name removed"></span><span class="ab">AB</span></div>
+            <dl>
+              <dt>Staff</dt><dd>10–49</dd>
+              <dt>Filed revenue</dt><dd>€1–5M · FY2025</dd>
+            </dl>
+          </div>
+          <div class="why">
+            <span class="tag">Why they fit</span>
+            <p>A maker of industrial machinery, a manufacturer for your PCB and cabling services.</p>
+          </div>
+          <ul class="people">
+            <li><div class="who"><span class="redact" style="width:7em" role="img" aria-label="Name removed"></span><span class="role">Purchasing, Production Planning</span></div>
+              <div class="meta"><span class="lab">Verified (company website)</span><span>email · phone</span></div></li>
+            <li><div class="who"><span class="redact" style="width:7.5em" role="img" aria-label="Name removed"></span><span class="role">CEO</span></div>
+              <div class="meta"><span class="lab">Verified (company website)</span><span>email · phone</span></div></li>
+          </ul>
+        </article>
+
+        <article class="entry">
+          <div class="co">
+            <h3 class="sr">Company 4 of 5</h3>
+            <span class="idx" aria-hidden="true">04</span>
+            <div class="name"><span class="redact" style="width:6.5em" role="img" aria-label="Company name removed"></span><span class="ab">AB</span></div>
+            <dl>
+              <dt>Staff</dt><dd>10–49</dd>
+              <dt>Filed revenue</dt><dd>€1–5M · FY2024</dd>
+            </dl>
+          </div>
+          <div class="why">
+            <span class="tag">Why they fit</span>
+            <p>A maker of commercial equipment with electrical parts, a manufacturer for your electronics production services.</p>
+          </div>
+          <ul class="people">
+            <li><div class="who"><span class="redact" style="width:6em" role="img" aria-label="Name removed"></span><span class="role">Production and Purchasing Manager</span></div>
+              <div class="meta"><span class="lab">Verified (company website)</span><span>email · phone</span></div></li>
+            <li><div class="who"><span class="redact" style="width:8em" role="img" aria-label="Name removed"></span><span class="role">CEO</span></div>
+              <div class="meta"><span class="lab">Verified (company website)</span><span>email · phone</span></div></li>
+          </ul>
+        </article>
+
+        <article class="entry">
+          <div class="co">
+            <h3 class="sr">Company 5 of 5</h3>
+            <span class="idx" aria-hidden="true">05</span>
+            <div class="name"><span class="redact" style="width:5.5em" role="img" aria-label="Company name removed"></span><span class="ab">AB</span></div>
+            <dl>
+              <dt>Staff</dt><dd>1–9</dd>
+              <dt>Filed revenue</dt><dd>€1–5M · FY2025</dd>
+            </dl>
+          </div>
+          <div class="why">
+            <span class="tag">Why they fit</span>
+            <p>A maker of industrial production lines, a manufacturer that needs your custom electronics and cabling.</p>
+          </div>
+          <div>
+            <p class="gap">We hold no purchasing or R&amp;D manager at this company, so the file names the CEO, who chooses suppliers at a company this size. The file says so in the row.</p>
+            <ul class="people">
+              <li><div class="who"><span class="redact" style="width:8em" role="img" aria-label="Name removed"></span><span class="role">CEO</span></div>
+                <div class="meta"><span class="lab">Verified (company website)</span><span>email · phone</span></div></li>
+            </ul>
+          </div>
+        </article>
+
+        <div class="sheet-foot">
+          <span><b>Buying signal:</b> none for these five. We show one only when we judge it strong, such as a registry change or a public contract won. Hiring on its own never counts.</span>
+          <span>The recipient’s file has one row per person with the full name, email, phone, website and business activity. <a href="#row">See every column</a>.</span>
         </div>
-    </section>
+      </div>
+      <p class="caption">The “Why they fit” lines come from the email that delivered the sample, shortened and made general here so the companies cannot be identified. “Verified (company website)” is the label in the file: every address in this sample was published on the company’s own website.</p>
+    </div>
+  </section>
 
-    <!-- === DIFFERENTIATORS === -->
-    <section id="diff">
-        <div class="container">
-            <div class="section-header reveal" style="text-align: center;">
-                <div class="section-eyebrow">Why LeadVault</div>
-                <h2 class="section-title">Companies you can actually close</h2>
-                <p class="section-desc" style="margin: 12px auto 0;">Most lists give you names. We give you the decision-makers at companies you already know can pay.</p>
-            </div>
-            <div class="diff-grid">
-                <div class="diff-card reveal">
-                    <div class="diff-icon">&#x1F4CA;</div>
-                    <h3>Never waste time on a company that can't pay</h3>
-                    <p>Every company comes with real revenue and profit data. Not estimated, not self-reported &mdash; pulled from official financial filings. You see exactly how big they are and whether they're making money.</p>
-                    <span class="diff-tag">Verified financials</span>
-                </div>
-                <div class="diff-card reveal" style="animation-delay: 0.1s;">
-                    <div class="diff-icon">&#x1F3AF;</div>
-                    <h3>Scored for your specific market</h3>
-                    <p>We don't give you a generic company list. Every company is scored against your specific industry and buyer profile. A recruitment firm gets different matches than a SaaS company &mdash; even in the same country.</p>
-                    <span class="diff-tag">Market-specific</span>
-                </div>
-                <div class="diff-card reveal" style="animation-delay: 0.2s;">
-                    <div class="diff-icon">&#x1F4E7;</div>
-                    <h3>Verified email for the right person</h3>
-                    <p>Not a generic info@ address. The actual decision-maker's verified email and LinkedIn profile. Sales directors, CEOs, procurement heads &mdash; whoever buys what you sell.</p>
-                    <span class="diff-tag">Verified contacts</span>
-                </div>
-                <div class="diff-card reveal" style="animation-delay: 0.3s;">
-                    <div class="diff-icon">&#x1F30D;</div>
-                    <h3>Over 15 million companies across Europe</h3>
-                    <p>Company data from 20+ government registers across 16 countries. Verified financial data available for 8+ countries. Not scraped. Not estimated. Not self-reported.</p>
-                    <span class="diff-tag">Pan-European</span>
-                </div>
-            </div>
+  <!-- EXHIBIT 2: what a delivered row holds -->
+  <section id="row" aria-labelledby="row-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="ex">Exhibit 2</span>
+        <div>
+          <h2 id="row-title">What a delivered row holds, and where each column comes from</h2>
+          <p>One row per decision-maker, as an Excel file and a HubSpot import file (CSV). The CSV holds the same companies and people under HubSpot’s column names, without the Buying power and Reach columns. Gaps are left as gaps.</p>
         </div>
-    </section>
+      </div>
+      <table class="led anatomy stack" role="table">
+        <thead role="rowgroup"><tr role="row"><th scope="col" role="columnheader">Column</th><th scope="col" role="columnheader">What it holds</th><th scope="col" role="columnheader">Where it comes from</th></tr></thead>
+        <tbody role="rowgroup">
+          <tr role="row"><th scope="row" role="rowheader">Company, country, city</th><td class="d" role="cell">The registered name and address.</td><td class="src" role="cell">The country’s official company register</td></tr>
+          <tr role="row"><th scope="row" role="rowheader">Employees, founded</th><td class="d" role="cell">Staff count and the year the company was registered.</td><td class="src" role="cell">The register or the company’s filed accounts</td></tr>
+          <tr role="row"><th scope="row" role="rowheader">Revenue (EUR)</th><td class="d" role="cell">The latest revenue the company filed, converted to euros. Empty where we hold no filed figure.</td><td class="src" role="cell">Filed annual accounts</td></tr>
+          <tr role="row"><th scope="row" role="rowheader">Buying power</th><td class="d" role="cell">A plain band (High, Medium) with the filed figure and its year, for example “Medium (Rev €2.7M Fy24)”.</td><td class="src" role="cell">Worked out by us from the filed revenue</td></tr>
+          <tr role="row"><th scope="row" role="rowheader">Website</th><td class="d" role="cell">The company’s own domain.</td><td class="src" role="cell">The company’s website, matched to its register entry</td></tr>
+          <tr role="row"><th scope="row" role="rowheader">Contact, title</th><td class="d" role="cell">The person and their role.</td><td class="src" role="cell">What the company publishes: its team, contact or about pages, press releases, official filings</td></tr>
+          <tr role="row"><th scope="row" role="rowheader">Email</th><td class="d" role="cell">Their work address.</td><td class="src" role="cell">The company’s website, or worked out from the company’s address format and then accepted by its mail server</td></tr>
+          <tr role="row"><th scope="row" role="rowheader">Email status</th><td class="d" role="cell">One of three labels for the proof behind the address. <a href="#labels">The labels are explained below</a>.</td><td class="src" role="cell">Where we found it, and our own mail-server check</td></tr>
+          <tr role="row"><th scope="row" role="rowheader">Reach</th><td class="d" role="cell">How to reach the person: by email, or through the company switchboard or company email, asking for them by name.</td><td class="src" role="cell">Worked out by us from the contact details we hold</td></tr>
+          <tr role="row"><th scope="row" role="rowheader">Phone</th><td class="d" role="cell">A work number, where the company publishes one.</td><td class="src" role="cell">The company’s website</td></tr>
+          <tr role="row"><th scope="row" role="rowheader">LinkedIn<small>company and contact</small></th><td class="d" role="cell">A link, where we found a public page. Often empty.</td><td class="src" role="cell">Public web search</td></tr>
+          <tr role="row"><th scope="row" role="rowheader">Buying signal</th><td class="d" role="cell">A reason to act now, with a link in the CSV, where we have one we judge strong. Many companies have none, and the row says so.</td><td class="src" role="cell">Registry changes, public procurement awards and public research grants</td></tr>
+          <tr role="row"><th scope="row" role="rowheader">Why this lead</th><td class="d" role="cell">One line on why the company fits what you sell, and any gap, such as “we hold no purchasing manager here”.</td><td class="src" role="cell">Written by us from the register, the company’s site and your website</td></tr>
+          <tr role="row"><th scope="row" role="rowheader">Business activity</th><td class="d" role="cell">What the company says it does.</td><td class="src" role="cell">The company’s website, summarised</td></tr>
+        </tbody>
+        <tfoot role="rowgroup"><tr role="row"><td colspan="3" role="cell">We keep the website, and often the exact page, or the register entry each contact came from. Ask about any cell in your file and we will tell you where it is from.</td></tr></tfoot>
+      </table>
+    </div>
+  </section>
 
-    <!-- === REPORT PREVIEW === -->
-    <section class="preview-section" id="report">
-        <div class="container">
-            <div class="section-header" style="text-align: center;">
-                <div class="section-eyebrow reveal">What you get</div>
-                <h2 class="section-title reveal">A premium intelligence report</h2>
-                <p class="section-desc reveal" style="margin: 12px auto 0;">Not a CSV dump. A branded PDF with scored contacts, verified emails, real financials, and buying power analysis &mdash; grouped by priority tier.</p>
-            </div>
-            <div class="preview-card reveal">
-                <div class="preview-bar">
-                    <span>Intelligence Report &mdash; European B2B &bull; Priority Tier</span>
-                    <span class="preview-bar-logo">LEADVAULT</span>
-                </div>
-                <div class="preview-content">
-                    <div class="preview-exec">
-                        <strong>Executive summary:</strong> 25 companies matched to your brief, with all decision-makers included (typically 75&ndash;100 contacts). 18 companies with verified revenue over &euro;5M. 7 Priority tier companies &mdash; profitable, high buying power.
-                    </div>
-                    <div class="table-scroll">
-                    <table class="preview-table">
-                        <thead>
-                            <tr>
-                                <th>Score</th>
-                                <th>Contact</th>
-                                <th>Financials</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><span class="lead-score" style="display:inline-flex;">94</span></td>
-                                <td>
-                                    <div class="td-name">A. Johansen</div>
-                                    <div class="td-company">CEO &bull; NordicTech Solutions &bull; SaaS &bull; Oslo</div>
-                                    <div style="margin-top:2px; font-size:0.68rem;"><span style="color:#1B5E20;">a.johansen@example.no</span> &bull; <span style="color:#1B5E20;">LinkedIn</span></div>
-                                    <div style="margin-top:4px;"><span class="lead-badge badge-profitable">PROFITABLE</span></div>
-                                </td>
-                                <td class="td-revenue">Rev NOK 280M<br>Profit NOK 24M<br>51&ndash;200 emp<br><span style="color:#1B5E20; font-weight:600;">HIGH buying power</span></td>
-                            </tr>
-                            <tr>
-                                <td><span class="lead-score" style="display:inline-flex;">91</span></td>
-                                <td>
-                                    <div class="td-name">E. Lindqvist</div>
-                                    <div class="td-company">Sales Director &bull; Fjord Foods AS &bull; Food &amp; Beverage &bull; Bergen</div>
-                                    <div style="margin-top:2px; font-size:0.68rem;"><span style="color:#1B5E20;">e.lindqvist@example.no</span> &bull; <span style="color:#1B5E20;">LinkedIn</span></div>
-                                    <div style="margin-top:4px;"><span class="lead-badge badge-growing">GROWING</span> <span class="lead-badge badge-profitable">PROFITABLE</span></div>
-                                </td>
-                                <td class="td-revenue">Rev NOK 620M<br>Profit NOK 41M<br>51&ndash;200 emp<br><span style="color:#1B5E20; font-weight:600;">HIGH buying power</span></td>
-                            </tr>
-                            <tr>
-                                <td><span class="lead-score" style="display:inline-flex;">88</span></td>
-                                <td>
-                                    <div class="td-name">T. Haugen</div>
-                                    <div class="td-company">Head of Growth &bull; Solvik Consulting &bull; Consulting &bull; Trondheim</div>
-                                    <div style="margin-top:2px; font-size:0.68rem;"><span style="color:#1B5E20;">t.haugen@example.no</span> &bull; <span style="color:#1B5E20;">LinkedIn</span></div>
-                                    <div style="margin-top:4px;"><span class="lead-badge badge-profitable">PROFITABLE</span></div>
-                                </td>
-                                <td class="td-revenue">Rev NOK 195M<br>Profit NOK 32M<br>51&ndash;200 emp<br><span style="color:#1B5E20; font-weight:600;">HIGH buying power</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    </div>
-                    <p class="preview-note">Illustrative example with fictional companies. Real reports use officially filed data from European government registers across 16 countries. Reports include 25&ndash;100 companies with all decision-makers included.</p>
-                </div>
-            </div>
+  <!-- EXHIBIT 3: coverage -->
+  <section id="coverage" aria-labelledby="coverage-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="ex">Exhibit 3</span>
+        <div>
+          <h2 id="coverage-title">Where we can build a list today, and where we can’t yet</h2>
+          <p>Two numbers per country: how many companies we hold a named person’s own email address for, and how often we hold a revenue figure the company filed with its register.</p>
         </div>
-    </section>
+      </div>
 
-    <!-- === PRICING === -->
-    <section id="pricing">
-        <div class="container">
-            <div class="section-header" style="text-align: center;">
-                <div class="section-eyebrow reveal">Pricing</div>
-                <h2 class="section-title reveal">One report. Dozens of ready-to-close conversations.</h2>
-                <p class="section-desc reveal" style="margin: 12px auto 0;">Every report includes verified decision-makers, real financial data, buying power scoring, and companies ranked by fit for your market.</p>
-            </div>
-
-            <!-- ============================================================
-                 PRICING CONFIG — change values here
-                 ============================================================ -->
-            <div class="pricing-grid reveal">
-                <div class="pricing-card">
-                    <div class="pricing-tier">Starter</div>
-                    <div class="pricing-price">&euro;349</div>
-                    <div class="pricing-desc">25 curated companies &bull; 48h delivery</div>
-                    <ul class="pricing-features">
-                        <li>All decision-makers included (typically 3&ndash;5 per company)</li>
-                        <li>Verified email for every decision-maker</li>
-                        <li>Real revenue &amp; profit data</li>
-                        <li>Scored and ranked by buying power</li>
-                        <li>PDF + CSV report</li>
-                    </ul>
-                    <a href="#brief" class="pricing-cta">Get started</a>
-                </div>
-                <div class="pricing-card featured">
-                    <div class="pricing-tier">Growth</div>
-                    <div class="pricing-price">&euro;599</div>
-                    <div class="pricing-desc">50 curated companies &bull; 48h delivery</div>
-                    <ul class="pricing-features">
-                        <li>Everything in Starter</li>
-                        <li>Buying power analysis per company</li>
-                        <li>Suggested approach per company</li>
-                        <li>Cold email drafts included</li>
-                        <li>Priority / High Value / Pipeline tiers</li>
-                    </ul>
-                    <a href="#brief" class="pricing-cta">Get started</a>
-                </div>
-                <div class="pricing-card">
-                    <div class="pricing-tier">Pro</div>
-                    <div class="pricing-price">&euro;999</div>
-                    <div class="pricing-desc">100 curated companies &bull; 24h delivery &bull; best value per company</div>
-                    <ul class="pricing-features">
-                        <li>Everything in Growth</li>
-                        <li>Deep industry-specific scoring</li>
-                        <li>We learn your preferences over time</li>
-                        <li>Priority delivery</li>
-                        <li>Company summaries included</li>
-                    </ul>
-                    <a href="#brief" class="pricing-cta">Get started</a>
-                </div>
-            </div>
-            <p class="pricing-note">Need more than 100 companies or a full sector scan? Email <a href="mailto:akseli@leadvault.eu" style="color: var(--brand); font-weight: 600; text-decoration: none;">akseli@leadvault.eu</a> for a custom quote.</p>
+      <div class="standing">
+        <div class="standing-head">
+          <span class="smallcaps" id="standing-title">Companies where we hold a named person’s own email address<sup class="fn"><a href="#n2" aria-label="Note 2">2</a></sup></span>
+          <span class="smallcaps">As of 18 Oct 2026, 05:40 UTC</span>
         </div>
-    </section>
+        <div role="group" aria-labelledby="standing-title"><dl class="standing-grid">
+          <div class="fig"><dt>Norway</dt><dd>14,057</dd></div>
+          <div class="fig"><dt>Finland</dt><dd>13,843</dd></div>
+          <div class="fig"><dt>Sweden</dt><dd>11,540</dd></div>
+          <div class="fig"><dt>Denmark</dt><dd>11,166</dd></div>
+        </dl></div>
+        <p class="standing-note">A company counts here when we hold at least one named person there with their own email address, not a shared one such as info@ or sales@. Each company is one register entry, so a business with several registered entities can count more than once.<sup class="fn"><a href="#n2" aria-label="Note 2">2</a></sup> Figures are recomputed nightly; the date travels with the number.</p>
+      </div>
 
-    <!-- === INTAKE FORM === -->
-    <section class="form-section" id="brief">
-        <div class="container">
-            <div class="section-header" style="text-align: center;">
-                <div class="section-eyebrow reveal">Get your report</div>
-                <h2 class="section-title reveal">Brief our research engine</h2>
-                <p class="section-desc reveal" style="margin: 12px auto 0;">Tell us who you want to reach. We'll match you with companies and include every decision-maker &mdash; verified emails and real financial data.</p>
-            </div>
-
-            <div class="wizard-container">
-                <div class="wizard-progress" id="wizProg">
-                    <div class="wizard-seg active"></div>
-                    <div class="wizard-seg"></div>
-                    <div class="wizard-seg"></div>
-                    <div class="wizard-seg"></div>
-                    <div class="wizard-seg"></div>
-                </div>
-                <div class="wizard-step-label" id="wizLabel">
-                    <span class="cur">Step 1 of 5</span>
-                    <span>About your company</span>
-                </div>
-
-                <div id="wizStatus" class="wiz-status"></div>
-
-                <div class="wizard-box">
-
-                    <!-- STEP 1 -->
-                    <div class="wiz-step active" id="ws1">
-                        <div class="wiz-title">Tell us about your company</div>
-                        <div class="wiz-desc">If you have a website, we'll auto-research your business to understand what you sell.</div>
-                        <div class="wiz-field">
-                            <label class="wiz-label">Company name *</label>
-                            <input class="wiz-input" type="text" id="w_company" placeholder="e.g. Meridian Group">
-                            <div class="wiz-field-error" id="w_companyErr">Required.</div>
-                        </div>
-                        <div class="wiz-field" id="websiteField">
-                            <label class="wiz-label">Website</label>
-                            <input class="wiz-input" type="url" id="w_website" placeholder="e.g. https://meridiangroup.com">
-                        </div>
-                        <div class="wiz-optional-toggle">
-                            <label class="wiz-check"><input type="checkbox" id="w_nosite" onchange="toggleSite()"> We don't have a website</label>
-                        </div>
-                        <div class="wiz-row">
-                            <div class="wiz-field">
-                                <label class="wiz-label">Your name</label>
-                                <input class="wiz-input" type="text" id="w_name" placeholder="A. Schwarzenegger">
-                            </div>
-                            <div class="wiz-field">
-                                <label class="wiz-label">Your email *</label>
-                                <input class="wiz-input" type="email" id="w_email" placeholder="arnold@gettothedeals.com">
-                                <div class="wiz-field-error" id="w_emailErr">Valid email required.</div>
-                            </div>
-                        </div>
-                        <div class="wiz-field">
-                            <label class="wiz-label">EU VAT number <span style="color:#999;font-weight:400">(optional — for reverse charge invoicing)</span></label>
-                            <input class="wiz-input" type="text" id="w_vat" placeholder="e.g. DK12345678 or FI12345678" style="max-width:320px;">
-                        </div>
-                        <div class="wiz-field">
-                            <label class="wiz-label">What are you looking for? *</label>
-                            <div class="wiz-chips wiz-chips-wrap" id="w_reltype" style="gap:10px;">
-                                <span class="wiz-chip sel" data-v="seller" onclick="tChipRadio(this,'w_reltype');updateRelType('seller')" style="padding:10px 18px;">Find new customers</span>
-                                <span class="wiz-chip" data-v="buyer" onclick="tChipRadio(this,'w_reltype');updateRelType('buyer')" style="padding:10px 18px;">Find suppliers</span>
-                                <span class="wiz-chip" data-v="partner" onclick="tChipRadio(this,'w_reltype');updateRelType('partner')" style="padding:10px 18px;">Find partners</span>
-                                <span class="wiz-chip" data-v="researcher" onclick="tChipRadio(this,'w_reltype');updateRelType('researcher')" style="padding:10px 18px;">Market research</span>
-                            </div>
-                        </div>
-                        <div class="wiz-summary" id="w_summary">
-                            <div class="wiz-summary-label">We found this about your company</div>
-                            <div id="w_summaryText"></div>
-                        </div>
-                        <div class="wiz-btns">
-                            <button class="wiz-btn wiz-btn-primary" id="wBtn1" onclick="wizStep1()">Research my company &rarr;</button>
-                        </div>
-                    </div>
-
-                    <!-- STEP 2 -->
-                    <div class="wiz-step" id="ws2">
-                        <div class="wiz-title" id="ws2_title">What do you sell?</div>
-                        <div class="wiz-desc" id="ws2_desc">The more specific, the better the matches. We've pre-filled this from your website &mdash; edit freely.</div>
-                        <!-- Seller mode (default) -->
-                        <div class="wiz-field" id="ws2_seller">
-                            <label class="wiz-label">Product or service description *</label>
-                            <span class="wiz-hint">At least 20 characters. Think: what does a buyer Google before finding you?</span>
-                            <textarea class="wiz-textarea" id="w_product" rows="4" placeholder="e.g. Prefab timber frame elements for residential and commercial construction"></textarea>
-                            <div class="wiz-field-error" id="w_productErr">Needs at least 20 characters.</div>
-                        </div>
-                        <div class="wiz-field" id="ws2_problem">
-                            <label class="wiz-label">What problem does this solve for your customers?</label>
-                            <span class="wiz-hint">This helps us understand why someone would buy from you.</span>
-                            <textarea class="wiz-textarea" id="w_problem" rows="3" placeholder="e.g. Cuts construction time by 40% vs traditional framing, reducing labour costs on residential projects"></textarea>
-                        </div>
-                        <!-- Buyer mode -->
-                        <div class="wiz-field" id="ws2_buyer" style="display:none;">
-                            <label class="wiz-label">What are you looking to buy or source? *</label>
-                            <span class="wiz-hint">At least 20 characters. Describe what you need so we can find the right vendors.</span>
-                            <textarea class="wiz-textarea" id="w_buying_need" rows="4" placeholder="e.g. Reliable suppliers of structural steel and reinforcement bars for large-scale construction projects"></textarea>
-                            <div class="wiz-field-error" id="w_buyingErr">Needs at least 20 characters.</div>
-                        </div>
-                        <!-- Partner mode -->
-                        <div class="wiz-field" id="ws2_partner" style="display:none;">
-                            <label class="wiz-label">What kind of partnership are you looking for? *</label>
-                            <span class="wiz-hint">At least 20 characters. Referral partners, distribution, co-creation, joint ventures?</span>
-                            <textarea class="wiz-textarea" id="w_partner_goal" rows="4" placeholder="e.g. Looking for architecture firms to refer projects to each other &mdash; we do 3D visualization, they do design"></textarea>
-                            <div class="wiz-field-error" id="w_partnerErr">Needs at least 20 characters.</div>
-                        </div>
-                        <!-- Researcher mode -->
-                        <div class="wiz-field" id="ws2_researcher" style="display:none;">
-                            <label class="wiz-label">What do you want to research? *</label>
-                            <span class="wiz-hint">At least 20 characters. Describe your research objective &mdash; we'll rank matches by relevance.</span>
-                            <textarea class="wiz-textarea" id="w_research_objective" rows="4" placeholder="e.g. Map all SaaS companies in Europe with revenue above &euro;5M that could be ready for Series A"></textarea>
-                            <div class="wiz-field-error" id="w_researchErr">Needs at least 20 characters.</div>
-                        </div>
-                        <div class="wiz-btns">
-                            <button class="wiz-btn wiz-btn-back" onclick="wizGo(1)">&larr; Back</button>
-                            <button class="wiz-btn wiz-btn-primary" onclick="wizStep2()">Next &rarr;</button>
-                        </div>
-                    </div>
-
-                    <!-- STEP 3 -->
-                    <div class="wiz-step" id="ws3">
-                        <div class="wiz-title">Who is your ideal buyer?</div>
-                        <div class="wiz-desc">Be specific. &ldquo;Head of Procurement&rdquo; beats &ldquo;decision maker&rdquo; every time.</div>
-                        <div class="wiz-field">
-                            <label class="wiz-label">Name 3 companies similar to your ideal customer</label>
-                            <span class="wiz-hint">Optional &mdash; we'll find companies like these.</span>
-                            <div class="wiz-examples">
-                                <div class="wiz-example-row"><span class="wiz-example-num">1.</span><input class="wiz-input" id="w_ex1" placeholder="e.g. Siemens"></div>
-                                <div class="wiz-example-row"><span class="wiz-example-num">2.</span><input class="wiz-input" id="w_ex2" placeholder="e.g. Schneider Electric"></div>
-                                <div class="wiz-example-row"><span class="wiz-example-num">3.</span><input class="wiz-input" id="w_ex3" placeholder="e.g. ABB"></div>
-                            </div>
-                        </div>
-                        <div class="wiz-field">
-                            <label class="wiz-label" id="w_titleLabel">Job title of the person who buys from you *</label>
-                            <span class="wiz-hint" id="w_titleHint">The actual title &mdash; not &ldquo;decision maker&rdquo;.</span>
-                            <input class="wiz-input" type="text" id="w_title" placeholder="e.g. Head of Procurement">
-                            <div class="wiz-field-error" id="w_titleErr">Required.</div>
-                        </div>
-                        <div class="wiz-field" id="ws3_signer">
-                            <label class="wiz-label">Who signs the deal?</label>
-                            <span class="wiz-hint">If different from the contact above &mdash; e.g. the CFO approves, but the buyer evaluates.</span>
-                            <input class="wiz-input" type="text" id="w_signer" placeholder="e.g. CFO or CEO">
-                        </div>
-                        <div class="wiz-field">
-                            <label class="wiz-label">Company size *</label>
-                            <div class="wiz-chips" id="w_sizes">
-                                <span class="wiz-chip" data-v="1-10" onclick="tChip(this)">1&ndash;10</span>
-                                <span class="wiz-chip sel" data-v="11-50" onclick="tChip(this)">11&ndash;50</span>
-                                <span class="wiz-chip sel" data-v="51-200" onclick="tChip(this)">51&ndash;200</span>
-                                <span class="wiz-chip sel" data-v="201-500" onclick="tChip(this)">201&ndash;500</span>
-                                <span class="wiz-chip" data-v="501+" onclick="tChip(this)">500+</span>
-                            </div>
-                            <div class="wiz-field-error" id="w_sizesErr">Select at least one.</div>
-                        </div>
-                        <div class="wiz-field">
-                            <label class="wiz-label">Countries *</label>
-                            <span class="wiz-hint">Select the markets you want to reach. We have financial data across most of Europe.</span>
-                            <div class="wiz-chips wiz-chips-wrap" id="w_countries">
-                                <span class="wiz-chip" data-v="DK" onclick="tChip(this)">Denmark</span>
-                                <span class="wiz-chip" data-v="SE" onclick="tChip(this)">Sweden</span>
-                                <span class="wiz-chip" data-v="NO" onclick="tChip(this)">Norway</span>
-                                <span class="wiz-chip" data-v="FI" onclick="tChip(this)">Finland</span>
-                                <span class="wiz-chip" data-v="FR" onclick="tChip(this)">France</span>
-                                <span class="wiz-chip" data-v="DE" onclick="tChip(this)">Germany</span>
-                                <span class="wiz-chip" data-v="NL" onclick="tChip(this)">Netherlands</span>
-                                <span class="wiz-chip" data-v="BE" onclick="tChip(this)">Belgium</span>
-                                <span class="wiz-chip" data-v="AT" onclick="tChip(this)">Austria</span>
-                                <span class="wiz-chip" data-v="IE" onclick="tChip(this)">Ireland</span>
-                                <span class="wiz-chip" data-v="ES" onclick="tChip(this)">Spain</span>
-                                <span class="wiz-chip" data-v="IT" onclick="tChip(this)">Italy</span>
-                                <span class="wiz-chip" data-v="PT" onclick="tChip(this)">Portugal</span>
-                                <span class="wiz-chip" data-v="PL" onclick="tChip(this)">Poland</span>
-                                <span class="wiz-chip" data-v="CZ" onclick="tChip(this)">Czech Republic</span>
-                                <span class="wiz-chip" data-v="RO" onclick="tChip(this)">Romania</span>
-                                <span class="wiz-chip" data-v="HU" onclick="tChip(this)">Hungary</span>
-                                <span class="wiz-chip" data-v="GR" onclick="tChip(this)">Greece</span>
-                                <span class="wiz-chip" data-v="BG" onclick="tChip(this)">Bulgaria</span>
-                                <span class="wiz-chip" data-v="HR" onclick="tChip(this)">Croatia</span>
-                                <span class="wiz-chip" data-v="SK" onclick="tChip(this)">Slovakia</span>
-                                <span class="wiz-chip" data-v="SI" onclick="tChip(this)">Slovenia</span>
-                                <span class="wiz-chip" data-v="LT" onclick="tChip(this)">Lithuania</span>
-                                <span class="wiz-chip" data-v="LV" onclick="tChip(this)">Latvia</span>
-                                <span class="wiz-chip" data-v="EE" onclick="tChip(this)">Estonia</span>
-                                <span class="wiz-chip" data-v="LU" onclick="tChip(this)">Luxembourg</span>
-                                <span class="wiz-chip" data-v="CY" onclick="tChip(this)">Cyprus</span>
-                                <span class="wiz-chip" data-v="MT" onclick="tChip(this)">Malta</span>
-                                <span class="wiz-chip" data-v="GB" onclick="tChip(this)">UK</span>
-                                <span class="wiz-chip" data-v="CH" onclick="tChip(this)">Switzerland</span>
-                                <span class="wiz-chip" data-v="IS" onclick="tChip(this)">Iceland</span>
-                            </div>
-                            <div class="wiz-field-error" id="w_countriesErr">Select at least one.</div>
-                        </div>
-                        <div class="wiz-field">
-                            <label class="wiz-label">Target industries</label>
-                            <span class="wiz-hint">Select all that apply.</span>
-                            <div class="wiz-chips wiz-chips-wrap" id="w_industries">
-                                <span class="wiz-chip" data-v="construction" onclick="tChip(this)">Construction</span>
-                                <span class="wiz-chip" data-v="manufacturing" onclick="tChip(this)">Manufacturing</span>
-                                <span class="wiz-chip" data-v="saas" onclick="tChip(this)">SaaS / Tech</span>
-                                <span class="wiz-chip" data-v="recruitment" onclick="tChip(this)">Recruitment</span>
-                                <span class="wiz-chip" data-v="logistics" onclick="tChip(this)">Logistics</span>
-                                <span class="wiz-chip" data-v="fintech" onclick="tChip(this)">Fintech</span>
-                                <span class="wiz-chip" data-v="hospitality" onclick="tChip(this)">Hospitality</span>
-                                <span class="wiz-chip" data-v="retail_fashion" onclick="tChip(this)">Retail / Fashion</span>
-                                <span class="wiz-chip" data-v="real_estate" onclick="tChip(this)">Real Estate</span>
-                                <span class="wiz-chip" data-v="healthcare" onclick="tChip(this)">Healthcare</span>
-                                <span class="wiz-chip" data-v="education" onclick="tChip(this)">Education</span>
-                                <span class="wiz-chip" data-v="professional_services" onclick="tChip(this)">Professional Services</span>
-                                <span class="wiz-chip" data-v="marketing_agency" onclick="tChip(this)">Marketing / Agency</span>
-                            </div>
-                            <input class="wiz-input" type="text" id="w_industries_other" placeholder="Other industry (optional)" style="margin-top: 8px;">
-                        </div>
-                        <div class="wiz-field">
-                            <label class="wiz-label">Minimum company revenue</label>
-                            <span class="wiz-hint">We have real financials from government registers &mdash; filter by actual revenue.</span>
-                            <div class="wiz-chips" id="w_minrev">
-                                <span class="wiz-chip sel" data-v="any" onclick="tChipRadio(this,'w_minrev')">Any</span>
-                                <span class="wiz-chip" data-v="1m" onclick="tChipRadio(this,'w_minrev')">&euro;1M+</span>
-                                <span class="wiz-chip" data-v="5m" onclick="tChipRadio(this,'w_minrev')">&euro;5M+</span>
-                                <span class="wiz-chip" data-v="10m" onclick="tChipRadio(this,'w_minrev')">&euro;10M+</span>
-                                <span class="wiz-chip" data-v="50m" onclick="tChipRadio(this,'w_minrev')">&euro;50M+</span>
-                            </div>
-                        </div>
-                        <div class="wiz-field">
-                            <label class="wiz-label">Growth signals that matter to you</label>
-                            <span class="wiz-hint">We detect these from public sources. Select the ones relevant to your sale.</span>
-                            <div class="wiz-chips wiz-chips-wrap" id="w_signals">
-                                <span class="wiz-chip sel" data-v="any" onclick="tChip(this)">Any growth</span>
-                                <span class="wiz-chip" data-v="funding" onclick="tChip(this)">Recently funded</span>
-                                <span class="wiz-chip" data-v="hiring" onclick="tChip(this)">Actively hiring</span>
-                                <span class="wiz-chip" data-v="expansion" onclick="tChip(this)">Expanding / new markets</span>
-                                <span class="wiz-chip" data-v="product_launch" onclick="tChip(this)">Launched new product</span>
-                            </div>
-                        </div>
-                        <div class="wiz-field" id="ws3_triggers">
-                            <label class="wiz-label">What triggers them to act?</label>
-                            <span class="wiz-hint">What makes companies start looking for a solution like yours?</span>
-                            <div class="wiz-chips wiz-chips-wrap" id="w_triggers">
-                                <span class="wiz-chip sel" data-v="any" onclick="tChip(this)">Not sure yet</span>
-                                <span class="wiz-chip" data-v="budget_cycle" onclick="tChip(this)">Budget cycle</span>
-                                <span class="wiz-chip" data-v="expansion" onclick="tChip(this)">Expansion</span>
-                                <span class="wiz-chip" data-v="hiring" onclick="tChip(this)">Hiring surge</span>
-                                <span class="wiz-chip" data-v="regulation" onclick="tChip(this)">New regulation</span>
-                                <span class="wiz-chip" data-v="project_launch" onclick="tChip(this)">Project launch</span>
-                                <span class="wiz-chip" data-v="funding_round" onclick="tChip(this)">Funding round</span>
-                                <span class="wiz-chip" data-v="contract_renewal" onclick="tChip(this)">Contract renewal</span>
-                                <span class="wiz-chip" data-v="pain_event" onclick="tChip(this)">Pain event</span>
-                            </div>
-                        </div>
-                        <div class="wiz-btns">
-                            <button class="wiz-btn wiz-btn-back" onclick="wizGo(2)">&larr; Back</button>
-                            <button class="wiz-btn wiz-btn-primary" onclick="wizStep3()">Next &rarr;</button>
-                        </div>
-                    </div>
-
-                    <!-- STEP 4 -->
-                    <div class="wiz-step" id="ws4">
-                        <div class="wiz-title">Who should we exclude?</div>
-                        <div class="wiz-desc">Help us filter out noise. Cleaner exclusions = better companies.</div>
-                        <div class="wiz-field">
-                            <label class="wiz-label">Competitors</label>
-                            <span class="wiz-hint">Comma-separated company names.</span>
-                            <input class="wiz-input" type="text" id="w_competitors" placeholder="e.g. Siemens MindSphere, ABB Ability">
-                        </div>
-                        <div class="wiz-field">
-                            <label class="wiz-label">Exclude these types</label>
-                            <div class="wiz-chips wiz-chips-wrap" id="w_excludes">
-                                <span class="wiz-chip" data-v="industry_association" onclick="tChip(this)">Industry associations</span>
-                                <span class="wiz-chip" data-v="government" onclick="tChip(this)">Government bodies</span>
-                                <span class="wiz-chip" data-v="retail" onclick="tChip(this)">Retail stores</span>
-                                <span class="wiz-chip" data-v="agents_brokers" onclick="tChip(this)">Agents / brokers</span>
-                                <span class="wiz-chip" data-v="consultancies" onclick="tChip(this)">Consultancies</span>
-                            </div>
-                        </div>
-                        <div class="wiz-field">
-                            <label class="wiz-label">Other exclusions</label>
-                            <input class="wiz-input" type="text" id="w_otherExcl" placeholder="e.g. No companies we've already contacted">
-                        </div>
-                        <div class="wiz-field">
-                            <label class="wiz-label">Must-have characteristics</label>
-                            <span class="wiz-hint">Only include companies that meet these criteria.</span>
-                            <div class="wiz-chips wiz-chips-wrap" id="w_musthave">
-                                <span class="wiz-chip" data-v="must_website" onclick="tChip(this)">Has a website</span>
-                                <span class="wiz-chip" data-v="must_profitable" onclick="tChip(this)">Profitable</span>
-                                <span class="wiz-chip sel" data-v="must_email" onclick="tChip(this)">Verified email</span>
-                                <span class="wiz-chip" data-v="must_growing" onclick="tChip(this)">Growth signals</span>
-                            </div>
-                        </div>
-                        <div class="wiz-btns">
-                            <button class="wiz-btn wiz-btn-back" onclick="wizGo(3)">&larr; Back</button>
-                            <button class="wiz-btn wiz-btn-primary" onclick="wizStep4()">Next &rarr;</button>
-                        </div>
-                    </div>
-
-                    <!-- STEP 5 -->
-                    <div class="wiz-step" id="ws5">
-                        <div class="wiz-title">Your report</div>
-                        <div class="wiz-desc">Almost done. Pick your report size and add any extras.</div>
-                        <div class="wiz-field">
-                            <label class="wiz-label">Number of companies</label>
-                            <div class="wiz-count-grid" style="grid-template-columns: repeat(3, 1fr);">
-                                <label class="wiz-count-opt">
-                                    <input type="radio" name="w_count" value="25" checked>
-                                    <div class="wiz-count-card">
-                                        <div class="wiz-count-num">25</div>
-                                        <div class="wiz-count-label">&euro;349</div>
-                                    </div>
-                                </label>
-                                <label class="wiz-count-opt">
-                                    <input type="radio" name="w_count" value="50">
-                                    <div class="wiz-count-card">
-                                        <div class="wiz-count-num">50</div>
-                                        <div class="wiz-count-label">&euro;599</div>
-                                    </div>
-                                </label>
-                                <label class="wiz-count-opt">
-                                    <input type="radio" name="w_count" value="100">
-                                    <div class="wiz-count-card">
-                                        <div class="wiz-count-num">100</div>
-                                        <div class="wiz-count-label">&euro;999</div>
-                                    </div>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="wiz-field">
-                            <label class="wiz-check"><input type="checkbox" id="w_drafts"> Include personalised cold email drafts</label>
-                        </div>
-                        <div class="wiz-field">
-                            <label class="wiz-label">How did you hear about us?</label>
-                            <input class="wiz-input" type="text" id="w_source" placeholder="e.g. LinkedIn, referral, Google">
-                        </div>
-                        <div class="wiz-btns">
-                            <button class="wiz-btn wiz-btn-back" onclick="wizGo(4)">&larr; Back</button>
-                            <button class="wiz-btn wiz-btn-primary" id="wBtnSubmit" onclick="wizSubmit()">Submit brief &rarr;</button>
-                        </div>
-                    </div>
-
-                    <!-- DONE -->
-                    <div class="wiz-step" id="wsDone">
-                        <!-- confMailto removed — was dead code (unreachable in current flow) -->
-                        <div class="wiz-confirmation" id="confDirect" style="display:none;">
-                            <div class="wiz-conf-icon">&#10003;</div>
-                            <h2>Brief received</h2>
-                            <p>Our research engine is building your intelligence report. We'll email you within 24&ndash;48 hours with verified contacts, financials, growth signals, and scoring.</p>
-                        </div>
-                        <div id="confFallback" style="display:none; padding: 24px 0;">
-                            <div style="text-align: center; margin-bottom: 20px;">
-                                <div class="wiz-conf-icon">&#128203;</div>
-                                <h2 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 8px;">Almost there &mdash; send us your brief</h2>
-                                <p style="color: var(--text-sec); font-size: 0.88rem;">Copy the brief below and email it to us. We'll start building your report immediately.</p>
-                            </div>
-                            <div style="background: var(--bg-alt); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; margin-bottom: 16px; max-height: 240px; overflow-y: auto;">
-                                <pre id="fallbackBrief" style="font-family: var(--mono); font-size: 0.72rem; line-height: 1.5; color: var(--text-sec); white-space: pre-wrap; word-break: break-word; margin: 0;"></pre>
-                            </div>
-                            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-                                <button class="wiz-btn wiz-btn-primary" style="flex: none; padding: 12px 24px;" onclick="copyBrief()">Copy to clipboard</button>
-                                <a href="mailto:akseli@leadvault.eu" class="wiz-btn wiz-btn-back" style="text-decoration: none; text-align: center; padding: 12px 24px;">Open email</a>
-                            </div>
-                            <div id="copyConfirm2" style="display:none; text-align: center; margin-top: 10px; font-size: 0.82rem; color: var(--brand); font-weight: 600;">Copied! Paste it in an email to akseli@leadvault.eu</div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
+      <div class="twocol">
+        <div>
+          <table class="led cov">
+            <caption><b>Countries we offer, or can on request</b></caption>
+            <thead>
+              <tr>
+                <th scope="col">Country</th>
+                <th scope="col" class="r">Companies with a named email<sup class="fn"><a href="#n2" aria-label="Note 2">2</a></sup></th>
+                <th scope="col" class="barcol"><span class="sr">Relative size</span></th>
+                <th scope="col">Filed revenue held<sup class="fn"><a href="#n3" aria-label="Note 3">3</a></sup></th>
+                <th scope="col">Lists</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Norway<span class="cc">NO</span></th><td class="n">14,057</td><td class="barcol"><span class="bar"><i style="width:100%"></i></span></td><td class="cls"><span class="nw">about 6 in 10</span><span class="num">62.6%</span></td><td><span class="st">Available</span></td></tr>
+              <tr><th scope="row">Finland<span class="cc">FI</span></th><td class="n">13,843</td><td class="barcol"><span class="bar"><i style="width:98.5%"></i></span></td><td class="cls"><span class="nw">about 1 in 4</span><span class="num">23.2%</span></td><td><span class="st">Available</span></td></tr>
+              <tr><th scope="row">Sweden<span class="cc">SE</span></th><td class="n">11,540</td><td class="barcol"><span class="bar"><i style="width:82.1%"></i></span></td><td class="cls"><span class="nw">about 1 in 3</span><span class="num">35.0%</span></td><td><span class="st">Available</span></td></tr>
+              <tr><th scope="row">Denmark<span class="cc">DK</span></th><td class="n">11,166</td><td class="barcol"><span class="bar"><i style="width:79.4%"></i></span></td><td class="cls"><span class="nw">about 1 in 7</span><span class="num">13.9%</span></td><td><span class="st">Available</span></td></tr>
+              <tr><th scope="row">France<span class="cc">FR</span></th><td class="n">6,438</td><td class="barcol"><span class="bar"><i style="width:45.8%"></i></span></td><td class="cls"><span class="nw">about 1 in 5</span><span class="num">21.1%</span></td><td><span class="st ask">Ask first</span></td></tr>
+              <tr><th scope="row">Estonia<span class="cc">EE</span></th><td class="n">4,025</td><td class="barcol"><span class="bar"><i style="width:28.6%"></i></span></td><td class="cls"><span class="nw">about 4 in 10</span><span class="num">43.1%</span></td><td><span class="st ask">Ask first</span></td></tr>
+              <tr><th scope="row">Latvia<span class="cc">LV</span></th><td class="n">202</td><td class="barcol"><span class="bar"><i style="width:1.4%"></i></span></td><td class="cls"><span class="nw">about 3 in 4</span><span class="num">77.1%</span></td><td><span class="st thin">Few named people</span></td></tr>
+              <tr><th scope="row">Lithuania<span class="cc">LT</span></th><td class="n">78</td><td class="barcol"><span class="bar"><i style="width:.6%"></i></span></td><td class="cls"><span class="nw">over half</span><span class="num">57.8%</span></td><td><span class="st thin">Few named people</span></td></tr>
+            </tbody>
+          </table>
         </div>
-    </section>
-
-    <!-- === FOOTER === -->
-    <footer>
-        <div class="container">
-            <div class="footer-inner">
-                <div class="footer-brand">Lead<span>Vault</span></div>
-                <div class="footer-links">
-                    <a href="mailto:akseli@leadvault.eu">akseli@leadvault.eu</a>
-                    <a href="privacy.html">Privacy Policy</a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                LeadVault &middot; Synlig Media &middot; CVR DK 44784416 &middot; Copenhagen, Denmark &middot; Built in Denmark &#x1F1E9;&#x1F1F0;
-            </div>
+        <div class="aside">
+          <h3>How to read the revenue column</h3>
+          <p>It is an estimate from a fixed 0.5% sample of the companies we hold, so read it as a level, not a decimal. Where a register publishes accounts (Latvia, Norway, Lithuania) we hold most of them; where it publishes few, we hold few.</p>
+          <h3>Where the companies come from</h3>
+          <p>Every company in a list is a company in its country’s official register. The register gives the name, address and size; the filings give the revenue and the year it was filed for.</p>
+          <h3>Selling somewhere else?</h3>
+          <p>Ask before you order. We will tell you what we hold for your country and industry before you pay anything.</p>
         </div>
-    </footer>
+      </div>
 
-    <script>
-    // ================================================================
-    // CONFIG
-    // ================================================================
-    const USE_API = true;
-    const API_BASE = 'https://api.leadvault.eu/api/intake';
-    const API_AUTH = '';
-    const MAILTO = 'akseli@leadvault.eu'; // Fallback only
-    // ================================================================
+      <table class="led notyet">
+        <caption><b>Not offered yet</b><span>We hold these countries’ registered companies, but too few named people to sell a list.</span></caption>
+        <thead><tr><th scope="col">Country</th><th scope="col" class="r">Companies with a named email<sup class="fn"><a href="#n2" aria-label="Note 2">2</a></sup></th><th scope="col" class="r">Filed revenue held<sup class="fn"><a href="#n3" aria-label="Note 3">3</a></sup></th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Germany</th><td class="n">104</td><td class="n">none in sample</td></tr>
+          <tr><th scope="row">United Kingdom</th><td class="n">49</td><td class="n">about 2%</td></tr>
+          <tr><th scope="row">Spain</th><td class="n">30</td><td class="n">none in sample</td></tr>
+          <tr><th scope="row">Italy</th><td class="n">23</td><td class="n">none in sample</td></tr>
+          <tr><th scope="row">Portugal</th><td class="n">18</td><td class="n">not measured</td></tr>
+          <tr><th scope="row">Czechia</th><td class="n">4</td><td class="n">none in sample</td></tr>
+          <tr><th scope="row">Greece</th><td class="n">3</td><td class="n">not measured</td></tr>
+          <tr><th scope="row">Romania</th><td class="n">2</td><td class="n">about 1 in 3</td></tr>
+          <tr><th scope="row">Ireland</th><td class="n">2</td><td class="n">none in sample</td></tr>
+          <tr><th scope="row">Austria</th><td class="n">2</td><td class="n">not measured</td></tr>
+          <tr><th scope="row">Netherlands, Switzerland, Poland</th><td class="n">1 each</td><td class="n">none in sample</td></tr>
+          <tr><th scope="row">Belgium</th><td class="n">1</td><td class="n">not measured</td></tr>
+          <tr><th scope="row">Slovakia, Luxembourg, Slovenia and every other European country</th><td class="n">0</td><td class="n">varies</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
 
-    let wData = {};
-    let wStep = 1;
+  <!-- METHOD -->
+  <section id="method" aria-labelledby="method-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="ex">Method</span>
+        <div>
+          <h2 id="method-title">How a list is built</h2>
+          <p>The same four steps produced Exhibit 1.</p>
+        </div>
+      </div>
+      <ol class="steps">
+        <li><h3>You send your website</h3><p>Or you reply to the email we sent you, which means we have already read it.</p></li>
+        <li><h3>We work out who buys from you</h3><p>From what your site says you make and who you serve, we pick the kinds of company that buy it, then draw them from the register for your region.</p></li>
+        <li><h3>We find the people who decide</h3><p>On each company’s own website, keeping the website, and often the exact page, each person came from. Where a strong buying signal exists, such as a registry change or a public contract won, we add it.</p></li>
+        <li><h3>You see a sample first</h3><p>Three to five of your own likely buyers, free. If it is useful, you order a list and get it within 48 hours as Excel and HubSpot CSV.</p></li>
+      </ol>
+    </div>
+  </section>
 
-    // Nav scroll
-    window.addEventListener('scroll', () => {
-        document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
-    });
+  <!-- EXHIBIT 4: labels -->
+  <section id="labels" aria-labelledby="labels-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="ex">Exhibit 4</span>
+        <div>
+          <h2 id="labels-title">Every address carries a label for its proof</h2>
+          <p>Each email in your file carries one of three labels. An address with none of them behind it is left out of the file. Below the labels: how the work addresses we hold at the companies’ own domains break down today, before any delivery check.<sup class="fn"><a href="#n4" aria-label="Note 4">4</a></sup></p>
+        </div>
+      </div>
+      <table class="led labels stack" role="table">
+        <caption><b>The three labels in your file</b></caption>
+        <thead role="rowgroup"><tr role="row"><th scope="col" role="columnheader">Label in the file</th><th scope="col" role="columnheader">What it means</th></tr></thead>
+        <tbody role="rowgroup">
+          <tr role="row"><th scope="row" role="rowheader"><span class="lab">Verified (company website)</span></th><td class="d" role="cell">Published on the company’s own website.</td></tr>
+          <tr role="row"><th scope="row" role="rowheader"><span class="lab">Verified</span></th><td class="d" role="cell">The company’s mail server accepted the address when we checked it. This includes addresses we worked out from the person’s name and the company’s address format. A server can still accept an address and bounce it later; that is what the free replacement is for.</td></tr>
+          <tr role="row"><th scope="row" role="rowheader"><span class="lab none">Likely (domain accepts all mail)</span></th><td class="d" role="cell">We have not seen the address published, and the company’s mail server says yes to every address, so our check cannot confirm this one.</td></tr>
+        </tbody>
+      </table>
+      <table class="led labels labels2 stack" role="table">
+        <caption><b>What we hold today, by the best evidence for each address</b></caption>
+        <thead role="rowgroup"><tr role="row"><th scope="col" role="columnheader">Evidence</th><th scope="col" role="columnheader">What happens at delivery</th><th scope="col" class="r" role="columnheader">Addresses held</th></tr></thead>
+        <tbody role="rowgroup">
+          <tr role="row"><th scope="row" role="rowheader"><span class="lab">Published on company website</span></th><td class="d" role="cell">Delivered as “Verified (company website)”. We keep the website it was on.</td><td class="n" role="cell">85,432</td></tr>
+          <tr role="row"><th scope="row" role="rowheader"><span class="lab">Mail-server check passed</span></th><td class="d" role="cell">Delivered as “Verified”, or as “Likely” on a domain that accepts all mail.</td><td class="n" role="cell">9,933</td></tr>
+          <tr role="row"><th scope="row" role="rowheader"><span class="lab none">Worked out, not yet checked</span></th><td class="d" role="cell">Made from the person’s name and the company’s address format, never seen published. Delivered only after the mail server accepts it.</td><td class="n" role="cell">90,885</td></tr>
+          <tr role="row"><th scope="row" role="rowheader"><span class="lab none">No result yet</span></th><td class="d" role="cell">Not yet checked, or the check gave no clear answer. Delivered only after a check passes.</td><td class="n" role="cell">77,636</td></tr>
+          <tr role="row"><th scope="row" role="rowheader"><span class="lab none">Failed check</span></th><td class="d" role="cell">The mail server rejected it. Never delivered.</td><td class="n" role="cell">134</td></tr>
+        </tbody>
+        <tfoot role="rowgroup"><tr role="row"><td colspan="2" role="cell">Total work addresses at own company domains · 18 Oct 2026, 05:41 UTC</td><td class="n" role="cell">264,020</td></tr></tfoot>
+      </table>
+    </div>
+  </section>
 
-    // Reveal on scroll
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  <!-- TERMS -->
+  <section id="terms" aria-labelledby="terms-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="ex">Terms</span>
+        <div><h2 id="terms-title">Price and contact</h2><p>No account, no checkout. Email or call, and we agree the region and industry with you first.</p></div>
+      </div>
+      <div class="terms">
+        <div>
+          <h3>Three ways to buy</h3>
+          <table class="prices">
+            <tbody>
+              <tr><th scope="row"><b>Try it</b><span>25 companies</span></th><td><b>€149</b></td></tr>
+              <tr><th scope="row"><b>Standard</b><span>100 companies</span></th><td><b>€449</b></td></tr>
+              <tr><th scope="row"><b>Monthly</b><span>100 new companies a month, never repeated. Cancel any time.</span></th><td><b>€349</b><small>per month</small></td></tr>
+            </tbody>
+          </table>
+          <div class="every">
+            <h4>Every list</h4>
+            <ul>
+              <li>A free replacement for any contact that bounces or turns out wrong</li>
+              <li>Delivered within 48 hours, in Excel and as a HubSpot CSV</li>
+              <li>The reason for every company</li>
+              <li>Companies from the official register, people from the companies’ own websites, a label on every email</li>
+            </ul>
+          </div>
+        </div>
+        <div id="contact">
+          <h3>Ask for a sample of your market</h3>
+          <p>Tell us your website and the region you sell in. We reply with a free sample of three to five of your own likely buyers.</p>
+          <p class="contact">
+            Akseli Mattila<br>
+            <a href="mailto:akseli@leadvault.eu?subject=Sample%20of%20my%20market&amp;body=Our%20website%3A%20%0D%0ARegion%20we%20sell%20in%3A%20">akseli@leadvault.eu</a><br>
+            <a href="tel:+358445964003">+358 44 596 4003</a>
+          </p>
+          <a class="btn" href="mailto:akseli@leadvault.eu?subject=Sample%20of%20my%20market&amp;body=Our%20website%3A%20%0D%0ARegion%20we%20sell%20in%3A%20">Email for a sample</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    // Chip toggle (multi-select)
-    function tChip(el) { el.classList.toggle('sel'); }
-    // Chip toggle (single-select / radio style)
-    function tChipRadio(el, groupId) {
-        document.querySelectorAll(`#${groupId} .wiz-chip`).forEach(c => c.classList.remove('sel'));
-        el.classList.add('sel');
-    }
-    function getChips(id) { return [...document.querySelectorAll(`#${id} .wiz-chip.sel`)].map(c => c.dataset.v); }
+  <div class="notes" id="notes">
+    <div class="wrap">
+      <div class="sec-head"><span class="ex">Notes</span><div><h2>Sources for the figures on this page</h2></div></div>
+      <ol>
+        <li id="n1">Sample file generated and sent on 2026-10-18 (sent 08:36 UTC): 5 companies, 7 named people, 7 with an email, 6 with a phone. Revenue is as filed for the fiscal year shown, converted to euros, and shown here in wide ranges (€1–5M, €5–10M).</li>
+        <li id="n2">Companies with at least one named contact holding a personal, non-generic email address; registry dumps excluded. Metric <code>named_email_companies_by_country</code>, as of 2026-10-18 05:40:49 UTC. These are company register entries, not organisations: across every country we hold, the 65,428 such entries (<code>named_email_companies_outreach</code>, 05:40:11 UTC) belong to 56,128 distinct organisations counted by website (<code>person_email_websites</code>, 05:40:58 UTC).</li>
+        <li id="n3">Share of companies with a filed revenue figure (any year, not zero), estimated from a 0.5% block sample with a fixed seed; small samples can move by several points. “Not measured” means too few companies in the sample to report. Metric <code>filed_revenue_coverage_by_country</code>, as of 2026-10-18 05:43:09 UTC.</li>
+        <li id="n4">Work addresses at the company’s own domain, each counted once under the best evidence held. Metric <code>person_email_people_own_domain_by_evidence</code>, as of 2026-10-18 05:41:12 UTC.</li>
+</ol>
+    </div>
+  </div>
+</main>
 
-    // Website toggle
-    function toggleSite() {
-        const off = document.getElementById('w_nosite').checked;
-        const f = document.getElementById('websiteField');
-        f.style.opacity = off ? '0.35' : '1';
-        f.style.pointerEvents = off ? 'none' : 'auto';
-        if (off) document.getElementById('w_website').value = '';
-    }
-
-    // Navigation
-    function wizGo(s) {
-        document.querySelectorAll('.wiz-step').forEach(el => el.classList.remove('active'));
-        document.getElementById(`ws${s}`).classList.add('active');
-        wStep = s;
-        updateProg();
-        clrStatus();
-    }
-
-    function updateProg() {
-        const segs = document.querySelectorAll('.wizard-seg');
-        const labels = ['About your company','Your product','Your ideal buyer','Exclusions','Your report'];
-        segs.forEach((s,i) => {
-            s.classList.remove('active','done');
-            if (i < wStep - 1) s.classList.add('done');
-            if (i === wStep - 1) s.classList.add('active');
-        });
-        document.getElementById('wizLabel').innerHTML = `<span class="cur">Step ${wStep} of 5</span><span>${labels[wStep-1]}</span>`;
-    }
-
-    // Validation
-    function req(id, errId) {
-        const v = document.getElementById(id).value.trim();
-        if (!v) {
-            document.getElementById(id).classList.add('invalid');
-            document.getElementById(errId).classList.add('visible');
-            return false;
-        }
-        document.getElementById(id).classList.remove('invalid');
-        document.getElementById(errId).classList.remove('visible');
-        return true;
-    }
-
-    function showStatus(msg, type) {
-        const el = document.getElementById('wizStatus');
-        el.textContent = msg;
-        el.className = `wiz-status ${type}`;
-    }
-
-    function clrStatus() { document.getElementById('wizStatus').className = 'wiz-status'; }
-
-    function setLoad(id, on) {
-        const btn = document.getElementById(id);
-        if (on) {
-            btn.disabled = true;
-            btn.dataset.orig = btn.innerHTML;
-            btn.innerHTML = '<span class="wiz-spinner"></span>Working...';
-        } else {
-            btn.disabled = false;
-            btn.innerHTML = btn.dataset.orig || 'Next &rarr;';
-        }
-    }
-
-    // === RELATIONSHIP TYPE TOGGLING ===
-
-    function updateRelType(type) {
-        // Step 2: show/hide fields based on relationship type
-        document.getElementById('ws2_seller').style.display = (type === 'seller') ? '' : 'none';
-        document.getElementById('ws2_problem').style.display = (type === 'seller') ? '' : 'none';
-        document.getElementById('ws2_buyer').style.display = (type === 'buyer') ? '' : 'none';
-        document.getElementById('ws2_partner').style.display = (type === 'partner') ? '' : 'none';
-        document.getElementById('ws2_researcher').style.display = (type === 'researcher') ? '' : 'none';
-
-        // Step 2 titles
-        const titles = { seller: 'What do you sell?', buyer: 'What do you need?', partner: 'Tell us about your business', researcher: 'Your research objective' };
-        const descs = { seller: 'The more specific, the better the matches.', buyer: 'Describe what you need so we can find the right vendors.', partner: 'We\'ll find companies that complement your business.', researcher: 'Describe what you want to research \u2014 we\'ll find and rank matches.' };
-        document.getElementById('ws2_title').textContent = titles[type] || titles.seller;
-        document.getElementById('ws2_desc').textContent = descs[type] || descs.seller;
-
-        // Step 3: update buyer title label
-        const titleLabels = { seller: 'Job title of the person who buys from you *', buyer: 'Job title at companies you want to buy from *', partner: 'Job title of potential partners *', researcher: 'Job title of people you\'re researching *' };
-        const titleHints = { seller: 'The actual title \u2014 not \u201cdecision maker\u201d.', buyer: 'e.g. Sales Director, Account Manager', partner: 'e.g. Managing Partner, Head of Business Development', researcher: 'e.g. CEO, CTO, VP Engineering' };
-        document.getElementById('w_titleLabel').textContent = titleLabels[type] || titleLabels.seller;
-        document.getElementById('w_titleHint').textContent = titleHints[type] || titleHints.seller;
-
-        // Hide signer + triggers for researcher (not relevant)
-        document.getElementById('ws3_signer').style.display = (type === 'researcher') ? 'none' : '';
-        document.getElementById('ws3_triggers').style.display = (type === 'researcher') ? 'none' : '';
-    }
-
-    // === STEP HANDLERS ===
-
-    const PERSONAL_DOMAINS = ['gmail.com','googlemail.com','yahoo.com','yahoo.co.uk','hotmail.com','hotmail.co.uk','outlook.com','live.com','msn.com','aol.com','icloud.com','me.com','mail.com','protonmail.com','proton.me','zoho.com','yandex.com','gmx.com','gmx.de','web.de','mail.ru','qq.com','163.com','126.com','sina.com'];
-
-    async function wizStep1() {
-        let ok = true;
-        if (!req('w_company', 'w_companyErr')) ok = false;
-        if (!req('w_email', 'w_emailErr')) ok = false;
-        if (!ok) return;
-
-        // Business email check
-        const emailVal = document.getElementById('w_email').value.trim().toLowerCase();
-        const emailDomain = emailVal.split('@')[1] || '';
-        if (PERSONAL_DOMAINS.includes(emailDomain)) {
-            document.getElementById('w_email').classList.add('invalid');
-            document.getElementById('w_emailErr').textContent = 'Please use your business email.';
-            document.getElementById('w_emailErr').classList.add('visible');
-            return;
-        }
-
-        const hasSite = !document.getElementById('w_nosite').checked;
-        const site = document.getElementById('w_website').value.trim();
-
-        wData.company_name = document.getElementById('w_company').value.trim();
-        wData.website = hasSite ? site : '';
-        wData.contact_name = document.getElementById('w_name').value.trim();
-        wData.contact_email = document.getElementById('w_email').value.trim();
-        wData.vat_number = (document.getElementById('w_vat').value || '').trim().replace(/[\s\-.]/g, '').toUpperCase();
-        wData.relationship_type = getChips('w_reltype')[0] || 'seller';
-
-        if (!USE_API || !hasSite || !site) {
-            wizGo(2);
-            return;
-        }
-
-        setLoad('wBtn1', true);
-        clrStatus();
-
-        try {
-            const res = await fetch(`${API_BASE}/step1`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(wData)
-            });
-            if (!res.ok) throw new Error(res.status);
-            const d = await res.json();
-
-            if (d.company_summary) {
-                document.getElementById('w_summaryText').textContent = d.company_summary;
-                document.getElementById('w_summary').classList.add('vis');
-            }
-            if (d.product_prefill) document.getElementById('w_product').value = d.product_prefill;
-            wData.domain = d.domain || '';
-
-            setLoad('wBtn1', false);
-            document.getElementById('wBtn1').innerHTML = 'Looks right &mdash; next &rarr;';
-            document.getElementById('wBtn1').onclick = () => wizGo(2);
-        } catch (e) {
-            setLoad('wBtn1', false);
-            showStatus('Could not research your company — no problem, fill in manually.', 'err');
-            setTimeout(() => { clrStatus(); wizGo(2); }, 1500);
-        }
-    }
-
-    function wizStep2() {
-        const type = wData.relationship_type || 'seller';
-        let v = '';
-        if (type === 'researcher') {
-            v = document.getElementById('w_research_objective').value.trim();
-            if (v.length < 20) { document.getElementById('w_research_objective').classList.add('invalid'); document.getElementById('w_researchErr').classList.add('visible'); return; }
-            wData.research_objective = v;
-        } else if (type === 'buyer') {
-            v = document.getElementById('w_buying_need').value.trim();
-            if (v.length < 20) { document.getElementById('w_buying_need').classList.add('invalid'); document.getElementById('w_buyingErr').classList.add('visible'); return; }
-            wData.buying_need = v;
-        } else if (type === 'partner') {
-            v = document.getElementById('w_partner_goal').value.trim();
-            if (v.length < 20) { document.getElementById('w_partner_goal').classList.add('invalid'); document.getElementById('w_partnerErr').classList.add('visible'); return; }
-            wData.partner_goal = v;
-        } else {
-            v = document.getElementById('w_product').value.trim();
-            if (v.length < 20) { document.getElementById('w_product').classList.add('invalid'); document.getElementById('w_productErr').classList.add('visible'); return; }
-            wData.product_description = v;
-            wData.problem_solved = document.getElementById('w_problem').value.trim();
-        }
-        wizGo(3);
-    }
-
-    function wizStep3() {
-        let ok = true;
-        if (!req('w_title', 'w_titleErr')) ok = false;
-        const sizes = getChips('w_sizes');
-        if (!sizes.length) { document.getElementById('w_sizesErr').classList.add('visible'); ok = false; }
-        else document.getElementById('w_sizesErr').classList.remove('visible');
-        const countries = getChips('w_countries');
-        if (!countries.length) { document.getElementById('w_countriesErr').classList.add('visible'); ok = false; }
-        else document.getElementById('w_countriesErr').classList.remove('visible');
-        if (!ok) return;
-
-        wData.buyer_title = document.getElementById('w_title').value.trim();
-        wData.decision_maker = (document.getElementById('w_signer') || {}).value || '';
-        wData.decision_maker = wData.decision_maker.trim();
-        wData.example_customers = [
-            document.getElementById('w_ex1').value.trim(),
-            document.getElementById('w_ex2').value.trim(),
-            document.getElementById('w_ex3').value.trim(),
-        ].filter(Boolean);
-        wData.company_sizes = sizes;
-        wData.countries = countries;
-        wData.industries = getChips('w_industries');
-        const otherInd = document.getElementById('w_industries_other').value.trim();
-        if (otherInd) wData.industries.push(otherInd);
-        wData.min_revenue = getChips('w_minrev')[0] || 'any';
-        wData.growth_signals = getChips('w_signals');
-        wData.purchase_triggers = getChips('w_triggers');
-        wizGo(4);
-    }
-
-    function wizStep4() {
-        wData.competitors = document.getElementById('w_competitors').value.trim().split(',').map(s=>s.trim()).filter(Boolean);
-        wData.exclude_types = getChips('w_excludes');
-        wData.must_have = getChips('w_musthave');
-        const other = document.getElementById('w_otherExcl').value.trim();
-        if (other) wData.other_exclusions = other;
-        wizGo(5);
-    }
-
-    async function wizSubmit() {
-        wData.lead_count = parseInt(document.querySelector('input[name="w_count"]:checked').value);
-        wData.include_email_drafts = document.getElementById('w_drafts').checked;
-        const source = document.getElementById('w_source').value.trim();
-        if (source) wData.referral_source = source;
-
-        const btn = document.getElementById('wBtnSubmit');
-        btn.disabled = true;
-        btn.innerHTML = '<span class="wiz-spinner"></span>Submitting...';
-        clrStatus();
-
-        // Store formatted brief globally
-        window._briefText = formatBrief(wData);
-        window._briefSubject = `Intelligence Report Brief: ${wData.company_name}`;
-
-        let apiSuccess = false;
-        let briefId = '';
-
-        // Step 1: Submit brief to API
-        if (USE_API) {
-            try {
-                const res = await fetch(`${API_BASE}/submit`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'Authorization': API_AUTH },
-                    body: JSON.stringify(wData)
-                });
-                if (!res.ok) throw new Error(res.status);
-                const result = await res.json();
-                briefId = result.brief_id || '';
-                apiSuccess = true;
-            } catch (e) {
-                console.log('API submit failed:', e);
-            }
-        }
-
-        // Step 2: paid tier → Revolut checkout (free tier removed 2026-04-22)
-        if (apiSuccess) {
-            try {
-                btn.innerHTML = '<span class="wiz-spinner"></span>Setting up payment...';
-                const payRes = await fetch('https://api.leadvault.eu/api/payment/create', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        lead_count: wData.lead_count,
-                        email: wData.contact_email,
-                        name: wData.contact_name || wData.company_name,
-                        brief_id: briefId,
-                        country: (wData.countries && wData.countries[0]) || '',
-                        vat_number: wData.vat_number || '',
-                    })
-                });
-                const payData = await payRes.json();
-                if (payData.success && payData.checkout_url) {
-                    // Redirect to Revolut checkout
-                    window.location.href = payData.checkout_url;
-                    return;
-                }
-            } catch (e) {
-                console.log('Payment setup failed:', e);
-            }
-            // Brief submitted but payment didn't go through — show fallback with email instructions
-            showDone('payment_fallback');
-        } else {
-            // API failed or not enabled — show the brief on screen so no lead is lost
-            showDone('fallback');
-        }
-    }
-
-    function showDone(mode) {
-        document.querySelectorAll('.wiz-step').forEach(s => s.classList.remove('active'));
-        document.getElementById('wsDone').classList.add('active');
-        document.querySelectorAll('.wizard-seg').forEach(s => { s.classList.remove('active'); s.classList.add('done'); });
-        document.getElementById('wizLabel').innerHTML = '<span class="cur">Complete</span><span>Brief submitted</span>';
-        
-        const confMailto = document.getElementById('confMailto');
-        if (mode === 'direct' || mode === 'payment_fallback') {
-            if (confMailto) confMailto.style.display = 'none';
-            document.getElementById('confDirect').style.display = 'block';
-            document.getElementById('confFallback').style.display = 'none';
-            if (mode === 'payment_fallback') {
-                document.getElementById('confDirect').querySelector('p').textContent =
-                    'Your brief is received. We\u2019ll email you a payment link shortly. Your report will be delivered within 48 hours of payment.';
-            }
-        } else if (mode === 'fallback') {
-            if (confMailto) confMailto.style.display = 'none';
-            document.getElementById('confDirect').style.display = 'none';
-            document.getElementById('confFallback').style.display = 'block';
-            document.getElementById('fallbackBrief').textContent = window._briefText;
-        } else {
-            if (confMailto) confMailto.style.display = 'block';
-            document.getElementById('confDirect').style.display = 'none';
-            document.getElementById('confFallback').style.display = 'none';
-        }
-    }
-
-    function copyBrief() {
-        const text = `Subject: ${window._briefSubject}\n\n${window._briefText}`;
-        navigator.clipboard.writeText(text).then(() => {
-            const c1 = document.getElementById('copyConfirm');
-            const c2 = document.getElementById('copyConfirm2');
-            if (c1) c1.style.display = 'block';
-            if (c2) c2.style.display = 'block';
-        }).catch(() => {
-            const ta = document.createElement('textarea');
-            ta.value = text;
-            document.body.appendChild(ta);
-            ta.select();
-            document.execCommand('copy');
-            document.body.removeChild(ta);
-            const c1 = document.getElementById('copyConfirm');
-            const c2 = document.getElementById('copyConfirm2');
-            if (c1) c1.style.display = 'block';
-            if (c2) c2.style.display = 'block';
-        });
-    }
-
-    function formatBrief(d) {
-        const ind = Array.isArray(d.industries) ? d.industries.join(', ') : (d.industries || 'Any');
-        const sig = Array.isArray(d.growth_signals) ? d.growth_signals.join(', ') : (d.growth_signals || 'Any');
-        const must = Array.isArray(d.must_have) ? d.must_have.join(', ') : 'None';
-        const rt = d.relationship_type || 'seller';
-        let objective = '';
-        if (rt === 'seller') {
-            objective = `PRODUCT\nDescription: ${d.product_description}\nProblem solved: ${d.problem_solved || 'Not specified'}`;
-        } else if (rt === 'buyer') {
-            objective = `SOURCING NEED\n${d.buying_need}`;
-        } else if (rt === 'partner') {
-            objective = `PARTNERSHIP GOAL\n${d.partner_goal}`;
-        } else if (rt === 'researcher') {
-            objective = `RESEARCH OBJECTIVE\n${d.research_objective}`;
-        }
-        const targetLabel = rt === 'buyer' ? 'Target vendor' : rt === 'partner' ? 'Target partner' : rt === 'researcher' ? 'Target contact' : 'Buyer title';
-        return `LEADVAULT INTELLIGENCE BRIEF\n${'='.repeat(40)}\n\n` +
-            `Company: ${d.company_name}\n` +
-            `Website: ${d.website || 'N/A'}\n` +
-            `Contact: ${d.contact_name} (${d.contact_email})\n` +
-            `Type: ${rt}\n\n` +
-            `${objective}\n\n` +
-            `TARGET\n` +
-            `${targetLabel}: ${d.buyer_title}\n` +
-            `Similar companies: ${(d.example_customers||[]).join(', ') || 'None'}\n` +
-            `Company sizes: ${(d.company_sizes||[]).join(', ')}\n` +
-            `Countries: ${(d.countries||[]).join(', ')}\n` +
-            `Industries: ${ind}\n` +
-            `Min revenue: ${d.min_revenue || 'Any'}\n` +
-            `Growth signals: ${sig}\n\n` +
-            `FILTERS\n` +
-            `Competitors: ${(d.competitors||[]).join(', ') || 'None'}\n` +
-            `Exclude types: ${(d.exclude_types||[]).join(', ') || 'None'}\n` +
-            `Other exclusions: ${d.other_exclusions || 'None'}\n` +
-            `Must-have: ${must}\n\n` +
-            `REPORT\n` +
-            `Company count: ${d.lead_count}\n` +
-            `Email drafts: ${d.include_email_drafts ? 'Yes' : 'No'}\n` +
-            `Source: ${d.referral_source || 'Not specified'}`;
-    }
-
-    // Clear validation on input
-    document.querySelectorAll('.wiz-input, .wiz-textarea').forEach(el => {
-        el.addEventListener('input', () => {
-            el.classList.remove('invalid');
-            const err = el.parentElement.querySelector('.wiz-field-error');
-            if (err) err.classList.remove('visible');
-        });
-    });
-
-    // ================================================================
-    // DEMO SEARCH
-    // ================================================================
-    const DEMO_API = (location.hostname === 'leadvault.eu' ? 'https://api.leadvault.eu' : '') + '/api/demo';
-
-    async function demoSearch() {
-        const country = document.getElementById('demoCountry').value;
-        const industry = document.getElementById('demoIndustry').value;
-        const btn = document.getElementById('demoBtn');
-        const errEl = document.getElementById('demoError');
-        const resultsEl = document.getElementById('demoResults');
-        const countEl = document.getElementById('demoCountOnly');
-
-        errEl.style.display = 'none';
-        resultsEl.style.display = 'none';
-        countEl.style.display = 'none';
-
-        if (!country) {
-            errEl.textContent = 'Please select a country.';
-            errEl.style.display = 'block';
-            return;
-        }
-        if (!industry) {
-            errEl.textContent = 'Please select an industry.';
-            errEl.style.display = 'block';
-            return;
-        }
-
-        btn.disabled = true;
-        btn.textContent = 'Searching...';
-
-        try {
-            const resp = await fetch(DEMO_API, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({country, industry}),
-            });
-            const data = await resp.json();
-
-            if (!data.success) {
-                errEl.textContent = data.error || 'Search failed. Try again.';
-                errEl.style.display = 'block';
-                return;
-            }
-
-            if (data.mode === 'count_only') {
-                countEl.innerHTML =
-                    '<span class="demo-count-num">' + data.total.toLocaleString() + '</span>' +
-                    data.industry + ' companies in ' + data.country + '.<br>' +
-                    '<a href="#wizard" style="color:var(--brand);font-weight:600;">Submit a brief</a> for a curated report with contacts.';
-                countEl.style.display = 'block';
-                return;
-            }
-
-            document.getElementById('demoResultsTitle').textContent = data.industry + ' in ' + data.country;
-            document.getElementById('demoResultsTotal').textContent = data.total.toLocaleString() + '+ total';
-
-            const hasTrend = data.companies.some(c => c.growth);
-            const cur = data.currency || '';
-            const thead = document.getElementById('demoTableHead');
-            thead.innerHTML = '<tr><th>Company</th><th>City</th><th>Revenue (' + esc(cur) + ')</th>' +
-                (hasTrend ? '<th>Trend</th>' : '') + '</tr>';
-
-            const tbody = document.getElementById('demoTableBody');
-            tbody.innerHTML = '';
-            data.companies.forEach(c => {
-                const badgeClass = c.growth ? c.growth.toLowerCase() : '';
-                const badgeHtml = c.growth ? '<span class="demo-badge ' + badgeClass + '">' + c.growth + '</span>' : '';
-                const row = document.createElement('tr');
-                row.innerHTML =
-                    '<td class="demo-name">' + esc(c.name) + '</td>' +
-                    '<td>' + esc(c.city) + '</td>' +
-                    '<td style="font-family:var(--mono);font-size:0.8rem;">' + esc(c.revenue_range) + '</td>' +
-                    (hasTrend ? '<td>' + badgeHtml + '</td>' : '');
-                tbody.appendChild(row);
-            });
-
-            document.getElementById('demoCta').innerHTML =
-                'Want contacts and exact financials for these companies? <a href="#wizard">Get your report</a>';
-
-            resultsEl.style.display = 'block';
-        } catch (e) {
-            errEl.textContent = 'Connection error. Please try again.';
-            errEl.style.display = 'block';
-        } finally {
-            btn.disabled = false;
-            btn.textContent = 'Search';
-        }
-    }
-
-    function esc(s) {
-        if (!s) return '';
-        const d = document.createElement('div');
-        d.textContent = s;
-        return d.innerHTML;
-    }
-    </script>
-
+<footer>
+  <div class="wrap">
+    <span>LeadVault is run by Synlig Media · CVR DK 44784416 · Copenhagen, Denmark</span>
+    <span><a href="privacy.html">How we handle business contact data</a> · This page sets no cookies, runs no scripts and loads nothing from other sites.</span>
+  </div>
+</footer>
 </body>
 </html>
