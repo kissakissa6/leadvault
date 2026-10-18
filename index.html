@@ -13,6 +13,9 @@
 <link rel="preload" href="fonts/albert-sans.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="site.css">
 <style>
+:root{--desk:#F1F2F4}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--desk:#1A1D22}}
+:root[data-theme="dark"]{--desk:#1A1D22}
 /* ---------- hero ---------- */
 .hero{padding:84px 0 0;overflow:hidden}
 .hero-top{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:24px 64px;align-items:end}
@@ -21,40 +24,54 @@ h1{font:700 76px/.98 var(--display);letter-spacing:-.035em;max-width:9.5em}
 .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
 .facts-line{margin-top:18px;font-size:15.5px;color:var(--muted)}
 
-/* ---------- the spreadsheet crop ---------- */
+/* ---------- the product picture: a PDF page on a desk, spreadsheet behind ---------- */
 .shot{margin-top:64px}
-.sheet{margin-right:calc(50% - 50vw);overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;
-  background:#fff;color:#222;border:1px solid #D0D3D8;border-right:0;border-radius:8px 0 0 8px;
-  box-shadow:0 1px 2px rgba(0,0,0,.05),0 18px 48px -20px rgba(0,0,0,.25);
-  font:400 13.5px/1.35 Aptos,Calibri,Carlito,"Segoe UI",Arial,sans-serif;
-  -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 48px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 48px),transparent)}
-.sheet::-webkit-scrollbar{display:none}
-.sheet-in{width:max-content;min-width:100%}
-.titlebar{background:#1D6B40;color:#fff;font-size:12.5px;height:32px;display:flex;align-items:center;padding:0 14px;gap:18px}
-.titlebar b{font-weight:600}
-.titlebar span{opacity:.8}
-.fx{display:flex;align-items:stretch;height:30px;border-bottom:1px solid #D4D4D4;background:#fff}
-.fx .nb{width:72px;border-right:1px solid #D4D4D4;display:flex;align-items:center;padding:0 10px;color:#333}
-.fx .f{width:40px;border-right:1px solid #D4D4D4;display:flex;align-items:center;justify-content:center;color:#666;font-style:italic}
-.fx .v{display:flex;align-items:center;padding:0 10px;white-space:nowrap;color:#222}
-table{border-collapse:collapse;table-layout:fixed}
-.cr{width:36px}.ca{width:150px}.cb{width:310px}.cc{width:136px}.cd{width:150px}.ce{width:84px}.cf{width:168px}.cg{width:176px}.ch{width:96px}
-th,td{border:1px solid #E1E1E1;padding:5px 7px;text-align:left;vertical-align:top;font-weight:400}
-thead th{background:#F5F5F5;color:#555;font-size:12px;text-align:center;padding:3px 0;border-color:#D9D9D9}
-thead th.on{background:#D3E9DB;color:#0B4A2A;box-shadow:inset 0 -2px 0 #107C41}
-tbody th{background:#F5F5F5;color:#555;font-size:12px;text-align:center;padding:5px 0;border-color:#D9D9D9}
-tbody th.on{background:#D3E9DB;color:#0B4A2A;box-shadow:inset -2px 0 0 #107C41}
-tr.h td{background:#E2EFDA;font-weight:700}
-td.sel{position:relative;box-shadow:inset 0 0 0 2px #107C41}
-td.sel::after{content:"";position:absolute;right:-4px;bottom:-4px;width:7px;height:7px;background:#107C41;border:1px solid #fff}
-tr.blank td{height:26px}
-.x{display:inline-block;height:.78em;background:#D5D7DA;border-radius:2px;vertical-align:-1px}
-.tabs{display:flex;align-items:stretch;height:30px;background:#F3F3F3;border-top:1px solid #D4D4D4;font-size:12.5px;color:#555}
-.tabs span{display:flex;align-items:center;padding:0 16px}
-.tabs .on{background:#fff;color:#107C41;font-weight:600;box-shadow:inset 0 -2px 0 #107C41}
-.shot figcaption{margin-top:16px;font-size:15px;color:var(--muted);max-width:44em}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .sheet{border-color:#3A3F47;box-shadow:none}}
-:root[data-theme="dark"] .sheet{border-color:#3A3F47;box-shadow:none}
+.stage{position:relative;height:540px;overflow:hidden;border-radius:14px;background:var(--desk);padding:44px 56px 0}
+.paper{position:relative;z-index:2;width:min(620px,100%);background:#fff;color:#33373D;border-radius:6px 6px 0 0;
+  box-shadow:0 1px 2px rgba(20,24,29,.06),0 28px 64px -26px rgba(20,24,29,.38);padding:26px 30px 0;font:400 14px/1.55 var(--text)}
+.pg-band{margin-bottom:14px;border-radius:8px;background:#0F3D1E;color:#fff;padding:14px 18px 13px}
+.pg-kick{display:flex;justify-content:space-between;gap:12px;font:600 10px/1 var(--text);letter-spacing:.16em;text-transform:uppercase;color:#B7CCBC}
+.pg-title{margin-top:8px;font:700 18px/1.25 var(--text);letter-spacing:-.005em}
+.pg-sub{margin-top:3px;font-size:12px;line-height:1.4;color:#CFDDD2}
+.card{border:1px solid #E1E3E6;border-radius:10px;padding:16px 18px 4px}
+.card + .card{margin-top:14px}
+.c-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.c-name{font:700 18px/1.25 var(--text);color:#15181D;letter-spacing:-.005em}
+.c-web,.src,.em-d,.st,.li{color:#2E6A31}
+.c-web{font-size:13.5px;white-space:nowrap}
+.c-meta{margin-top:2px;font-size:12.5px;color:#6B7078}
+.c-line{margin-top:8px}
+.tag{display:inline-block;margin-right:6px;padding:3px 6px 2px;border-radius:4px;background:#E5F1E3;color:#245829;
+  font:700 10.5px/1.2 ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;vertical-align:1px;white-space:nowrap}
+.tag.sig{background:#FCEED6;color:#A4500B}
+.ppl{margin-top:12px}
+.pp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr) 60px;column-gap:16px;border-top:1px solid #E1E3E6;padding:8px 0 10px;font-size:12.5px;line-height:1.5}
+.pp .tt{color:#6B7078}
+.pp .st{font-size:12px}
+.pp .nm{grid-area:1/1}.pp .em{grid-area:1/2}.pp .tt{grid-area:2/1}.pp .st{grid-area:2/2}
+.pp .li{grid-column:3;grid-row:1/3;align-self:end;text-align:right}
+.bar{display:inline-block;height:.74em;border-radius:2px;background:#D6D9DD;vertical-align:-.04em}
+.nm .bar{background:#BEC2C8;height:.8em}
+.xl{position:absolute;z-index:1;top:92px;left:calc(56px + 598px);width:min(440px,calc(100% - 56px - 598px - 32px));background:#fff;border:1px solid #D3D6DA;border-radius:6px;overflow:hidden;
+  box-shadow:0 18px 44px -24px rgba(20,24,29,.32);font:400 11px/1 Aptos,Calibri,Carlito,"Segoe UI",Arial,sans-serif;color:#444}
+.xl-bar{height:24px;background:#1D6B40;color:#fff;display:flex;align-items:center;padding:0 10px 0 82px;font-weight:600;font-size:11px}
+.xl-grid{display:grid;grid-template-columns:22px 1.15fr 1.6fr .95fr 78px;font-size:10.5px}
+.xl-grid span{height:21px;border-right:1px solid #E3E3E3;border-bottom:1px solid #E3E3E3;display:flex;align-items:center;padding:0 6px;overflow:hidden;white-space:nowrap}
+.xl-grid .rh{background:#F4F4F4;color:#777;justify-content:center;padding:0}
+.xl-grid .hd{background:#E2EFDA;font-weight:700;color:#333}
+.xl-grid i{display:block;height:6px;border-radius:2px;background:#DADDE0}
+.chip{position:absolute;z-index:3;display:inline-flex;align-items:center;gap:8px;padding:9px 13px;border-radius:999px;background:#fff;color:#15181D;
+  border:1px solid #DADDE1;box-shadow:0 10px 24px -14px rgba(20,24,29,.4);font:600 13.5px/1 var(--text);white-space:nowrap}
+.chip::before{content:"";width:8px;height:8px;border-radius:50%;background:#FF7A59}
+.chip.hs{top:412px;left:calc(56px + 598px + 40px)}
+.chip.xls{display:none}
+.chip.xls::before{background:#1D6B40}
+.shot figcaption{margin-top:18px;max-width:46em;font-size:15px;color:var(--muted)}
+.shot figcaption a{font-weight:600;color:var(--ink);white-space:nowrap}
+.shot figcaption b{display:block;margin-bottom:4px;font-size:18px;font-weight:600;color:var(--ink)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .paper{box-shadow:none}:root:not([data-theme="light"]) .xl,:root:not([data-theme="light"]) .chip{box-shadow:none;border-color:#3A3F47}}
+:root[data-theme="dark"] .paper{box-shadow:none}
+:root[data-theme="dark"] .xl,:root[data-theme="dark"] .chip{box-shadow:none;border-color:#3A3F47}
 
 /* ---------- how it works / what you get ---------- */
 .inner{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:24px 64px}
@@ -82,6 +99,11 @@ tr.blank td{height:26px}
 .terms{margin-top:44px;max-width:44em;font-size:18px}
 .terms a{font-weight:600}
 
+/* ---------- ideal customer + outreach help ---------- */
+.help .prose p{max-width:36em}
+.help .cta-row{margin-top:24px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px}
+.help .cta-row a:not(.btn){font-weight:600;display:inline-block;padding:10px 0}
+
 /* ---------- founder ---------- */
 .about .prose p{font-size:19px}
 .sign{margin-top:22px;display:flex;flex-wrap:wrap;align-items:baseline;gap:0 18px}
@@ -106,6 +128,12 @@ tr.blank td{height:26px}
   .inner{grid-template-columns:minmax(0,1fr)}
   .plans{gap:28px}
   .price{font-size:42px}
+  .stage{height:520px;padding:36px 40px 0}
+  .paper{width:calc(100% - 150px);max-width:620px}
+  .xl{left:auto;right:14px;width:200px;top:80px}
+  .xl .cB,.xl .cC{display:none}
+  .xl-grid{grid-template-columns:22px minmax(0,1fr) 72px}
+  .chip.hs{left:auto;right:30px;top:372px}
 }
 @media (max-width:860px){
   .plans{grid-template-columns:minmax(0,1fr);gap:0;margin-top:28px}
@@ -130,13 +158,33 @@ tr.blank td{height:26px}
   .ctas .btn{flex:1 1 auto}
   .facts-line{font-size:15px}
   .shot{margin-top:36px}
-  .sheet{font-size:13px}
-  .cr{width:28px}.ca{width:92px}.cb{width:252px}
-  .sheet{-webkit-mask-image:none;mask-image:none}
-  .sheet .x{max-width:76px}
-  .fx .nb{width:52px}.fx .f{width:32px}
-  .sheet tbody tr:nth-child(n+5){display:none}
+  .stage{height:auto;padding:14px 12px 12px;border-radius:12px;display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px}
+  .paper{flex:0 0 100%;width:100%;max-width:none;border-radius:6px;padding:12px 12px 12px;font-size:13.5px;line-height:1.5}
+  .pg-band{margin-bottom:8px;border-radius:6px;padding:8px 12px 9px}
+  .pg-kick{font-size:9.5px}
+  .pg-title{margin-top:6px;font-size:15px}
+  .pg-sub,.fd{display:none}
+  .card{padding:13px 13px 2px;border-radius:8px}
+  .card + .card{display:none}
+  .c-top{flex-wrap:wrap;gap:0 10px}
+  .c-name{font-size:16.5px}
+  .c-web{font-size:12.5px}
+  .c-meta{font-size:12px}
+  .c-line{margin-top:7px}
+  .tag{font-size:10px;margin-right:5px}
+  .pp{grid-template-columns:minmax(0,.9fr) minmax(0,1.25fr);column-gap:10px;font-size:12px}
+  .pp .st{font-size:11.5px}
+  .pp .em{white-space:nowrap}
+  .pp .em .bar{width:26px!important}
+  .pp .li{grid-column:1;grid-row:3;align-self:start;text-align:left}
+  .xl{display:none}
+  .chip{padding:8px 11px;font-size:12.5px}
+  .chip{position:static;box-shadow:none}
+  .chip.xls{display:inline-flex}
   .shot figcaption{font-size:14.5px;padding-right:4px}
+  .shot figcaption b{font-size:16.5px}
+  .help .cta-row{margin-top:20px;gap:6px 16px}
+  .help .cta-row .btn{flex:1 1 100%}
   .seq{gap:18px}
   .seq li{grid-template-columns:28px minmax(0,1fr);font-size:17.5px}
   .seq li::before{font-size:17.5px}
@@ -184,26 +232,64 @@ tr.blank td{height:26px}
   </div>
 
   <figure class="shot">
-    <div class="sheet" role="img" aria-label="A spreadsheet with example rows. Columns: company, why they fit, decision-maker, job title, country, line of business, work email and email check. The selected cell reads: Opened a second warehouse in Jönköping in March; its job ads mention manual picking. Company names, person names and email addresses are hidden.">
-      <div class="sheet-in" aria-hidden="true">
-        <div class="titlebar"><b>Buyer list.xlsx</b><span>Excel</span></div>
-        <div class="fx"><span class="nb">B2</span><span class="f">fx</span><span class="v">Opened a second warehouse in J&ouml;nk&ouml;ping in March; its job ads mention manual picking.</span></div>
-        <table>
-          <colgroup><col class="cr"><col class="ca"><col class="cb"><col class="cc"><col class="cd"><col class="ce"><col class="cf"><col class="cg"><col class="ch"></colgroup>
-          <thead><tr><th></th><th>A</th><th class="on">B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>H</th></tr></thead>
-          <tbody>
-            <tr class="h"><th>1</th><td>Company</td><td>Why they fit</td><td>Decision-maker</td><td>Job title</td><td>Country</td><td>Line of business</td><td>Work email</td><td>Email check</td></tr>
-            <tr><th class="on">2</th><td><span class="x" style="width:96px"></span></td><td class="sel">Opened a second warehouse in J&ouml;nk&ouml;ping in March; its job ads mention manual picking.</td><td><span class="x" style="width:88px"></span></td><td>Head of Logistics</td><td>Sweden</td><td>Wholesale, building supplies</td><td><span class="x" style="width:52px"></span>@<span class="x" style="width:58px"></span>.se</td><td>valid</td></tr>
-            <tr><th>3</th><td><span class="x" style="width:78px"></span></td><td>Moving production to a larger site in Tampere next year, according to its annual report.</td><td><span class="x" style="width:70px"></span></td><td>COO</td><td>Finland</td><td>Machine manufacturer</td><td><span class="x" style="width:44px"></span>@<span class="x" style="width:64px"></span>.fi</td><td>valid</td></tr>
-            <tr><th>4</th><td><span class="x" style="width:110px"></span></td><td>Won a public contract to supply hospitals in the Oslo region and is hiring warehouse staff.</td><td><span class="x" style="width:92px"></span></td><td>Purchasing Manager</td><td>Norway</td><td>Medical supplies</td><td><span class="x" style="width:60px"></span>@<span class="x" style="width:50px"></span>.no</td><td>catch-all</td></tr>
-            <tr><th>5</th><td><span class="x" style="width:84px"></span></td><td>Same size and trade as your best customers; ships its webshop orders from Aarhus.</td><td><span class="x" style="width:76px"></span></td><td>CEO and owner</td><td>Denmark</td><td>Garden products</td><td><span class="x" style="width:40px"></span>@<span class="x" style="width:62px"></span>.dk</td><td>valid</td></tr>
-            <tr class="blank"><th>6</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-          </tbody>
-        </table>
-        <div class="tabs"><span class="on">Buyer list</span><span>Notes</span></div>
+    <div class="stage" role="img" aria-label="An example page from a LeadVault PDF prospect list, with an Excel sheet and a HubSpot CSV file beside it. The page shows a company card for an invented building-supplies wholesaler in Jönköping, Sweden: why it is a lead (it opened a second warehouse in March and its job ads mention manual picking), a buying signal (hiring warehouse staff), what it does, and two contacts, a Head of Logistics with a verified email and a CEO whose email is marked likely. Person names and email addresses are hidden.">
+      <div class="xl" aria-hidden="true">
+        <div class="xl-bar">Buyer list.xlsx</div>
+        <div class="xl-grid">
+          <span class="rh"></span><span class="rh">A</span><span class="rh cB">B</span><span class="rh cC">C</span><span class="rh">D</span>
+          <span class="rh">1</span><span class="hd">Company</span><span class="hd cB">Why This Lead</span><span class="hd cC">Title</span><span class="hd">Email Status</span>
+          <span class="rh">2</span><span>Ljungmark Bygg&hellip;</span><span class="cB">Opened a second wareh&hellip;</span><span class="cC">Head of Logis&hellip;</span><span>Verified</span>
+          <span class="rh">3</span><span>Ljungmark Bygg&hellip;</span><span class="cB"><i style="width:80%"></i></span><span class="cC">CEO and owner</span><span>Likely</span>
+          <span class="rh">4</span><span>Kalliora Kone&hellip;</span><span class="cB">Moving production to&hellip;</span><span class="cC">COO</span><span>Verified</span>
+          <span class="rh">5</span><span><i style="width:70%"></i></span><span class="cB"><i style="width:90%"></i></span><span class="cC"><i style="width:60%"></i></span><span><i style="width:50%"></i></span>
+          <span class="rh">6</span><span><i style="width:85%"></i></span><span class="cB"><i style="width:75%"></i></span><span class="cC"><i style="width:70%"></i></span><span><i style="width:50%"></i></span>
+          <span class="rh">7</span><span><i style="width:60%"></i></span><span class="cB"><i style="width:88%"></i></span><span class="cC"><i style="width:55%"></i></span><span><i style="width:50%"></i></span>
+          <span class="rh">8</span><span><i style="width:75%"></i></span><span class="cB"><i style="width:70%"></i></span><span class="cC"><i style="width:65%"></i></span><span><i style="width:50%"></i></span>
+          <span class="rh">9</span><span><i style="width:65%"></i></span><span class="cB"><i style="width:82%"></i></span><span class="cC"><i style="width:50%"></i></span><span><i style="width:50%"></i></span>
+          <span class="rh">10</span><span><i style="width:80%"></i></span><span class="cB"><i style="width:72%"></i></span><span class="cC"><i style="width:62%"></i></span><span><i style="width:50%"></i></span>
+          <span class="rh">11</span><span><i style="width:58%"></i></span><span class="cB"><i style="width:86%"></i></span><span class="cC"><i style="width:58%"></i></span><span><i style="width:50%"></i></span>
+          <span class="rh">12</span><span><i style="width:72%"></i></span><span class="cB"><i style="width:78%"></i></span><span class="cC"><i style="width:66%"></i></span><span><i style="width:50%"></i></span>
+          <span class="rh">13</span><span><i style="width:66%"></i></span><span class="cB"><i style="width:90%"></i></span><span class="cC"><i style="width:54%"></i></span><span><i style="width:50%"></i></span>
+          <span class="rh">14</span><span><i style="width:84%"></i></span><span class="cB"><i style="width:70%"></i></span><span class="cC"><i style="width:60%"></i></span><span><i style="width:50%"></i></span>
+          <span class="rh">15</span><span><i style="width:62%"></i></span><span class="cB"><i style="width:84%"></i></span><span class="cC"><i style="width:68%"></i></span><span><i style="width:50%"></i></span>
+          <span class="rh">16</span><span><i style="width:78%"></i></span><span class="cB"><i style="width:76%"></i></span><span class="cC"><i style="width:52%"></i></span><span><i style="width:50%"></i></span>
+          <span class="rh">17</span><span><i style="width:70%"></i></span><span class="cB"><i style="width:88%"></i></span><span class="cC"><i style="width:64%"></i></span><span><i style="width:50%"></i></span>
+          <span class="rh">18</span><span><i style="width:60%"></i></span><span class="cB"><i style="width:80%"></i></span><span class="cC"><i style="width:58%"></i></span><span><i style="width:50%"></i></span>
+          <span class="rh">19</span><span><i style="width:82%"></i></span><span class="cB"><i style="width:74%"></i></span><span class="cC"><i style="width:62%"></i></span><span><i style="width:50%"></i></span>
+          <span class="rh">20</span><span><i style="width:68%"></i></span><span class="cB"><i style="width:86%"></i></span><span class="cC"><i style="width:56%"></i></span><span><i style="width:50%"></i></span>
+          <span class="rh">21</span><span><i style="width:74%"></i></span><span class="cB"><i style="width:72%"></i></span><span class="cC"><i style="width:66%"></i></span><span><i style="width:50%"></i></span>
+          <span class="rh">22</span><span><i style="width:64%"></i></span><span class="cB"><i style="width:90%"></i></span><span class="cC"><i style="width:52%"></i></span><span><i style="width:50%"></i></span>
+          <span class="rh">23</span><span><i style="width:80%"></i></span><span class="cB"><i style="width:78%"></i></span><span class="cC"><i style="width:60%"></i></span><span><i style="width:50%"></i></span>
+          <span class="rh">24</span><span><i style="width:66%"></i></span><span class="cB"><i style="width:84%"></i></span><span class="cC"><i style="width:64%"></i></span><span><i style="width:50%"></i></span>
+        </div>
       </div>
+      <div class="paper" aria-hidden="true">
+        <div class="pg-band"><div class="pg-kick"><span>LeadVault</span><span>Example page</span></div><p class="pg-title">Prospect list for Your Company</p><p class="pg-sub">Example &middot; warehouse equipment</p></div>
+        <div class="card">
+          <div class="c-top"><span class="c-name">Ljungmark Byggvaror AB</span><span class="c-web">ljungmarkbygg.se</span></div>
+          <p class="c-meta">J&ouml;nk&ouml;ping &middot; Sweden &middot; 85 employees<span class="fd"> &middot; founded 1987</span></p>
+          <p class="c-line"><span class="tag">Why this lead</span>Opened a second warehouse in March, and its job ads mention manual picking.</p>
+          <p class="c-line"><span class="tag sig">Buying signal</span>Hiring warehouse staff (posted 12 days ago) <span class="src">source</span></p>
+          <p class="c-line"><span class="tag">What they do</span>Sells building supplies to builders and hardware stores across southern Sweden.</p>
+          <div class="ppl">
+            <div class="pp"><span class="nm"><span class="bar" style="width:96px"></span></span><span class="em"><span class="bar" style="width:44px"></span><span class="em-d">@ljungmarkbygg.se</span></span><span class="li">LinkedIn</span><span class="tt">Head of Logistics</span><span class="st">Verified</span></div>
+            <div class="pp"><span class="nm"><span class="bar" style="width:84px"></span></span><span class="em"><span class="bar" style="width:52px"></span><span class="em-d">@ljungmarkbygg.se</span></span><span class="tt">CEO and owner</span><span class="st">Likely (domain accepts all mail)</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="c-top"><span class="c-name">Kalliora Konetekniikka Oy</span><span class="c-web">kalliora.fi</span></div>
+          <p class="c-meta">Tampere &middot; Finland &middot; 140 employees &middot; founded 1972</p>
+          <p class="c-line"><span class="tag">Why this lead</span>Moving production to a larger site in Tampere next year, according to its annual report.</p>
+          <p class="c-line"><span class="tag">What they do</span>Builds packaging machines for food producers.</p>
+          <div class="ppl">
+            <div class="pp"><span class="nm"><span class="bar" style="width:78px"></span></span><span class="em"><span class="bar" style="width:40px"></span><span class="em-d">@kalliora.fi</span></span><span class="li">LinkedIn</span><span class="tt">COO</span><span class="st">Verified</span></div>
+          </div>
+        </div>
+      </div>
+      <span class="chip xls" aria-hidden="true">Excel</span>
+      <span class="chip hs" aria-hidden="true">HubSpot CSV</span>
     </div>
-    <figcaption>Example rows for a business that sells warehouse equipment. Names are hidden here; your list has them in&nbsp;full.</figcaption>
+    <figcaption><b>Every list comes as a PDF to read, an Excel file and a HubSpot import.</b>An example page for a seller of warehouse equipment. The companies are invented; on your own list, names and emails are shown in full. <a href="mailto:akseli@leadvault.eu?subject=Free%20sample&amp;body=Our%20website%3A%20%0D%0AWhat%20we%20sell%3A%20%0D%0ACountries%20we%20want%3A%20">Get a free sample for your market&nbsp;&rarr;</a></figcaption>
   </figure>
 </div></section>
 
@@ -219,9 +305,8 @@ tr.blank td{height:26px}
 <section class="sec" id="list" aria-labelledby="list-h"><div class="wrap"><div class="inner">
   <h2 id="list-h">What you get</h2>
   <div class="prose">
-    <p class="big">Every row is a company you could call tomorrow: its name, country, region and line of business, the person who decides there by name and job title, and one sentence on why they&rsquo;d buy, so you know how to start the conversation.</p>
-    <p>We check each work email with the company&rsquo;s mail server and note the result in the list. Some servers accept any address, so a few can&rsquo;t be fully confirmed, and those are marked.</p>
-    <p>The file comes as Excel and as a HubSpot CSV. Open it in any spreadsheet or import it straight into HubSpot.</p>
+    <p class="big">Every company on your list is ready to call. You get its name, country, region and line of business, the person who decides there by name and job title, and one sentence on why they&rsquo;d buy, so you know how to start the conversation.</p>
+    <p>We check each work email with the company&rsquo;s mail server. If the server accepts any address, we can&rsquo;t fully confirm the email, so we mark it &ldquo;Likely&rdquo;.</p>
     <p>Contact details come from companies&rsquo; own websites and official business registers, never from data brokers. <a href="privacy.html">How we handle data</a></p>
   </div>
 </div></div></section>
@@ -255,6 +340,17 @@ tr.blank td{height:26px}
     </article>
   </div>
   <p class="terms">Every list arrives within 48&nbsp;hours with the reason each company fits, and we replace bounced or wrong contacts free. Not sure yet? <a href="mailto:akseli@leadvault.eu?subject=Free%20sample&amp;body=Our%20website%3A%20%0D%0AWhat%20we%20sell%3A%20%0D%0ACountries%20we%20want%3A%20">Ask for a free sample first.</a></p>
+</div></div></section>
+
+<section class="sec help" id="help" aria-labelledby="help-h"><div class="wrap"><div class="inner">
+  <h2 id="help-h">Not sure who to target?</h2>
+  <div class="prose">
+    <p>Your first order comes with a free 30&#8209;minute call where we work out together which companies and roles to go after. For a full plan, book our half&#8209;day workshop (&euro;750): we define your ideal customer, decide which roles to contact, and plan how to reach them by email, phone or LinkedIn.</p>
+    <div class="cta-row">
+      <a class="btn btn-line" href="mailto:akseli@leadvault.eu?subject=Workshop%3A%20Ideal%20customer%20and%20outreach%20plan%20(%E2%82%AC750)&amp;body=Our%20website%3A%20%0D%0AWhat%20we%20sell%3A%20%0D%0AWho%20we%20sell%20to%20today%3A%20">Ask about the workshop</a>
+      <a href="tel:+358445964003">or call +358&nbsp;44&nbsp;596&nbsp;4003</a>
+    </div>
+  </div>
 </div></div></section>
 
 <section class="sec about" id="about" aria-labelledby="about-h"><div class="wrap"><div class="inner">
